@@ -1,0 +1,26 @@
+{
+  "name": "GHT",
+  "version": "0.0.0",
+  "description": "Library",
+  "main": "index.js",
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "jsx-loader": "^0.13.2",
+    "less": "^2.7.3",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
+    "webpack": "^2.7.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://lmahistre@bitbucket.org/lmahistre/ght.git"
+  },
+  "author": "",
+  "license": "BSD-2-Clause"
+}

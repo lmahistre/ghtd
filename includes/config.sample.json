@@ -1,0 +1,16 @@
+{
+	/**
+	 * GitHub user id
+	 */
+	"user" : "",
+
+	/**
+	 * Personal access token with gist access
+	 */
+	"token" : "",
+
+	/**
+	 * Id of the Gist used to save data
+	 */
+	"gistId" : ""
+}
