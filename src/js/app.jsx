@@ -34,13 +34,16 @@ module.exports = {
 		app.render();
 		app.state.isInitialized = true;
 		app.services.getData(function(data) {
-			// console.log(data);
 			if (data.tasks) {
 				for (let k in data.tasks) {
 					app.state.data.tasks[k] = data.tasks[k];
 				}
 			}
-			app.state.data.projects = data.projects;
+			if (data.projects) {
+				for (let k in data.projects) {
+					app.state.data.projects[k] = data.projects[k];
+				}
+			}
 			app.render();
 		});
 	},

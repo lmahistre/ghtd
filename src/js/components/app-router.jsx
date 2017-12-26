@@ -7,6 +7,7 @@ const Route = ReactRouterDom.Route;
 const Switch = ReactRouterDom.Switch;
 
 const TaskList = require("./task-list.jsx");
+const ProjectEdit = require("./project-edit.jsx");
 const ProjectList = require("./project-list.jsx");
 
 module.exports = React.createClass({
@@ -18,6 +19,7 @@ module.exports = React.createClass({
 			<Route exact path="/" component={TaskList} />
 			<Route exact path="/tasks" component={TaskList} />
 			<Route exact path="/projects" component={ProjectList} />
+			<Route exact path="/project-edit" component={ProjectEdit} />
 			<Route exact path="*" component={TaskList} />
 		</Switch>
 	),
