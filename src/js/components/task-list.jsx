@@ -1,13 +1,11 @@
 const React = require("react");
 
 const AppPage = require("./app-page.jsx");
+const Task = require("./task.jsx");
 
-module.exports = React.createClass({
+class TaskList extends React.Component {
 
-	displayName : "TaskList",
-
-	addTask : function() {
-		const taskName = document.getElementById('new-task').value;
+	addTask() {
 		// Task ID
 		let id = 0;
 		if (app.state.data.tasks) {
@@ -20,60 +18,29 @@ module.exports = React.createClass({
 		id++;
 
 		// Project ID
-		let projectId = parseInt(document.forms[0].projectId.value);
+		const name = document.forms['new-task'].name.value;
+		let projectId = parseInt(document.forms['new-task'].projectId.value);
 		if (isNaN(projectId)) {
 			projectId = 0;
 		}
 
-		app.state.data.tasks[id] = {
+		let task = {
 			id : id,
-			name : taskName,
+			name : name,
 			projectId : projectId,
 			status : 'active',
 		};
-		console.log({
-			id : id,
-			name : taskName,
-			projectId : projectId,
-			status : 'active',
-		});
+		app.state.data.tasks[id] = task;
 		app.services.saveData();
 		app.render();
-	},
+	}
 
 
 	handleInputKeyDown(event) {
 		if (event.which == 13) {
 			this.addTask();
 		}
-	},
-
-
-	resolve(id) {
-		if (app.state.data.tasks[id]) {
-			app.state.data.tasks[id].status = 'done';
-		}
-		app.services.saveData();
-		app.render();
-	},
-
-
-	delete(id) {
-		if (app.state.data.tasks[id]) {
-			delete app.state.data.tasks[id];
-		}
-		app.services.saveData();
-		app.render();
-	},
-
-
-	unresolve(id) {
-		if (app.state.data.tasks[id]) {
-			app.state.data.tasks[id].status = 'active';
-		}
-		app.services.saveData();
-		app.render();
-	},
+	}
 
 
 	render() {
@@ -84,6 +51,9 @@ module.exports = React.createClass({
 				let task = app.state.data.tasks[i];
 				if (app.state.data.projects && app.state.data.projects[task.projectId]) {
 					task.projectName = app.state.data.projects[task.projectId].name;
+				}
+				else {
+					task.projectName = ' ';
 				}
 				taskList.push(task);
 			}
@@ -100,49 +70,26 @@ module.exports = React.createClass({
 			}
 		}
 		return (
-			<AppPage>
-				<form>
+			<AppPage selectedMenu="tasks">
+				<form name="new-task">
 					<select name="projectId">
 						{projectList.map(elt => (
-							<option value={elt.id}>{elt.name}</option>
+							<option key={elt.id} value={elt.id}>{elt.name}</option>
 						))}
 					</select>
+					<input name="name" onKeyDown={this.handleInputKeyDown.bind(this)} />
 				</form>
-				<input id="new-task" onKeyDown={this.handleInputKeyDown.bind(this)} />
 				<button onClick={self.addTask}>GO</button>
 				<table className="list-table">
 					<tbody>
 						{taskList.map(elt => (
-							<tr key={elt.id} className={"status-"+elt.status}>
-								<td>
-									{elt.status == 'done' ? 
-										[
-											<a href="javascript:void(0);" key={0} className="small-button" onClick={self.delete.bind(self, elt.id)}>
-												<span className="glyphicon glyphicon-trash" aria-hidden="true"></span>
-											</a>,
-											<a href="javascript:void(0);" key={1} className="small-button" onClick={self.unresolve.bind(self, elt.id)}>
-												<span className="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
-											</a>
-										]
-									:
-										[
-											<a href="javascript:void(0);" key={0} className="small-button">
-												<span className="glyphicon glyphicon-edit" aria-hidden="true"></span>
-											</a>,
-											<a href="javascript:void(0);" key={1} className="small-button" onClick={self.resolve.bind(self, elt.id)}>
-												<span className="glyphicon glyphicon-ok" aria-hidden="true"></span>
-											</a>
-										]
-									}
-								</td>
-								<td>{elt.projectId}</td>
-								<td>{elt.projectName}</td>
-								<td>{elt.name}</td>
-							</tr>
+							<Task key={elt.id} task={elt} />
 						))}
 					</tbody>
 				</table>
 			</AppPage>
 		);
 	}
-});
+}
+
+module.exports = TaskList;

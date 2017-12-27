@@ -1,3 +1,3 @@
 
 window.app = require("./app.jsx");
-setTimeout(app.init, 298);
+setTimeout(app.init, 200);

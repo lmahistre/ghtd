@@ -10,26 +10,28 @@ const TaskList = require("./task-list.jsx");
 const ProjectEdit = require("./project-edit.jsx");
 const ProjectList = require("./project-list.jsx");
 
-module.exports = React.createClass({
+class AppRouter extends React.Component {
 
-	displayName : "AppRouter",
+	constructor() {
+		this.routes = (
+			<Switch>
+				<Route exact path="/" component={TaskList} />
+				<Route exact path="/tasks" component={TaskList} />
+				<Route exact path="/projects" component={ProjectList} />
+				<Route exact path="/project-edit" component={ProjectEdit} />
+				<Route exact path="/project-edit/:id" component={ProjectEdit} />
+				<Route exact path="*" component={TaskList} />
+			</Switch>
+		);
+	}
 
-	routes : (
-		<Switch>
-			<Route exact path="/" component={TaskList} />
-			<Route exact path="/tasks" component={TaskList} />
-			<Route exact path="/projects" component={ProjectList} />
-			<Route exact path="/project-edit" component={ProjectEdit} />
-			<Route exact path="*" component={TaskList} />
-		</Switch>
-	),
-
-	render : function () {
+	render() {
 		return (
 			<HashRouter>
 				{this.routes}
 			</HashRouter>
 		);
-	},
-});
+	}
+}
 
+module.exports = AppRouter;

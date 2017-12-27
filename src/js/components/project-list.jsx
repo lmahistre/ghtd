@@ -5,10 +5,10 @@ const Link = ReactRouterDom.Link;
 
 const AppPage = require("./app-page.jsx");
 
-module.exports = React.createClass({
-	displayName : "ProjectList",
+class ProjectList extends React.Component {
 
 	render() {
+		const self = this;
 		const projectList = [];
 		if (app.state.data.projects) {
 			for (let i in app.state.data.projects) {
@@ -16,12 +16,17 @@ module.exports = React.createClass({
 			}
 		}
 		return (
-			<AppPage>
+			<AppPage selectedMenu="projects">
 				<Link to="/project-edit">New project</Link>
 				<table className="list-table">
 					<tbody>
 						{projectList.map(elt => (
 							<tr key={elt.id}>
+								<td>
+									<Link to={"/project-edit/"+elt.id} className="small-button">
+										<span className="glyphicon glyphicon-edit" aria-hidden="true"></span>
+									</Link>
+								</td>
 								<td>{elt.id}</td>
 								<td>{elt.name}</td>
 							</tr>
@@ -31,4 +36,5 @@ module.exports = React.createClass({
 			</AppPage>
 		);
 	}
-});
+}
+module.exports = ProjectList;

@@ -3,18 +3,16 @@ const React = require("react");
 
 const Menu = require('./menu.jsx');
 
-module.exports = React.createClass({
-
-	displayName : "AppPage",
-
-
-	render : function() {
+class AppPage extends React.Component {
+	render() {
 		const self = this;
 		return (
 			<div className="container">
-				<Menu currentPage={app.state.currentPage} />
+				<Menu selectedMenu={self.props.selectedMenu} />
 				{self.props.children}
 			</div>
 		);
-	},
-});
+	}
+}
+
+module.exports = AppPage;

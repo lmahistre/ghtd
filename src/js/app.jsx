@@ -10,7 +10,6 @@ module.exports = {
 			tasks : {},
 			projects : {},
 		},
-		currentPage : 'tasks',
 		alerts : {},
 		pleaseWait : 0,
 		isInitialized : false,

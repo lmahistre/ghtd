@@ -4,18 +4,17 @@ const ReactRouterDom = require('react-router-dom');
 
 const Link = ReactRouterDom.Link;
 
-module.exports = React.createClass({
-
-	displayName : "Menu",
-
+class Menu extends React.Component {
 
 	render() {
 		const self = this;
 		return (
 			<div className="menu">
-				<Link className="menu-entry" to="/tasks">Tasks</Link>
-				<Link className="menu-entry" to="/projects">Projects</Link>
+				<Link className={"menu-entry"+(self.props.selectedMenu == 'tasks' ? ' active' : '')} to="/tasks" replace>Tasks</Link>
+				<Link className={"menu-entry"+(self.props.selectedMenu == 'projects' ? ' active' : '')} to="/projects" replace>Projects</Link>
 			</div>
 		);
-	},
-});
+	}
+}
+
+module.exports = Menu;

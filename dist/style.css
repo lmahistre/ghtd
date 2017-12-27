@@ -1,6 +1,6 @@
 body {
   background-color: #FFF;
-  font-family: sans-serif, "Helvetica Neue", Helvetica, Arial;
+  font-family: Helvetica, sans-serif, Arial;
   font-size: 14px;
   color: #111;
   padding-top: 0px;
@@ -43,8 +43,15 @@ div.menu .menu-entry {
   padding: 4px 8px;
   text-align: center;
 }
+div.menu .menu-entry.active {
+  background-color: #FCC;
+}
 div.menu .menu-entry:hover {
   background-color: #BBF;
+}
+div.project-label {
+  background-color: #EDD;
+  padding: 2px 4px;
 }
 @font-face {
   font-family: 'Glyphicons Halflings';
