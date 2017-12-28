@@ -31,7 +31,7 @@ module.exports = {
 		};
 
 		app.render();
-		app.state.isInitialized = true;
+		app.state.isInitialized = false;
 		app.services.getData(function(data) {
 			if (data.tasks) {
 				for (let k in data.tasks) {
@@ -43,12 +43,14 @@ module.exports = {
 					app.state.data.projects[k] = data.projects[k];
 				}
 			}
+			app.state.isInitialized = true;
 			app.render();
 		});
 	},
 
 
 	error : function(err) {
+		app.showAlert('error', err);
 		console.error(err);
 		// app.services.log(err, app.endPleaseWait);
 	},
@@ -114,12 +116,12 @@ module.exports = {
 
 
 	showAlert : function(type, msg, timeout) {
-		app.state.data.alerts[type] = msg;
+		app.state.alerts[type] = msg;
 		app.render();
 		if (timeout && parseInt(timeout) > 0) {
 			setTimeout(function() {
-				if (app.state.data.alerts[type] == msg) {
-					app.state.data.alerts[type] = null;
+				if (app.state.alerts[type] == msg) {
+					app.state.alerts[type] = null;
 					app.render();
 				}
 			}, timeout);

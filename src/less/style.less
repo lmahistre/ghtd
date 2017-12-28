@@ -4,10 +4,8 @@
 
 @font-size-default : 14px;
 @text-color : #111;
-@input-background-color: rgba(0, 0, 16, 0.6);
 
-@radius : 4px;
-@border-width : 1px;
+@button-color : #8BF;
 
 body {
 	background-color: #FFF;
@@ -16,8 +14,8 @@ body {
 	color: @text-color;
 	padding-top: 0px;
 	padding-bottom: 0px;
-	padding-left: 0px;
-	padding-right: 0px;
+	padding-left: 8px;
+	padding-right: 8px;
 	margin-top: 0px;
 	margin-bottom: 0px;
 	margin-left: 0px;
@@ -25,48 +23,83 @@ body {
 
 	table.list-table {
 		tr.status-active {
-			color: #000;
+			color: @text-color;
 		}
 		tr.status-done {
 			color: #888;
 		}
+		td.actions {
+			min-width: 56px;
+		}
 	}
+}
+
+a.common-button {
+	text-decoration: none;
+	color: #000;
+	background-color: @button-color;
+	padding: 4px 8px;
+	display: inline-block;
+	border-radius: 2px;
+	margin: 2px 4px;
 }
 
 a.small-button {
 	color: #000;
 	text-decoration: none;
-	background-color: #DDE;
-	width: 18px;
-	height: 18px;
-	margin: 1px;
+	background-color: #8BF;
+	width: 16px;
+	height: 16px;
+	margin: 1px 2px;
 	border-radius: 2px;
 	display: inline-block;
-	padding: 1px;
+	padding: 4px;
 }
 .clearfix {
 	clear: both;
 }
 
 div.menu {
-	background-color: #EEE;
+	background-color: #DDD;
+	margin-bottom: 2px;
 	.menu-entry {
 		display: inline-block;
 		width: 60px;
 		text-decoration: none;
 		color: #000;
-		padding: 4px 8px;
+		padding: 6px 12px;
 		text-align: center;
 		&.active {
-			background-color: #FCC;
+			background-color: @button-color;
 		}
 		&:hover {
-			background-color: #BBF;
+			background-color: @button-color;
 		}
 	}
 }
 
 div.project-label {
-	background-color: #EDD;
-	padding: 2px 4px;
+	background-color: #CDE;
+	border-radius: 2px;
+	padding: 3px 6px;
+}
+
+div.alerts {
+	.alert {
+		padding: 4px 8px;
+		&.error {
+			background-color: #FCC;
+			color: #400;
+			.alert-hide {
+				color: #800;
+				&:hover {
+					color: #000;
+				}
+			}
+		}
+		.alert-hide {
+			float: right;
+			cursor: pointer;
+		}
+	}
 }

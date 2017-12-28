@@ -1,8 +1,7 @@
 const React = require("react");
 
-// module.exports = React.createClass({
+const SmallButton = require("./small-button.jsx");
 
-// 	displayName : "Task",
 class Task extends React.Component {
 
 	resolve(id) {
@@ -73,6 +72,13 @@ class Task extends React.Component {
 	}
 
 
+	handleInputKeyDown(event) {
+		if (event.which == 13) {
+			this.save();
+		}
+	}
+
+
 	render() {
 		const self = this;
 		const elt = self.props.task;
@@ -92,15 +98,10 @@ class Task extends React.Component {
 			}
 			return (
 				<tr className={"status-"+elt.status}>
-					<td>
-						<a href="javascript:void(0);" className="small-button" onClick={self.cancel.bind(self)}>
-							<span className="glyphicon glyphicon-remove" aria-hidden="true"></span>
-						</a>
-						<a href="javascript:void(0);" className="small-button" onClick={self.save.bind(self)}>
-							<span className="glyphicon glyphicon-ok" aria-hidden="true"></span>
-						</a>
+					<td className="actions">
+						<SmallButton glyphicon="remove" onClick={self.cancel.bind(self)} title="Cancel" />
+						<SmallButton glyphicon="ok" onClick={self.save.bind(self)} title="Save" />
 					</td>
-					<td></td>
 					<td>
 						<select id={"task-edit-projectId-"+elt.id} name="projectId" defaultValue={elt.projectId}>
 							{projectList.map(opt => (
@@ -109,7 +110,7 @@ class Task extends React.Component {
 						</select>
 					</td>
 					<td>
-						<input id={"task-edit-name-"+elt.id} type="text" name="name" defaultValue={elt.name} />
+						<input id={"task-edit-name-"+elt.id} type="text" name="name" defaultValue={elt.name} onKeyDown={this.handleInputKeyDown.bind(this)} />
 					</td>
 				</tr>
 			);
@@ -117,28 +118,19 @@ class Task extends React.Component {
 		else {
 			return (
 				<tr className={"status-"+elt.status}>
-					<td>
+					<td className="actions">
 						{elt.status == 'done' ? 
 							[
-								<a href="javascript:void(0);" key={0} className="small-button" onClick={self.delete.bind(self, elt.id)}>
-									<span className="glyphicon glyphicon-trash" aria-hidden="true"></span>
-								</a>,
-								<a href="javascript:void(0);" key={1} className="small-button" onClick={self.unresolve.bind(self, elt.id)}>
-									<span className="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
-								</a>
+								<SmallButton key={0} glyphicon="trash" onClick={self.delete.bind(self, elt.id)} title="Delete" />,
+								<SmallButton key={1} glyphicon="folder-open" onClick={self.unresolve.bind(self, elt.id)} title="Reopen" />
 							]
 						:
 							[
-								<a href="javascript:void(0);" key={0} className="small-button" onClick={self.edit.bind(self)}>
-									<span className="glyphicon glyphicon-edit" aria-hidden="true"></span>
-								</a>,
-								<a href="javascript:void(0);" key={1} className="small-button" onClick={self.resolve.bind(self, elt.id)}>
-									<span className="glyphicon glyphicon-ok" aria-hidden="true"></span>
-								</a>
+								<SmallButton key={0} glyphicon="edit" onClick={self.edit.bind(self, elt.id)} title="Edit" />,
+								<SmallButton key={1} glyphicon="ok" onClick={self.resolve.bind(self, elt.id)} title="Resolve" />
 							]
 						}
 					</td>
-					<td>{elt.projectId}</td>
 					<td>
 						<div className="project-label">{elt.projectName}</div>
 					</td>

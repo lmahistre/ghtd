@@ -7,7 +7,7 @@ const Route = ReactRouterDom.Route;
 const Switch = ReactRouterDom.Switch;
 
 const TaskList = require("./task-list.jsx");
-const ProjectEdit = require("./project-edit.jsx");
+const ProjectEditPage = require("./project-edit-page.jsx");
 const ProjectList = require("./project-list.jsx");
 
 class AppRouter extends React.Component {
@@ -18,8 +18,8 @@ class AppRouter extends React.Component {
 				<Route exact path="/" component={TaskList} />
 				<Route exact path="/tasks" component={TaskList} />
 				<Route exact path="/projects" component={ProjectList} />
-				<Route exact path="/project-edit" component={ProjectEdit} />
-				<Route exact path="/project-edit/:id" component={ProjectEdit} />
+				<Route exact path="/project-edit" component={ProjectEditPage} />
+				<Route exact path="/project-edit/:id" component={ProjectEditPage} />
 				<Route exact path="*" component={TaskList} />
 			</Switch>
 		);

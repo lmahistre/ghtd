@@ -4,6 +4,7 @@ const ReactRouterDom = require('react-router-dom');
 const Link = ReactRouterDom.Link;
 
 const AppPage = require("./app-page.jsx");
+const CommonButton = require("./common-button.jsx");
 
 class ProjectList extends React.Component {
 
@@ -17,7 +18,7 @@ class ProjectList extends React.Component {
 		}
 		return (
 			<AppPage selectedMenu="projects">
-				<Link to="/project-edit">New project</Link>
+				<CommonButton to="/project-edit">New project</CommonButton>
 				<table className="list-table">
 					<tbody>
 						{projectList.map(elt => (
