@@ -7,9 +7,10 @@ const Alerts = require('./alerts.jsx');
 class AppPage extends React.Component {
 	render() {
 		const self = this;
+		const theme = localStorage.theme === 'dark' ? 'dark' : 'light';
 		if (app.state.isInitialized) {
 			return (
-				<div className="container">
+				<div className="app-container" data-theme={theme}>
 					<Menu selectedMenu={self.props.selectedMenu} />
 					<Alerts alerts={app.state.alerts} />
 					{self.props.children}
@@ -18,7 +19,11 @@ class AppPage extends React.Component {
 		}
 		else {
 			return (
-				<div>Loading...</div>
+				<div className="first-loader" data-theme={theme}>
+					<div className="loader-horizontal">
+						<img src="dist/loader.gif" />
+					</div>
+				</div>
 			);
 		}
 	}

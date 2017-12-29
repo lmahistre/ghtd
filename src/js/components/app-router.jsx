@@ -9,6 +9,7 @@ const Switch = ReactRouterDom.Switch;
 const TaskList = require("./task-list.jsx");
 const ProjectEditPage = require("./project-edit-page.jsx");
 const ProjectList = require("./project-list.jsx");
+const SettingsPage = require("./settings-page.jsx");
 
 class AppRouter extends React.Component {
 
@@ -20,6 +21,7 @@ class AppRouter extends React.Component {
 				<Route exact path="/projects" component={ProjectList} />
 				<Route exact path="/project-edit" component={ProjectEditPage} />
 				<Route exact path="/project-edit/:id" component={ProjectEditPage} />
+				<Route exact path="/settings" component={SettingsPage} />
 				<Route exact path="*" component={TaskList} />
 			</Switch>
 		);

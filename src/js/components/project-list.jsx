@@ -5,6 +5,7 @@ const Link = ReactRouterDom.Link;
 
 const AppPage = require("./app-page.jsx");
 const CommonButton = require("./common-button.jsx");
+const VisibleMarker = require("./visible-marker.jsx");
 
 class ProjectList extends React.Component {
 
@@ -28,8 +29,10 @@ class ProjectList extends React.Component {
 										<span className="glyphicon glyphicon-edit" aria-hidden="true"></span>
 									</Link>
 								</td>
-								<td>{elt.id}</td>
 								<td>{elt.name}</td>
+								<td>
+									<VisibleMarker visible={elt.visible} />
+								</td>
 							</tr>
 						))}
 					</tbody>

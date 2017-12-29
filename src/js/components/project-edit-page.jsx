@@ -22,6 +22,7 @@ class ProjectEditPage extends React.Component {
 			id : id,
 			name : document.forms['project-edit'].name.value,
 			visible : document.forms['project-edit'].visible.checked,
+			color : document.forms['project-edit'].color.value,
 		};
 		if (project.name.length > 0) {
 			app.state.data.projects[id] = project;
@@ -36,6 +37,7 @@ class ProjectEditPage extends React.Component {
 			id : document.forms['project-edit'].id.value,
 			name : document.forms['project-edit'].name.value,
 			visible : document.forms['project-edit'].visible.checked,
+			color : document.forms['project-edit'].color.value,
 		};
 		if (app.state.data.projects[project.id]) {
 			app.state.data.projects[project.id] = project;

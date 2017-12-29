@@ -18,6 +18,7 @@ module.exports = {
 	apiEndpoint : 'main.php',
 
 	services : require('./services.jsx'),
+	consts : require('./consts.jsx'),
 
 	init : function() {
 
@@ -52,7 +53,6 @@ module.exports = {
 	error : function(err) {
 		app.showAlert('error', err);
 		console.error(err);
-		// app.services.log(err, app.endPleaseWait);
 	},
 
 

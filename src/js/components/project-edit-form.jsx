@@ -45,6 +45,17 @@ class ProjectEditForm extends React.Component {
 								<input type="checkbox" name="visible" checked={self.props.project.visible} onChange={self.changeVisible.bind(self)} />
 							</td>
 						</tr>
+						<tr>
+							<td>Color</td>
+							<td>
+								<select name="color">
+									<option value=""></option>
+									{app.consts.colors.map(elt => (
+										<option key={elt.id} value={elt.color} style={{backgroundColor : '#'+elt.color}}>{elt.name}</option>
+									))}
+								</select>
+							</td>
+						</tr>
 					</tbody>
 				</table>
 			</form>

@@ -42,8 +42,3 @@ if (isset($_REQUEST['action'])) {
 
 	echo json_encode($return);
 }
-// index
-else {
-	// Functions::checkApp();
-	// require './includes/view.php';
-}

@@ -1,36 +1,42 @@
-body {
-  background-color: #FFF;
+html {
+  height: 100%;
+}
+html body {
   font-family: Helvetica, sans-serif, Arial;
   font-size: 14px;
-  color: #111;
   padding-top: 0px;
   padding-bottom: 0px;
-  padding-left: 8px;
-  padding-right: 8px;
+  padding-left: 0px;
+  padding-right: 0px;
   margin-top: 0px;
   margin-bottom: 0px;
   margin-left: 0px;
   margin-right: 0px;
+  height: 100%;
 }
-body table.list-table tr.status-active {
+html body #react-root {
+  height: 100%;
+}
+html body #react-root .app-container {
+  height: 100%;
+  background-color: #FFF;
   color: #111;
+  padding-left: 8px;
+  padding-right: 8px;
 }
-body table.list-table tr.status-done {
-  color: #888;
-}
-body table.list-table td.actions {
-  min-width: 56px;
-}
-a.common-button {
+html body #react-root .app-container a.common-button {
   text-decoration: none;
   color: #000;
   background-color: #8BF;
   padding: 4px 8px;
   display: inline-block;
   border-radius: 2px;
-  margin: 2px 4px;
+  margin: 3px 6px;
 }
-a.small-button {
+html body #react-root .app-container a.common-button:hover {
+  background-color: #8AE;
+}
+html body #react-root .app-container a.small-button {
   color: #000;
   text-decoration: none;
   background-color: #8BF;
@@ -41,14 +47,17 @@ a.small-button {
   display: inline-block;
   padding: 4px;
 }
-.clearfix {
+html body #react-root .app-container a.small-button:hover {
+  background-color: #8AE;
+}
+html body #react-root .app-container .clearfix {
   clear: both;
 }
-div.menu {
+html body #react-root .app-container div.menu {
   background-color: #DDD;
   margin-bottom: 2px;
 }
-div.menu .menu-entry {
+html body #react-root .app-container div.menu .menu-entry {
   display: inline-block;
   width: 60px;
   text-decoration: none;
@@ -56,32 +65,115 @@ div.menu .menu-entry {
   padding: 6px 12px;
   text-align: center;
 }
-div.menu .menu-entry.active {
+html body #react-root .app-container div.menu .menu-entry.active {
   background-color: #8BF;
 }
-div.menu .menu-entry:hover {
-  background-color: #8BF;
+html body #react-root .app-container div.menu .menu-entry:hover {
+  background-color: #8AE;
 }
-div.project-label {
-  background-color: #EDD;
-  padding: 2px 4px;
-}
-div.alerts .alert {
+html body #react-root .app-container div.project-label {
+  color: #FFF;
+  border-radius: 2px;
   padding: 4px 8px;
 }
-div.alerts .alert.error {
+html body #react-root .app-container div.alerts .alert {
+  padding: 4px 8px;
+  border-radius: 2px;
+}
+html body #react-root .app-container div.alerts .alert.error {
   background-color: #FCC;
   color: #400;
 }
-div.alerts .alert.error .alert-hide {
+html body #react-root .app-container div.alerts .alert.error .alert-hide {
   color: #800;
 }
-div.alerts .alert.error .alert-hide:hover {
+html body #react-root .app-container div.alerts .alert.error .alert-hide:hover {
   color: #000;
 }
-div.alerts .alert .alert-hide {
+html body #react-root .app-container div.alerts .alert .alert-hide {
   float: right;
   cursor: pointer;
+}
+html body #react-root .app-container select {
+  height: 24px;
+  background-color: #FFF;
+  color: #111;
+  border-width: 1px;
+  border-width: solid;
+  padding: 1px 2px;
+  margin: 1px 2px;
+}
+html body #react-root .app-container select option {
+  color: #111;
+  height: 24px;
+  background-color: #FFF;
+}
+html body #react-root .app-container input[type=text] {
+  height: 20px;
+  padding: 1px 2px;
+  margin: 1px 2px;
+  background-color: #EEE;
+  color: #111;
+  border-width: 1px;
+  border-width: solid;
+}
+html body #react-root .app-container span.color-yes {
+  color: #0A0;
+}
+html body #react-root .app-container span.color-no {
+  color: #A00;
+}
+html body #react-root .app-container table.list-table tr.status-active {
+  color: #111;
+}
+html body #react-root .app-container table.list-table tr.status-done {
+  color: #888;
+}
+html body #react-root .app-container table.list-table td.actions {
+  min-width: 56px;
+}
+html body #react-root .app-container table.list-table input[type=text] {
+  width: 100%;
+}
+html body #react-root .app-container[data-theme=dark] {
+  background-color: #000;
+  color: #EEE;
+}
+html body #react-root .app-container[data-theme=dark] table.list-table tr.status-active {
+  color: #EEE;
+}
+html body #react-root .app-container[data-theme=dark] select {
+  color: #EEE;
+  background-color: #111;
+}
+html body #react-root .app-container[data-theme=dark] select option {
+  color: #EEE;
+  background-color: #111;
+}
+html body #react-root .app-container[data-theme=dark] input[type=text] {
+  color: #EEE;
+  background-color: #111;
+}
+html body #react-root div.first-loader {
+  background-color: #FFF;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+html body #react-root div.first-loader .loader-horizontal {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+html body #react-root div.first-loader .loader-horizontal img {
+  max-width: 100%;
+  max-height: 100%;
+}
+html body #react-root div.first-loader[data-theme=dark] {
+  background-color: #000;
 }
 @font-face {
   font-family: 'Glyphicons Halflings';

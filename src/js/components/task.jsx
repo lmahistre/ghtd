@@ -88,6 +88,7 @@ class Task extends React.Component {
 				{
 					id : 0,
 					name : '',
+					color : '',
 				}
 			];
 			if (app.state.data.projects) {
@@ -132,7 +133,7 @@ class Task extends React.Component {
 						}
 					</td>
 					<td>
-						<div className="project-label">{elt.projectName}</div>
+						<div className="project-label" style={{backgroundColor : '#'+elt.projectColor}}>{elt.projectName}</div>
 					</td>
 					<td>{elt.name}</td>
 				</tr>
