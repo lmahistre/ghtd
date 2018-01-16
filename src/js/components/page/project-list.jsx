@@ -3,9 +3,9 @@ const ReactRouterDom = require('react-router-dom');
 
 const Link = ReactRouterDom.Link;
 
-const AppPage = require("./app-page.jsx");
-const CommonButton = require("./common-button.jsx");
-const VisibleMarker = require("./visible-marker.jsx");
+const AppPage = require("../app-page.jsx");
+const CommonButton = require("../ui/common-button.jsx");
+const VisibleMarker = require("../visible-marker.jsx");
 
 class ProjectList extends React.Component {
 

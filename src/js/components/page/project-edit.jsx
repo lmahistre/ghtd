@@ -1,10 +1,10 @@
 const React = require("react");
 
-const AppPage = require("./app-page.jsx");
-const CommonButton = require("./common-button.jsx");
-const ProjectEditForm = require("./project-edit-form.jsx");
+const AppPage = require("../app-page.jsx");
+const CommonButton = require("../ui/common-button.jsx");
+const ProjectEditForm = require("../project-edit-form.jsx");
 
-class ProjectEditPage extends React.Component {
+class ProjectEdit extends React.Component {
 
 	create() {
 		let id = 0;
@@ -72,10 +72,11 @@ class ProjectEditPage extends React.Component {
 		return (
 			<AppPage>
 				<CommonButton onClick={save}>Save</CommonButton>
+				<CommonButton to="/projects">Cancel</CommonButton>
 				<ProjectEditForm project={project} save={save} />
 			</AppPage>
 		);
 	}
 }
 
-module.exports = ProjectEditPage;
+module.exports = ProjectEdit;

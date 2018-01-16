@@ -1,9 +1,9 @@
 
 const React = require("react");
 
-const AppPage = require("./app-page.jsx");
+const AppPage = require("../app-page.jsx");
 
-class SettingsPage extends React.Component {
+class Settings extends React.Component {
 	render() {
 		return (
 			<AppPage selectedMenu="settings">
@@ -22,4 +22,4 @@ class SettingsPage extends React.Component {
 	}
 }
 
-module.exports = SettingsPage;
+module.exports = Settings;

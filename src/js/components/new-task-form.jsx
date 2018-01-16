@@ -1,7 +1,7 @@
 
 const React = require("react");
 
-const SmallButton = require("./small-button.jsx");
+const SmallButton = require("./ui/small-button.jsx");
 
 class NewTaskForm extends React.Component {
 

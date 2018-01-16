@@ -1,7 +1,7 @@
 const React = require("react");
 
 const AppPage = require("./app-page.jsx");
-const CommonButton = require("./common-button.jsx");
+const CommonButton = require("./ui/common-button.jsx");
 
 class ProjectEditForm extends React.Component {
 
@@ -31,27 +31,27 @@ class ProjectEditForm extends React.Component {
 		return (
 			<form name="project-edit" onSubmit={self.formFakeSubmit}>
 				<input type="hidden" name="id" value={self.props.project.id} />
-				<table className="list-table">
+				<table className="form-table">
 					<tbody>
 						<tr>
-							<td>Name</td>
-							<td>
+							<td className="label">Name</td>
+							<td className="value">
 								<input type="text" name="name" defaultValue={self.props.project.name} onKeyDown={self.handleInputKeyDown.bind(self, self.props.save)} />
 							</td>
 						</tr>
 						<tr>
-							<td>Visible</td>
-							<td>
+							<td className="label">Visible</td>
+							<td className="value">
 								<input type="checkbox" name="visible" checked={self.props.project.visible} onChange={self.changeVisible.bind(self)} />
 							</td>
 						</tr>
 						<tr>
-							<td>Color</td>
-							<td>
+							<td className="label">Color</td>
+							<td className="value">
 								<select name="color">
 									<option value=""></option>
 									{app.consts.colors.map(elt => (
-										<option key={elt.id} value={elt.color} style={{backgroundColor : '#'+elt.color}}>{elt.name}</option>
+										<option key={elt.id} value={elt.color} style={{backgroundColor : '#'+elt.color}} selected={elt.color == self.props.project.color}>{elt.name}</option>
 									))}
 								</select>
 							</td>

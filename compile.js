@@ -20,6 +20,13 @@ const configJs = {
 	},
 };
 
+const configCss = {
+	inputFolder : __dirname+'/src/less',
+	entry : 'index.less',
+	outputFolder : __dirname+'/dist',
+	outputFilename : 'style.css',
+};
+
 const compiler = webpack(configJs);
 
 const compileJs = function(callback) {
@@ -49,11 +56,14 @@ const compileJs = function(callback) {
 };
 
 
-const compileCss =  function(inputFile, outputFile, callback) {
-	console.log('Compiling '+outputFile);
+/**
+ * Compiles LESS files into CSS
+ */
+const compileCss =  function(callback) {
+	console.log('Compiling '+configCss.outputFilename);
 
 	try {
-		fs.readFile(__dirname+'/src/less/'+inputFile, { 
+		fs.readFile(configCss.inputFolder+'/'+configCss.entry, { 
 			encoding: 'utf8' 
 		}, 
 		function(err, data) {
@@ -61,15 +71,15 @@ const compileCss =  function(inputFile, outputFile, callback) {
 				console.log(err.stack);
 			}
 			less.render(data, {
-				paths: [__dirname+'/src/less/'], // Specify search paths for @import directives
-				filename: './'+inputFile, // Specify a filename, for better error messages
+				paths: [configCss.inputFolder+'/'], // Specify search paths for @import directives
+				filename: './'+configCss.entry,
 				compress: false // Minify CSS output
 			},
 			function (e, output) {
 				if (e) {
 					console.log(e.stack);
 				}
-				fs.writeFile(__dirname+'/dist/'+outputFile, output.css, {
+				fs.writeFile(__dirname+'/dist/'+configCss.outputFilename, output.css, {
 					flag:'w+', 
 					encoding:'utf8'
 				},
@@ -78,8 +88,8 @@ const compileCss =  function(inputFile, outputFile, callback) {
 						console.log(err.stack);
 					}
 					else {
-						console.log('Successfully compiled '+outputFile);
-						if (callback) {
+						console.log('Successfully compiled '+configCss.outputFilename);
+						if (callback && typeof callback === 'function') {
 							callback();
 						}
 					}
@@ -88,16 +98,10 @@ const compileCss =  function(inputFile, outputFile, callback) {
 		});
 	}
 	catch(err) {
-		console.log('Compilation failed : '+outputFile);
+		console.log('Compilation failed : '+configCss.outputFilename);
 		console.log(err.stack);
 	}
 };
-
-
-const compileMainCss = function(callback) {
-	compileCss('index.less', 'style.css', callback);
-};
-
 
 
 const args = process.argv.slice(2);
@@ -109,12 +113,12 @@ if (args.length) {
 		compileJs();
 	}
 	else if (args[0] === 'css') {
-		compileMainCss();
+		compileCss();
 	}
 	else {
 		console.log('Invalid argument '+args[0]);
 	}
 }
 else {
-	compileJs(compileMainCss);
+	compileJs(compileCss);
 }

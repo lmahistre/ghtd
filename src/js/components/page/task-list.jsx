@@ -1,10 +1,10 @@
 const React = require("react");
 
-const AppPage = require("./app-page.jsx");
-const Task = require("./task.jsx");
-const SmallButton = require("./small-button.jsx");
-const CommonButton = require("./common-button.jsx");
-const NewTaskForm = require("./new-task-form.jsx");
+const AppPage = require("../app-page.jsx");
+const Task = require("../task.jsx");
+const SmallButton = require("../ui/small-button.jsx");
+const CommonButton = require("../ui/common-button.jsx");
+const NewTaskForm = require("../new-task-form.jsx");
 
 class TaskList extends React.Component {
 

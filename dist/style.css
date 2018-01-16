@@ -94,29 +94,6 @@ html body #react-root .app-container div.alerts .alert .alert-hide {
   float: right;
   cursor: pointer;
 }
-html body #react-root .app-container select {
-  height: 24px;
-  background-color: #FFF;
-  color: #111;
-  border-width: 1px;
-  border-width: solid;
-  padding: 1px 2px;
-  margin: 1px 2px;
-}
-html body #react-root .app-container select option {
-  color: #111;
-  height: 24px;
-  background-color: #FFF;
-}
-html body #react-root .app-container input[type=text] {
-  height: 20px;
-  padding: 1px 2px;
-  margin: 1px 2px;
-  background-color: #EEE;
-  color: #111;
-  border-width: 1px;
-  border-width: solid;
-}
 html body #react-root .app-container span.color-yes {
   color: #0A0;
 }
@@ -133,6 +110,33 @@ html body #react-root .app-container table.list-table td.actions {
   min-width: 56px;
 }
 html body #react-root .app-container table.list-table input[type=text] {
+  width: 100%;
+}
+html body #react-root .app-container table.form-table select {
+  height: 24px;
+  background-color: #FFF;
+  color: #111;
+  border-width: 1px;
+  border-width: solid;
+  border-radius: 2px;
+  padding: 1px 2px;
+  margin: 1px 2px;
+  width: 100%;
+}
+html body #react-root .app-container table.form-table select option {
+  color: #111;
+  height: 24px;
+  background-color: #FFF;
+}
+html body #react-root .app-container table.form-table input[type=text] {
+  height: 20px;
+  padding: 1px 2px;
+  margin: 1px 2px;
+  border-radius: 2px;
+  background-color: #EEE;
+  color: #111;
+  border-width: 1px;
+  border-width: solid;
   width: 100%;
 }
 html body #react-root .app-container[data-theme=dark] {
