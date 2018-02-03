@@ -9,7 +9,7 @@ const Switch = ReactRouterDom.Switch;
 const TaskList = require("./page/task-list.jsx");
 const ProjectEdit = require("./page/project-edit.jsx");
 const ProjectList = require("./page/project-list.jsx");
-const SettingsPage = require("./page/settings.jsx");
+const Settings = require("./page/settings.jsx");
 
 class AppRouter extends React.Component {
 

@@ -42,3 +42,6 @@ if (isset($_REQUEST['action'])) {
 
 	echo json_encode($return);
 }
+else {
+	require 'view.html';
+}

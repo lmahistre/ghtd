@@ -112,7 +112,7 @@ html body #react-root .app-container table.list-table td.actions {
 html body #react-root .app-container table.list-table input[type=text] {
   width: 100%;
 }
-html body #react-root .app-container table.form-table select {
+html body #react-root .app-container form select {
   height: 24px;
   background-color: #FFF;
   color: #111;
@@ -121,14 +121,13 @@ html body #react-root .app-container table.form-table select {
   border-radius: 2px;
   padding: 1px 2px;
   margin: 1px 2px;
-  width: 100%;
 }
-html body #react-root .app-container table.form-table select option {
+html body #react-root .app-container form select option {
   color: #111;
   height: 24px;
   background-color: #FFF;
 }
-html body #react-root .app-container table.form-table input[type=text] {
+html body #react-root .app-container form input[type=text] {
   height: 20px;
   padding: 1px 2px;
   margin: 1px 2px;
@@ -137,6 +136,11 @@ html body #react-root .app-container table.form-table input[type=text] {
   color: #111;
   border-width: 1px;
   border-width: solid;
+}
+html body #react-root .app-container form table.form-table select {
+  width: 100%;
+}
+html body #react-root .app-container form table.form-table input[type=text] {
   width: 100%;
 }
 html body #react-root .app-container[data-theme=dark] {

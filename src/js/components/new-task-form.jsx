@@ -21,36 +21,38 @@ class NewTaskForm extends React.Component {
 
 
 	addTask() {
-		// Task ID
-		let id = 0;
-		if (app.state.data.tasks) {
-			for (let i in app.state.data.tasks) {
-				if (app.state.data.tasks[i].id && app.state.data.tasks[i].id > id) {
-					id = app.state.data.tasks[i].id;
+		const name = document.forms['new-task'].name.value;
+		if (name.length > 0) {
+			// Task ID
+			let id = 0;
+			if (app.state.data.tasks) {
+				for (let i in app.state.data.tasks) {
+					if (app.state.data.tasks[i].id && app.state.data.tasks[i].id > id) {
+						id = app.state.data.tasks[i].id;
+					}
 				}
 			}
-		}
-		id++;
+			id++;
 
-		// Project ID
-		const name = document.forms['new-task'].name.value;
-		let projectId = parseInt(document.forms['new-task'].projectId.value);
-		if (isNaN(projectId)) {
-			projectId = 0;
-		}
+			// Project ID
+			let projectId = parseInt(document.forms['new-task'].projectId.value);
+			if (isNaN(projectId)) {
+				projectId = 0;
+			}
 
-		let task = {
-			id : id,
-			name : name,
-			projectId : projectId,
-			status : 'active',
-		};
-		this.setState({
-			name: '',
-		});
-		app.state.data.tasks[id] = task;
-		app.services.saveData();
-		app.render();
+			let task = {
+				id : id,
+				name : name,
+				projectId : projectId,
+				status : 'active',
+			};
+			this.setState({
+				name: '',
+			});
+			app.state.data.tasks[id] = task;
+			app.services.saveData();
+			app.render();
+		}
 	}
 
 
@@ -77,7 +79,7 @@ class NewTaskForm extends React.Component {
 					))}
 				</select>
 				<input type="text" name="name"value={self.state.name} onKeyDown={self.handleInputKeyDown.bind(self)} onChange={self.onChangeName.bind(self)} />
-				<SmallButton glyphicon="plus-sign" onClick={self.addTask} title={"Add task"} />
+				<SmallButton glyphicon="plus-sign" onClick={self.addTask.bind(self)} title={"Add task"} />
 			</form>
 		);
 	}

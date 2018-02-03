@@ -15,7 +15,7 @@ module.exports = {
 		isInitialized : false,
 	},
 
-	apiEndpoint : 'main.php',
+	apiEndpoint : 'index.php',
 
 	services : require('./services.jsx'),
 	consts : require('./consts.jsx'),
