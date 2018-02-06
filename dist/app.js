@@ -5104,7 +5104,7 @@ var locationsAreEqual = function locationsAreEqual(a, b) {
 /** @jsx React.DOM */
 const React = __webpack_require__(4);
 
-var ____Classd=React.Component;for(var ____Classd____Key in ____Classd){if(____Classd.hasOwnProperty(____Classd____Key)){SmallButton[____Classd____Key]=____Classd[____Classd____Key];}}var ____SuperProtoOf____Classd=____Classd===null?null:____Classd.prototype;SmallButton.prototype=Object.create(____SuperProtoOf____Classd);SmallButton.prototype.constructor=SmallButton;SmallButton.__superConstructor__=____Classd;function SmallButton(){"use strict";if(____Classd!==null){____Classd.apply(this,arguments);}}
+var ____Classc=React.Component;for(var ____Classc____Key in ____Classc){if(____Classc.hasOwnProperty(____Classc____Key)){SmallButton[____Classc____Key]=____Classc[____Classc____Key];}}var ____SuperProtoOf____Classc=____Classc===null?null:____Classc.prototype;SmallButton.prototype=Object.create(____SuperProtoOf____Classc);SmallButton.prototype.constructor=SmallButton;SmallButton.__superConstructor__=____Classc;function SmallButton(){"use strict";if(____Classc!==null){____Classc.apply(this,arguments);}}
 	Object.defineProperty(SmallButton.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
 		return (
 			React.createElement("a", {href: "javascript:void(0);", className: "small-button", onClick: this.props.onClick, title: this.props.title}, 
@@ -5126,7 +5126,7 @@ const React = __webpack_require__(4);
 const ReactRouterDom = __webpack_require__(39);
 const Link = ReactRouterDom.Link;
 
-var ____Classc=React.Component;for(var ____Classc____Key in ____Classc){if(____Classc.hasOwnProperty(____Classc____Key)){CommonButton[____Classc____Key]=____Classc[____Classc____Key];}}var ____SuperProtoOf____Classc=____Classc===null?null:____Classc.prototype;CommonButton.prototype=Object.create(____SuperProtoOf____Classc);CommonButton.prototype.constructor=CommonButton;CommonButton.__superConstructor__=____Classc;function CommonButton(){"use strict";if(____Classc!==null){____Classc.apply(this,arguments);}}
+var ____Classd=React.Component;for(var ____Classd____Key in ____Classd){if(____Classd.hasOwnProperty(____Classd____Key)){CommonButton[____Classd____Key]=____Classd[____Classd____Key];}}var ____SuperProtoOf____Classd=____Classd===null?null:____Classd.prototype;CommonButton.prototype=Object.create(____SuperProtoOf____Classd);CommonButton.prototype.constructor=CommonButton;CommonButton.__superConstructor__=____Classd;function CommonButton(){"use strict";if(____Classd!==null){____Classd.apply(this,arguments);}}
 	Object.defineProperty(CommonButton.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
 		if (this.props.to) {
 			return (
@@ -11779,6 +11779,7 @@ module.exports = {
 	},
 
 	apiEndpoint : 'index.php',
+	// apiEndpoint : 'api',
 
 	services : __webpack_require__(249),
 	consts : __webpack_require__(250),
@@ -27323,7 +27324,7 @@ const SmallButton = __webpack_require__(41);
 const CommonButton = __webpack_require__(42);
 const NewTaskForm = __webpack_require__(243);
 
-var ____Class7=React.Component;for(var ____Class7____Key in ____Class7){if(____Class7.hasOwnProperty(____Class7____Key)){TaskList[____Class7____Key]=____Class7[____Class7____Key];}}var ____SuperProtoOf____Class7=____Class7===null?null:____Class7.prototype;TaskList.prototype=Object.create(____SuperProtoOf____Class7);TaskList.prototype.constructor=TaskList;TaskList.__superConstructor__=____Class7;function TaskList(){"use strict";if(____Class7!==null){____Class7.apply(this,arguments);}}
+var ____Class4=React.Component;for(var ____Class4____Key in ____Class4){if(____Class4.hasOwnProperty(____Class4____Key)){TaskList[____Class4____Key]=____Class4[____Class4____Key];}}var ____SuperProtoOf____Class4=____Class4===null?null:____Class4.prototype;TaskList.prototype=Object.create(____SuperProtoOf____Class4);TaskList.prototype.constructor=TaskList;TaskList.__superConstructor__=____Class4;function TaskList(){"use strict";if(____Class4!==null){____Class4.apply(this,arguments);}}
 
 	Object.defineProperty(TaskList.prototype,"removeResolved",{writable:true,configurable:true,value:function() {"use strict";
 		for (let i in app.state.data.tasks) {
@@ -27397,7 +27398,7 @@ module.exports = TaskList;
 
 const SmallButton = __webpack_require__(41);
 
-var ____Classb=React.Component;for(var ____Classb____Key in ____Classb){if(____Classb.hasOwnProperty(____Classb____Key)){Task[____Classb____Key]=____Classb[____Classb____Key];}}var ____SuperProtoOf____Classb=____Classb===null?null:____Classb.prototype;Task.prototype=Object.create(____SuperProtoOf____Classb);Task.prototype.constructor=Task;Task.__superConstructor__=____Classb;function Task(){"use strict";if(____Classb!==null){____Classb.apply(this,arguments);}}
+var ____Class8=React.Component;for(var ____Class8____Key in ____Class8){if(____Class8.hasOwnProperty(____Class8____Key)){Task[____Class8____Key]=____Class8[____Class8____Key];}}var ____SuperProtoOf____Class8=____Class8===null?null:____Class8.prototype;Task.prototype=Object.create(____SuperProtoOf____Class8);Task.prototype.constructor=Task;Task.__superConstructor__=____Class8;function Task(){"use strict";if(____Class8!==null){____Class8.apply(this,arguments);}}
 
 	Object.defineProperty(Task.prototype,"resolve",{writable:true,configurable:true,value:function(id) {"use strict";
 		if (app.state.data.tasks[id]) {
@@ -27548,7 +27549,7 @@ const React = __webpack_require__(4);
 
 const SmallButton = __webpack_require__(41);
 
-var ____Class8=React.Component;for(var ____Class8____Key in ____Class8){if(____Class8.hasOwnProperty(____Class8____Key)){NewTaskForm[____Class8____Key]=____Class8[____Class8____Key];}}var ____SuperProtoOf____Class8=____Class8===null?null:____Class8.prototype;NewTaskForm.prototype=Object.create(____SuperProtoOf____Class8);NewTaskForm.prototype.constructor=NewTaskForm;NewTaskForm.__superConstructor__=____Class8;
+var ____Class9=React.Component;for(var ____Class9____Key in ____Class9){if(____Class9.hasOwnProperty(____Class9____Key)){NewTaskForm[____Class9____Key]=____Class9[____Class9____Key];}}var ____SuperProtoOf____Class9=____Class9===null?null:____Class9.prototype;NewTaskForm.prototype=Object.create(____SuperProtoOf____Class9);NewTaskForm.prototype.constructor=NewTaskForm;NewTaskForm.__superConstructor__=____Class9;
 
 	Object.defineProperty(NewTaskForm.prototype,"handleInputKeyDown",{writable:true,configurable:true,value:function(event) {"use strict";
 		if (event.which == 13) {
@@ -27642,7 +27643,7 @@ const AppPage = __webpack_require__(24);
 const CommonButton = __webpack_require__(42);
 const ProjectEditForm = __webpack_require__(245);
 
-var ____Class4=React.Component;for(var ____Class4____Key in ____Class4){if(____Class4.hasOwnProperty(____Class4____Key)){ProjectEdit[____Class4____Key]=____Class4[____Class4____Key];}}var ____SuperProtoOf____Class4=____Class4===null?null:____Class4.prototype;ProjectEdit.prototype=Object.create(____SuperProtoOf____Class4);ProjectEdit.prototype.constructor=ProjectEdit;ProjectEdit.__superConstructor__=____Class4;function ProjectEdit(){"use strict";if(____Class4!==null){____Class4.apply(this,arguments);}}
+var ____Class5=React.Component;for(var ____Class5____Key in ____Class5){if(____Class5.hasOwnProperty(____Class5____Key)){ProjectEdit[____Class5____Key]=____Class5[____Class5____Key];}}var ____SuperProtoOf____Class5=____Class5===null?null:____Class5.prototype;ProjectEdit.prototype=Object.create(____SuperProtoOf____Class5);ProjectEdit.prototype.constructor=ProjectEdit;ProjectEdit.__superConstructor__=____Class5;function ProjectEdit(){"use strict";if(____Class5!==null){____Class5.apply(this,arguments);}}
 
 	Object.defineProperty(ProjectEdit.prototype,"create",{writable:true,configurable:true,value:function() {"use strict";
 		let id = 0;
@@ -27728,7 +27729,7 @@ module.exports = ProjectEdit;
 const AppPage = __webpack_require__(24);
 const CommonButton = __webpack_require__(42);
 
-var ____Class9=React.Component;for(var ____Class9____Key in ____Class9){if(____Class9.hasOwnProperty(____Class9____Key)){ProjectEditForm[____Class9____Key]=____Class9[____Class9____Key];}}var ____SuperProtoOf____Class9=____Class9===null?null:____Class9.prototype;ProjectEditForm.prototype=Object.create(____SuperProtoOf____Class9);ProjectEditForm.prototype.constructor=ProjectEditForm;ProjectEditForm.__superConstructor__=____Class9;function ProjectEditForm(){"use strict";if(____Class9!==null){____Class9.apply(this,arguments);}}
+var ____Classa=React.Component;for(var ____Classa____Key in ____Classa){if(____Classa.hasOwnProperty(____Classa____Key)){ProjectEditForm[____Classa____Key]=____Classa[____Classa____Key];}}var ____SuperProtoOf____Classa=____Classa===null?null:____Classa.prototype;ProjectEditForm.prototype=Object.create(____SuperProtoOf____Classa);ProjectEditForm.prototype.constructor=ProjectEditForm;ProjectEditForm.__superConstructor__=____Classa;function ProjectEditForm(){"use strict";if(____Classa!==null){____Classa.apply(this,arguments);}}
 
 	Object.defineProperty(ProjectEditForm.prototype,"formFakeSubmit",{writable:true,configurable:true,value:function(event) {"use strict";
 		event.stopPropagation();
@@ -27804,7 +27805,7 @@ const AppPage = __webpack_require__(24);
 const CommonButton = __webpack_require__(42);
 const VisibleMarker = __webpack_require__(247);
 
-var ____Class5=React.Component;for(var ____Class5____Key in ____Class5){if(____Class5.hasOwnProperty(____Class5____Key)){ProjectList[____Class5____Key]=____Class5[____Class5____Key];}}var ____SuperProtoOf____Class5=____Class5===null?null:____Class5.prototype;ProjectList.prototype=Object.create(____SuperProtoOf____Class5);ProjectList.prototype.constructor=ProjectList;ProjectList.__superConstructor__=____Class5;function ProjectList(){"use strict";if(____Class5!==null){____Class5.apply(this,arguments);}}
+var ____Class6=React.Component;for(var ____Class6____Key in ____Class6){if(____Class6.hasOwnProperty(____Class6____Key)){ProjectList[____Class6____Key]=____Class6[____Class6____Key];}}var ____SuperProtoOf____Class6=____Class6===null?null:____Class6.prototype;ProjectList.prototype=Object.create(____SuperProtoOf____Class6);ProjectList.prototype.constructor=ProjectList;ProjectList.__superConstructor__=____Class6;function ProjectList(){"use strict";if(____Class6!==null){____Class6.apply(this,arguments);}}
 
 	Object.defineProperty(ProjectList.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
 		const self = this;
@@ -27847,7 +27848,7 @@ module.exports = ProjectList;
 /** @jsx React.DOM */
 const React = __webpack_require__(4);
 
-var ____Classa=React.Component;for(var ____Classa____Key in ____Classa){if(____Classa.hasOwnProperty(____Classa____Key)){VisibleMarker[____Classa____Key]=____Classa[____Classa____Key];}}var ____SuperProtoOf____Classa=____Classa===null?null:____Classa.prototype;VisibleMarker.prototype=Object.create(____SuperProtoOf____Classa);VisibleMarker.prototype.constructor=VisibleMarker;VisibleMarker.__superConstructor__=____Classa;function VisibleMarker(){"use strict";if(____Classa!==null){____Classa.apply(this,arguments);}}
+var ____Classb=React.Component;for(var ____Classb____Key in ____Classb){if(____Classb.hasOwnProperty(____Classb____Key)){VisibleMarker[____Classb____Key]=____Classb[____Classb____Key];}}var ____SuperProtoOf____Classb=____Classb===null?null:____Classb.prototype;VisibleMarker.prototype=Object.create(____SuperProtoOf____Classb);VisibleMarker.prototype.constructor=VisibleMarker;VisibleMarker.__superConstructor__=____Classb;function VisibleMarker(){"use strict";if(____Classb!==null){____Classb.apply(this,arguments);}}
 	Object.defineProperty(VisibleMarker.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
 		return this.props.visible ? (
 			React.createElement("span", {className: "glyphicon glyphicon-eye-open color-yes", "aria-hidden": "true"})
@@ -27869,7 +27870,7 @@ const React = __webpack_require__(4);
 const AppPage = __webpack_require__(24);
 const SmallButton = __webpack_require__(41);
 
-var ____Class6=React.Component;for(var ____Class6____Key in ____Class6){if(____Class6.hasOwnProperty(____Class6____Key)){Settings[____Class6____Key]=____Class6[____Class6____Key];}}var ____SuperProtoOf____Class6=____Class6===null?null:____Class6.prototype;Settings.prototype=Object.create(____SuperProtoOf____Class6);Settings.prototype.constructor=Settings;Settings.__superConstructor__=____Class6;function Settings(){"use strict";if(____Class6!==null){____Class6.apply(this,arguments);}}
+var ____Class7=React.Component;for(var ____Class7____Key in ____Class7){if(____Class7.hasOwnProperty(____Class7____Key)){Settings[____Class7____Key]=____Class7[____Class7____Key];}}var ____SuperProtoOf____Class7=____Class7===null?null:____Class7.prototype;Settings.prototype=Object.create(____SuperProtoOf____Class7);Settings.prototype.constructor=Settings;Settings.__superConstructor__=____Class7;function Settings(){"use strict";if(____Class7!==null){____Class7.apply(this,arguments);}}
 
 	Object.defineProperty(Settings.prototype,"toggleTheme",{writable:true,configurable:true,value:function() {"use strict";
 		const theme = localStorage.theme === 'dark' ? 'dark' : 'light';
@@ -27908,6 +27909,7 @@ module.exports = {
 
 	getData : function (callback) {
 		app.get('?action=getData', function(response) {
+		// app.get('/getData', function(response) {
 			if (callback && typeof callback == 'function') {
 				callback(response.data);
 			}
@@ -27921,6 +27923,7 @@ module.exports = {
 			projects : app.state.data.projects,
 		}
 		app.post('?action=setData', data, function(response) {
+		// app.post('/setData', data, function(response) {
 			if (callback && typeof callback == 'function') {
 				callback(response.data);
 			}

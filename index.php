@@ -3,7 +3,7 @@ require 'includes/functions.php';
 require 'includes/controller.php';
 
 global $CONFIG;
-$CONFIG = json_decode(file_get_contents('includes/config.json'), true);
+$CONFIG = json_decode(file_get_contents('config.json'), true);
 
 // Cas d'une action en ajax
 if (isset($_REQUEST['action'])) {

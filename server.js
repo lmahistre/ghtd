@@ -12,11 +12,19 @@ const fs = require('fs');
  * Render main html page
  */
 app.get('/', function (req, res) {
-	res.sendFile(__dirname+'/index.html');
+	res.sendFile(__dirname+'/view.html');
 });
 
-const apiRouter = require('./services/api-router.js');
+
+// Config
+const config = JSON.parse(fs.readFileSync('config.json'));
+
+// Routing
+const apiRouter = require('./server/api-router.js');
+// apiRouter.config = config;
+
 app.use('/api', apiRouter);
+
 
 /**
  * Serve static files
