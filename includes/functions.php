@@ -75,7 +75,6 @@ class Functions {
 	public static function getGHData() {
 		global $CONFIG;
 		$gistUrl = "https://api.github.com/gists/{$CONFIG['gistId']}";
-		var_dump($gistUrl);
 		$fileName = 'ght.json';
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $gistUrl);
@@ -84,7 +83,6 @@ class Functions {
 		curl_setopt($ch, CURLOPT_USERAGENT, 'GHT');
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 		$response = curl_exec($ch);
-		// var_dump($response);
 		$gistData = json_decode($response, true);
 		$data = [
 			'tasks' => [],

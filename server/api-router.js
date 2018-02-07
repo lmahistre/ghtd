@@ -15,14 +15,31 @@ router.get('/getData', function(req, res) {
 		host : 'api.github.com',
 		port : 80,
 		path : "/gists/"+config.gistId,
+		auth : config.user+':'+config.token,
 	};
-	http.get(options, function(res) {
-		console.log(res);
+	http.get(options, function(response) {
+		// for (var k in res) {
+		// 	console.log(k);
+		// }
+		let pageData = '';
+		response.on('data', function (chunk) {
+			pageData += chunk;
+			console.log(chunk);
+		});
+		response.on('end', function(){
+			console.log(pageData);
+			res.json({
+				data : pageData,
+			});
+		});
+		// console.log(res);
 	})
 	.on('error', function(err) {
 		console.error(err);
+		res.json({
+			error : err,
+		});
 	});
-	res.json({});
 });
 
 
