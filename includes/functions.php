@@ -79,7 +79,7 @@ class Functions {
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $gistUrl);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLOPT_USERPWD, "{$CONFIG['user']}:{$CONFIG['token']}");
+		// curl_setopt($ch, CURLOPT_USERPWD, "{$CONFIG['user']}:{$CONFIG['token']}");
 		curl_setopt($ch, CURLOPT_USERAGENT, 'GHT');
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 		$response = curl_exec($ch);
