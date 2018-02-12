@@ -21,7 +21,6 @@ const config = JSON.parse(fs.readFileSync('config.json'));
 
 // Routing
 const apiRouter = require('./server/api-router.js');
-// apiRouter.config = config;
 
 app.use('/api', apiRouter);
 
@@ -32,7 +31,7 @@ app.use('/api', apiRouter);
 app.use('/dist', express.static('dist'));
 
 // Port the app is listening
-const port = 3002;
+const port = config.port ? config.port : 3000;
 
 app.listen(port);
 
