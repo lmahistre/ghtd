@@ -8,13 +8,13 @@ const https = require('https');
 
 const options = {
 	host : 'api.github.com',
-	// port : 443,
 	path : "/gists/"+config.gistId,
-	// auth : config.user+':'+config.token,
 	headers : {
-		'User-Agent' : 'GHT',
+		'User-Agent' : 'Github-Todo',
 	},
 };
+
+const filename = 'ght.json';
 
 
 /**
@@ -46,14 +46,14 @@ const reqToPost = function(req, res, callback) {
 router.get('/getData', function(req, res) {
 	https.get(options, function(response) {
 		response.setEncoding('utf8');
-		let pageData = '';
+		let content = '';
 		response.on('data', function (chunk) {
-			pageData += chunk;
+			content += chunk;
 		});
 		response.on('end', function(){
 			try {
-				const parsedData = JSON.parse(pageData);
-				const gistContent = parsedData.files['ght.json'].content;
+				const parsedData = JSON.parse(content);
+				const gistContent = parsedData.files[filename].content;
 				const gistData = JSON.parse(gistContent);
 				res.json({
 					data : gistData,
@@ -80,19 +80,49 @@ router.post('/setData', function(req, res) {
 		let reqOptions = JSON.parse(JSON.stringify(options));
 		reqOptions.method = 'POST';
 		reqOptions.headers['Content-Type'] = 'application/json';
-		const postData = JSON.stringify(post);
+		const postData = JSON.stringify({
+			description : "Github-Todo",
+			files : {
+				[filename] : {
+					content : JSON.stringify(post),
+				},
+			},
+		});
 		reqOptions.headers['Content-Length'] = Buffer.byteLength(postData);
 		reqOptions.auth = config.user+':'+config.token;
+
 		const postReq = https.request(reqOptions, function(response) {
 			response.setEncoding('utf8');
-			let pageData = '';
+			let content = '';
 			response.on('data', function (chunk) {
-				pageData += chunk;
-				// console.log(chunk);
+				content += chunk;
 			});
 			response.on('end', function(){
-				console.log('POST response');
-				console.log(pageData);
+				try {
+					const parsedData = JSON.parse(content);
+					if (parsedData 
+						&& parsedData.files 
+						&& parsedData.files[filename]
+						&& parsedData.files[filename].content
+					) {
+						const gistContent = parsedData.files[filename].content;
+						const gistData = JSON.parse(gistContent);
+						res.json({
+							data : gistData,
+						});
+					}
+					else {
+						res.json({
+							error : "Could not parse API response",
+						})
+					}
+				}
+				catch (err) {
+					console.error(err);
+					res.json({
+						error : err,
+					})
+				}
 			});
 		})
 		.on('error', function(err) {
