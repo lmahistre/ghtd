@@ -1,5 +1,6 @@
 
 const React = require("react");
+const ReactTooltip = require("react-tooltip");
 
 const Menu = require('./menu.jsx');
 const Alerts = require('./alerts.jsx');
@@ -15,6 +16,7 @@ class AppPage extends React.Component {
 				<div className="app-container" data-theme={theme}>
 					<Menu selectedMenu={self.props.selectedMenu} />
 					<Alerts alerts={app.state.alerts} />
+					<ReactTooltip />
 					{self.props.children}
 				</div>
 			);

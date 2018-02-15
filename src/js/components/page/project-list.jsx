@@ -19,6 +19,37 @@ class ProjectList extends React.Component {
 	}
 
 
+	import() {
+		app.services.importProjects(function (projects) {
+			// To check if project already exists
+			let alreadyExistingProjects = [];
+			for (var i in app.state.data.projects) {
+				alreadyExistingProjects.push(app.state.data.projects[i].repo);
+			}
+			console.log(alreadyExistingProjects);
+			let modified = false;
+			for (let i = 0; i < projects.length; i++) {
+				if (alreadyExistingProjects.indexOf(projects[i].name) == -1) {
+					let id = app.utils.getNextProjectId();
+					let project = {
+						id : id,
+						name : app.utils.renameProject(projects[i].name),
+						repo : projects[i].name,
+						visible : true,
+						color : app.utils.generateRandomColor(),
+					};
+					app.state.data.projects[id] = project;
+					modified = true;
+				}
+			}
+			if (modified) {
+				app.services.saveData();
+				app.render();
+			}
+		});
+	}
+
+
 	render() {
 		const self = this;
 		const projectList = [];
@@ -30,6 +61,7 @@ class ProjectList extends React.Component {
 		return (
 			<AppPage selectedMenu="projects">
 				<CommonButton to="/project-edit">{"New project"}</CommonButton>
+				<CommonButton onClick={self.import}>{"Import from GitHub"}</CommonButton>
 				<table className="list-table">
 					<tbody>
 						{projectList.map(elt => (
@@ -46,7 +78,7 @@ class ProjectList extends React.Component {
 								</td>
 								<td>{elt.name}</td>
 								<td>
-									<SmallButton glyphicon="minus" style={{backgroundColor : '#'+elt.color}} />
+									<SmallButton glyphicon="picture" style={{backgroundColor : '#'+elt.color}} />
 								</td>
 								<td>
 									<VisibleMarker visible={elt.visible} />

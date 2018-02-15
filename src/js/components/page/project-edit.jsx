@@ -2,27 +2,18 @@ const React = require("react");
 
 const AppPage = require("../app-page.jsx");
 const CommonButton = require("../ui/common-button.jsx");
-const ProjectEditForm = require("../project-edit-form.jsx");
+const ProjectEditForm = require("../forms/project-edit-form.jsx");
 
 class ProjectEdit extends React.Component {
 
 	create() {
-		let id = 0;
-		// Determine new id
-		if (app.state.data.projects) {
-			for (let i in app.state.data.projects) {
-				if (app.state.data.projects[i].id && app.state.data.projects[i].id > id) {
-					id = app.state.data.projects[i].id;
-				}
-			}
-		}
-		id++;
-
+		const id = app.utils.getNextProjectId();
 		let project = {
 			id : id,
 			name : document.forms['project-edit'].name.value,
 			visible : document.forms['project-edit'].visible.checked,
 			color : document.forms['project-edit'].color.value,
+			repo : document.forms['project-edit'].repo.value,
 		};
 		if (project.name.length > 0) {
 			app.state.data.projects[id] = project;
@@ -38,6 +29,7 @@ class ProjectEdit extends React.Component {
 			name : document.forms['project-edit'].name.value,
 			visible : document.forms['project-edit'].visible.checked,
 			color : document.forms['project-edit'].color.value,
+			repo : document.forms['project-edit'].repo.value,
 		};
 		if (app.state.data.projects[project.id]) {
 			app.state.data.projects[project.id] = project;
@@ -56,6 +48,7 @@ class ProjectEdit extends React.Component {
 			id : 0,
 			name : '',
 			visible : true,
+			repo : '',
 		};
 		let save = self.create;
 		// In case of edition
@@ -72,43 +65,14 @@ class ProjectEdit extends React.Component {
 		}
 		// Case of creation
 		else {
-			// selection of a randon color
-			const colors = {};
-			for (let i = 0; i < app.consts.colors.length; i++) {
-				colors[app.consts.colors[i].color] = 0;
-			}
-			for (let i in app.state.data.projects) {
-				console.log(colors[app.state.data.projects[i].color]);
-				if (colors[app.state.data.projects[i].color] !== undefined) {
-					colors[app.state.data.projects[i].color]++;
-				}
-			}
-			// search for minimum
-			let minColor;
-			for (let color in colors) {
-				if (typeof minColor === 'undefined') {
-					minColor = colors[color];
-				}
-				else {
-					minColor = Math.min(minColor, colors[color]);
-				}
-			}
-			const selectableColors = [];
-			for (let color in colors) {
-				if (colors[color] == minColor) {
-					selectableColors.push(color);
-				}
-			}
-
-			const randomIndex = parseInt(Math.random() * selectableColors.length);
-			project.color = selectableColors[randomIndex];
-			console.log(selectableColors);
-			console.log(project.color);
+			// selection of a random color
+			project.color = app.utils.generateRandomColor();
 		}
 		return (
-			<AppPage>
+			<AppPage selectedMenu="projects">
 				<CommonButton onClick={save}>{"Save"}</CommonButton>
 				<CommonButton to="/projects">{"Cancel"}</CommonButton>
+				<CommonButton to={"/project-delete/"+project.id}>{"Delete"}</CommonButton>
 				<ProjectEditForm project={project} save={save} />
 			</AppPage>
 		);

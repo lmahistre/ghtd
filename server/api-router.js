@@ -50,7 +50,7 @@ router.get('/getData', function(req, res) {
 		response.on('data', function (chunk) {
 			content += chunk;
 		});
-		response.on('end', function(){
+		response.on('end', function() {
 			try {
 				const parsedData = JSON.parse(content);
 				const gistContent = parsedData.files[filename].content;
@@ -75,6 +75,9 @@ router.get('/getData', function(req, res) {
 });
 
 
+/**
+ * Send data to Gist
+ */
 router.post('/setData', function(req, res) {
 	reqToPost(req, res, function(post) {
 		let reqOptions = JSON.parse(JSON.stringify(options));
@@ -136,5 +139,47 @@ router.post('/setData', function(req, res) {
 		postReq.end();
 	});
 });
+
+
+/**
+ * Get data from Github
+ */
+router.get('/importProjects', function(req, res) {
+	let reqOptions = JSON.parse(JSON.stringify(options));
+	reqOptions.path = '/users/'+config.user+'/repos';
+	https.get(reqOptions, function(response) {
+		response.setEncoding('utf8');
+		let content = '';
+		response.on('data', function (chunk) {
+			content += chunk;
+		});
+		response.on('end', function() {
+			try {
+				const parsedData = JSON.parse(content);
+				const projects = [];
+				for (var i = 0; i < parsedData.length; i++) {
+					projects.push({
+						name : parsedData[i].name,
+					});
+				}
+				res.json({
+					data : projects,
+				});
+			}
+			catch (err) {
+				res.json({
+					error : err,
+				});
+			}
+		});
+	})
+	.on('error', function(err) {
+		console.error(err);
+		res.json({
+			error : err,
+		});
+	});
+});
+
 
 module.exports = router;

@@ -1,7 +1,7 @@
 const React = require("react");
 
-const AppPage = require("./app-page.jsx");
-const CommonButton = require("./ui/common-button.jsx");
+const AppPage = require("../app-page.jsx");
+const CommonButton = require("../ui/common-button.jsx");
 
 class ProjectEditForm extends React.Component {
 
@@ -48,12 +48,18 @@ class ProjectEditForm extends React.Component {
 						<tr>
 							<td className="label">{"Color"}</td>
 							<td className="value">
-								<select name="color">
+								<select name="color" defaultValue={self.props.project.color}>
 									<option value=""></option>
 									{app.consts.colors.map(elt => (
-										<option key={elt.id} value={elt.color} style={{backgroundColor : '#'+elt.color}} selected={elt.color == self.props.project.color}>{elt.name}</option>
+										<option key={elt.id} value={elt.color} style={{color : '#'+elt.color}}>{elt.name}</option>
 									))}
 								</select>
+							</td>
+						</tr>
+						<tr>
+							<td className="label">{"Github repo"}</td>
+							<td>
+								<input type="text" name="repo" defaultValue={self.props.project.repo} onKeyDown={self.handleInputKeyDown.bind(self, self.props.save)} />
 							</td>
 						</tr>
 					</tbody>

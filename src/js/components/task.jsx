@@ -132,7 +132,7 @@ class Task extends React.Component {
 						}
 					</td>
 					<td>
-						<div className="project-label" style={{backgroundColor : '#'+elt.projectColor}} title={elt.projectName}>{elt.projectName}</div>
+						<div className="project-label" style={{backgroundColor : '#'+elt.projectColor}} title={elt.projectName} data-tip={elt.projectName}>{elt.projectName}</div>
 					</td>
 					<td>{elt.name}</td>
 				</tr>

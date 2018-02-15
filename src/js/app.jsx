@@ -16,11 +16,11 @@ module.exports = {
 		isInitialized : false,
 	},
 
-	// apiEndpoint : 'index.php',
 	apiEndpoint : '/api',
 
 	services : require('./services.jsx'),
 	consts : require('./consts.jsx'),
+	utils : require('./utils.jsx'),
 
 	init : function() {
 
@@ -83,10 +83,6 @@ module.exports = {
 		.then(function(responseText) {
 			try {
 				const responseData = JSON.parse(responseText);
-
-				// if (!responseData.logged_in) {
-				// 	delete app.state.currentUser;
-				// }
 
 				if (responseData.warning) {
 					console.warn(responseData.warning);

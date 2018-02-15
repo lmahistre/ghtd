@@ -21,5 +21,12 @@ module.exports = {
 				callback(response.data);
 			}
 		});
-	}
+	},
+
+
+	importProjects : function (callback) {
+		app.get('/importProjects', function(response) {
+			callback(response.data);
+		});
+	},
 };
