@@ -8,6 +8,9 @@ const app = express();
 
 const fs = require('fs');
 
+const configManager = require("./server/config-manager.js");
+const config = configManager.load();
+
 /**
  * Render main html page
  */
@@ -16,8 +19,6 @@ app.get('/', function (req, res) {
 });
 
 
-// Config
-const config = JSON.parse(fs.readFileSync('config.json'));
 
 // Routing
 const apiRouter = require('./server/api-router.js');

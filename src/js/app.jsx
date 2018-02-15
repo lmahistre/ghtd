@@ -64,7 +64,6 @@ module.exports = {
 
 
 	fetch : function(uri, post, callback) {
-		// app.startPleaseWait();
 		const params = {
 			credentials : 'same-origin',
 		};
