@@ -14,6 +14,7 @@ module.exports = {
 		const data = {
 			tasks : app.state.data.tasks,
 			projects : app.state.data.projects,
+			settings : app.state.data.settings,
 		}
 		app.post('/setData', data, function(response) {
 			if (callback && typeof callback == 'function') {

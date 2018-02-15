@@ -58,6 +58,7 @@ class ProjectEdit extends React.Component {
 			visible : true,
 		};
 		let save = self.create;
+		// In case of edition
 		if (self.props.match 
 				&& self.props.match.params 
 				&& self.props.match.params.id
@@ -69,10 +70,45 @@ class ProjectEdit extends React.Component {
 			}
 			save = self.update;
 		}
+		// Case of creation
+		else {
+			// selection of a randon color
+			const colors = {};
+			for (let i = 0; i < app.consts.colors.length; i++) {
+				colors[app.consts.colors[i].color] = 0;
+			}
+			for (let i in app.state.data.projects) {
+				console.log(colors[app.state.data.projects[i].color]);
+				if (colors[app.state.data.projects[i].color] !== undefined) {
+					colors[app.state.data.projects[i].color]++;
+				}
+			}
+			// search for minimum
+			let minColor;
+			for (let color in colors) {
+				if (typeof minColor === 'undefined') {
+					minColor = colors[color];
+				}
+				else {
+					minColor = Math.min(minColor, colors[color]);
+				}
+			}
+			const selectableColors = [];
+			for (let color in colors) {
+				if (colors[color] == minColor) {
+					selectableColors.push(color);
+				}
+			}
+
+			const randomIndex = parseInt(Math.random() * selectableColors.length);
+			project.color = selectableColors[randomIndex];
+			console.log(selectableColors);
+			console.log(project.color);
+		}
 		return (
 			<AppPage>
-				<CommonButton onClick={save}>Save</CommonButton>
-				<CommonButton to="/projects">Cancel</CommonButton>
+				<CommonButton onClick={save}>{"Save"}</CommonButton>
+				<CommonButton to="/projects">{"Cancel"}</CommonButton>
 				<ProjectEditForm project={project} save={save} />
 			</AppPage>
 		);

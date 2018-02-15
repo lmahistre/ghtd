@@ -9,6 +9,7 @@ module.exports = {
 		data : {
 			tasks : {},
 			projects : {},
+			settings : {},
 		},
 		alerts : {},
 		pleaseWait : 0,
@@ -43,6 +44,11 @@ module.exports = {
 			if (data.projects) {
 				for (let k in data.projects) {
 					app.state.data.projects[k] = data.projects[k];
+				}
+			}
+			if (data.settings) {
+				for (let k in data.settings) {
+					app.state.data.settings[k] = data.settings[k];
 				}
 			}
 			app.state.isInitialized = true;

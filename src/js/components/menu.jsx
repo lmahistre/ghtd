@@ -10,9 +10,9 @@ class Menu extends React.Component {
 		const self = this;
 		return (
 			<div className="menu">
-				<Link className={"menu-entry"+(self.props.selectedMenu == 'tasks' ? ' active' : '')} to="/tasks" replace>Tasks</Link>
-				<Link className={"menu-entry"+(self.props.selectedMenu == 'projects' ? ' active' : '')} to="/projects" replace>Projects</Link>
-				<Link className={"menu-entry"+(self.props.selectedMenu == 'settings' ? ' active' : '')} to="/settings" replace>Settings</Link>
+				<Link className={"menu-entry"+(self.props.selectedMenu == 'tasks' ? ' active' : '')} to="/tasks" replace>{"Tasks"}</Link>
+				<Link className={"menu-entry"+(self.props.selectedMenu == 'projects' ? ' active' : '')} to="/projects" replace>{"Projects"}</Link>
+				<Link className={"menu-entry"+(self.props.selectedMenu == 'settings' ? ' active' : '')} to="/settings" replace>{"Settings"}</Link>
 			</div>
 		);
 	}

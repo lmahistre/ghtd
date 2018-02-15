@@ -73,13 +73,13 @@ class NewTaskForm extends React.Component {
 		const self = this;
 		return (
 			<form name="new-task" onSubmit={self.formFakeSubmit} className="new-task-form">
+				<SmallButton glyphicon="plus-sign" onClick={self.addTask.bind(self)} title={"Add task"} />
 				<select name="projectId">
 					{self.props.projectList.map(elt => (
 						<option key={elt.id} value={elt.id}>{elt.name}</option>
 					))}
 				</select>
 				<input type="text" name="name"value={self.state.name} onKeyDown={self.handleInputKeyDown.bind(self)} onChange={self.onChangeName.bind(self)} />
-				<SmallButton glyphicon="plus-sign" onClick={self.addTask.bind(self)} title={"Add task"} />
 			</form>
 		);
 	}

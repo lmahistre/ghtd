@@ -6,8 +6,18 @@ const Link = ReactRouterDom.Link;
 const AppPage = require("../app-page.jsx");
 const CommonButton = require("../ui/common-button.jsx");
 const VisibleMarker = require("../visible-marker.jsx");
+const SmallButton = require("../ui/small-button.jsx");
 
 class ProjectList extends React.Component {
+
+	changeVisibility(id) {
+		if (app.state.data.projects[id]) {
+			app.state.data.projects[id].visible = !app.state.data.projects[id].visible;
+			app.services.saveData();
+			app.render();
+		}
+	}
+
 
 	render() {
 		const self = this;
@@ -19,7 +29,7 @@ class ProjectList extends React.Component {
 		}
 		return (
 			<AppPage selectedMenu="projects">
-				<CommonButton to="/project-edit">New project</CommonButton>
+				<CommonButton to="/project-edit">{"New project"}</CommonButton>
 				<table className="list-table">
 					<tbody>
 						{projectList.map(elt => (
@@ -28,8 +38,16 @@ class ProjectList extends React.Component {
 									<Link to={"/project-edit/"+elt.id} className="small-button">
 										<span className="glyphicon glyphicon-edit" aria-hidden="true"></span>
 									</Link>
+									{elt.visible ? 
+										<SmallButton glyphicon="eye-close" onClick={self.changeVisibility.bind(self, elt.id)} title={"Hide"} />
+									:
+										<SmallButton glyphicon="eye-open" onClick={self.changeVisibility.bind(self, elt.id)} title={"Show"} />
+									}
 								</td>
 								<td>{elt.name}</td>
+								<td>
+									<SmallButton glyphicon="minus" style={{backgroundColor : '#'+elt.color}} />
+								</td>
 								<td>
 									<VisibleMarker visible={elt.visible} />
 								</td>

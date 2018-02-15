@@ -16,13 +16,17 @@ html body {
 }
 html body #react-root {
   height: 100%;
+  background-color: #000;
 }
 html body #react-root .app-container {
   height: 100%;
-  background-color: #FFF;
+  background-color: #EEE;
   color: #111;
   padding-left: 8px;
   padding-right: 8px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 html body #react-root .app-container a.common-button {
   text-decoration: none;
@@ -54,7 +58,7 @@ html body #react-root .app-container .clearfix {
   clear: both;
 }
 html body #react-root .app-container div.menu {
-  background-color: #DDD;
+  background-color: #CCC;
   margin-bottom: 2px;
 }
 html body #react-root .app-container div.menu .menu-entry {
@@ -100,6 +104,9 @@ html body #react-root .app-container span.color-yes {
 html body #react-root .app-container span.color-no {
   color: #A00;
 }
+html body #react-root .app-container table.list-table {
+  width: 100%;
+}
 html body #react-root .app-container table.list-table tr.status-active {
   color: #111;
 }
@@ -137,6 +144,9 @@ html body #react-root .app-container form input[type=text] {
   border-width: 1px;
   border-width: solid;
 }
+html body #react-root .app-container form table.form-table {
+  width: 100%;
+}
 html body #react-root .app-container form table.form-table select {
   width: 100%;
 }
@@ -144,7 +154,7 @@ html body #react-root .app-container form table.form-table input[type=text] {
   width: 100%;
 }
 html body #react-root .app-container[data-theme=dark] {
-  background-color: #000;
+  background-color: #111;
   color: #EEE;
 }
 html body #react-root .app-container[data-theme=dark] table.list-table tr.status-active {

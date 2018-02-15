@@ -34,19 +34,19 @@ class ProjectEditForm extends React.Component {
 				<table className="form-table">
 					<tbody>
 						<tr>
-							<td className="label">Name</td>
+							<td className="label">{"Name"}</td>
 							<td className="value">
 								<input type="text" name="name" defaultValue={self.props.project.name} onKeyDown={self.handleInputKeyDown.bind(self, self.props.save)} />
 							</td>
 						</tr>
 						<tr>
-							<td className="label">Visible</td>
+							<td className="label">{"Visible"}</td>
 							<td className="value">
 								<input type="checkbox" name="visible" checked={self.props.project.visible} onChange={self.changeVisible.bind(self)} />
 							</td>
 						</tr>
 						<tr>
-							<td className="label">Color</td>
+							<td className="label">{"Color"}</td>
 							<td className="value">
 								<select name="color">
 									<option value=""></option>

@@ -7,7 +7,9 @@ const Alerts = require('./alerts.jsx');
 class AppPage extends React.Component {
 	render() {
 		const self = this;
-		const theme = localStorage.theme === 'dark' ? 'dark' : 'light';
+		const theme = (app.state.data.settings 
+			&& app.state.data.settings.theme 
+			&& app.state.data.settings.theme === 'dark') ? 'dark' : 'light';
 		if (app.state.isInitialized) {
 			return (
 				<div className="app-container" data-theme={theme}>

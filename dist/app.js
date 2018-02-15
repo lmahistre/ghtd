@@ -1438,7 +1438,7 @@ var CallbackQueue = __webpack_require__(79);
 var PooledClass = __webpack_require__(19);
 var ReactFeatureFlags = __webpack_require__(80);
 var ReactReconciler = __webpack_require__(22);
-var Transaction = __webpack_require__(34);
+var Transaction = __webpack_require__(35);
 
 var invariant = __webpack_require__(1);
 
@@ -2179,7 +2179,7 @@ var _assign = __webpack_require__(43);
 var ReactCurrentOwner = __webpack_require__(14);
 
 var warning = __webpack_require__(2);
-var canDefineProperty = __webpack_require__(31);
+var canDefineProperty = __webpack_require__(32);
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 
 var REACT_ELEMENT_TYPE = __webpack_require__(70);
@@ -2653,7 +2653,7 @@ var cloneElement = ReactElement.cloneElement;
 
 if (process.env.NODE_ENV !== 'production') {
   var lowPriorityWarning = __webpack_require__(44);
-  var canDefineProperty = __webpack_require__(31);
+  var canDefineProperty = __webpack_require__(32);
   var ReactElementValidator = __webpack_require__(72);
   var didWarnPropTypesDeprecated = false;
   createElement = ReactElementValidator.createElement;
@@ -2984,7 +2984,7 @@ module.exports = ReactReconciler;
 
 
 var DOMNamespaces = __webpack_require__(52);
-var setInnerHTML = __webpack_require__(36);
+var setInnerHTML = __webpack_require__(37);
 
 var createMicrosoftUnsafeLocalFunction = __webpack_require__(53);
 var setTextContent = __webpack_require__(84);
@@ -3099,10 +3099,12 @@ const React = __webpack_require__(4);
 const Menu = __webpack_require__(211);
 const Alerts = __webpack_require__(239);
 
-var ____Class1=React.Component;for(var ____Class1____Key in ____Class1){if(____Class1.hasOwnProperty(____Class1____Key)){AppPage[____Class1____Key]=____Class1[____Class1____Key];}}var ____SuperProtoOf____Class1=____Class1===null?null:____Class1.prototype;AppPage.prototype=Object.create(____SuperProtoOf____Class1);AppPage.prototype.constructor=AppPage;AppPage.__superConstructor__=____Class1;function AppPage(){"use strict";if(____Class1!==null){____Class1.apply(this,arguments);}}
+var ____Class0=React.Component;for(var ____Class0____Key in ____Class0){if(____Class0.hasOwnProperty(____Class0____Key)){AppPage[____Class0____Key]=____Class0[____Class0____Key];}}var ____SuperProtoOf____Class0=____Class0===null?null:____Class0.prototype;AppPage.prototype=Object.create(____SuperProtoOf____Class0);AppPage.prototype.constructor=AppPage;AppPage.__superConstructor__=____Class0;function AppPage(){"use strict";if(____Class0!==null){____Class0.apply(this,arguments);}}
 	Object.defineProperty(AppPage.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
 		const self = this;
-		const theme = localStorage.theme === 'dark' ? 'dark' : 'light';
+		const theme = (app.state.data.settings 
+			&& app.state.data.settings.theme 
+			&& app.state.data.settings.theme === 'dark') ? 'dark' : 'light';
 		if (app.state.isInitialized) {
 			return (
 				React.createElement("div", {className: "app-container", "data-theme": theme}, 
@@ -3281,7 +3283,7 @@ module.exports = EventPropagators;
 
 var _prodInvariant = __webpack_require__(3);
 
-var EventPluginRegistry = __webpack_require__(33);
+var EventPluginRegistry = __webpack_require__(34);
 var EventPluginUtils = __webpack_require__(46);
 var ReactErrorUtils = __webpack_require__(47);
 
@@ -3795,6 +3797,25 @@ var createPath = function createPath(location) {
 /* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
+/** @jsx React.DOM */
+const React = __webpack_require__(4);
+
+var ____Classc=React.Component;for(var ____Classc____Key in ____Classc){if(____Classc.hasOwnProperty(____Classc____Key)){SmallButton[____Classc____Key]=____Classc[____Classc____Key];}}var ____SuperProtoOf____Classc=____Classc===null?null:____Classc.prototype;SmallButton.prototype=Object.create(____SuperProtoOf____Classc);SmallButton.prototype.constructor=SmallButton;SmallButton.__superConstructor__=____Classc;function SmallButton(){"use strict";if(____Classc!==null){____Classc.apply(this,arguments);}}
+	Object.defineProperty(SmallButton.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
+		return (
+			React.createElement("a", {href: "javascript:void(0);", className: "small-button", onClick: this.props.onClick, title: this.props.title, style: this.props.style}, 
+				React.createElement("span", {className: "glyphicon glyphicon-"+this.props.glyphicon, "aria-hidden": "true"})
+			)
+		);
+	}});
+
+
+module.exports = SmallButton;
+
+/***/ }),
+/* 32 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {/**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -3822,7 +3843,7 @@ module.exports = canDefineProperty;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3846,7 +3867,7 @@ module.exports = emptyObject;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4103,7 +4124,7 @@ module.exports = EventPluginRegistry;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4335,7 +4356,7 @@ module.exports = TransactionImpl;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4410,7 +4431,7 @@ SyntheticUIEvent.augmentClass(SyntheticMouseEvent, MouseEventInterface);
 module.exports = SyntheticMouseEvent;
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4511,7 +4532,7 @@ if (ExecutionEnvironment.canUseDOM) {
 module.exports = setInnerHTML;
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4636,7 +4657,7 @@ function escapeTextContentForBrowser(text) {
 module.exports = escapeTextContentForBrowser;
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4652,7 +4673,7 @@ module.exports = escapeTextContentForBrowser;
 
 var _assign = __webpack_require__(6);
 
-var EventPluginRegistry = __webpack_require__(33);
+var EventPluginRegistry = __webpack_require__(34);
 var ReactEventEmitterMixin = __webpack_require__(160);
 var ViewportMetrics = __webpack_require__(83);
 
@@ -4963,7 +4984,7 @@ var ReactBrowserEventEmitter = _assign({}, ReactEventEmitterMixin, {
 module.exports = ReactBrowserEventEmitter;
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5022,7 +5043,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5098,35 +5119,16 @@ var locationsAreEqual = function locationsAreEqual(a, b) {
 };
 
 /***/ }),
-/* 41 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/** @jsx React.DOM */
-const React = __webpack_require__(4);
-
-var ____Classd=React.Component;for(var ____Classd____Key in ____Classd){if(____Classd.hasOwnProperty(____Classd____Key)){SmallButton[____Classd____Key]=____Classd[____Classd____Key];}}var ____SuperProtoOf____Classd=____Classd===null?null:____Classd.prototype;SmallButton.prototype=Object.create(____SuperProtoOf____Classd);SmallButton.prototype.constructor=SmallButton;SmallButton.__superConstructor__=____Classd;function SmallButton(){"use strict";if(____Classd!==null){____Classd.apply(this,arguments);}}
-	Object.defineProperty(SmallButton.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
-		return (
-			React.createElement("a", {href: "javascript:void(0);", className: "small-button", onClick: this.props.onClick, title: this.props.title}, 
-				React.createElement("span", {className: "glyphicon glyphicon-"+this.props.glyphicon, "aria-hidden": "true"})
-			)
-		);
-	}});
-
-
-module.exports = SmallButton;
-
-/***/ }),
 /* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /** @jsx React.DOM */
 const React = __webpack_require__(4);
 
-const ReactRouterDom = __webpack_require__(39);
+const ReactRouterDom = __webpack_require__(40);
 const Link = ReactRouterDom.Link;
 
-var ____Classc=React.Component;for(var ____Classc____Key in ____Classc){if(____Classc.hasOwnProperty(____Classc____Key)){CommonButton[____Classc____Key]=____Classc[____Classc____Key];}}var ____SuperProtoOf____Classc=____Classc===null?null:____Classc.prototype;CommonButton.prototype=Object.create(____SuperProtoOf____Classc);CommonButton.prototype.constructor=CommonButton;CommonButton.__superConstructor__=____Classc;function CommonButton(){"use strict";if(____Classc!==null){____Classc.apply(this,arguments);}}
+var ____Classd=React.Component;for(var ____Classd____Key in ____Classd){if(____Classd.hasOwnProperty(____Classd____Key)){CommonButton[____Classd____Key]=____Classd[____Classd____Key];}}var ____SuperProtoOf____Classd=____Classd===null?null:____Classd.prototype;CommonButton.prototype=Object.create(____SuperProtoOf____Classd);CommonButton.prototype.constructor=CommonButton;CommonButton.__superConstructor__=____Classd;function CommonButton(){"use strict";if(____Classd!==null){____Classd.apply(this,arguments);}}
 	Object.defineProperty(CommonButton.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
 		if (this.props.to) {
 			return (
@@ -5813,7 +5815,7 @@ var ReactDOMComponentTree = __webpack_require__(5);
 var ReactInstrumentation = __webpack_require__(11);
 
 var createMicrosoftUnsafeLocalFunction = __webpack_require__(53);
-var setInnerHTML = __webpack_require__(36);
+var setInnerHTML = __webpack_require__(37);
 var setTextContent = __webpack_require__(84);
 
 function getNodeAfter(parentNode, node) {
@@ -7601,8 +7603,8 @@ var _prodInvariant = __webpack_require__(21),
 
 var ReactNoopUpdateQueue = __webpack_require__(69);
 
-var canDefineProperty = __webpack_require__(31);
-var emptyObject = __webpack_require__(32);
+var canDefineProperty = __webpack_require__(32);
+var emptyObject = __webpack_require__(33);
 var invariant = __webpack_require__(1);
 var lowPriorityWarning = __webpack_require__(44);
 
@@ -7922,7 +7924,7 @@ var ReactElement = __webpack_require__(18);
 
 var checkReactTypeSpec = __webpack_require__(114);
 
-var canDefineProperty = __webpack_require__(31);
+var canDefineProperty = __webpack_require__(32);
 var getIteratorFn = __webpack_require__(71);
 var warning = __webpack_require__(2);
 var lowPriorityWarning = __webpack_require__(44);
@@ -9254,8 +9256,8 @@ module.exports = ViewportMetrics;
 
 
 var ExecutionEnvironment = __webpack_require__(7);
-var escapeTextContentForBrowser = __webpack_require__(37);
-var setInnerHTML = __webpack_require__(36);
+var escapeTextContentForBrowser = __webpack_require__(38);
+var setInnerHTML = __webpack_require__(37);
 
 /**
  * Set the textContent property of a node, ensuring that whitespace is preserved
@@ -10675,7 +10677,7 @@ var _prodInvariant = __webpack_require__(3);
 var DOMLazyTree = __webpack_require__(23);
 var DOMProperty = __webpack_require__(17);
 var React = __webpack_require__(20);
-var ReactBrowserEventEmitter = __webpack_require__(38);
+var ReactBrowserEventEmitter = __webpack_require__(39);
 var ReactCurrentOwner = __webpack_require__(14);
 var ReactDOMComponentTree = __webpack_require__(5);
 var ReactDOMContainerInfo = __webpack_require__(201);
@@ -10688,10 +10690,10 @@ var ReactReconciler = __webpack_require__(22);
 var ReactUpdateQueue = __webpack_require__(59);
 var ReactUpdates = __webpack_require__(15);
 
-var emptyObject = __webpack_require__(32);
+var emptyObject = __webpack_require__(33);
 var instantiateReactComponent = __webpack_require__(90);
 var invariant = __webpack_require__(1);
-var setInnerHTML = __webpack_require__(36);
+var setInnerHTML = __webpack_require__(37);
 var shouldUpdateReactComponent = __webpack_require__(57);
 var warning = __webpack_require__(2);
 
@@ -11772,6 +11774,7 @@ module.exports = {
 		data : {
 			tasks : {},
 			projects : {},
+			settings : {},
 		},
 		alerts : {},
 		pleaseWait : 0,
@@ -11806,6 +11809,11 @@ module.exports = {
 			if (data.projects) {
 				for (let k in data.projects) {
 					app.state.data.projects[k] = data.projects[k];
+				}
+			}
+			if (data.settings) {
+				for (let k in data.settings) {
+					app.state.data.settings[k] = data.settings[k];
 				}
 			}
 			app.state.isInitialized = true;
@@ -13062,7 +13070,7 @@ module.exports = factory(Component, isValidElement, ReactNoopUpdateQueue);
 
 var _assign = __webpack_require__(123);
 
-var emptyObject = __webpack_require__(32);
+var emptyObject = __webpack_require__(33);
 var _invariant = __webpack_require__(1);
 
 if (process.env.NODE_ENV !== 'production') {
@@ -16029,7 +16037,7 @@ module.exports = DefaultEventPluginOrder;
 
 var EventPropagators = __webpack_require__(25);
 var ReactDOMComponentTree = __webpack_require__(5);
-var SyntheticMouseEvent = __webpack_require__(35);
+var SyntheticMouseEvent = __webpack_require__(36);
 
 var eventTypes = {
   mouseEnter: {
@@ -16815,8 +16823,8 @@ var DOMNamespaces = __webpack_require__(52);
 var DOMProperty = __webpack_require__(17);
 var DOMPropertyOperations = __webpack_require__(87);
 var EventPluginHub = __webpack_require__(26);
-var EventPluginRegistry = __webpack_require__(33);
-var ReactBrowserEventEmitter = __webpack_require__(38);
+var EventPluginRegistry = __webpack_require__(34);
+var ReactBrowserEventEmitter = __webpack_require__(39);
 var ReactDOMComponentFlags = __webpack_require__(75);
 var ReactDOMComponentTree = __webpack_require__(5);
 var ReactDOMInput = __webpack_require__(162);
@@ -16828,7 +16836,7 @@ var ReactMultiChild = __webpack_require__(165);
 var ReactServerRenderingTransaction = __webpack_require__(174);
 
 var emptyFunction = __webpack_require__(10);
-var escapeTextContentForBrowser = __webpack_require__(37);
+var escapeTextContentForBrowser = __webpack_require__(38);
 var invariant = __webpack_require__(1);
 var isEventSupported = __webpack_require__(49);
 var shallowEqual = __webpack_require__(56);
@@ -18339,7 +18347,7 @@ module.exports = memoizeStringOnly;
 
 
 
-var escapeTextContentForBrowser = __webpack_require__(37);
+var escapeTextContentForBrowser = __webpack_require__(38);
 
 /**
  * Escapes attribute value to prevent scripting attacks.
@@ -19711,7 +19719,7 @@ if (process.env.NODE_ENV !== 'production') {
   var checkReactTypeSpec = __webpack_require__(168);
 }
 
-var emptyObject = __webpack_require__(32);
+var emptyObject = __webpack_require__(33);
 var invariant = __webpack_require__(1);
 var shallowEqual = __webpack_require__(56);
 var shouldUpdateReactComponent = __webpack_require__(57);
@@ -20893,7 +20901,7 @@ module.exports = flattenChildren;
 var _assign = __webpack_require__(6);
 
 var PooledClass = __webpack_require__(19);
-var Transaction = __webpack_require__(34);
+var Transaction = __webpack_require__(35);
 var ReactInstrumentation = __webpack_require__(11);
 var ReactServerUpdateQueue = __webpack_require__(175);
 
@@ -21337,7 +21345,7 @@ var DOMChildrenOperations = __webpack_require__(51);
 var DOMLazyTree = __webpack_require__(23);
 var ReactDOMComponentTree = __webpack_require__(5);
 
-var escapeTextContentForBrowser = __webpack_require__(37);
+var escapeTextContentForBrowser = __webpack_require__(38);
 var invariant = __webpack_require__(1);
 var validateDOMNesting = __webpack_require__(60);
 
@@ -21499,7 +21507,7 @@ module.exports = ReactDOMTextComponent;
 var _assign = __webpack_require__(6);
 
 var ReactUpdates = __webpack_require__(15);
-var Transaction = __webpack_require__(34);
+var Transaction = __webpack_require__(35);
 
 var emptyFunction = __webpack_require__(10);
 
@@ -21772,7 +21780,7 @@ var EventPluginHub = __webpack_require__(26);
 var EventPluginUtils = __webpack_require__(46);
 var ReactComponentEnvironment = __webpack_require__(55);
 var ReactEmptyComponent = __webpack_require__(92);
-var ReactBrowserEventEmitter = __webpack_require__(38);
+var ReactBrowserEventEmitter = __webpack_require__(39);
 var ReactHostComponent = __webpack_require__(93);
 var ReactUpdates = __webpack_require__(15);
 
@@ -21808,10 +21816,10 @@ var _assign = __webpack_require__(6);
 
 var CallbackQueue = __webpack_require__(79);
 var PooledClass = __webpack_require__(19);
-var ReactBrowserEventEmitter = __webpack_require__(38);
+var ReactBrowserEventEmitter = __webpack_require__(39);
 var ReactInputSelection = __webpack_require__(96);
 var ReactInstrumentation = __webpack_require__(11);
-var Transaction = __webpack_require__(34);
+var Transaction = __webpack_require__(35);
 var ReactUpdateQueue = __webpack_require__(59);
 
 /**
@@ -22884,7 +22892,7 @@ var SyntheticClipboardEvent = __webpack_require__(193);
 var SyntheticEvent = __webpack_require__(16);
 var SyntheticFocusEvent = __webpack_require__(194);
 var SyntheticKeyboardEvent = __webpack_require__(195);
-var SyntheticMouseEvent = __webpack_require__(35);
+var SyntheticMouseEvent = __webpack_require__(36);
 var SyntheticDragEvent = __webpack_require__(197);
 var SyntheticTouchEvent = __webpack_require__(198);
 var SyntheticTransitionEvent = __webpack_require__(199);
@@ -23427,7 +23435,7 @@ module.exports = getEventKey;
 
 
 
-var SyntheticMouseEvent = __webpack_require__(35);
+var SyntheticMouseEvent = __webpack_require__(36);
 
 /**
  * @interface DragEvent
@@ -23556,7 +23564,7 @@ module.exports = SyntheticTransitionEvent;
 
 
 
-var SyntheticMouseEvent = __webpack_require__(35);
+var SyntheticMouseEvent = __webpack_require__(36);
 
 /**
  * @interface WheelEvent
@@ -23870,7 +23878,7 @@ module.exports = ReactMount.renderSubtreeIntoContainer;
 
 
 var DOMProperty = __webpack_require__(17);
-var EventPluginRegistry = __webpack_require__(33);
+var EventPluginRegistry = __webpack_require__(34);
 var ReactComponentTreeHook = __webpack_require__(9);
 
 var warning = __webpack_require__(2);
@@ -24120,11 +24128,11 @@ module.exports = ReactDOMInvalidARIAHook;
 
 /** @jsx React.DOM */
 const React = __webpack_require__(4);
-const ReactRouterDom = __webpack_require__(39);
+const ReactRouterDom = __webpack_require__(40);
 
 const Link = ReactRouterDom.Link;
 
-var ____Class6=React.Component;for(var ____Class6____Key in ____Class6){if(____Class6.hasOwnProperty(____Class6____Key)){Menu[____Class6____Key]=____Class6[____Class6____Key];}}var ____SuperProtoOf____Class6=____Class6===null?null:____Class6.prototype;Menu.prototype=Object.create(____SuperProtoOf____Class6);Menu.prototype.constructor=Menu;Menu.__superConstructor__=____Class6;function Menu(){"use strict";if(____Class6!==null){____Class6.apply(this,arguments);}}
+var ____Class3=React.Component;for(var ____Class3____Key in ____Class3){if(____Class3.hasOwnProperty(____Class3____Key)){Menu[____Class3____Key]=____Class3[____Class3____Key];}}var ____SuperProtoOf____Class3=____Class3===null?null:____Class3.prototype;Menu.prototype=Object.create(____SuperProtoOf____Class3);Menu.prototype.constructor=Menu;Menu.__superConstructor__=____Class3;function Menu(){"use strict";if(____Class3!==null){____Class3.apply(this,arguments);}}
 
 	Object.defineProperty(Menu.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
 		const self = this;
@@ -25989,7 +25997,7 @@ Redirect.contextTypes = {
 /* unused harmony reexport createHashHistory */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__createMemoryHistory__ = __webpack_require__(230);
 /* unused harmony reexport createMemoryHistory */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__LocationUtils__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__LocationUtils__ = __webpack_require__(41);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_3__LocationUtils__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_3__LocationUtils__["b"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__PathUtils__ = __webpack_require__(30);
@@ -26014,7 +26022,7 @@ Redirect.contextTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PathUtils__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__createTransitionManager__ = __webpack_require__(67);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DOMUtils__ = __webpack_require__(106);
@@ -26318,7 +26326,7 @@ var createBrowserHistory = function createBrowserHistory() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PathUtils__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__createTransitionManager__ = __webpack_require__(67);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DOMUtils__ = __webpack_require__(106);
@@ -26638,7 +26646,7 @@ var createHashHistory = function createHashHistory() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__PathUtils__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__createTransitionManager__ = __webpack_require__(67);
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
@@ -27242,7 +27250,7 @@ module.exports = function hoistNonReactStatics(targetComponent, sourceComponent,
 
 /** @jsx React.DOM */const React = __webpack_require__(4);
 
-var ____Class7=React.Component;for(var ____Class7____Key in ____Class7){if(____Class7.hasOwnProperty(____Class7____Key)){Alerts[____Class7____Key]=____Class7[____Class7____Key];}}var ____SuperProtoOf____Class7=____Class7===null?null:____Class7.prototype;Alerts.prototype=Object.create(____SuperProtoOf____Class7);Alerts.prototype.constructor=Alerts;Alerts.__superConstructor__=____Class7;function Alerts(){"use strict";if(____Class7!==null){____Class7.apply(this,arguments);}}
+var ____Class2=React.Component;for(var ____Class2____Key in ____Class2){if(____Class2.hasOwnProperty(____Class2____Key)){Alerts[____Class2____Key]=____Class2[____Class2____Key];}}var ____SuperProtoOf____Class2=____Class2===null?null:____Class2.prototype;Alerts.prototype=Object.create(____SuperProtoOf____Class2);Alerts.prototype.constructor=Alerts;Alerts.__superConstructor__=____Class2;function Alerts(){"use strict";if(____Class2!==null){____Class2.apply(this,arguments);}}
 
 	Object.defineProperty(Alerts.prototype,"hide",{writable:true,configurable:true,value:function() {"use strict";
 		app.state.alerts = {};
@@ -27275,7 +27283,7 @@ module.exports = Alerts;
 /** @jsx React.DOM */
 const React = __webpack_require__(4);
 
-const ReactRouterDom = __webpack_require__(39);
+const ReactRouterDom = __webpack_require__(40);
 const HashRouter = ReactRouterDom.HashRouter;
 const Route = ReactRouterDom.Route;
 const Switch = ReactRouterDom.Switch;
@@ -27285,7 +27293,7 @@ const ProjectEdit = __webpack_require__(244);
 const ProjectList = __webpack_require__(246);
 const Settings = __webpack_require__(248);
 
-var ____Class0=React.Component;for(var ____Class0____Key in ____Class0){if(____Class0.hasOwnProperty(____Class0____Key)){AppRouter[____Class0____Key]=____Class0[____Class0____Key];}}var ____SuperProtoOf____Class0=____Class0===null?null:____Class0.prototype;AppRouter.prototype=Object.create(____SuperProtoOf____Class0);AppRouter.prototype.constructor=AppRouter;AppRouter.__superConstructor__=____Class0;
+var ____Class1=React.Component;for(var ____Class1____Key in ____Class1){if(____Class1.hasOwnProperty(____Class1____Key)){AppRouter[____Class1____Key]=____Class1[____Class1____Key];}}var ____SuperProtoOf____Class1=____Class1===null?null:____Class1.prototype;AppRouter.prototype=Object.create(____SuperProtoOf____Class1);AppRouter.prototype.constructor=AppRouter;AppRouter.__superConstructor__=____Class1;
 
 	function AppRouter() {"use strict";
 		this.routes = (
@@ -27320,11 +27328,11 @@ module.exports = AppRouter;
 
 const AppPage = __webpack_require__(24);
 const Task = __webpack_require__(242);
-const SmallButton = __webpack_require__(41);
+const SmallButton = __webpack_require__(31);
 const CommonButton = __webpack_require__(42);
 const NewTaskForm = __webpack_require__(243);
 
-var ____Class2=React.Component;for(var ____Class2____Key in ____Class2){if(____Class2.hasOwnProperty(____Class2____Key)){TaskList[____Class2____Key]=____Class2[____Class2____Key];}}var ____SuperProtoOf____Class2=____Class2===null?null:____Class2.prototype;TaskList.prototype=Object.create(____SuperProtoOf____Class2);TaskList.prototype.constructor=TaskList;TaskList.__superConstructor__=____Class2;function TaskList(){"use strict";if(____Class2!==null){____Class2.apply(this,arguments);}}
+var ____Class4=React.Component;for(var ____Class4____Key in ____Class4){if(____Class4.hasOwnProperty(____Class4____Key)){TaskList[____Class4____Key]=____Class4[____Class4____Key];}}var ____SuperProtoOf____Class4=____Class4===null?null:____Class4.prototype;TaskList.prototype=Object.create(____SuperProtoOf____Class4);TaskList.prototype.constructor=TaskList;TaskList.__superConstructor__=____Class4;function TaskList(){"use strict";if(____Class4!==null){____Class4.apply(this,arguments);}}
 
 	Object.defineProperty(TaskList.prototype,"removeResolved",{writable:true,configurable:true,value:function() {"use strict";
 		for (let i in app.state.data.tasks) {
@@ -27396,7 +27404,7 @@ module.exports = TaskList;
 
 /** @jsx React.DOM */const React = __webpack_require__(4);
 
-const SmallButton = __webpack_require__(41);
+const SmallButton = __webpack_require__(31);
 
 var ____Class8=React.Component;for(var ____Class8____Key in ____Class8){if(____Class8.hasOwnProperty(____Class8____Key)){Task[____Class8____Key]=____Class8[____Class8____Key];}}var ____SuperProtoOf____Class8=____Class8===null?null:____Class8.prototype;Task.prototype=Object.create(____SuperProtoOf____Class8);Task.prototype.constructor=Task;Task.__superConstructor__=____Class8;function Task(){"use strict";if(____Class8!==null){____Class8.apply(this,arguments);}}
 
@@ -27459,7 +27467,6 @@ var ____Class8=React.Component;for(var ____Class8____Key in ____Class8){if(____C
 			name : name,
 			projectId : projectId,
 		};
-		// console.log(task);
 		if (app.state.data.tasks[id].name != task.name || app.state.data.tasks[id].projectId != task.projectId) {
 			app.state.data.tasks[id] = task;
 			app.services.saveData();
@@ -27529,7 +27536,7 @@ var ____Class8=React.Component;for(var ____Class8____Key in ____Class8){if(____C
 						
 					), 
 					React.createElement("td", null, 
-						React.createElement("div", {className: "project-label", style: {backgroundColor : '#'+elt.projectColor}}, elt.projectName)
+						React.createElement("div", {className: "project-label", style: {backgroundColor : '#'+elt.projectColor}, title: elt.projectName}, elt.projectName)
 					), 
 					React.createElement("td", null, elt.name)
 				)
@@ -27547,7 +27554,7 @@ module.exports = Task;
 /** @jsx React.DOM */
 const React = __webpack_require__(4);
 
-const SmallButton = __webpack_require__(41);
+const SmallButton = __webpack_require__(31);
 
 var ____Class9=React.Component;for(var ____Class9____Key in ____Class9){if(____Class9.hasOwnProperty(____Class9____Key)){NewTaskForm[____Class9____Key]=____Class9[____Class9____Key];}}var ____SuperProtoOf____Class9=____Class9===null?null:____Class9.prototype;NewTaskForm.prototype=Object.create(____SuperProtoOf____Class9);NewTaskForm.prototype.constructor=NewTaskForm;NewTaskForm.__superConstructor__=____Class9;
 
@@ -27619,13 +27626,13 @@ var ____Class9=React.Component;for(var ____Class9____Key in ____Class9){if(____C
 		const self = this;
 		return (
 			React.createElement("form", {name: "new-task", onSubmit: self.formFakeSubmit, className: "new-task-form"}, 
+				React.createElement(SmallButton, {glyphicon: "plus-sign", onClick: self.addTask.bind(self), title: "Add task"}), 
 				React.createElement("select", {name: "projectId"}, 
 					self.props.projectList.map(function(elt)  
 						{return React.createElement("option", {key: elt.id, value: elt.id}, elt.name);}
 					)
 				), 
-				React.createElement("input", {type: "text", name: "name", value: self.state.name, onKeyDown: self.handleInputKeyDown.bind(self), onChange: self.onChangeName.bind(self)}), 
-				React.createElement(SmallButton, {glyphicon: "plus-sign", onClick: self.addTask.bind(self), title: "Add task"})
+				React.createElement("input", {type: "text", name: "name", value: self.state.name, onKeyDown: self.handleInputKeyDown.bind(self), onChange: self.onChangeName.bind(self)})
 			)
 		);
 	}});
@@ -27643,7 +27650,7 @@ const AppPage = __webpack_require__(24);
 const CommonButton = __webpack_require__(42);
 const ProjectEditForm = __webpack_require__(245);
 
-var ____Class3=React.Component;for(var ____Class3____Key in ____Class3){if(____Class3.hasOwnProperty(____Class3____Key)){ProjectEdit[____Class3____Key]=____Class3[____Class3____Key];}}var ____SuperProtoOf____Class3=____Class3===null?null:____Class3.prototype;ProjectEdit.prototype=Object.create(____SuperProtoOf____Class3);ProjectEdit.prototype.constructor=ProjectEdit;ProjectEdit.__superConstructor__=____Class3;function ProjectEdit(){"use strict";if(____Class3!==null){____Class3.apply(this,arguments);}}
+var ____Class5=React.Component;for(var ____Class5____Key in ____Class5){if(____Class5.hasOwnProperty(____Class5____Key)){ProjectEdit[____Class5____Key]=____Class5[____Class5____Key];}}var ____SuperProtoOf____Class5=____Class5===null?null:____Class5.prototype;ProjectEdit.prototype=Object.create(____SuperProtoOf____Class5);ProjectEdit.prototype.constructor=ProjectEdit;ProjectEdit.__superConstructor__=____Class5;function ProjectEdit(){"use strict";if(____Class5!==null){____Class5.apply(this,arguments);}}
 
 	Object.defineProperty(ProjectEdit.prototype,"create",{writable:true,configurable:true,value:function() {"use strict";
 		let id = 0;
@@ -27697,6 +27704,7 @@ var ____Class3=React.Component;for(var ____Class3____Key in ____Class3){if(____C
 			visible : true,
 		};
 		let save = self.create;
+		// In case of edition
 		if (self.props.match 
 				&& self.props.match.params 
 				&& self.props.match.params.id
@@ -27707,6 +27715,41 @@ var ____Class3=React.Component;for(var ____Class3____Key in ____Class3){if(____C
 				project.visible = true;
 			}
 			save = self.update;
+		}
+		// Case of creation
+		else {
+			// selection of a randon color
+			const colors = {};
+			for (let i = 0; i < app.consts.colors.length; i++) {
+				colors[app.consts.colors[i].color] = 0;
+			}
+			for (let i in app.state.data.projects) {
+				console.log(colors[app.state.data.projects[i].color]);
+				if (colors[app.state.data.projects[i].color] !== undefined) {
+					colors[app.state.data.projects[i].color]++;
+				}
+			}
+			// search for minimum
+			let minColor;
+			for (let color in colors) {
+				if (typeof minColor === 'undefined') {
+					minColor = colors[color];
+				}
+				else {
+					minColor = Math.min(minColor, colors[color]);
+				}
+			}
+			const selectableColors = [];
+			for (let color in colors) {
+				if (colors[color] == minColor) {
+					selectableColors.push(color);
+				}
+			}
+
+			const randomIndex = parseInt(Math.random() * selectableColors.length);
+			project.color = selectableColors[randomIndex];
+			console.log(selectableColors);
+			console.log(project.color);
 		}
 		return (
 			React.createElement(AppPage, null, 
@@ -27797,15 +27840,25 @@ module.exports = ProjectEditForm;
 /***/ (function(module, exports, __webpack_require__) {
 
 /** @jsx React.DOM */const React = __webpack_require__(4);
-const ReactRouterDom = __webpack_require__(39);
+const ReactRouterDom = __webpack_require__(40);
 
 const Link = ReactRouterDom.Link;
 
 const AppPage = __webpack_require__(24);
 const CommonButton = __webpack_require__(42);
 const VisibleMarker = __webpack_require__(247);
+const SmallButton = __webpack_require__(31);
 
-var ____Class4=React.Component;for(var ____Class4____Key in ____Class4){if(____Class4.hasOwnProperty(____Class4____Key)){ProjectList[____Class4____Key]=____Class4[____Class4____Key];}}var ____SuperProtoOf____Class4=____Class4===null?null:____Class4.prototype;ProjectList.prototype=Object.create(____SuperProtoOf____Class4);ProjectList.prototype.constructor=ProjectList;ProjectList.__superConstructor__=____Class4;function ProjectList(){"use strict";if(____Class4!==null){____Class4.apply(this,arguments);}}
+var ____Class7=React.Component;for(var ____Class7____Key in ____Class7){if(____Class7.hasOwnProperty(____Class7____Key)){ProjectList[____Class7____Key]=____Class7[____Class7____Key];}}var ____SuperProtoOf____Class7=____Class7===null?null:____Class7.prototype;ProjectList.prototype=Object.create(____SuperProtoOf____Class7);ProjectList.prototype.constructor=ProjectList;ProjectList.__superConstructor__=____Class7;function ProjectList(){"use strict";if(____Class7!==null){____Class7.apply(this,arguments);}}
+
+	Object.defineProperty(ProjectList.prototype,"changeVisibility",{writable:true,configurable:true,value:function(id) {"use strict";
+		if (app.state.data.projects[id]) {
+			app.state.data.projects[id].visible = !app.state.data.projects[id].visible;
+			app.services.saveData();
+			app.render();
+		}
+	}});
+
 
 	Object.defineProperty(ProjectList.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
 		const self = this;
@@ -27825,9 +27878,17 @@ var ____Class4=React.Component;for(var ____Class4____Key in ____Class4){if(____C
 								React.createElement("td", null, 
 									React.createElement(Link, {to: "/project-edit/"+elt.id, className: "small-button"}, 
 										React.createElement("span", {className: "glyphicon glyphicon-edit", "aria-hidden": "true"})
-									)
+									), 
+									elt.visible ? 
+										React.createElement(SmallButton, {glyphicon: "eye-close", onClick: self.changeVisibility.bind(self, elt.id), title: "Hide"})
+									:
+										React.createElement(SmallButton, {glyphicon: "eye-open", onClick: self.changeVisibility.bind(self, elt.id), title: "Show"})
+									
 								), 
 								React.createElement("td", null, elt.name), 
+								React.createElement("td", null, 
+									React.createElement(SmallButton, {glyphicon: "minus", style: {backgroundColor : '#'+elt.color}})
+								), 
 								React.createElement("td", null, 
 									React.createElement(VisibleMarker, {visible: elt.visible})
 								)
@@ -27868,13 +27929,14 @@ module.exports = VisibleMarker;
 const React = __webpack_require__(4);
 
 const AppPage = __webpack_require__(24);
-const SmallButton = __webpack_require__(41);
+const SmallButton = __webpack_require__(31);
 
-var ____Class5=React.Component;for(var ____Class5____Key in ____Class5){if(____Class5.hasOwnProperty(____Class5____Key)){Settings[____Class5____Key]=____Class5[____Class5____Key];}}var ____SuperProtoOf____Class5=____Class5===null?null:____Class5.prototype;Settings.prototype=Object.create(____SuperProtoOf____Class5);Settings.prototype.constructor=Settings;Settings.__superConstructor__=____Class5;function Settings(){"use strict";if(____Class5!==null){____Class5.apply(this,arguments);}}
+var ____Class6=React.Component;for(var ____Class6____Key in ____Class6){if(____Class6.hasOwnProperty(____Class6____Key)){Settings[____Class6____Key]=____Class6[____Class6____Key];}}var ____SuperProtoOf____Class6=____Class6===null?null:____Class6.prototype;Settings.prototype=Object.create(____SuperProtoOf____Class6);Settings.prototype.constructor=Settings;Settings.__superConstructor__=____Class6;function Settings(){"use strict";if(____Class6!==null){____Class6.apply(this,arguments);}}
 
 	Object.defineProperty(Settings.prototype,"toggleTheme",{writable:true,configurable:true,value:function() {"use strict";
-		const theme = localStorage.theme === 'dark' ? 'dark' : 'light';
-		localStorage.theme = theme === 'dark' ? 'light' : 'dark';
+		const theme = app.state.data.settings.theme === 'dark' ? 'dark' : 'light';
+		app.state.data.settings.theme = theme === 'dark' ? 'light' : 'dark';
+		app.services.saveData();
 		app.render();
 	}});
 
@@ -27882,13 +27944,13 @@ var ____Class5=React.Component;for(var ____Class5____Key in ____Class5){if(____C
 	Object.defineProperty(Settings.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
 		return (
 			React.createElement(AppPage, {selectedMenu: "settings"}, 
-				React.createElement("table", null, 
+				React.createElement("table", {className: "list-table"}, 
 					React.createElement("tbody", null, 
 						React.createElement("tr", null, 
-							React.createElement("td", {className: "label"}, "Theme"), 
-							React.createElement("td", {className: "value"}, 
+							React.createElement("td", null, 
 								React.createElement(SmallButton, {title: "", glyphicon: "adjust", onClick: this.toggleTheme})
-							)
+							), 
+							React.createElement("td", null, "Theme")
 						)
 					)
 				)
@@ -27908,7 +27970,6 @@ module.exports = Settings;
 module.exports = {
 
 	getData : function (callback) {
-		// app.get('?action=getData', function(response) {
 		app.get('/getData', function(response) {
 			if (callback && typeof callback == 'function') {
 				callback(response.data);
@@ -27921,8 +27982,8 @@ module.exports = {
 		const data = {
 			tasks : app.state.data.tasks,
 			projects : app.state.data.projects,
+			settings : app.state.data.settings,
 		}
-		// app.post('?action=setData', data, function(response) {
 		app.post('/setData', data, function(response) {
 			if (callback && typeof callback == 'function') {
 				callback(response.data);

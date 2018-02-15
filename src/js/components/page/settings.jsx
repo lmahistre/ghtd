@@ -7,8 +7,9 @@ const SmallButton = require("../ui/small-button.jsx");
 class Settings extends React.Component {
 
 	toggleTheme() {
-		const theme = localStorage.theme === 'dark' ? 'dark' : 'light';
-		localStorage.theme = theme === 'dark' ? 'light' : 'dark';
+		const theme = app.state.data.settings.theme === 'dark' ? 'dark' : 'light';
+		app.state.data.settings.theme = theme === 'dark' ? 'light' : 'dark';
+		app.services.saveData();
 		app.render();
 	}
 
@@ -16,13 +17,13 @@ class Settings extends React.Component {
 	render() {
 		return (
 			<AppPage selectedMenu="settings">
-				<table>
+				<table className="list-table">
 					<tbody>
 						<tr>
-							<td className="label">Theme</td>
-							<td className="value">
+							<td>
 								<SmallButton title="" glyphicon="adjust" onClick={this.toggleTheme} />
 							</td>
+							<td>{"Theme"}</td>
 						</tr>
 					</tbody>
 				</table>

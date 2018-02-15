@@ -63,7 +63,6 @@ class Task extends React.Component {
 			name : name,
 			projectId : projectId,
 		};
-		// console.log(task);
 		if (app.state.data.tasks[id].name != task.name || app.state.data.tasks[id].projectId != task.projectId) {
 			app.state.data.tasks[id] = task;
 			app.services.saveData();
@@ -100,8 +99,8 @@ class Task extends React.Component {
 			return (
 				<tr className={"status-"+elt.status}>
 					<td className="actions">
-						<SmallButton glyphicon="remove" onClick={self.cancel.bind(self)} title="Cancel" />
-						<SmallButton glyphicon="ok" onClick={self.save.bind(self)} title="Save" />
+						<SmallButton glyphicon="remove" onClick={self.cancel.bind(self)} title={"Cancel"} />
+						<SmallButton glyphicon="ok" onClick={self.save.bind(self)} title={"Save"} />
 					</td>
 					<td>
 						<select id={"task-edit-projectId-"+elt.id} name="projectId" defaultValue={elt.projectId}>
@@ -122,18 +121,18 @@ class Task extends React.Component {
 					<td className="actions">
 						{elt.status == 'done' ? 
 							[
-								<SmallButton key={0} glyphicon="trash" onClick={self.delete.bind(self, elt.id)} title="Delete" />,
-								<SmallButton key={1} glyphicon="folder-open" onClick={self.unresolve.bind(self, elt.id)} title="Reopen" />
+								<SmallButton key={0} glyphicon="trash" onClick={self.delete.bind(self, elt.id)} title={"Delete"} />,
+								<SmallButton key={1} glyphicon="folder-open" onClick={self.unresolve.bind(self, elt.id)} title={"Reopen"} />
 							]
 						:
 							[
-								<SmallButton key={0} glyphicon="edit" onClick={self.edit.bind(self, elt.id)} title="Edit" />,
-								<SmallButton key={1} glyphicon="ok" onClick={self.resolve.bind(self, elt.id)} title="Resolve" />
+								<SmallButton key={0} glyphicon="edit" onClick={self.edit.bind(self, elt.id)} title={"Edit"} />,
+								<SmallButton key={1} glyphicon="ok" onClick={self.resolve.bind(self, elt.id)} title={"Resolve"} />
 							]
 						}
 					</td>
 					<td>
-						<div className="project-label" style={{backgroundColor : '#'+elt.projectColor}}>{elt.projectName}</div>
+						<div className="project-label" style={{backgroundColor : '#'+elt.projectColor}} title={elt.projectName}>{elt.projectName}</div>
 					</td>
 					<td>{elt.name}</td>
 				</tr>
