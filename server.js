@@ -9,7 +9,7 @@ const app = express();
 const fs = require('fs');
 
 const configManager = require("./server/config-manager.js");
-const config = configManager.load();
+const config = configManager.get();
 
 /**
  * Render main html page
@@ -17,7 +17,6 @@ const config = configManager.load();
 app.get('/', function (req, res) {
 	res.sendFile(__dirname+'/view.html');
 });
-
 
 
 // Routing

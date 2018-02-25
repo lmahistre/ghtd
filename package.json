@@ -22,6 +22,6 @@
     "type": "git",
     "url": "https://github.com/lmahistre/github-todo.git"
   },
-  "author": "",
-  "license": "BSD-2-Clause"
+  "author": "Lionel Mahistre",
+  "license": "MIT"
 }

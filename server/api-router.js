@@ -1,21 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const fs = require('fs');
-const config = JSON.parse(fs.readFileSync('config.json'));
-
-const https = require('https');
-
-const options = {
-	host : 'api.github.com',
-	path : "/gists/"+config.gistId,
-	headers : {
-		'User-Agent' : 'Github-Todo',
-	},
-};
-
-const filename = 'ght.json';
-
+const github = require('./github.js');
 
 /**
  * Parses the body and extracts the post data
@@ -40,38 +26,23 @@ const reqToPost = function(req, res, callback) {
 }
 
 
+const retFunc = function(err, data) {
+	if (err) {
+		this.json({
+			error : err,
+		});
+	}
+	else {
+		this.json({data});
+	}
+}
+
+
 /**
  * Get data from Github
  */
 router.get('/getData', function(req, res) {
-	https.get(options, function(response) {
-		response.setEncoding('utf8');
-		let content = '';
-		response.on('data', function (chunk) {
-			content += chunk;
-		});
-		response.on('end', function() {
-			try {
-				const parsedData = JSON.parse(content);
-				const gistContent = parsedData.files[filename].content;
-				const gistData = JSON.parse(gistContent);
-				res.json({
-					data : gistData,
-				});
-			}
-			catch (err) {
-				res.json({
-					error : err,
-				});
-			}
-		});
-	})
-	.on('error', function(err) {
-		console.error(err);
-		res.json({
-			error : err,
-		});
-	});
+	github.getGistData(retFunc.bind(res));
 });
 
 
@@ -80,63 +51,7 @@ router.get('/getData', function(req, res) {
  */
 router.post('/setData', function(req, res) {
 	reqToPost(req, res, function(post) {
-		let reqOptions = JSON.parse(JSON.stringify(options));
-		reqOptions.method = 'POST';
-		reqOptions.headers['Content-Type'] = 'application/json';
-		const postData = JSON.stringify({
-			description : "Github-Todo",
-			files : {
-				[filename] : {
-					content : JSON.stringify(post),
-				},
-			},
-		});
-		reqOptions.headers['Content-Length'] = Buffer.byteLength(postData);
-		reqOptions.auth = config.user+':'+config.token;
-
-		const postReq = https.request(reqOptions, function(response) {
-			response.setEncoding('utf8');
-			let content = '';
-			response.on('data', function (chunk) {
-				content += chunk;
-			});
-			response.on('end', function(){
-				try {
-					const parsedData = JSON.parse(content);
-					if (parsedData 
-						&& parsedData.files 
-						&& parsedData.files[filename]
-						&& parsedData.files[filename].content
-					) {
-						const gistContent = parsedData.files[filename].content;
-						const gistData = JSON.parse(gistContent);
-						res.json({
-							data : gistData,
-						});
-					}
-					else {
-						res.json({
-							error : "Could not parse API response",
-						})
-					}
-				}
-				catch (err) {
-					console.error(err);
-					res.json({
-						error : err,
-					})
-				}
-			});
-		})
-		.on('error', function(err) {
-			console.error(err);
-			res.json({
-				error : err,
-			});
-		});
-
-		postReq.write(postData);
-		postReq.end();
+		github.setGistData(post, retFunc.bind(res));
 	});
 });
 
@@ -145,40 +60,7 @@ router.post('/setData', function(req, res) {
  * Get data from Github
  */
 router.get('/importProjects', function(req, res) {
-	let reqOptions = JSON.parse(JSON.stringify(options));
-	reqOptions.path = '/users/'+config.user+'/repos';
-	https.get(reqOptions, function(response) {
-		response.setEncoding('utf8');
-		let content = '';
-		response.on('data', function (chunk) {
-			content += chunk;
-		});
-		response.on('end', function() {
-			try {
-				const parsedData = JSON.parse(content);
-				const projects = [];
-				for (var i = 0; i < parsedData.length; i++) {
-					projects.push({
-						name : parsedData[i].name,
-					});
-				}
-				res.json({
-					data : projects,
-				});
-			}
-			catch (err) {
-				res.json({
-					error : err,
-				});
-			}
-		});
-	})
-	.on('error', function(err) {
-		console.error(err);
-		res.json({
-			error : err,
-		});
-	});
+	github.getProjects(retFunc.bind(res));
 });
 
 

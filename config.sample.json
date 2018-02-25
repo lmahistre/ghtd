@@ -2,5 +2,6 @@
 	"user" : "",
 	"token" : "",
 	"gistId" : "",
-	"port" : 3002
+	"port" : 3002,
+	"filename" : "ght.json"
 }
