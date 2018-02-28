@@ -5,6 +5,7 @@ const express = require('express');
 const app = express();
 
 const fs = require('fs');
+const path = require('path');
 
 const configManager = require("./config-manager.js");
 const config = configManager.get();
@@ -14,7 +15,7 @@ module.exports = function(callback) {
 	 * Render main html page
 	 */
 	app.get('/', function (req, res) {
-		res.sendFile(__dirname+'/view.html');
+		res.sendFile(path.resolve(__dirname+'/../view.html'));
 	});
 
 
