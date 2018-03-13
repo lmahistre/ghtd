@@ -49,6 +49,30 @@ exports.compile = function(args) {
  * TODO
  */
 exports.test = function(args) {
+	var Jasmine = require('jasmine');
+	var jasmine = new Jasmine();
+
+	jasmine.loadConfig({
+		spec_dir: 'src/spec',
+		spec_files: [
+			'test.js',
+		],
+		helpers: [
+			// 'helpers/**/*.js'
+		]
+	});
+
+	jasmine.onComplete(function(passed) {
+		console.log(' --- ')
+		if(passed) {
+			console.log('Tous les tests passent');
+		}
+		else {
+			console.log('Au moins un test a échoué');
+		}
+	});
+
+	jasmine.execute();
 }
 
 
