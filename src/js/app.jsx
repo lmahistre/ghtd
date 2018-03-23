@@ -1,189 +1,71 @@
-const React = require("react");
-const ReactDOM = require("react-dom");
-const AppPage = require("./components/app-page.jsx");
-const AppRouter = require("./components/app-router.jsx");
 
-module.exports = {
+const browserService = require('./services/browser.js');
 
-	state : {
-		data : {
-			tasks : {},
-			projects : {},
-			settings : {},
-		},
-		alerts : {},
-		pleaseWait : 0,
-		isInitialized : false,
-	},
+exports.state = require('./services/state-container.js'),
 
-	apiEndpoint : '/api',
-
-	services : require('./services.jsx'),
-	consts : require('./consts.jsx'),
-	utils : require('./utils.jsx'),
-
-	init : function() {
-
-		// Focus
-		app.hasFocus = true;
-		window.onfocus = function() {
-			app.hasFocus = true;
-		};
-		window.onblur = function() {
-			app.hasFocus = false;
-		};
-
-		app.render();
-		app.state.isInitialized = false;
-		app.services.getData(function(data) {
-			if (data.tasks) {
-				for (let k in data.tasks) {
-					app.state.data.tasks[k] = data.tasks[k];
-				}
-			}
-			if (data.projects) {
-				for (let k in data.projects) {
-					app.state.data.projects[k] = data.projects[k];
-				}
-			}
-			if (data.settings) {
-				for (let k in data.settings) {
-					app.state.data.settings[k] = data.settings[k];
-				}
-			}
-			app.state.isInitialized = true;
-			app.render();
-		});
-	},
+exports.services = require('./services/services.js'),
+exports.consts = require('./services/consts.js'),
+exports.utils = require('./services/utils.js'),
+exports.actions = require('./services/actions.js'),
 
 
-	error : function(err) {
-		app.showAlert('error', err);
-		console.error(err);
-	},
+exports.init = function() {
+	// Focus
+	exports.hasFocus = true;
+	window.onfocus = function() {
+		exports.hasFocus = true;
+	};
+	window.onblur = function() {
+		exports.hasFocus = false;
+	};
 
-
-	fetch : function(uri, post, callback) {
-		const params = {
-			credentials : 'same-origin',
-		};
-		if (post) {
-			params.method = 'POST';
-			params.headers = {  
-				"Content-type": "application/json; charset=UTF-8" 
-			};
-			// params.body = post;
-			params.body = JSON.stringify(post);
-		}
-		fetch(uri, params).then(function(response) {
-			// app.endPleaseWait();
-			return response.text();
-		})
-		.then(function(responseText) {
-			try {
-				const responseData = JSON.parse(responseText);
-
-				if (responseData.warning) {
-					console.warn(responseData.warning);
-				}
-				if (responseData.error) {
-					app.error(responseData.error);
-				}
-				app.render();
-				if (callback && typeof callback === 'function') {
-					callback(responseData);
-				}
-			}
-			catch (error) {
-				app.error(error);
-			}
-		})
-		.catch(function(error) {
-			app.error(error);
-		});
-	},
-
-
-	/**
-	 * Get format : index.php/[controller]/[action]/[id/param]
-	 */
-	get : function(uri, callback) {
-		app.fetch(app.apiEndpoint+uri, null, callback);
-	},
-
-	
-	post : function(uri, data, callback) {
-		app.fetch(app.apiEndpoint+uri, data, callback);
-	},
-
-
-	showAlert : function(type, msg, timeout) {
-		app.state.alerts[type] = msg;
-		app.render();
-		if (timeout && parseInt(timeout) > 0) {
-			setTimeout(function() {
-				if (app.state.alerts[type] == msg) {
-					app.state.alerts[type] = null;
-					app.render();
-				}
-			}, timeout);
-		}
-	},
-
-
-	render : function() {
-		ReactDOM.render(<AppRouter />, document.getElementById('react-root'));
-	},
-
-
-	startPleaseWait : function() {
-	// 	app.pleaseWait++;
-	// 	$('.please-wait').show();
-	},
-
-
-	endPleaseWait : function() {
-	// 	app.pleaseWait--;
-	// 	if (app.pleaseWait < 0) {
-	// 		app.pleaseWait = 0;
-	// 	}
-	// 	if (!app.pleaseWait) {
-	// 		$('.please-wait').hide();
-	// 	}
-	},
-
-
-	setTitle : function(str) {
-		var baseTitle = 'GHT';
-		var title = baseTitle;
-		if (str.length > 0) {
-			title += ' - '+str;
-		}
-		document.title = title;
-	},
-
-
-	/**
-	 * Envoie une notification
-	 */
-	notify : function(msg) {
-		if (window.Notification) {
-			var options = {
-				// icon : $('head link[rel^=shortcut]').attr('href'),
-			};
-
-			if (Notification.permission === "granted") {
-				var notification = new Notification(msg, options);
-			}
-			else if (Notification.permission !== "denied") {
-				Notification.requestPermission(function (permission) {
-					if (permission === "granted") {
-						var notification = new Notification(msg, options);
-					}
-				});
+	exports.render();
+	exports.state.isInitialized = false;
+	exports.services.getData(function(data) {
+		if (data.tasks) {
+			for (let k in data.tasks) {
+				exports.state.data.tasks[k] = data.tasks[k];
 			}
 		}
-	},
-};
+		if (data.projects) {
+			for (let k in data.projects) {
+				exports.state.data.projects[k] = data.projects[k];
+			}
+		}
+		if (data.settings) {
+			for (let k in data.settings) {
+				exports.state.data.settings[k] = data.settings[k];
+			}
+		}
+		exports.state.isInitialized = true;
+		exports.render();
+	});
+}
 
 
+// TO REMOVE
+exports.error = browserService.error;
+exports.setTitle = browserService.setTitle;
+exports.render = browserService.render;
+
+
+exports.showAlert = function(type, msg, timeout) {
+	exports.state.alerts[type] = msg;
+	exports.render();
+	if (timeout && parseInt(timeout) > 0) {
+		setTimeout(function() {
+			if (exports.state.alerts[type] == msg) {
+				exports.state.alerts[type] = null;
+				exports.render();
+			}
+		}, timeout);
+	}
+}
+
+
+// exports.render = function() {
+// 	ReactDOM.render(
+// 		React.createElement(AppRouter, null), 
+// 		document.getElementById('react-root')
+// 	);
+// }

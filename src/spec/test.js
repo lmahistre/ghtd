@@ -1,7 +1,7 @@
 
-describe ('state-manager', function() {
-	const stateManager = require('../src/js/state-manager.js');
-	stateManager.interactions = require('./interactions.mock.js');
+describe ('http', function() {
+	const httpService = require('../js/services/http.js');
+	// stateManager.interactions = require('./interactions.mock.js');
 
 	it ("tests startGame then next", function() {
 		let state = stateManager.startGame();
@@ -37,3 +37,4 @@ describe ('state-manager', function() {
 		expect(state.game.turn).toBe(undefined);
 		expect(state.game.currentPlayer).toBe(undefined);
 	});
+});
