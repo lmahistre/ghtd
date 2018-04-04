@@ -35,6 +35,22 @@ exports.notify = function (msg) {
 }
 
 
+// TODO: mettre ça ailleurs
+exports.showAlert = function(type, msg, timeout) {
+	alert(msg)
+	// exports.state.alerts[type] = msg;
+	// exports.render();
+	// if (timeout && parseInt(timeout) > 0) {
+	// 	setTimeout(function() {
+	// 		if (exports.state.alerts[type] == msg) {
+	// 			exports.state.alerts[type] = null;
+	// 			exports.render();
+	// 		}
+	// 	}, timeout);
+	// }
+}
+
+
 exports.error = function (err) {
 	exports.showAlert('error', err);
 	console.error(err);
@@ -46,4 +62,9 @@ exports.render = function () {
 		React.createElement(AppRouter, null), 
 		document.getElementById('react-root')
 	);
+}
+
+
+exports.redirect = function (uri) {
+	window.location.href = '#/'+uri;
 }

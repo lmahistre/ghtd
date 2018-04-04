@@ -49,13 +49,13 @@ exports.compile = function(args) {
  * TODO
  */
 exports.test = function(args) {
-	var Jasmine = require('jasmine');
-	var jasmine = new Jasmine();
+	const Jasmine = require('jasmine');
+	const jasmine = new Jasmine();
 
 	jasmine.loadConfig({
 		spec_dir: 'src/spec',
 		spec_files: [
-			'test.js',
+			'utils.js',
 		],
 		helpers: [
 			// 'helpers/**/*.js'
@@ -65,10 +65,10 @@ exports.test = function(args) {
 	jasmine.onComplete(function(passed) {
 		console.log(' --- ')
 		if(passed) {
-			console.log('Tous les tests passent');
+			console.log('All tests pass');
 		}
 		else {
-			console.log('Au moins un test a échoué');
+			console.log('At least one test failed');
 		}
 	});
 
@@ -102,11 +102,19 @@ exports.tasks = function(args) {
 }
 
 
-exports.default = function() {
+/**
+ * Compilation JS et CSS
+ */
+exports.build = function(args) {
 	const compiler = require('./compiler.js');
 	const config = require('./compiler-config.js');
-	const server = require('./server.js');
+
 	compiler.js(config.js, function() {
-		compiler.css(config.css, server);
+		compiler.css(config.css, function() {
+			exports.test();
+		});
 	});
 }
+
+
+exports.default = exports.server;

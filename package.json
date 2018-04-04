@@ -4,7 +4,9 @@
   "description": "Library",
   "main": "index.html",
   "dependencies": {
-    "express": "^4.16.2",
+    "express": "^4.16.2"
+  },
+  "devDependencies": {
     "jasmine": "^3.1.0",
     "jsx-loader": "^0.13.2",
     "less": "^2.7.3",
@@ -15,7 +17,6 @@
     "react-tooltip": "^3.4.0",
     "webpack": "^3.10.0"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "node index.js test",
     "build": "node index.js compile"

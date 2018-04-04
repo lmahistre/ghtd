@@ -4,6 +4,8 @@ const AppPage = require("../app-page.jsx");
 const CommonButton = require("../ui/common-button.jsx");
 const ProjectEditForm = require("../forms/project-edit-form.jsx");
 
+const actionsService = require('../../services/actions.js');
+
 class ProjectEdit extends React.Component {
 
 	create() {
@@ -17,7 +19,7 @@ class ProjectEdit extends React.Component {
 		};
 		if (project.name.length > 0) {
 			app.state.data.projects[id] = project;
-			app.services.saveData();
+			actionsService.saveData();
 			window.location.href = '#/projects';
 		}
 	}
@@ -33,7 +35,7 @@ class ProjectEdit extends React.Component {
 		};
 		if (app.state.data.projects[project.id]) {
 			app.state.data.projects[project.id] = project;
-			app.services.saveData();
+			actionsService.saveData();
 			window.location.href = '#/projects';
 		}
 		else {

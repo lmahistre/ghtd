@@ -3,11 +3,13 @@ const React = require("react");
 const AppPage = require("../app-page.jsx");
 const CommonButton = require("../ui/common-button.jsx");
 
+const actionsService = require('../../services/actions.js');
+
 class ProjectDelete extends React.Component {
 
 	delete() {
 		delete app.state.data.projects[this.props.match.params.id];
-		app.services.saveData();
+		actionsService.saveData();
 		window.location.href = '#/projects';
 	}
 

@@ -1,3 +1,5 @@
+[![Travis Build Status](https://travis-ci.org/lmahistre/github-todo.svg?branch=master)](https://travis-ci.org/lmahistre/github-todo)
+
 # GitHub Todo
 
 ## Installation

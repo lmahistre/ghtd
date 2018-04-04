@@ -6,42 +6,54 @@ const SmallButton = require("../ui/small-button.jsx");
 const CommonButton = require("../ui/common-button.jsx");
 const NewTaskForm = require("../forms/new-task-form.jsx");
 
+const actionService = require('../../services/actions.js');
+const browserService = require('../../services/browser.js');
+const dataContainerService = require('../../services/data-container.js');
+
 class TaskList extends React.Component {
 
-	removeResolved() {
+	removeResolved () {
 		for (let i in app.state.data.tasks) {
 			if (app.state.data.tasks[i].status === 'done') {
 				delete app.state.data.tasks[i];
 			}
 		}
-		app.services.saveData();
-		app.render();
+		actionService.saveData();
+		browserService.render();
+	}
+
+
+	sort (object) {
+		const list = [];
+		const projects = dataContainerService.getProjects();
+		for (let i in object) {
+			let task = object[i];
+			if (!task.status) {
+				task.status = 'active';
+			}
+			if (!projects[task.projectId]
+					|| projects[task.projectId].visible 
+					|| projects[task.projectId].visible === undefined) {
+				if (projects[task.projectId]) {
+					task.projectName = projects[task.projectId].name;
+					task.projectColor = projects[task.projectId].color;
+				}
+				else {
+					task.projectName = ' ';
+					task.projectColor = 'FFF';
+				}
+				list.push(task);
+			}
+		}
+		return list;
 	}
 
 
 	render() {
 		const self = this;
-		const taskList = [];
-		if (app.state.data.tasks) {
-			for (let i in app.state.data.tasks) {
-				let task = app.state.data.tasks[i];
-				if (!task.status) {
-					task.status = 'active';
-				}
-				if (!app.state.data.projects[task.projectId]
-						|| app.state.data.projects[task.projectId].visible 
-						|| app.state.data.projects[task.projectId].visible === undefined) {
-					if (app.state.data.projects && app.state.data.projects[task.projectId]) {
-						task.projectName = app.state.data.projects[task.projectId].name;
-						task.projectColor = app.state.data.projects[task.projectId].color;
-					}
-					else {
-						task.projectName = ' ';
-						task.projectColor = 'FFF';
-					}
-					taskList.push(task);
-				}
-			}
+		let taskList = [];
+		if (dataContainerService.getDataIsLoaded()) {
+			taskList = self.sort(dataContainerService.getTasks());
 		}
 		const projectList = [
 			{
@@ -49,10 +61,9 @@ class TaskList extends React.Component {
 				name : '',
 			},
 		];
-		if (app.state.data.projects) {
-			for (let i in app.state.data.projects) {
-				projectList.push(app.state.data.projects[i]);
-			}
+		const projects = dataContainerService.getProjects();
+		for (let i in projects) {
+			projectList.push(projects[i]);
 		}
 		return (
 			<AppPage selectedMenu="tasks">

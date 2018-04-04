@@ -3,6 +3,8 @@ const React = require("react");
 
 const SmallButton = require("../ui/small-button.jsx");
 
+const actionsService = require('../../services/actions.js');
+
 class NewTaskForm extends React.Component {
 
 	handleInputKeyDown(event) {
@@ -45,12 +47,14 @@ class NewTaskForm extends React.Component {
 				name : name,
 				projectId : projectId,
 				status : 'active',
+				timestampCreated : parseInt(Date.now()/1000),
+				timestampModified : parseInt(Date.now()/1000),
 			};
 			this.setState({
 				name: '',
 			});
 			app.state.data.tasks[id] = task;
-			app.services.saveData();
+			actionsService.saveData();
 			app.render();
 		}
 	}

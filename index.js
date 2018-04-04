@@ -11,7 +11,7 @@ if (args.length) {
 		console.log('Invalid argument '+args[0]);
 	}
 }
-else {
+else if (typeof action.default === 'function') {
 	action.default();
 }
 

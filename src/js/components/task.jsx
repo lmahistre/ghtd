@@ -2,14 +2,20 @@ const React = require("react");
 
 const SmallButton = require("./ui/small-button.jsx");
 
+const actionsService = require('../services/actions.js');
+const browserService = require('../services/browser.js');
+const dataContainerService = require('../services/data-container.js');
+
 class Task extends React.Component {
 
 	resolve(id) {
-		if (app.state.data.tasks[id]) {
-			app.state.data.tasks[id].status = 'done';
+		const task = dataContainerService.getTask(id);
+		if (task) {
+			task.status = 'done';
 		}
-		app.services.saveData();
-		app.render();
+		dataContainerService.setTask(id, task);
+		actionsService.saveData();
+		browserService.render();
 	}
 
 
@@ -18,7 +24,7 @@ class Task extends React.Component {
 			delete app.state.data.tasks[id];
 		}
 		app.services.saveData();
-		app.render();
+		browserService.render();
 	}
 
 
@@ -26,8 +32,8 @@ class Task extends React.Component {
 		if (app.state.data.tasks[id]) {
 			app.state.data.tasks[id].status = 'active';
 		}
-		app.services.saveData();
-		app.render();
+		actionsService.saveData();
+		browserService.render();
 	}
 
 
@@ -63,11 +69,15 @@ class Task extends React.Component {
 			name : name,
 			projectId : projectId,
 		};
-		if (app.state.data.tasks[id].name != task.name || app.state.data.tasks[id].projectId != task.projectId) {
-			app.state.data.tasks[id] = task;
-			app.services.saveData();
-			app.render();
-		}
+		dataContainerService.setTask(id, task);
+		actionsService.saveData();
+
+		// if (app.state.data.tasks[id].name != task.name 
+		// 		|| app.state.data.tasks[id].projectId != task.projectId) {
+		// 	app.state.data.tasks[id] = task;
+		// 	actionsService.saveData();
+		// 	app.render();
+		// }
 	}
 
 
@@ -90,11 +100,10 @@ class Task extends React.Component {
 					color : '',
 				}
 			];
-			if (app.state.data.projects) {
-				for (let i in app.state.data.projects) {
-					let project = app.state.data.projects[i];
-					projectList.push(project);
-				}
+			const projects = dataContainerService.getProjects();
+			for (let i in projects) {
+				let project = projects[i];
+				projectList.push(project);
 			}
 			return (
 				<tr className={"status-"+elt.status}>

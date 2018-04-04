@@ -8,60 +8,37 @@ const CommonButton = require("../ui/common-button.jsx");
 const VisibleMarker = require("../visible-marker.jsx");
 const SmallButton = require("../ui/small-button.jsx");
 
+const actionService = require('../../services/actions.js');
+const browserService = require('../../services/browser.js');
+const dataContainerService = require('../../services/data-container.js');
+
 class ProjectList extends React.Component {
 
-	changeVisibility(id) {
-		if (app.state.data.projects[id]) {
-			app.state.data.projects[id].visible = !app.state.data.projects[id].visible;
-			app.services.saveData();
-			app.render();
+	changeVisibility (id) {
+		const projects = dataContainerService.getProjects();
+		if (projects[id]) {
+			let project = new Object(projects[id]);
+			project.visible = !projects[id].visible;
+			dataContainerService.setProject(id, project);
+			actionService.saveData();
+			browserService.render();
 		}
 	}
 
 
-	import() {
-		app.services.importProjects(function (projects) {
-			// To check if project already exists
-			let alreadyExistingProjects = [];
-			for (var i in app.state.data.projects) {
-				alreadyExistingProjects.push(app.state.data.projects[i].repo);
-			}
-			console.log(alreadyExistingProjects);
-			let modified = false;
-			for (let i = 0; i < projects.length; i++) {
-				if (alreadyExistingProjects.indexOf(projects[i].name) == -1) {
-					let id = app.utils.getNextProjectId();
-					let project = {
-						id : id,
-						name : app.utils.renameProject(projects[i].name),
-						repo : projects[i].name,
-						visible : true,
-						color : app.utils.generateRandomColor(),
-					};
-					app.state.data.projects[id] = project;
-					modified = true;
-				}
-			}
-			if (modified) {
-				app.services.saveData();
-				app.render();
-			}
-		});
-	}
-
-
-	render() {
+	render () {
 		const self = this;
 		const projectList = [];
-		if (app.state.data.projects) {
-			for (let i in app.state.data.projects) {
-				projectList.push(app.state.data.projects[i]);
+		const projects = dataContainerService.getProjects();
+		if (projects) {
+			for (let i in projects) {
+				projectList.push(projects[i]);
 			}
 		}
 		return (
 			<AppPage selectedMenu="projects">
 				<CommonButton to="/project-edit">{"New project"}</CommonButton>
-				<CommonButton onClick={self.import}>{"Import from GitHub"}</CommonButton>
+				<CommonButton to="/project-import">{"Import from GitHub"}</CommonButton>
 				<table className="list-table">
 					<tbody>
 						{projectList.map(elt => (
