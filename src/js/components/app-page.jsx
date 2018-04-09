@@ -5,17 +5,20 @@ const ReactTooltip = require("react-tooltip");
 const Menu = require('./menu.jsx');
 const Alerts = require('./alerts.jsx');
 
+const dataContainerService = require('../services/data-container.js');
+const stateContainerService = require('../services/state-container.js');
+
 class AppPage extends React.Component {
 	render() {
 		const self = this;
-		const theme = (app.state.data.settings 
-			&& app.state.data.settings.theme 
-			&& app.state.data.settings.theme === 'dark') ? 'dark' : 'light';
-		if (app.state.isInitialized) {
+		const settings = dataContainerService.getSettings();
+		const theme = (settings.theme 
+			&& settings.theme === 'dark') ? 'dark' : 'light';
+		if (stateContainerService.getIsInitialized()) {
 			return (
 				<div className="app-container" data-theme={theme}>
 					<Menu selectedMenu={self.props.selectedMenu} />
-					<Alerts alerts={app.state.alerts} />
+					<Alerts alerts={{}} />
 					<ReactTooltip />
 					{self.props.children}
 				</div>

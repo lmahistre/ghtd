@@ -4,6 +4,8 @@ const React = require("react");
 const SmallButton = require("../ui/small-button.jsx");
 
 const actionsService = require('../../services/actions.js');
+const dataContainerService = require('../../services/data-container.js');
+const browserService = require('../../services/browser.js');
 
 class NewTaskForm extends React.Component {
 
@@ -26,12 +28,11 @@ class NewTaskForm extends React.Component {
 		const name = document.forms['new-task'].name.value;
 		if (name.length > 0) {
 			// Task ID
+			const tasks = dataContainerService.getTasks();
 			let id = 0;
-			if (app.state.data.tasks) {
-				for (let i in app.state.data.tasks) {
-					if (app.state.data.tasks[i].id && app.state.data.tasks[i].id > id) {
-						id = app.state.data.tasks[i].id;
-					}
+			for (let i in tasks) {
+				if (tasks[i].id && tasks[i].id > id) {
+					id = tasks[i].id;
 				}
 			}
 			id++;
@@ -53,9 +54,9 @@ class NewTaskForm extends React.Component {
 			this.setState({
 				name: '',
 			});
-			app.state.data.tasks[id] = task;
+			dataContainerService.setTask(id, task);
 			actionsService.saveData();
-			app.render();
+			browserService.render();
 		}
 	}
 

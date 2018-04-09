@@ -13,9 +13,10 @@ const dataContainerService = require('../../services/data-container.js');
 class TaskList extends React.Component {
 
 	removeResolved () {
-		for (let i in app.state.data.tasks) {
-			if (app.state.data.tasks[i].status === 'done') {
-				delete app.state.data.tasks[i];
+		const tasks = dataContainerService.getTasks();
+		for (let i in tasks) {
+			if (tasks[i].status === 'done') {
+				dataContainerService.deleteTask(i);
 			}
 		}
 		actionService.saveData();

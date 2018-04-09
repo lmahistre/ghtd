@@ -3,6 +3,8 @@ const React = require("react");
 const AppPage = require("../app-page.jsx");
 const CommonButton = require("../ui/common-button.jsx");
 
+const constsService = require('../../services/consts.js');
+
 class ProjectEditForm extends React.Component {
 
 	formFakeSubmit(event) {
@@ -50,7 +52,7 @@ class ProjectEditForm extends React.Component {
 							<td className="value">
 								<select name="color" defaultValue={self.props.project.color}>
 									<option value=""></option>
-									{app.consts.colors.map(elt => (
+									{constsService.colors.map(elt => (
 										<option key={elt.id} value={elt.color} style={{color : '#'+elt.color}}>{elt.name}</option>
 									))}
 								</select>

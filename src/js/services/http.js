@@ -28,7 +28,7 @@ const call = function(uri, post, callback) {
 			if (responseData.error) {
 				browserService.error(responseData.error);
 			}
-			app.render();
+			browserService.render();
 			if (callback && typeof callback === 'function') {
 				callback(responseData);
 			}

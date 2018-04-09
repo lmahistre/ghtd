@@ -20,18 +20,18 @@ class Task extends React.Component {
 
 
 	delete(id) {
-		if (app.state.data.tasks[id]) {
-			delete app.state.data.tasks[id];
-		}
-		app.services.saveData();
+		dataContainerService.deleteTask(id);
+		actionsService.saveData();
 		browserService.render();
 	}
 
 
 	unresolve(id) {
-		if (app.state.data.tasks[id]) {
-			app.state.data.tasks[id].status = 'active';
+		const task = dataContainerService.getTask(id);
+		if (task) {
+			task.status = 'active';
 		}
+		dataContainerService.setTask(id, task);
 		actionsService.saveData();
 		browserService.render();
 	}
@@ -71,13 +71,6 @@ class Task extends React.Component {
 		};
 		dataContainerService.setTask(id, task);
 		actionsService.saveData();
-
-		// if (app.state.data.tasks[id].name != task.name 
-		// 		|| app.state.data.tasks[id].projectId != task.projectId) {
-		// 	app.state.data.tasks[id] = task;
-		// 	actionsService.saveData();
-		// 	app.render();
-		// }
 	}
 
 

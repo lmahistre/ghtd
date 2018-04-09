@@ -36,6 +36,11 @@ exports.getProjects = function () {
 }
 
 
+exports.getProject = function (id) {
+	return projects[id];
+}
+
+
 exports.setProjects = function (value) {
 	projects = value;
 }
@@ -43,6 +48,15 @@ exports.setProjects = function (value) {
 
 exports.setProject = function (id, obj) {
 	projects[id] = obj;
+}
+
+
+exports.deleteProject = function(id) {
+	if (projects[id]) {
+		delete projects[id];
+		return true;
+	}
+	return false;
 }
 
 
@@ -63,6 +77,15 @@ exports.getTask = function (id) {
 
 exports.setTask = function (id, obj) {
 	tasks[id] = obj;
+}
+
+
+exports.deleteTask = function(id) {
+	if (tasks[id]) {
+		delete tasks[id];
+		return true;
+	}
+	return false;
 }
 
 

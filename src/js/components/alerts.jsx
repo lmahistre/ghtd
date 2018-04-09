@@ -1,10 +1,13 @@
 const React = require("react");
 
+const stateContainerService = require('../services/state-container.js');
+const browserService = require('../services/browser.js');
+
 class Alerts extends React.Component {
 
 	hide() {
-		app.state.alerts = {};
-		app.render();
+		stateContainerService.setAlerts({});
+		browserService.render();
 	}
 
 	render() {

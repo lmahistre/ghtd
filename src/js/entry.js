@@ -1,6 +1,4 @@
 
-window.app = require("./app.jsx");
-
 const browserService = require('./services/browser.js');
 const actionsService = require('./services/actions.js');
 const dataContainerService = require('./services/data-container.js');

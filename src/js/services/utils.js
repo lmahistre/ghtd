@@ -1,4 +1,7 @@
 
+const constsService = require('./consts.js');
+const dataContainerService = require('./data-container.js');
+
 /**
  * Transform the technical name of the project into human readable name
  */
@@ -20,12 +23,13 @@ exports.renameProject = function(name) {
 exports.generateRandomColor = function() {
 	// selection of a random color
 	const colors = {};
-	for (let i = 0; i < app.consts.colors.length; i++) {
-		colors[app.consts.colors[i].color] = 0;
+	const projects = dataContainerService.getProjects();
+	for (let i = 0; i < constsService.colors.length; i++) {
+		colors[constsService.colors[i].color] = 0;
 	}
-	for (let i in app.state.data.projects) {
-		if (colors[app.state.data.projects[i].color] !== undefined) {
-			colors[app.state.data.projects[i].color]++;
+	for (let i in projects) {
+		if (colors[projects[i].color] !== undefined) {
+			colors[projects[i].color]++;
 		}
 	}
 	// search for minimum
@@ -51,12 +55,13 @@ exports.generateRandomColor = function() {
 
 
 exports.getNextProjectId = function() {
+	const projects = dataContainerService.getProjects();
 	let id = 0;
 	// Determine new id
-	if (app.state.data.projects) {
-		for (let i in app.state.data.projects) {
-			if (app.state.data.projects[i].id && app.state.data.projects[i].id > id) {
-				id = app.state.data.projects[i].id;
+	if (projects) {
+		for (let i in projects) {
+			if (projects[i].id && projects[i].id > id) {
+				id = projects[i].id;
 			}
 		}
 	}

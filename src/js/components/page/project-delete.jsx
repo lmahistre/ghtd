@@ -4,11 +4,13 @@ const AppPage = require("../app-page.jsx");
 const CommonButton = require("../ui/common-button.jsx");
 
 const actionsService = require('../../services/actions.js');
+const browserService = require('../../services/browser.js');
+const dataContainerService = require('../../services/data-container.js');
 
 class ProjectDelete extends React.Component {
 
 	delete() {
-		delete app.state.data.projects[this.props.match.params.id];
+		dataContainerService.deleteProject(this.props.match.params.id);
 		actionsService.saveData();
 		window.location.href = '#/projects';
 	}
@@ -16,18 +18,20 @@ class ProjectDelete extends React.Component {
 
 	render() {
 		const self = this;
+		const projects = dataContainerService.getProjects();
+		const tasks = dataContainerService.getTasks();
 		// In case of edition
 		if (self.props.match 
 				&& self.props.match.params 
 				&& self.props.match.params.id
-				&& app.state.data.projects[self.props.match.params.id]
+				&& projects[self.props.match.params.id]
 		) {
-			const project = app.state.data.projects[self.props.match.params.id];
+			const project = projects[self.props.match.params.id];
 
 			// Check if there are tasks using this project
 			let projectIsUsed = false;
-			for (let taskId in app.state.data.tasks) {
-				if (app.state.data.tasks[taskId].projectId == project.id) {
+			for (let taskId in tasks) {
+				if (tasks[taskId].projectId == project.id) {
 					projectIsUsed = true;
 				}
 			}
@@ -55,7 +59,7 @@ class ProjectDelete extends React.Component {
 		}
 		// If the project does not exist
 		else {
-			app.error("This project does not exist.");
+			browserService.error("This project does not exist.");
 			window.location.href = '#/projects';
 			return (
 				<AppPage selectedMenu="projects">

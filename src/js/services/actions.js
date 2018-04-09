@@ -2,6 +2,7 @@
 const httpService = require('../services/http.js');
 const browserService = require('../services/browser.js');
 const dataContainerService = require('../services/data-container.js');
+const stateContainerService = require('../services/state-container.js');
 
 exports.getData = function (callback) {
 	httpService.get('/getData', function(response) {
@@ -23,7 +24,7 @@ exports.getData = function (callback) {
 				dataContainerService.setSetting(k, data.settings[k]);
 			}
 		}
-		app.state.isInitialized = true;
+		stateContainerService.setIsInitialized(true);
 
 		if (callback && typeof callback == 'function') {
 			callback(data);
@@ -38,11 +39,6 @@ exports.saveData = function (callback) {
 		projects : dataContainerService.getProjects(),
 		settings : dataContainerService.getSettings(),
 	}
-	// const data = {
-	// 	tasks : app.state.data.tasks,
-	// 	projects : app.state.data.projects,
-	// 	settings : app.state.data.settings,
-	// }
 	httpService.post('/setData', data, function(response) {
 		if (callback && typeof callback == 'function') {
 			callback(response.data);
