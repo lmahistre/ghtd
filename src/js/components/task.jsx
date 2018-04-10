@@ -101,8 +101,8 @@ class Task extends React.Component {
 			return (
 				<tr className={"status-"+elt.status}>
 					<td className="actions">
-						<SmallButton glyphicon="remove" onClick={self.cancel.bind(self)} title={"Cancel"} />
-						<SmallButton glyphicon="ok" onClick={self.save.bind(self)} title={"Save"} />
+						<SmallButton fa="remove" onClick={self.cancel.bind(self)} title={"Cancel"} />
+						<SmallButton fa="check" onClick={self.save.bind(self)} title={"Save"} />
 					</td>
 					<td>
 						<select id={"task-edit-projectId-"+elt.id} name="projectId" defaultValue={elt.projectId}>
@@ -123,13 +123,13 @@ class Task extends React.Component {
 					<td className="actions">
 						{elt.status == 'done' ? 
 							[
-								<SmallButton key={0} glyphicon="trash" onClick={self.delete.bind(self, elt.id)} title={"Delete"} />,
-								<SmallButton key={1} glyphicon="folder-open" onClick={self.unresolve.bind(self, elt.id)} title={"Reopen"} />
+								<SmallButton key={0} fa="trash" onClick={self.delete.bind(self, elt.id)} title={"Delete"} />,
+								<SmallButton key={1} fa="folder-open" onClick={self.unresolve.bind(self, elt.id)} title={"Reopen"} />
 							]
 						:
 							[
-								<SmallButton key={0} glyphicon="edit" onClick={self.edit.bind(self, elt.id)} title={"Edit"} />,
-								<SmallButton key={1} glyphicon="ok" onClick={self.resolve.bind(self, elt.id)} title={"Resolve"} />
+								<SmallButton key={0} fa="edit" onClick={self.edit.bind(self, elt.id)} title={"Edit"} />,
+								<SmallButton key={1} fa="check" onClick={self.resolve.bind(self, elt.id)} title={"Resolve"} />
 							]
 						}
 					</td>

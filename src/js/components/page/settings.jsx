@@ -26,7 +26,7 @@ class Settings extends React.Component {
 					<tbody>
 						<tr>
 							<td>
-								<SmallButton title="" glyphicon="adjust" onClick={this.toggleTheme} />
+								<SmallButton title="" fa="adjust" onClick={this.toggleTheme} />
 							</td>
 							<td>{"Theme"}</td>
 						</tr>

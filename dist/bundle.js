@@ -3408,11 +3408,21 @@ module.exports = DOMLazyTree;
 /** @jsx React.DOM */
 const React = __webpack_require__(3);
 
-var ____Classb=React.Component;for(var ____Classb____Key in ____Classb){if(____Classb.hasOwnProperty(____Classb____Key)){SmallButton[____Classb____Key]=____Classb[____Classb____Key];}}var ____SuperProtoOf____Classb=____Classb===null?null:____Classb.prototype;SmallButton.prototype=Object.create(____SuperProtoOf____Classb);SmallButton.prototype.constructor=SmallButton;SmallButton.__superConstructor__=____Classb;function SmallButton(){"use strict";if(____Classb!==null){____Classb.apply(this,arguments);}}
+var ____Classc=React.Component;for(var ____Classc____Key in ____Classc){if(____Classc.hasOwnProperty(____Classc____Key)){SmallButton[____Classc____Key]=____Classc[____Classc____Key];}}var ____SuperProtoOf____Classc=____Classc===null?null:____Classc.prototype;SmallButton.prototype=Object.create(____SuperProtoOf____Classc);SmallButton.prototype.constructor=SmallButton;SmallButton.__superConstructor__=____Classc;function SmallButton(){"use strict";if(____Classc!==null){____Classc.apply(this,arguments);}}
 	Object.defineProperty(SmallButton.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
+		let className;
+		if (this.props.glyphicon) {
+			className = "glyphicon glyphicon-"+this.props.glyphicon;
+		}
+		else if (this.props.fa) {
+			className = "fa fa-"+this.props.fa;
+		}
+		else {
+			className = "fa";
+		}
 		return (
 			React.createElement("a", {href: "javascript:void(0);", className: "small-button", onClick: this.props.onClick, style: this.props.style, "data-tip": this.props.title}, 
-				React.createElement("span", {className: "glyphicon glyphicon-"+this.props.glyphicon, "aria-hidden": "true"})
+				React.createElement("span", {className: className, "aria-hidden": "true"})
 			)
 		);
 	}});
@@ -27513,7 +27523,7 @@ const actionService = __webpack_require__(19);
 const browserService = __webpack_require__(14);
 const dataContainerService = __webpack_require__(13);
 
-var ____Class1=React.Component;for(var ____Class1____Key in ____Class1){if(____Class1.hasOwnProperty(____Class1____Key)){TaskList[____Class1____Key]=____Class1[____Class1____Key];}}var ____SuperProtoOf____Class1=____Class1===null?null:____Class1.prototype;TaskList.prototype=Object.create(____SuperProtoOf____Class1);TaskList.prototype.constructor=TaskList;TaskList.__superConstructor__=____Class1;function TaskList(){"use strict";if(____Class1!==null){____Class1.apply(this,arguments);}}
+var ____Class3=React.Component;for(var ____Class3____Key in ____Class3){if(____Class3.hasOwnProperty(____Class3____Key)){TaskList[____Class3____Key]=____Class3[____Class3____Key];}}var ____SuperProtoOf____Class3=____Class3===null?null:____Class3.prototype;TaskList.prototype=Object.create(____SuperProtoOf____Class3);TaskList.prototype.constructor=TaskList;TaskList.__superConstructor__=____Class3;function TaskList(){"use strict";if(____Class3!==null){____Class3.apply(this,arguments);}}
 
 	Object.defineProperty(TaskList.prototype,"removeResolved",{writable:true,configurable:true,value:function( ) {"use strict";
 		const tasks = dataContainerService.getTasks();
@@ -29192,8 +29202,8 @@ var ____Class8=React.Component;for(var ____Class8____Key in ____Class8){if(____C
 			return (
 				React.createElement("tr", {className: "status-"+elt.status}, 
 					React.createElement("td", {className: "actions"}, 
-						React.createElement(SmallButton, {glyphicon: "remove", onClick: self.cancel.bind(self), title: "Cancel"}), 
-						React.createElement(SmallButton, {glyphicon: "ok", onClick: self.save.bind(self), title: "Save"})
+						React.createElement(SmallButton, {fa: "remove", onClick: self.cancel.bind(self), title: "Cancel"}), 
+						React.createElement(SmallButton, {fa: "check", onClick: self.save.bind(self), title: "Save"})
 					), 
 					React.createElement("td", null, 
 						React.createElement("select", {id: "task-edit-projectId-"+elt.id, name: "projectId", defaultValue: elt.projectId}, 
@@ -29214,13 +29224,13 @@ var ____Class8=React.Component;for(var ____Class8____Key in ____Class8){if(____C
 					React.createElement("td", {className: "actions"}, 
 						elt.status == 'done' ? 
 							[
-								React.createElement(SmallButton, {key: 0, glyphicon: "trash", onClick: self.delete.bind(self, elt.id), title: "Delete"}),
-								React.createElement(SmallButton, {key: 1, glyphicon: "folder-open", onClick: self.unresolve.bind(self, elt.id), title: "Reopen"})
+								React.createElement(SmallButton, {key: 0, fa: "trash", onClick: self.delete.bind(self, elt.id), title: "Delete"}),
+								React.createElement(SmallButton, {key: 1, fa: "folder-open", onClick: self.unresolve.bind(self, elt.id), title: "Reopen"})
 							]
 						:
 							[
-								React.createElement(SmallButton, {key: 0, glyphicon: "edit", onClick: self.edit.bind(self, elt.id), title: "Edit"}),
-								React.createElement(SmallButton, {key: 1, glyphicon: "ok", onClick: self.resolve.bind(self, elt.id), title: "Resolve"})
+								React.createElement(SmallButton, {key: 0, fa: "edit", onClick: self.edit.bind(self, elt.id), title: "Edit"}),
+								React.createElement(SmallButton, {key: 1, fa: "check", onClick: self.resolve.bind(self, elt.id), title: "Resolve"})
 							]
 						
 					), 
@@ -29379,7 +29389,7 @@ var ____Classd=React.Component;for(var ____Classd____Key in ____Classd){if(____C
 		const self = this;
 		return (
 			React.createElement("form", {name: "new-task", onSubmit: self.formFakeSubmit, className: "new-task-form"}, 
-				React.createElement(SmallButton, {glyphicon: "plus-sign", onClick: self.addTask.bind(self), title: "Add task"}), 
+				React.createElement(SmallButton, {fa: "plus-circle", onClick: self.addTask.bind(self), title: "Add task"}), 
 				React.createElement("select", {name: "projectId"}, 
 					self.props.projectList.map(function(elt)  
 						{return React.createElement("option", {key: elt.id, value: elt.id}, elt.name);}
@@ -29408,7 +29418,7 @@ const browserService = __webpack_require__(14);
 const dataContainerService = __webpack_require__(13);
 const utilsService = __webpack_require__(265);
 
-var ____Class2=React.Component;for(var ____Class2____Key in ____Class2){if(____Class2.hasOwnProperty(____Class2____Key)){ProjectEdit[____Class2____Key]=____Class2[____Class2____Key];}}var ____SuperProtoOf____Class2=____Class2===null?null:____Class2.prototype;ProjectEdit.prototype=Object.create(____SuperProtoOf____Class2);ProjectEdit.prototype.constructor=ProjectEdit;ProjectEdit.__superConstructor__=____Class2;function ProjectEdit(){"use strict";if(____Class2!==null){____Class2.apply(this,arguments);}}
+var ____Class1=React.Component;for(var ____Class1____Key in ____Class1){if(____Class1.hasOwnProperty(____Class1____Key)){ProjectEdit[____Class1____Key]=____Class1[____Class1____Key];}}var ____SuperProtoOf____Class1=____Class1===null?null:____Class1.prototype;ProjectEdit.prototype=Object.create(____SuperProtoOf____Class1);ProjectEdit.prototype.constructor=ProjectEdit;ProjectEdit.__superConstructor__=____Class1;function ProjectEdit(){"use strict";if(____Class1!==null){____Class1.apply(this,arguments);}}
 
 	Object.defineProperty(ProjectEdit.prototype,"create",{writable:true,configurable:true,value:function() {"use strict";
 		const id = utilsService.getNextProjectId();
@@ -29488,7 +29498,7 @@ const CommonButton = __webpack_require__(35);
 
 const constsService = __webpack_require__(113);
 
-var ____Classc=React.Component;for(var ____Classc____Key in ____Classc){if(____Classc.hasOwnProperty(____Classc____Key)){ProjectEditForm[____Classc____Key]=____Classc[____Classc____Key];}}var ____SuperProtoOf____Classc=____Classc===null?null:____Classc.prototype;ProjectEditForm.prototype=Object.create(____SuperProtoOf____Classc);ProjectEditForm.prototype.constructor=ProjectEditForm;ProjectEditForm.__superConstructor__=____Classc;function ProjectEditForm(){"use strict";if(____Classc!==null){____Classc.apply(this,arguments);}}
+var ____Classb=React.Component;for(var ____Classb____Key in ____Classb){if(____Classb.hasOwnProperty(____Classb____Key)){ProjectEditForm[____Classb____Key]=____Classb[____Classb____Key];}}var ____SuperProtoOf____Classb=____Classb===null?null:____Classb.prototype;ProjectEditForm.prototype=Object.create(____SuperProtoOf____Classb);ProjectEditForm.prototype.constructor=ProjectEditForm;ProjectEditForm.__superConstructor__=____Classb;function ProjectEditForm(){"use strict";if(____Classb!==null){____Classb.apply(this,arguments);}}
 
 	Object.defineProperty(ProjectEditForm.prototype,"formFakeSubmit",{writable:true,configurable:true,value:function(event) {"use strict";
 		event.stopPropagation();
@@ -29617,18 +29627,34 @@ exports.generateRandomColor = function() {
 }
 
 
+exports.generateRandomId = function () {
+	const alphabet = 'abcdefghijklmnopqrstuvwxyz0123456789';
+	const idLength = 8;
+	let id = '';
+	for (var i = 0; i < idLength; i++) {
+		id += alphabet[parseInt(Math.random()*alphabet.length)];
+	}
+	return id;
+}
+
+
 exports.getNextProjectId = function() {
 	const projects = dataContainerService.getProjects();
-	let id = 0;
-	// Determine new id
-	if (projects) {
-		for (let i in projects) {
-			if (projects[i].id && projects[i].id > id) {
-				id = projects[i].id;
+	let id = exports.generateRandomId();
+	let idIsUnique = false;
+	while (!idIsUnique) {
+		idIsUnique = true;
+		if (projects) {
+			for (let i in projects) {
+				if (projects[i].id === id) {
+					id = exports.generateRandomId();
+					idIsUnique = false;
+					break;
+				}
 			}
 		}
 	}
-	id++;
+	// id++;
 	return id;
 }
 
@@ -29645,7 +29671,7 @@ const actionsService = __webpack_require__(19);
 const browserService = __webpack_require__(14);
 const dataContainerService = __webpack_require__(13);
 
-var ____Class5=React.Component;for(var ____Class5____Key in ____Class5){if(____Class5.hasOwnProperty(____Class5____Key)){ProjectDelete[____Class5____Key]=____Class5[____Class5____Key];}}var ____SuperProtoOf____Class5=____Class5===null?null:____Class5.prototype;ProjectDelete.prototype=Object.create(____SuperProtoOf____Class5);ProjectDelete.prototype.constructor=ProjectDelete;ProjectDelete.__superConstructor__=____Class5;function ProjectDelete(){"use strict";if(____Class5!==null){____Class5.apply(this,arguments);}}
+var ____Class2=React.Component;for(var ____Class2____Key in ____Class2){if(____Class2.hasOwnProperty(____Class2____Key)){ProjectDelete[____Class2____Key]=____Class2[____Class2____Key];}}var ____SuperProtoOf____Class2=____Class2===null?null:____Class2.prototype;ProjectDelete.prototype=Object.create(____SuperProtoOf____Class2);ProjectDelete.prototype.constructor=ProjectDelete;ProjectDelete.__superConstructor__=____Class2;function ProjectDelete(){"use strict";if(____Class2!==null){____Class2.apply(this,arguments);}}
 
 	Object.defineProperty(ProjectDelete.prototype,"delete",{writable:true,configurable:true,value:function() {"use strict";
 		dataContainerService.deleteProject(this.props.match.params.id);
@@ -29726,7 +29752,7 @@ const SmallButton = __webpack_require__(28);
 const actionsService = __webpack_require__(19);
 const dataService = __webpack_require__(13);
 
-var ____Class3=React.Component;for(var ____Class3____Key in ____Class3){if(____Class3.hasOwnProperty(____Class3____Key)){ProjectImport[____Class3____Key]=____Class3[____Class3____Key];}}var ____SuperProtoOf____Class3=____Class3===null?null:____Class3.prototype;ProjectImport.prototype=Object.create(____SuperProtoOf____Class3);ProjectImport.prototype.constructor=ProjectImport;ProjectImport.__superConstructor__=____Class3;function ProjectImport(){"use strict";if(____Class3!==null){____Class3.apply(this,arguments);}}
+var ____Class4=React.Component;for(var ____Class4____Key in ____Class4){if(____Class4.hasOwnProperty(____Class4____Key)){ProjectImport[____Class4____Key]=____Class4[____Class4____Key];}}var ____SuperProtoOf____Class4=____Class4===null?null:____Class4.prototype;ProjectImport.prototype=Object.create(____SuperProtoOf____Class4);ProjectImport.prototype.constructor=ProjectImport;ProjectImport.__superConstructor__=____Class4;function ProjectImport(){"use strict";if(____Class4!==null){____Class4.apply(this,arguments);}}
 
 	// import() {
 	// 	app.services.importProjects(function (projects) {
@@ -29759,17 +29785,20 @@ var ____Class3=React.Component;for(var ____Class3____Key in ____Class3){if(____C
 	// }
 
 
+	Object.defineProperty(ProjectImport.prototype,"import",{writable:true,configurable:true,value:function(repo) {"use strict";
+		
+	}});
+
+
 	Object.defineProperty(ProjectImport.prototype,"refresh",{writable:true,configurable:true,value:function( ) {"use strict";
 		const self = this;
 		actionsService.importProjects(function (importProjects) {
 			dataService.setImportProjects(importProjects);
 			dataService.setImportProjectsIsLoaded(true);
-			actionsService.getData(function (data) {
-
-			})
-			for (let i=0; i<importProjects.length; i++) {
-
-			}
+			// actionsService.getData(function (data) {
+			// })
+			// for (let i=0; i<importProjects.length; i++) {
+			// }
 		});
 	}});
 
@@ -29793,7 +29822,7 @@ var ____Class3=React.Component;for(var ____Class3____Key in ____Class3){if(____C
 		for (var i in projects) {
 			alreadyExistingProjects.push(projects[i].repo);
 		}
-		for (let i=0; i<importProjects; i++) {
+		for (let i=0; i<importProjects.length; i++) {
 			importProjects[i].imported = alreadyExistingProjects.indexOf(importProjects[i].name) > -1;
 		}
 
@@ -29805,7 +29834,7 @@ var ____Class3=React.Component;for(var ____Class3____Key in ____Class3){if(____C
 							{return React.createElement("tr", {key: elt.name}, 
 								React.createElement("td", null, elt.name), 
 								React.createElement("td", null, 
-									elt.imported ? null : React.createElement(SmallButton, {glyphicon: "picture"})
+									elt.imported ? null : React.createElement(SmallButton, {fa: "download"})
 								)
 							);}
 						)
@@ -29836,7 +29865,7 @@ const actionService = __webpack_require__(19);
 const browserService = __webpack_require__(14);
 const dataContainerService = __webpack_require__(13);
 
-var ____Class4=React.Component;for(var ____Class4____Key in ____Class4){if(____Class4.hasOwnProperty(____Class4____Key)){ProjectList[____Class4____Key]=____Class4[____Class4____Key];}}var ____SuperProtoOf____Class4=____Class4===null?null:____Class4.prototype;ProjectList.prototype=Object.create(____SuperProtoOf____Class4);ProjectList.prototype.constructor=ProjectList;ProjectList.__superConstructor__=____Class4;function ProjectList(){"use strict";if(____Class4!==null){____Class4.apply(this,arguments);}}
+var ____Class6=React.Component;for(var ____Class6____Key in ____Class6){if(____Class6.hasOwnProperty(____Class6____Key)){ProjectList[____Class6____Key]=____Class6[____Class6____Key];}}var ____SuperProtoOf____Class6=____Class6===null?null:____Class6.prototype;ProjectList.prototype=Object.create(____SuperProtoOf____Class6);ProjectList.prototype.constructor=ProjectList;ProjectList.__superConstructor__=____Class6;function ProjectList(){"use strict";if(____Class6!==null){____Class6.apply(this,arguments);}}
 
 	Object.defineProperty(ProjectList.prototype,"changeVisibility",{writable:true,configurable:true,value:function(id) {"use strict";
 		const projects = dataContainerService.getProjects();
@@ -29872,14 +29901,14 @@ var ____Class4=React.Component;for(var ____Class4____Key in ____Class4){if(____C
 										React.createElement("span", {className: "glyphicon glyphicon-edit", "aria-hidden": "true"})
 									), 
 									elt.visible ? 
-										React.createElement(SmallButton, {glyphicon: "eye-close", onClick: self.changeVisibility.bind(self, elt.id), title: "Hide"})
+										React.createElement(SmallButton, {fa: "eye", onClick: self.changeVisibility.bind(self, elt.id), title: "Hide"})
 									:
-										React.createElement(SmallButton, {glyphicon: "eye-open", onClick: self.changeVisibility.bind(self, elt.id), title: "Show"})
+										React.createElement(SmallButton, {fa: "eye-slash", onClick: self.changeVisibility.bind(self, elt.id), title: "Show"})
 									
 								), 
 								React.createElement("td", null, elt.name), 
 								React.createElement("td", null, 
-									React.createElement(SmallButton, {glyphicon: "picture", style: {backgroundColor : '#'+elt.color}})
+									React.createElement(SmallButton, {fa: "square-o", style: {backgroundColor : '#'+elt.color}})
 								), 
 								React.createElement("td", null, 
 									React.createElement(VisibleMarker, {visible: elt.visible})
@@ -29927,7 +29956,7 @@ const actionsService = __webpack_require__(19);
 const browserService = __webpack_require__(14);
 const dataContainerService = __webpack_require__(13);
 
-var ____Class6=React.Component;for(var ____Class6____Key in ____Class6){if(____Class6.hasOwnProperty(____Class6____Key)){Settings[____Class6____Key]=____Class6[____Class6____Key];}}var ____SuperProtoOf____Class6=____Class6===null?null:____Class6.prototype;Settings.prototype=Object.create(____SuperProtoOf____Class6);Settings.prototype.constructor=Settings;Settings.__superConstructor__=____Class6;function Settings(){"use strict";if(____Class6!==null){____Class6.apply(this,arguments);}}
+var ____Class5=React.Component;for(var ____Class5____Key in ____Class5){if(____Class5.hasOwnProperty(____Class5____Key)){Settings[____Class5____Key]=____Class5[____Class5____Key];}}var ____SuperProtoOf____Class5=____Class5===null?null:____Class5.prototype;Settings.prototype=Object.create(____SuperProtoOf____Class5);Settings.prototype.constructor=Settings;Settings.__superConstructor__=____Class5;function Settings(){"use strict";if(____Class5!==null){____Class5.apply(this,arguments);}}
 
 	Object.defineProperty(Settings.prototype,"toggleTheme",{writable:true,configurable:true,value:function() {"use strict";
 		const settings = dataContainerService.getSettings();
@@ -29945,7 +29974,7 @@ var ____Class6=React.Component;for(var ____Class6____Key in ____Class6){if(____C
 					React.createElement("tbody", null, 
 						React.createElement("tr", null, 
 							React.createElement("td", null, 
-								React.createElement(SmallButton, {title: "", glyphicon: "adjust", onClick: this.toggleTheme})
+								React.createElement(SmallButton, {title: "", fa: "adjust", onClick: this.toggleTheme})
 							), 
 							React.createElement("td", null, "Theme")
 						)

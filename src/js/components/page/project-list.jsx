@@ -48,14 +48,14 @@ class ProjectList extends React.Component {
 										<span className="glyphicon glyphicon-edit" aria-hidden="true"></span>
 									</Link>
 									{elt.visible ? 
-										<SmallButton glyphicon="eye-close" onClick={self.changeVisibility.bind(self, elt.id)} title={"Hide"} />
+										<SmallButton fa="eye" onClick={self.changeVisibility.bind(self, elt.id)} title={"Hide"} />
 									:
-										<SmallButton glyphicon="eye-open" onClick={self.changeVisibility.bind(self, elt.id)} title={"Show"} />
+										<SmallButton fa="eye-slash" onClick={self.changeVisibility.bind(self, elt.id)} title={"Show"} />
 									}
 								</td>
 								<td>{elt.name}</td>
 								<td>
-									<SmallButton glyphicon="picture" style={{backgroundColor : '#'+elt.color}} />
+									<SmallButton fa="square-o" style={{backgroundColor : '#'+elt.color}} />
 								</td>
 								<td>
 									<VisibleMarker visible={elt.visible} />

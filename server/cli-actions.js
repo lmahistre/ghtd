@@ -95,7 +95,11 @@ exports.tasks = function(args) {
 		}
 		else {
 			for (let id in data.tasks) {
-				console.log("["+data.tasks[id].projectName+"] "+data.tasks[id].name);
+				let projectName = data.tasks[id].projectId;
+				if (data.projects[data.tasks[id].projectId]) {
+					projectName = data.projects[data.tasks[id].projectId].name;
+				}
+				console.log('\x1b[32m%s\x1b[0m', "["+projectName+"]", data.tasks[id].name);
 			}
 		}
 	});

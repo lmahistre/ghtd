@@ -40,17 +40,20 @@ class ProjectImport extends React.Component {
 	// }
 
 
+	import (repo) {
+		
+	}
+
+
 	refresh () {
 		const self = this;
 		actionsService.importProjects(function (importProjects) {
 			dataService.setImportProjects(importProjects);
 			dataService.setImportProjectsIsLoaded(true);
-			actionsService.getData(function (data) {
-
-			})
-			for (let i=0; i<importProjects.length; i++) {
-
-			}
+			// actionsService.getData(function (data) {
+			// })
+			// for (let i=0; i<importProjects.length; i++) {
+			// }
 		});
 	}
 
@@ -74,7 +77,7 @@ class ProjectImport extends React.Component {
 		for (var i in projects) {
 			alreadyExistingProjects.push(projects[i].repo);
 		}
-		for (let i=0; i<importProjects; i++) {
+		for (let i=0; i<importProjects.length; i++) {
 			importProjects[i].imported = alreadyExistingProjects.indexOf(importProjects[i].name) > -1;
 		}
 
@@ -86,7 +89,7 @@ class ProjectImport extends React.Component {
 							<tr key={elt.name}>
 								<td>{elt.name}</td>
 								<td>
-									{elt.imported ? null : <SmallButton glyphicon="picture" />}
+									{elt.imported ? null : <SmallButton fa="download" />}
 								</td>
 							</tr>
 						))}

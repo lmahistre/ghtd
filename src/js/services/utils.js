@@ -54,17 +54,33 @@ exports.generateRandomColor = function() {
 }
 
 
+exports.generateRandomId = function () {
+	const alphabet = 'abcdefghijklmnopqrstuvwxyz0123456789';
+	const idLength = 8;
+	let id = '';
+	for (var i = 0; i < idLength; i++) {
+		id += alphabet[parseInt(Math.random()*alphabet.length)];
+	}
+	return id;
+}
+
+
 exports.getNextProjectId = function() {
 	const projects = dataContainerService.getProjects();
-	let id = 0;
-	// Determine new id
-	if (projects) {
-		for (let i in projects) {
-			if (projects[i].id && projects[i].id > id) {
-				id = projects[i].id;
+	let id = exports.generateRandomId();
+	let idIsUnique = false;
+	while (!idIsUnique) {
+		idIsUnique = true;
+		if (projects) {
+			for (let i in projects) {
+				if (projects[i].id === id) {
+					id = exports.generateRandomId();
+					idIsUnique = false;
+					break;
+				}
 			}
 		}
 	}
-	id++;
+	// id++;
 	return id;
 }

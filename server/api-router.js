@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const github = require('./github.js');
+const rules = require('./rules.js');
 
 /**
  * Parses the body and extracts the post data
@@ -51,7 +52,7 @@ router.get('/getData', function(req, res) {
  */
 router.post('/setData', function(req, res) {
 	reqToPost(req, res, function(post) {
-		github.setGistData(post, retFunc.bind(res));
+		github.setGistData(rules.validateData(post), retFunc.bind(res));
 	});
 });
 

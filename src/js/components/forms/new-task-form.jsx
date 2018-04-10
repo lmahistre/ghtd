@@ -78,7 +78,7 @@ class NewTaskForm extends React.Component {
 		const self = this;
 		return (
 			<form name="new-task" onSubmit={self.formFakeSubmit} className="new-task-form">
-				<SmallButton glyphicon="plus-sign" onClick={self.addTask.bind(self)} title={"Add task"} />
+				<SmallButton fa="plus-circle" onClick={self.addTask.bind(self)} title={"Add task"} />
 				<select name="projectId">
 					{self.props.projectList.map(elt => (
 						<option key={elt.id} value={elt.id}>{elt.name}</option>
