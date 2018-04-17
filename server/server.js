@@ -15,7 +15,7 @@ module.exports = function(callback) {
 	 * Render main html page
 	 */
 	app.get('/', function (req, res) {
-		res.sendFile(path.resolve(__dirname+'/../view.html'));
+		res.sendFile(path.resolve(__dirname+'/../src/view.html'));
 	});
 
 

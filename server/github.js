@@ -17,6 +17,7 @@ const options = {
  * Gets Gist data from GitHub
  */
 exports.getGistData = function(callback) {
+	options.auth = config.user+':'+config.token;
 	https.get(options, function(response) {
 		response.setEncoding('utf8');
 		let content = '';
@@ -24,8 +25,10 @@ exports.getGistData = function(callback) {
 			content += chunk;
 		});
 		response.on('end', function() {
+			let parsedData;
 			try {
-				const parsedData = JSON.parse(content);
+				parsedData = JSON.parse(content);
+				console.log(content);
 				const gistContent = parsedData.files[config.filename].content;
 				const gistData = JSON.parse(gistContent);
 				if (callback && typeof callback === 'function') {
@@ -33,9 +36,17 @@ exports.getGistData = function(callback) {
 				}
 			}
 			catch (err) {
-				console.error(err);
-				if (callback && typeof callback === 'function') {
-					callback(err, null);
+				if (parsedData && parsedData.message) {
+					console.error(parsedData.message);
+					if (callback && typeof callback === 'function') {
+						callback(parsedData.message, null);
+					}
+				}
+				else {
+					console.error(err);
+					if (callback && typeof callback === 'function') {
+						callback(err, null);
+					}
 				}
 			}
 		});
@@ -52,6 +63,7 @@ exports.getGistData = function(callback) {
 exports.getProjects = function(callback) {
 	let reqOptions = JSON.parse(JSON.stringify(options));
 	reqOptions.path = '/users/'+config.user+'/repos';
+	reqOptions.auth = config.user+':'+config.token;
 	https.get(reqOptions, function(response) {
 		response.setEncoding('utf8');
 		let content = '';

@@ -99,28 +99,28 @@ class Task extends React.Component {
 				projectList.push(project);
 			}
 			return (
-				<tr className={"status-"+elt.status}>
-					<td className="actions">
+				<div className={"list-elt status-"+elt.status}>
+					<div className="list-td actions">
 						<SmallButton fa="remove" onClick={self.cancel.bind(self)} title={"Cancel"} />
 						<SmallButton fa="check" onClick={self.save.bind(self)} title={"Save"} />
-					</td>
-					<td>
+					</div>
+					<div className="list-td project-label-container">
 						<select id={"task-edit-projectId-"+elt.id} name="projectId" defaultValue={elt.projectId}>
 							{projectList.map(opt => (
 								<option key={opt.id} value={opt.id}>{opt.name}</option>
 							))}
 						</select>
-					</td>
-					<td>
+					</div>
+					<div className="list-td">
 						<input id={"task-edit-name-"+elt.id} type="text" name="name" defaultValue={elt.name} onKeyDown={this.handleInputKeyDown.bind(this)} />
-					</td>
-				</tr>
+					</div>
+				</div>
 			);
 		}
 		else {
 			return (
-				<tr className={"status-"+elt.status}>
-					<td className="actions">
+				<div className={"list-elt status-"+elt.status}>
+					<div className="list-td actions">
 						{elt.status == 'done' ? 
 							[
 								<SmallButton key={0} fa="trash" onClick={self.delete.bind(self, elt.id)} title={"Delete"} />,
@@ -132,12 +132,12 @@ class Task extends React.Component {
 								<SmallButton key={1} fa="check" onClick={self.resolve.bind(self, elt.id)} title={"Resolve"} />
 							]
 						}
-					</td>
-					<td>
+					</div>
+					<div className="list-td project-label-container">
 						<div className="project-label" style={{backgroundColor : '#'+elt.projectColor}} title={elt.projectName} data-tip={elt.projectName}>{elt.projectName}</div>
-					</td>
-					<td>{elt.name}</td>
-				</tr>
+					</div>
+					<div className="list-td">{elt.name}</div>
+				</div>
 			);
 		}
 	}

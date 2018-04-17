@@ -58,23 +58,27 @@ exports.css =  function(configCss, callback) {
 			},
 			function (e, output) {
 				if (e) {
-					console.log(e.stack);
+					// console.log('ERR 2');
+					console.log(e.message);
+					console.log('File '+e.filename+', line '+e.line);
 				}
-				fs.writeFile(configCss.outputFolder+'/'+configCss.outputFilename, output.css, {
-					flag:'w+', 
-					encoding:'utf8'
-				},
-				function(err) {
-					if (err != null) {
-						console.log(err.stack);
-					}
-					else {
-						console.log('Successfully compiled '+configCss.outputFilename);
-						if (callback && typeof callback === 'function') {
-							callback();
+				else {
+					fs.writeFile(configCss.outputFolder+'/'+configCss.outputFilename, output.css, {
+						flag:'w+', 
+						encoding:'utf8'
+					},
+					function(err) {
+						if (err) {
+							console.log(err.stack);
 						}
-					}
-				});
+						else {
+							console.log('Successfully compiled '+configCss.outputFilename);
+							if (callback && typeof callback === 'function') {
+								callback();
+							}
+						}
+					});
+				}
 			});
 		});
 	}

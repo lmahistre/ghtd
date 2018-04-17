@@ -46,7 +46,6 @@ exports.compile = function(args) {
 
 /**
  * Run unit tests
- * TODO
  */
 exports.test = function(args) {
 	const Jasmine = require('jasmine');
@@ -73,6 +72,53 @@ exports.test = function(args) {
 	});
 
 	jasmine.execute();
+}
+
+
+exports.jest = function (args) {
+	const jest = require('jest');
+// console.log(jest.run);
+	// jest.config = {
+	// 	spec_dir: 'src/spec',
+	// 	spec_files: [
+	// 		'utils.js',
+	// 	],
+	// 	helpers: [
+	// 		// 'helpers/**/*.js'
+	// 	]
+	// };
+
+	// jest.onComplete(function(passed) {
+	// 	console.log(' --- ')
+	// 	if(passed) {
+	// 		console.log('All tests pass');
+	// 	}
+	// 	else {
+	// 		console.log('At least one test failed');
+	// 	}
+	// });
+
+	// jest.runCLI({
+	// 	spec_dir: 'src/spec',
+	// 	spec_files: [
+	// 		'utils.js',
+	// 	],
+	// 	helpers: [
+	// 		// 'helpers/**/*.js'
+	// 	]
+	// });
+	const path = require('path');
+	const appDirName = path.resolve(__dirname+'/../src/spec');
+	var options = {
+		rootDir : appDirName,
+		testMatch : [
+			'**/__tests__/**/*.js?(x)', 
+			'**/?(*.)(spec|test).js?(x)'
+		],
+	}
+
+	// jest.run({'_': ['test1']}, 'src/spec');
+	jest.runCLI(options, [options.rootDir])
 }
 
 

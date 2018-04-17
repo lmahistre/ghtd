@@ -4,13 +4,14 @@
 
 @font-size-default : 14px;
 @text-color : #111;
+@text-color-light : #111;
 @text-color-dark : #EEE;
 
 @button-color : #8BF;
 @button-hover-color : #8AE;
 
 html {
-	height: 100%;
+	// height: 100%;
 
 	body {
 		font-family: Helvetica, sans-serif, Arial;
@@ -24,10 +25,10 @@ html {
 		margin-left: 0px;
 		margin-right: 0px;
 		height: 100%;
+		background-color: #888;
 
 		#react-root {
 			height: 100%;
-			background-color: #000;
 			.app-container {
 				// height: 100%;
 				background-color: #EEE;
@@ -146,6 +147,26 @@ html {
 					}
 				}
 
+				.list-container {
+					display: block;
+
+					.list-elt {
+						display: block;
+						width: 100%;
+
+						.list-td {
+							display: inline-block;
+
+							&.actions {
+								width: 62px;
+							}
+							&.project-label-container {
+								width: 160px;
+							}
+						}
+					}
+				}
+
 				form {
 					select {
 						height: 24px;
@@ -185,6 +206,30 @@ html {
 						input[type=text] {
 							width: 100%;
 						}
+					}
+				}
+
+				// Light theme
+				&[data-theme=light] {
+					background-color: #EEE;
+					color: @text-color-light;
+
+					table.list-table {
+						tr.status-active {
+							color: @text-color-light;
+						}
+					}
+					select {
+						color: @text-color-light;
+						background-color: #EEE;
+						option {
+							color: @text-color-light;
+							background-color: #EEE;
+						}
+					}
+					input[type=text] {
+						color: @text-color-light;
+						background-color: #EEE;
 					}
 				}
 

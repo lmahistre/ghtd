@@ -1,6 +1,3 @@
-html {
-  height: 100%;
-}
 html body {
   font-family: Helvetica, sans-serif, Arial;
   font-size: 14px;
@@ -13,10 +10,10 @@ html body {
   margin-left: 0px;
   margin-right: 0px;
   height: 100%;
+  background-color: #888;
 }
 html body #react-root {
   height: 100%;
-  background-color: #000;
 }
 html body #react-root .app-container {
   background-color: #EEE;
@@ -125,6 +122,22 @@ html body #react-root .app-container table.list-table td.actions {
 html body #react-root .app-container table.list-table input[type=text] {
   width: 100%;
 }
+html body #react-root .app-container .list-container {
+  display: block;
+}
+html body #react-root .app-container .list-container .list-elt {
+  display: block;
+  width: 100%;
+}
+html body #react-root .app-container .list-container .list-elt .list-td {
+  display: inline-block;
+}
+html body #react-root .app-container .list-container .list-elt .list-td.actions {
+  width: 62px;
+}
+html body #react-root .app-container .list-container .list-elt .list-td.project-label-container {
+  width: 160px;
+}
 html body #react-root .app-container form select {
   height: 24px;
   background-color: #222;
@@ -160,6 +173,25 @@ html body #react-root .app-container form table.form-table select {
 }
 html body #react-root .app-container form table.form-table input[type=text] {
   width: 100%;
+}
+html body #react-root .app-container[data-theme=light] {
+  background-color: #EEE;
+  color: #111;
+}
+html body #react-root .app-container[data-theme=light] table.list-table tr.status-active {
+  color: #111;
+}
+html body #react-root .app-container[data-theme=light] select {
+  color: #111;
+  background-color: #EEE;
+}
+html body #react-root .app-container[data-theme=light] select option {
+  color: #111;
+  background-color: #EEE;
+}
+html body #react-root .app-container[data-theme=light] input[type=text] {
+  color: #111;
+  background-color: #EEE;
 }
 html body #react-root .app-container[data-theme=dark] {
   background-color: #111;

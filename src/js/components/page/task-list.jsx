@@ -69,14 +69,12 @@ class TaskList extends React.Component {
 		return (
 			<AppPage selectedMenu="tasks">
 				<CommonButton onClick={self.removeResolved}>{"Clean resolved"}</CommonButton>
-				<NewTaskForm projectList={projectList} />
-				<table className="list-table">
-					<tbody>
-						{taskList.map(elt => (
-							<Task key={elt.id} task={elt} />
-						))}
-					</tbody>
-				</table>
+				<div className="list-container">
+					<NewTaskForm projectList={projectList} />
+					{taskList.map(elt => (
+						<Task key={elt.id} task={elt} />
+					))}
+				</div>
 			</AppPage>
 		);
 	}

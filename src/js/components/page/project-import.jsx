@@ -41,7 +41,15 @@ class ProjectImport extends React.Component {
 
 
 	import (repo) {
-		
+		let id = app.utils.getNextProjectId();
+		let project = {
+			id : id,
+			name : app.utils.renameProject(repo),
+			repo : projects[i].name,
+			visible : true,
+			color : app.utils.generateRandomColor(),
+		};
+		app.state.data.projects[id] = project;
 	}
 
 
@@ -50,10 +58,6 @@ class ProjectImport extends React.Component {
 		actionsService.importProjects(function (importProjects) {
 			dataService.setImportProjects(importProjects);
 			dataService.setImportProjectsIsLoaded(true);
-			// actionsService.getData(function (data) {
-			// })
-			// for (let i=0; i<importProjects.length; i++) {
-			// }
 		});
 	}
 
