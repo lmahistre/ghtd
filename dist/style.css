@@ -128,6 +128,7 @@ html body #react-root .app-container .list-container {
 html body #react-root .app-container .list-container .list-elt {
   display: block;
   width: 100%;
+  vertical-align: top;
 }
 html body #react-root .app-container .list-container .list-elt .list-td {
   display: inline-block;

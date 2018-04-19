@@ -1,11 +1,14 @@
 
+const reactAppBase = require('react-app-base');
+const config = require('./compiler-config.js');
+const compiler = require('./compiler.js');
+
 /**
  * Compile CSS
  */
 exports.css = function(args) {
-	const compiler = require('./compiler.js');
-	const config = require('./compiler-config.js');
-	compiler.css(config.css);
+	// const compiler = require('./compiler.js');
+	reactAppBase.css(config.css);
 }
 
 
@@ -13,9 +16,7 @@ exports.css = function(args) {
  * Compile JS
  */
 exports.js = function(args) {
-	const compiler = require('./compiler.js');
-	const config = require('./compiler-config.js');
-	compiler.js(config.js);
+	reactAppBase.js(config.js);
 }
 
 
@@ -23,102 +24,81 @@ exports.js = function(args) {
  * Compile JS and CSS
  */
 exports.compile = function(args) {
-	const compiler = require('./compiler.js');
-	const config = require('./compiler-config.js');
 	if (args.length) {
 		if (args[0] === 'js') {
-			compiler.js(config.js);
+			reactAppBase.js(config.js);
 		}
 		else if (args[0] === 'css') {
-			compiler.css(config.css);
+			reactAppBase.css(config.css);
 		}
 		else {
 			console.log('Invalid argument '+args[0]);
 		}
 	}
 	else {
-		compiler.js(config.js, function() {
-			compiler.css(config.css);
+		reactAppBase.js(config.js, function() {
+			reactAppBase.css(config.css);
 		});
 	}
 }
 
 
+// /**
+//  * Run unit tests
+//  */
+// exports.jasmine = function(args) {
+// 	const Jasmine = require('jasmine');
+// 	const jasmine = new Jasmine();
+
+// 	jasmine.loadConfig({
+// 		spec_dir: 'src/spec',
+// 		spec_files: [
+// 			'utils.test.js',
+// 		],
+// 		helpers: [
+// 			// 'helpers/**/*.js'
+// 		]
+// 	});
+
+// 	jasmine.onComplete(function(passed) {
+// 		console.log(' --- ')
+// 		if(passed) {
+// 			console.log('All tests pass');
+// 		}
+// 		else {
+// 			console.log('At least one test failed');
+// 		}
+// 	});
+
+// 	jasmine.execute();
+// }
+
+
+// exports.jest = function (args) {
+// 	const jest = require('jest');
+// 	const path = require('path');
+// 	const appDirName = path.resolve(__dirname+'/../src/spec');
+// 	var options = {
+// 		rootDir : appDirName,
+// 		testMatch : [
+// 			'**/__tests__/**/*.js?(x)', 
+// 			'**/?(*.)(spec|test).js?(x)'
+// 		],
+// 	}
+
+// 	var je = jest.runCLI(options, [options.rootDir]).then(function(success) {
+// 		console.log('youpi');
+// 		console.log(success);
+// 	})
+// 	// console.log(je);
+// }
+
+
 /**
- * Run unit tests
+ * Compile JS
  */
 exports.test = function(args) {
-	const Jasmine = require('jasmine');
-	const jasmine = new Jasmine();
-
-	jasmine.loadConfig({
-		spec_dir: 'src/spec',
-		spec_files: [
-			'utils.js',
-		],
-		helpers: [
-			// 'helpers/**/*.js'
-		]
-	});
-
-	jasmine.onComplete(function(passed) {
-		console.log(' --- ')
-		if(passed) {
-			console.log('All tests pass');
-		}
-		else {
-			console.log('At least one test failed');
-		}
-	});
-
-	jasmine.execute();
-}
-
-
-exports.jest = function (args) {
-	const jest = require('jest');
-// console.log(jest.run);
-	// jest.config = {
-	// 	spec_dir: 'src/spec',
-	// 	spec_files: [
-	// 		'utils.js',
-	// 	],
-	// 	helpers: [
-	// 		// 'helpers/**/*.js'
-	// 	]
-	// };
-
-	// jest.onComplete(function(passed) {
-	// 	console.log(' --- ')
-	// 	if(passed) {
-	// 		console.log('All tests pass');
-	// 	}
-	// 	else {
-	// 		console.log('At least one test failed');
-	// 	}
-	// });
-
-	// jest.runCLI({
-	// 	spec_dir: 'src/spec',
-	// 	spec_files: [
-	// 		'utils.js',
-	// 	],
-	// 	helpers: [
-	// 		// 'helpers/**/*.js'
-	// 	]
-	// });
-	const path = require('path');
-	const appDirName = path.resolve(__dirname+'/../src/spec');
-	var options = {
-		rootDir : appDirName,
-		testMatch : [
-			'**/__tests__/**/*.js?(x)', 
-			'**/?(*.)(spec|test).js?(x)'
-		],
-	}
-
-	// jest.run({'_': ['test1']}, 'src/spec');
-	jest.runCLI(options, [options.rootDir])
+	reactAppBase.test(config.test);
 }
 
 
@@ -156,11 +136,8 @@ exports.tasks = function(args) {
  * Compilation JS et CSS
  */
 exports.build = function(args) {
-	const compiler = require('./compiler.js');
-	const config = require('./compiler-config.js');
-
-	compiler.js(config.js, function() {
-		compiler.css(config.css, function() {
+	reactAppBase.js(config.js, function() {
+		reactAppBase.css(config.css, function() {
 			exports.test();
 		});
 	});

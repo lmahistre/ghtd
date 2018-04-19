@@ -1,4 +1,4 @@
-#!/usr/bin/env nodejs
+#!/usr/bin/env node
 const args = process.argv.slice(2);
 
 const action = require('./server/cli-actions.js');

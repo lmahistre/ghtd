@@ -28,7 +28,6 @@ exports.getGistData = function(callback) {
 			let parsedData;
 			try {
 				parsedData = JSON.parse(content);
-				console.log(content);
 				const gistContent = parsedData.files[config.filename].content;
 				const gistData = JSON.parse(gistContent);
 				if (callback && typeof callback === 'function') {

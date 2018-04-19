@@ -2,7 +2,7 @@ const path = require('path');
 const appDirName = path.resolve(__dirname+'/..');
 
 module.exports = {
-	js : {
+	oldJs : {
 		entry: appDirName+"/src/js/entry.js",
 		output: {
 			path: appDirName +'/dist',
@@ -17,10 +17,18 @@ module.exports = {
 			],
 		},
 	},
+	js : {
+		inputFilepath : appDirName+"/src/js/entry.js",
+		outputFolder : appDirName +'/dist',
+		outputFilename : 'bundle.js',
+	},
 	css : {
 		inputFolder : appDirName+'/src/less',
-		entry : 'index.less',
+		inputFilename : 'index.less',
 		outputFolder : appDirName+'/dist',
 		outputFilename : 'style.css',
+	},
+	test : {
+		inputFolder : appDirName+'/src/spec',
 	},
 };
