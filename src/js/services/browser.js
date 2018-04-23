@@ -2,6 +2,8 @@ const React = require("react");
 const ReactDOM = require("react-dom");
 const AppRouter = require("../components/app-router.jsx");
 
+const stateContainerService = require('../services/state-container.js');
+
 /**
  * Set the title of the document
  */
@@ -18,7 +20,7 @@ exports.setTitle = function (str) {
 exports.notify = function (msg) {
 	if (window.Notification) {
 		var options = {
-			// icon : $('head link[rel^=shortcut]').attr('href'),
+			icon : $('head link[rel^=shortcut]').attr('href'),
 		};
 
 		if (Notification.permission === "granted") {
@@ -37,7 +39,12 @@ exports.notify = function (msg) {
 
 // TODO: mettre ça ailleurs
 exports.showAlert = function(type, msg, timeout) {
-	alert(msg)
+	if (type === 'error') {
+		stateContainerService.addAlert(type, msg);
+	}
+	else {
+		alert(msg)
+	}
 	// exports.state.alerts[type] = msg;
 	// exports.render();
 	// if (timeout && parseInt(timeout) > 0) {

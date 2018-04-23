@@ -1,30 +1,40 @@
 
-exports.alerts = {};
-
-
-exports.pleaseWait = 0;
-
-
-exports.isInitialized = false;
+const alerts = [];
+var pleaseWait = 0;
+var isInitialized = false;
 
 
 exports.getAlerts = function () {
-	return exports.alerts;
+	return alerts;
 }
 
 
-exports.setAlerts = function (value) {
-	exports.alerts = value;
+/**
+ * types : error
+ */
+exports.addAlert = function (message, type) {
+	if (type !== 'error') {
+		type = 'error';
+	}
+	alerts.push ({
+		type,
+		message,
+	});
+}
+
+
+exports.clearAlert = function () {
+
 }
 
 
 // exports.getPleaseWait
 
 exports.getIsInitialized = function () {
-	return exports.isInitialized;
+	return isInitialized;
 }
 
 
 exports.setIsInitialized = function (value) {
-	exports.isInitialized = value ? true : false;
+	isInitialized = value ? true : false;
 }
