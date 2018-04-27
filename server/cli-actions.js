@@ -1,13 +1,11 @@
 
 const reactAppBase = require('react-app-base');
 const config = require('./compiler-config.js');
-const compiler = require('./compiler.js');
 
 /**
  * Compile CSS
  */
 exports.css = function(args) {
-	// const compiler = require('./compiler.js');
 	reactAppBase.css(config.css);
 }
 

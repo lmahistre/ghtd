@@ -74,7 +74,7 @@ html body #react-root .app-container div.menu .menu-entry:hover {
 html body #react-root .app-container div.project-label {
   color: #FFF;
   border-radius: 2px;
-  padding: 4px 8px;
+  padding: 3px 6px;
   max-width: 150px;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -128,10 +128,12 @@ html body #react-root .app-container .list-container {
 html body #react-root .app-container .list-container .list-elt {
   display: block;
   width: 100%;
-  vertical-align: top;
+  margin: 2px 0px;
+  clear: both;
 }
 html body #react-root .app-container .list-container .list-elt .list-td {
-  display: inline-block;
+  display: block;
+  float: left;
 }
 html body #react-root .app-container .list-container .list-elt .list-td.actions {
   width: 62px;
