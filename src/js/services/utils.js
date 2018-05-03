@@ -81,6 +81,26 @@ exports.getNextProjectId = function() {
 			}
 		}
 	}
-	// id++;
 	return id;
 }
+
+
+exports.getNextTaskId = function() {
+	const tasks = dataContainerService.getTasks();
+	let id = exports.generateRandomId();
+	let idIsUnique = false;
+	while (!idIsUnique) {
+		idIsUnique = true;
+		if (tasks) {
+			for (let i in tasks) {
+				if (tasks[i].id === id) {
+					id = exports.generateRandomId();
+					idIsUnique = false;
+					break;
+				}
+			}
+		}
+	}
+	return id;
+}
+
