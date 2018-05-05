@@ -29,7 +29,7 @@ class NewTaskForm extends React.Component {
 		const name = document.getElementById('new-task-name').value;
 		if (name.length > 0) {
 			// Project ID
-			alert(document.getElementById('new-task-projectId').value);
+			// alert(document.getElementById('new-task-projectId').value);
 			let projectId = document.getElementById('new-task-projectId').value;
 			let task = {
 				id : utilsService.getNextTaskId(),
@@ -70,11 +70,11 @@ class NewTaskForm extends React.Component {
 					<SmallButton fa="plus-circle" onClick={self.addTask.bind(self)} title={"Add task"} />
 				</td>
 				<td className="project-label-container">
-					<select name="projectId" id="new-task-projectId">
-						{self.props.projectList.map(elt => (
-							<option key={elt.id} value={elt.id}>{elt.name}</option>
-						))}
-					</select>
+						<select className="project-label" name="projectId" id="new-task-projectId">
+							{self.props.projectList.map(elt => (
+								<option key={elt.id} value={elt.id}>{elt.name}</option>
+							))}
+						</select>
 				</td>
 				<td>
 					<input id="new-task-name" type="text" name="name"value={self.state.name} onKeyDown={self.handleInputKeyDown.bind(self)} onChange={self.onChangeName.bind(self)} />

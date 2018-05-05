@@ -60,10 +60,7 @@ class Task extends React.Component {
 		});
 		const id = self.props.task.id;
 		const name = document.getElementById("task-edit-name-"+id).value;
-		let projectId = parseInt(document.getElementById("task-edit-projectId-"+id).value);
-		if (isNaN(projectId)) {
-			projectId = 0;
-		}
+		let projectId = document.getElementById("task-edit-projectId-"+id).value;
 		const task = {
 			id : id,
 			name : name,
@@ -71,6 +68,7 @@ class Task extends React.Component {
 		};
 		dataContainerService.setTask(id, task);
 		actionsService.saveData();
+		browserService.render();
 	}
 
 
@@ -105,14 +103,14 @@ class Task extends React.Component {
 						<SmallButton fa="check" onClick={self.save.bind(self)} title={"Save"} />
 					</td>
 					<td className="project-label-container">
-						<select id={"task-edit-projectId-"+elt.id} name="projectId" defaultValue={elt.projectId}>
+						<select id={"task-edit-projectId-"+elt.id} className="project-label" name="projectId" defaultValue={elt.projectId}>
 							{projectList.map(opt => (
 								<option key={opt.id} value={opt.id}>{opt.name}</option>
 							))}
 						</select>
 					</td>
 					<td>
-						<input id={"task-edit-name-"+elt.id} type="text" name="name" defaultValue={elt.name} />
+						<input id={"task-edit-name-"+elt.id} type="text" name="name" defaultValue={elt.name} onKeyDown={self.handleInputKeyDown.bind(self)} />
 					</td>
 				</tr>
 			);

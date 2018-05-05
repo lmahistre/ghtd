@@ -15,7 +15,8 @@ const call = function(uri, post, callback) {
 		// params.body = post;
 		params.body = JSON.stringify(post);
 	}
-	fetch(uri, params).then(function(response) {
+	fetch(uri, params)
+	.then(function(response) {
 		return response.text();
 	})
 	.then(function(responseText) {

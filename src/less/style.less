@@ -30,12 +30,10 @@ html {
 		#react-root {
 			height: 100%;
 			.app-container {
-				// height: 100%;
 				background-color: #EEE;
 				color: @text-color;
 				padding-left: 8px;
 				padding-right: 8px;
-				max-width: 800px;
 				margin-left: auto;
 				margin-right: auto;
 				a.common-button {
@@ -88,15 +86,30 @@ html {
 					}
 				}
 
-				div.project-label {
+				select, 
+				input[type=text] {
+					border-style: solid;
+					border-width: 1px;
+					border-radius: 4px;
+					box-sizing: border-box;
+					padding: 4px 8px;
+					border-color:	#CCC;
+					color: @text-color;
+				}
+
+				.project-label {
 					// background-color: #CDE;
 					color: #FFF;
 					border-radius: 2px;
 					padding: 3px 6px;
-					max-width: 150px;
+					max-width: 40px;
 					white-space: nowrap;
 					text-overflow: ellipsis;
 					overflow-x: hidden;
+				}
+
+				select.project-label {
+					width: 100%;
 				}
 
 				div.new-task-form {
@@ -155,7 +168,7 @@ html {
 						border-width: 1px;
 						border-type: solid;
 						border-radius: 4px;
-						border-color:	#CCC;
+						/*border-color:	#CCC;*/
 						padding: 1px 2px;
 						margin: 1px 2px;
 						option {
@@ -165,17 +178,6 @@ html {
 						}
 					}
 
-					input[type=text] {
-						height: 22px;
-						padding: 1px 2px;
-						margin: 1px 2px;
-						border-radius: 4px;
-						background-color: #222;
-						color: @text-color;
-						border-width: 1px;
-						border-type: solid;
-						border-color:	#CCC;
-					}
 					// Form on full page
 					table.form-table {
 						width: 100%;
@@ -201,15 +203,17 @@ html {
 					}
 					select {
 						color: @text-color-light;
-						background-color: #EEE;
+						background-color: #DDD;
+						border-color: #BBB;
 						option {
 							color: @text-color-light;
-							background-color: #EEE;
+							background-color: #DDD;
 						}
 					}
 					input[type=text] {
+						border-color: #BBB;
 						color: @text-color-light;
-						background-color: #EEE;
+						background-color: #DDD;
 					}
 				}
 
@@ -225,15 +229,17 @@ html {
 					}
 					select {
 						color: @text-color-dark;
-						background-color: #111;
+						background-color: #222;
+						border-color: #444;
 						option {
 							color: @text-color-dark;
-							background-color: #111;
+							background-color: #222;
 						}
 					}
 					input[type=text] {
+						border-color: #444;
 						color: @text-color-dark;
-						background-color: #111;
+						background-color: #222;
 					}
 				}
 			}
@@ -259,6 +265,47 @@ html {
 					background-color: #000;
 				}
 			}
+		}
+	}
+}
+
+@media (min-width: 480px) {
+	html body #react-root .app-container {
+		max-width: 464px;
+		.project-label {
+			max-width: 80px;
+		}
+	}
+}
+@media (min-width: 576px) {
+	html body #react-root .app-container {
+		max-width: 560px;
+		.project-label {
+			max-width: 120px;
+		}
+	}
+}
+@media (min-width: 768px) {
+	html body #react-root .app-container {
+		max-width: 752px;
+		.project-label {
+			max-width: 160px;
+		}
+	}
+}
+@media (min-width: 992px) {
+	html body #react-root .app-container {
+		max-width: 976px;
+		.project-label {
+			max-width: 200px;
+		}
+	}
+}
+@media (min-width: 1200px) {
+	html body #react-root .app-container {
+		max-width: 1180px;
+		.project-label {
+			max-width: 240px;
 		}
 	}
 }
