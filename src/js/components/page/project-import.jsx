@@ -6,56 +6,30 @@ const SmallButton = require("../ui/small-button.jsx");
 
 const actionsService = require('../../services/actions.js');
 const dataService = require('../../services/data-container.js');
+const utilsService = require('../../services/utils.js');
+const storageService = require('../../services/storage.js');
 
 class ProjectImport extends React.Component {
 
-	// import() {
-	// 	app.services.importProjects(function (projects) {
-	// 		// To check if project already exists
-	// 		let alreadyExistingProjects = [];
-	// 		for (var i in app.state.data.projects) {
-	// 			alreadyExistingProjects.push(app.state.data.projects[i].repo);
-	// 		}
-	// 		console.log(alreadyExistingProjects);
-	// 		let modified = false;
-	// 		for (let i = 0; i < projects.length; i++) {
-	// 			if (alreadyExistingProjects.indexOf(projects[i].name) == -1) {
-	// 				let id = app.utils.getNextProjectId();
-	// 				let project = {
-	// 					id : id,
-	// 					name : app.utils.renameProject(projects[i].name),
-	// 					repo : projects[i].name,
-	// 					visible : true,
-	// 					color : app.utils.generateRandomColor(),
-	// 				};
-	// 				app.state.data.projects[id] = project;
-	// 				modified = true;
-	// 			}
-	// 		}
-	// 		if (modified) {
-	// 			app.services.saveData();
-	// 			app.render();
-	// 		}
-	// 	});
-	// }
-
-
 	import (repo) {
-		let id = app.utils.getNextProjectId();
+		let id = utilsService.getNextProjectId();
 		let project = {
 			id : id,
-			name : app.utils.renameProject(repo),
-			repo : projects[i].name,
+			name : utilsService.renameProject(repo),
+			repo : repo,
 			visible : true,
-			color : app.utils.generateRandomColor(),
+			color : utilsService.generateRandomColor(),
 		};
-		app.state.data.projects[id] = project;
+		dataService.setProject(id, project);
+		actionsService.saveData();
+		browserService.render();
 	}
 
 
 	refresh () {
 		const self = this;
 		actionsService.importProjects(function (importProjects) {
+			storageService.save({importProjects});
 			dataService.setImportProjects(importProjects);
 			dataService.setImportProjectsIsLoaded(true);
 		});
@@ -93,7 +67,7 @@ class ProjectImport extends React.Component {
 							<tr key={elt.name}>
 								<td>{elt.name}</td>
 								<td>
-									{elt.imported ? null : <SmallButton fa="download" />}
+									{elt.imported ? null : <SmallButton fa="download" onClick={self.import.bind(self, elt.repo)} />}
 								</td>
 							</tr>
 						))}

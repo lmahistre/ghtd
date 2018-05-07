@@ -1,5 +1,8 @@
 const React = require("react");
 
+const ReactRouterDom = require('react-router-dom');
+const Link = ReactRouterDom.Link;
+
 const SmallButton = require("./ui/small-button.jsx");
 
 const actionsService = require('../services/actions.js');
@@ -12,6 +15,7 @@ class Task extends React.Component {
 		const task = dataContainerService.getTask(id);
 		if (task) {
 			task.status = 'done';
+			task.timestampModified = parseInt(Date.now()/1000);
 		}
 		dataContainerService.setTask(id, task);
 		actionsService.saveData();
@@ -30,6 +34,7 @@ class Task extends React.Component {
 		const task = dataContainerService.getTask(id);
 		if (task) {
 			task.status = 'active';
+			task.timestampModified = parseInt(Date.now()/1000);
 		}
 		dataContainerService.setTask(id, task);
 		actionsService.saveData();
@@ -59,16 +64,17 @@ class Task extends React.Component {
 			isBeingEdited : false,
 		});
 		const id = self.props.task.id;
+		const task = dataContainerService.getTask(self.props.task.id);
 		const name = document.getElementById("task-edit-name-"+id).value;
-		let projectId = document.getElementById("task-edit-projectId-"+id).value;
-		const task = {
-			id : id,
-			name : name,
-			projectId : projectId,
-		};
-		dataContainerService.setTask(id, task);
-		actionsService.saveData();
-		browserService.render();
+		const projectId = document.getElementById("task-edit-projectId-"+id).value;
+		if (task.name != name || task.projectId != projectId) {
+			task.name = name;
+			task.projectId = projectId;
+			task.timestampModified = parseInt(Date.now()/1000);
+			dataContainerService.setTask(id, task);
+			actionsService.saveData();
+			browserService.render();
+		}
 	}
 
 

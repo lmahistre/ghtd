@@ -46,6 +46,9 @@ class TaskList extends React.Component {
 				list.push(task);
 			}
 		}
+		list.sort(function(a, b) {
+			return a.timestampModified < b.timestampModified;
+		});
 		return list;
 	}
 
