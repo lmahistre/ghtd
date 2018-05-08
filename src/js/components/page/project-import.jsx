@@ -8,15 +8,16 @@ const actionsService = require('../../services/actions.js');
 const dataService = require('../../services/data-container.js');
 const utilsService = require('../../services/utils.js');
 const storageService = require('../../services/storage.js');
+const browserService = require('../../services/browser.js');
 
 class ProjectImport extends React.Component {
 
-	import (repo) {
+	import (name) {
 		let id = utilsService.getNextProjectId();
 		let project = {
 			id : id,
-			name : utilsService.renameProject(repo),
-			repo : repo,
+			name : utilsService.renameProject(name),
+			repo : name,
 			visible : true,
 			color : utilsService.generateRandomColor(),
 		};
@@ -67,7 +68,7 @@ class ProjectImport extends React.Component {
 							<tr key={elt.name}>
 								<td>{elt.name}</td>
 								<td>
-									{elt.imported ? null : <SmallButton fa="download" onClick={self.import.bind(self, elt.repo)} />}
+									{elt.imported ? null : <SmallButton fa="download" onClick={self.import.bind(self, elt.name)} />}
 								</td>
 							</tr>
 						))}
