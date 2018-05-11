@@ -85,6 +85,11 @@ class Task extends React.Component {
 	}
 
 
+	viewTaskDetail() {
+		browserService.redirect('task-view/'+this.props.task.id);
+	}
+
+
 	render() {
 		const self = this;
 		const elt = self.props.task;
@@ -140,7 +145,7 @@ class Task extends React.Component {
 					<td className="project-label-container">
 						<div className="project-label" style={{backgroundColor : '#'+elt.projectColor}} title={elt.projectName} data-tip={elt.projectName}>{elt.projectName}</div>
 					</td>
-					<td>{elt.name}</td>
+					<td onDoubleClick={self.viewTaskDetail.bind(self)}>{elt.name}</td>
 				</tr>
 			);
 		}

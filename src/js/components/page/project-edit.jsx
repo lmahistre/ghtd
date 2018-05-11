@@ -62,8 +62,6 @@ class ProjectEdit extends React.Component {
 				repo : '',
 				color : utilsService.generateRandomColor(),
 			}
-			// // selection of a random color
-			// project.color = utilsService.generateRandomColor();
 		}
 		return (
 			<AppPage selectedMenu="projects">

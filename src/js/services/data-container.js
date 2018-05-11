@@ -4,6 +4,7 @@ let projects = {};
 let tasks = {};
 let settings = {};
 let dataIsLoaded = false;
+let timestampSynchronized = 0;
 
 
 exports.getImportProjects = function () {
