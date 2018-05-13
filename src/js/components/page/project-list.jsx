@@ -39,11 +39,11 @@ class ProjectList extends React.Component {
 			<AppPage selectedMenu="projects">
 				<CommonButton to="/project-edit">{"New project"}</CommonButton>
 				<CommonButton to="/project-import">{"Import from GitHub"}</CommonButton>
-				<table className="list-table">
+				<table className="list-table" data-table="project-list">
 					<tbody>
 						{projectList.map(elt => (
 							<tr key={elt.id}>
-								<td>
+								<td data-column="actions">
 									<Link to={"/project-edit/"+elt.id} className="small-button">
 										<span className="glyphicon glyphicon-edit" aria-hidden="true"></span>
 									</Link>
@@ -53,11 +53,9 @@ class ProjectList extends React.Component {
 										<SmallButton fa="eye-slash" onClick={self.changeVisibility.bind(self, elt.id)} title={"Show"} />
 									}
 								</td>
-								<td>{elt.name}</td>
-								<td>
-									<SmallButton fa="square-o" style={{backgroundColor : '#'+elt.color}} />
-								</td>
-								<td>
+								<td data-column="name">{elt.name}</td>
+								<td data-column="indicators">
+									<SmallButton fa={elt.repo ? "github" : "square-o"} title={elt.repo} style={{backgroundColor : '#'+elt.color}} />
 									<VisibleMarker visible={elt.visible} />
 								</td>
 							</tr>

@@ -37,29 +37,9 @@ exports.notify = function (msg) {
 }
 
 
-// TODO: mettre ça ailleurs
-exports.showAlert = function(type, msg, timeout) {
-	if (type === 'error') {
-		stateContainerService.addAlert(type, msg);
-	}
-	else {
-		alert(msg)
-	}
-	// exports.state.alerts[type] = msg;
-	// exports.render();
-	// if (timeout && parseInt(timeout) > 0) {
-	// 	setTimeout(function() {
-	// 		if (exports.state.alerts[type] == msg) {
-	// 			exports.state.alerts[type] = null;
-	// 			exports.render();
-	// 		}
-	// 	}, timeout);
-	// }
-}
-
-
 exports.error = function (err) {
-	exports.showAlert('error', err);
+	stateContainerService.addAlert(err.message ? err.message : err, 'error');
+	exports.render();
 	console.error(err);
 }
 

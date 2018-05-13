@@ -72,7 +72,7 @@ class TaskList extends React.Component {
 		return (
 			<AppPage selectedMenu="tasks">
 				<CommonButton onClick={self.removeResolved}>{"Clean resolved"}</CommonButton>
-				<table className="list-table">
+				<table className="list-table" data-table="task-list">
 					<tbody>
 						<NewTaskForm projectList={projectList} />
 						{taskList.map(elt => (

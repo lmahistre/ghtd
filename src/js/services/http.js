@@ -1,12 +1,16 @@
 
 const browserService = require('./browser.js');
+const stateContainerService = require('./state-container.js');
 
 const apiEndpoint = '/api';
+const queue = [];
 
 const call = function(uri, post, callback) {
 	const params = {
 		credentials : 'same-origin',
 	};
+	stateContainerService.increasePleaseWait();
+	browserService.render();
 	if (post) {
 		params.method = 'POST';
 		params.headers = {  
@@ -22,6 +26,7 @@ const call = function(uri, post, callback) {
 	.then(function(responseText) {
 		try {
 			const responseData = JSON.parse(responseText);
+			console.log(responseData);
 
 			if (responseData.warning) {
 				console.warn(responseData.warning);
@@ -29,7 +34,6 @@ const call = function(uri, post, callback) {
 			if (responseData.error) {
 				browserService.error(responseData.error);
 			}
-			browserService.render();
 			if (callback && typeof callback === 'function') {
 				callback(responseData);
 			}
@@ -37,6 +41,8 @@ const call = function(uri, post, callback) {
 		catch (error) {
 			browserService.error(error);
 		}
+		stateContainerService.decreasePleaseWait();
+		browserService.render();
 	})
 	.catch(function(error) {
 		browserService.error(error);

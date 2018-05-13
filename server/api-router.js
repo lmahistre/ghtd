@@ -3,6 +3,8 @@ const router = express.Router();
 
 const github = require('./github.js');
 const rules = require('./rules.js');
+const reactAppBase = require('react-app-base');
+const config = require('./compiler-config.js');
 
 /**
  * Parses the body and extracts the post data
@@ -62,6 +64,20 @@ router.post('/setData', function(req, res) {
  */
 router.get('/importProjects', function(req, res) {
 	github.getProjects(retFunc.bind(res));
+});
+
+
+router.post('/compileCss', function(req, res) {
+	reactAppBase.css(config.css, function(error, success) {
+		res.send({error, success,});
+	});
+});
+
+
+router.post('/compileJs', function(req, res) {
+	reactAppBase.js(config.js, function(error, success) {
+		res.send({error, success,});
+	});
 });
 
 

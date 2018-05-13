@@ -109,18 +109,18 @@ class Task extends React.Component {
 			}
 			return (
 				<tr className={"status-"+elt.status}>
-					<td className="actions">
+					<td className="actions" data-column="actions">
 						<SmallButton fa="remove" onClick={self.cancel.bind(self)} title={"Cancel"} />
 						<SmallButton fa="check" onClick={self.save.bind(self)} title={"Save"} />
 					</td>
-					<td className="project-label-container">
+					<td data-column="project">
 						<select id={"task-edit-projectId-"+elt.id} className="project-label" name="projectId" defaultValue={elt.projectId}>
 							{projectList.map(opt => (
 								<option key={opt.id} value={opt.id}>{opt.name}</option>
 							))}
 						</select>
 					</td>
-					<td>
+					<td data-column="name">
 						<input id={"task-edit-name-"+elt.id} type="text" name="name" defaultValue={elt.name} onKeyDown={self.handleInputKeyDown.bind(self)} />
 					</td>
 				</tr>
@@ -129,7 +129,7 @@ class Task extends React.Component {
 		else {
 			return (
 				<tr className={"status-"+elt.status}>
-					<td className="actions">
+					<td className="actions" data-column="actions">
 						{elt.status == 'done' ? 
 							[
 								<SmallButton key={0} fa="trash" onClick={self.delete.bind(self, elt.id)} title={"Delete"} />,
@@ -141,11 +141,12 @@ class Task extends React.Component {
 								<SmallButton key={1} fa="check" onClick={self.resolve.bind(self, elt.id)} title={"Resolve"} />
 							]
 						}
+						<SmallButton fa="eye" to={"/task-view/"+elt.id} title={"View"} />
 					</td>
-					<td className="project-label-container">
+					<td className="project-label-container" data-column="project">
 						<div className="project-label" style={{backgroundColor : '#'+elt.projectColor}} title={elt.projectName} data-tip={elt.projectName}>{elt.projectName}</div>
 					</td>
-					<td onDoubleClick={self.viewTaskDetail.bind(self)}>{elt.name}</td>
+					<td data-column="name">{elt.name}</td>
 				</tr>
 			);
 		}

@@ -66,15 +66,15 @@ class NewTaskForm extends React.Component {
 		const self = this;
 		return (
 			<tr name="new-task" onSubmit={self.formFakeSubmit} className="list-elt new-task-form">
-				<td className="actions">
+				<td data-column="actions">
 					<SmallButton fa="plus-circle" onClick={self.addTask.bind(self)} title={"Add task"} />
 				</td>
-				<td className="project-label-container">
-						<select className="project-label" name="projectId" id="new-task-projectId">
-							{self.props.projectList.map(elt => (
-								<option key={elt.id} value={elt.id}>{elt.name}</option>
-							))}
-						</select>
+				<td data-column="project">
+					<select className="project-label" name="projectId" id="new-task-projectId">
+						{self.props.projectList.map(elt => (
+							<option key={elt.id} value={elt.id}>{elt.name}</option>
+						))}
+					</select>
 				</td>
 				<td>
 					<input id="new-task-name" type="text" name="name"value={self.state.name} onKeyDown={self.handleInputKeyDown.bind(self)} onChange={self.onChangeName.bind(self)} />

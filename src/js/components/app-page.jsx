@@ -17,8 +17,8 @@ class AppPage extends React.Component {
 		if (stateContainerService.getIsInitialized()) {
 			return (
 				<div className="app-container" data-theme={theme}>
-					<Menu selectedMenu={self.props.selectedMenu} />
-					<Alerts alerts={{}} />
+					<Menu selectedMenu={self.props.selectedMenu} busy={stateContainerService.getPleaseWait()} />
+					<Alerts alerts={stateContainerService.getAlerts()} />
 					<ReactTooltip />
 					{self.props.children}
 				</div>

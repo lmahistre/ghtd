@@ -9,6 +9,7 @@ class TaskView extends React.Component {
 	render() {
 		const self = this;
 		let task = dataContainerService.getTask(self.props.match.params.id);
+		let project = task.projectId ? dataContainerService.getProject(task.projectId) : null;
 		return (
 			<AppPage selectedMenu="tasks">
 				<table className="list-table">
@@ -23,7 +24,7 @@ class TaskView extends React.Component {
 						</tr>
 						<tr>
 							<td>{"Project"}</td>
-							<td>{task.projectId}</td>
+							<td style={{color: '#'+project.color}}>{project.name}</td>
 						</tr>
 						<tr>
 							<td>{"Creation time"}</td>

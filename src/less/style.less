@@ -84,6 +84,18 @@ html {
 							background-color: @button-hover-color;
 						}
 					}
+					.please-wait {
+						float: right;
+						color: #000;
+						display: block;
+						background-color: #F00;
+						width: 30px;
+						height: 30px;
+						span {
+							margin: 6px;
+							font-size: 20px;
+						}
+					}
 				}
 
 				select, 
@@ -102,7 +114,7 @@ html {
 					color: #FFF;
 					border-radius: 2px;
 					padding: 3px 6px;
-					max-width: 40px;
+					width: 40px;
 					white-space: nowrap;
 					text-overflow: ellipsis;
 					overflow-x: hidden;
@@ -146,15 +158,19 @@ html {
 
 				table.list-table {
 					width: 100%;
+					table-layout: fixed;
 					tr.status-active {
 						color: @text-color;
 					}
 					tr.status-done {
 						color: #888;
 					}
-					td.actions {
-						min-width: 56px;
-					}
+					// td.actions {
+					// 	width: 84px;
+					// }
+					// td.project-label-container {
+					// 	width: 52px;
+					// }
 					input[type=text] {
 						width: 100%;
 					}
@@ -168,7 +184,6 @@ html {
 						border-width: 1px;
 						border-type: solid;
 						border-radius: 4px;
-						/*border-color:	#CCC;*/
 						padding: 1px 2px;
 						margin: 1px 2px;
 						option {
@@ -269,11 +284,38 @@ html {
 	}
 }
 
+table[data-table=task-list] {
+	td[data-column=actions] {
+		width: 84px;
+	}
+	td[data-column=project] {
+		width: 52px;
+	}
+}
+table[data-table=project-list] {
+	td[data-column=actions] {
+		width: 84px;
+	}
+	td[data-column=indicators] {
+		width: 56px;
+	}
+}
+table[data-table=settings-list] {
+	td[data-column=actions] {
+		width: 28px;
+	}
+}
+
 @media (min-width: 480px) {
 	html body #react-root .app-container {
 		max-width: 464px;
 		.project-label {
-			max-width: 80px;
+			width: 80px;
+		}
+	}
+	table[data-table=task-list] {
+		td[data-column=project] {
+			width: 92px;
 		}
 	}
 }
@@ -281,7 +323,15 @@ html {
 	html body #react-root .app-container {
 		max-width: 560px;
 		.project-label {
-			max-width: 120px;
+			width: 120px;
+		}
+		// td.project-label-container {
+		// 	width: 132px !important;
+		// }
+	}
+	table[data-table=task-list] {
+		td[data-column=project] {
+			width: 132px;
 		}
 	}
 }
@@ -289,7 +339,15 @@ html {
 	html body #react-root .app-container {
 		max-width: 752px;
 		.project-label {
-			max-width: 160px;
+			width: 160px;
+		}
+		// td.project-label-container {
+		// 	width: 172px !important;
+		// }
+	}
+	table[data-table=task-list] {
+		td[data-column=project] {
+			width: 172px;
 		}
 	}
 }
@@ -297,7 +355,15 @@ html {
 	html body #react-root .app-container {
 		max-width: 976px;
 		.project-label {
-			max-width: 200px;
+			width: 200px;
+		}
+		// td.project-label-container {
+		// 	width: 212px !important;
+		// }
+	}
+	table[data-table=task-list] {
+		td[data-column=project] {
+			width: 212px;
 		}
 	}
 }
@@ -305,7 +371,15 @@ html {
 	html body #react-root .app-container {
 		max-width: 1180px;
 		.project-label {
-			max-width: 240px;
+			width: 240px;
+		}
+		// td.project-label-container {
+		// 	width: 252px !important;
+		// }
+	}
+	table[data-table=task-list] {
+		td[data-column=project] {
+			width: 252px;
 		}
 	}
 }

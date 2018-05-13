@@ -3,6 +3,7 @@ const React = require("react");
 
 const AppPage = require("../app-page.jsx");
 const SmallButton = require("../ui/small-button.jsx");
+const CommonButton = require("../ui/common-button.jsx");
 
 const actionsService = require('../../services/actions.js');
 const browserService = require('../../services/browser.js');
@@ -19,16 +20,34 @@ class Settings extends React.Component {
 	}
 
 
+	configure() {
+		
+	}
+
+
 	render() {
 		return (
 			<AppPage selectedMenu="settings">
-				<table className="list-table">
+				<CommonButton onClick={self.configure}>{"Configure"}</CommonButton>
+				<table className="list-table" data-table="settings-list">
 					<tbody>
 						<tr>
-							<td>
-								<SmallButton title="" fa="adjust" onClick={this.toggleTheme} />
+							<td data-column="actions">
+								<SmallButton title={"Toggle theme"} fa="adjust" onClick={this.toggleTheme} />
 							</td>
-							<td>{"Theme"}</td>
+							<td>{"Toggle theme"}</td>
+						</tr>
+						<tr>
+							<td data-column="actions">
+								<SmallButton title={"Recompile CSS"} fa="css3" onClick={actionsService.recompileCss} />
+							</td>
+							<td>{"Recompile CSS"}</td>
+						</tr>
+						<tr>
+							<td data-column="actions">
+								<SmallButton title={"Recompile Javascript"} fa="jsfiddle" onClick={actionsService.recompileJs} />
+							</td>
+							<td>{"Recompile Javascript"}</td>
 						</tr>
 					</tbody>
 				</table>

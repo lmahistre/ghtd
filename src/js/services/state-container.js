@@ -1,7 +1,7 @@
 
 const alerts = [];
-var pleaseWait = 0;
-var isInitialized = false;
+let pleaseWait = 0;
+let isInitialized = false;
 
 
 exports.getAlerts = function () {
@@ -23,12 +23,25 @@ exports.addAlert = function (message, type) {
 }
 
 
-exports.clearAlert = function () {
-
+exports.clearAlert = function (index) {
+	alerts.splice(index, 1);
 }
 
 
-// exports.getPleaseWait
+exports.getPleaseWait = function () {
+	return pleaseWait;
+}
+
+
+exports.increasePleaseWait = function () {
+	pleaseWait++;
+}
+
+
+exports.decreasePleaseWait = function () {
+	pleaseWait--;
+}
+
 
 exports.getIsInitialized = function () {
 	return isInitialized;

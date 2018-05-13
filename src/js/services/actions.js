@@ -23,13 +23,16 @@ exports.getData = function (callback) {
 				dataContainerService.setSetting(k, data.settings[k]);
 			}
 		}
-		stateContainerService.setIsInitialized(true);
+		if (data.tasks || data.projects || data.settings) {
+			stateContainerService.setIsInitialized(true);
+		}
 		browserService.render();
 		// console.log(data);
 
 		httpService.get('/getData', function(response) {
 			// console.log(response);
 			data = response.data;
+			stateContainerService.setIsInitialized(true);
 			dataContainerService.setDataIsLoaded(true);
 			if (data.tasks) {
 				for (let k in data.tasks) {
@@ -77,15 +80,19 @@ exports.importProjects = function (callback) {
 }
 
 
-exports.showAlert = function(type, msg, timeout) {
-	exports.state.alerts[type] = msg;
-	browserService.render();
-	if (timeout && parseInt(timeout) > 0) {
-		setTimeout(function() {
-			if (exports.state.alerts[type] == msg) {
-				exports.state.alerts[type] = null;
-				browserService.render();
-			}
-		}, timeout);
-	}
+exports.recompileCss = function(callback) {
+	httpService.post('/compileCss', function(response) {
+		if (callback && typeof callback == 'function') {
+			callback(response.data);
+		}
+	});
+}
+
+
+exports.recompileJs = function(callback) {
+	httpService.post('/compileJs', function(response) {
+		if (callback && typeof callback == 'function') {
+			callback(response.data);
+		}
+	});
 }
