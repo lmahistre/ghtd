@@ -1,7 +1,8 @@
 
 const fs = require('fs');
+const path = require('path');
 
-const fileName = 'config.json';
+const fileName = path.resolve(__dirname+'/../config.json');
 
 let config = {};
 
@@ -14,7 +15,7 @@ load = function() {
 		configFileContent = fs.readFileSync(fileName);
 	}
 	catch (err) {
-		configFileContent = fs.readFileSync('config.sample.json');
+		configFileContent = fs.readFileSync(path.resolve(__dirname+'/../config.sample.json'));
 		fs.writeFileSync(fileName, configFileContent);
 	}
 	return JSON.parse(configFileContent);

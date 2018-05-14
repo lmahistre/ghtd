@@ -28,7 +28,7 @@ module.exports = function(callback) {
 	/**
 	 * Serve static files
 	 */
-	app.use('/dist', express.static('dist'));
+	app.use('/dist', express.static(path.resolve(__dirname+'/../dist')));
 
 	// Port the app is listening
 	const port = config.port ? config.port : 3000;
