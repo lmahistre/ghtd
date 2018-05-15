@@ -1328,6 +1328,7 @@ let tasks = {};
 let settings = {};
 let dataIsLoaded = false;
 let timestampSynchronized = 0;
+let selectedProject;
 
 
 exports.getImportProjects = function () {
@@ -2143,7 +2144,7 @@ const Alerts = __webpack_require__(261);
 const dataContainerService = __webpack_require__(12);
 const stateContainerService = __webpack_require__(37);
 
-var ____ClassJ=React.Component;for(var ____ClassJ____Key in ____ClassJ){if(____ClassJ.hasOwnProperty(____ClassJ____Key)){AppPage[____ClassJ____Key]=____ClassJ[____ClassJ____Key];}}var ____SuperProtoOf____ClassJ=____ClassJ===null?null:____ClassJ.prototype;AppPage.prototype=Object.create(____SuperProtoOf____ClassJ);AppPage.prototype.constructor=AppPage;AppPage.__superConstructor__=____ClassJ;function AppPage(){"use strict";if(____ClassJ!==null){____ClassJ.apply(this,arguments);}}
+var ____Class9=React.Component;for(var ____Class9____Key in ____Class9){if(____Class9.hasOwnProperty(____Class9____Key)){AppPage[____Class9____Key]=____Class9[____Class9____Key];}}var ____SuperProtoOf____Class9=____Class9===null?null:____Class9.prototype;AppPage.prototype=Object.create(____SuperProtoOf____Class9);AppPage.prototype.constructor=AppPage;AppPage.__superConstructor__=____Class9;function AppPage(){"use strict";if(____Class9!==null){____Class9.apply(this,arguments);}}
 	Object.defineProperty(AppPage.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
 		const self = this;
 		const settings = dataContainerService.getSettings();
@@ -3488,7 +3489,7 @@ const React = __webpack_require__(3);
 const ReactRouterDom = __webpack_require__(28);
 const Link = ReactRouterDom.Link;
 
-var ____ClassM=React.Component;for(var ____ClassM____Key in ____ClassM){if(____ClassM.hasOwnProperty(____ClassM____Key)){SmallButton[____ClassM____Key]=____ClassM[____ClassM____Key];}}var ____SuperProtoOf____ClassM=____ClassM===null?null:____ClassM.prototype;SmallButton.prototype=Object.create(____SuperProtoOf____ClassM);SmallButton.prototype.constructor=SmallButton;SmallButton.__superConstructor__=____ClassM;function SmallButton(){"use strict";if(____ClassM!==null){____ClassM.apply(this,arguments);}}
+var ____Classd=React.Component;for(var ____Classd____Key in ____Classd){if(____Classd.hasOwnProperty(____Classd____Key)){SmallButton[____Classd____Key]=____Classd[____Classd____Key];}}var ____SuperProtoOf____Classd=____Classd===null?null:____Classd.prototype;SmallButton.prototype=Object.create(____SuperProtoOf____Classd);SmallButton.prototype.constructor=SmallButton;SmallButton.__superConstructor__=____Classd;function SmallButton(){"use strict";if(____Classd!==null){____Classd.apply(this,arguments);}}
 
 	Object.defineProperty(SmallButton.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
 		let className;
@@ -3530,7 +3531,7 @@ const React = __webpack_require__(3);
 const ReactRouterDom = __webpack_require__(28);
 const Link = ReactRouterDom.Link;
 
-var ____ClassN=React.Component;for(var ____ClassN____Key in ____ClassN){if(____ClassN.hasOwnProperty(____ClassN____Key)){CommonButton[____ClassN____Key]=____ClassN[____ClassN____Key];}}var ____SuperProtoOf____ClassN=____ClassN===null?null:____ClassN.prototype;CommonButton.prototype=Object.create(____SuperProtoOf____ClassN);CommonButton.prototype.constructor=CommonButton;CommonButton.__superConstructor__=____ClassN;function CommonButton(){"use strict";if(____ClassN!==null){____ClassN.apply(this,arguments);}}
+var ____Classf=React.Component;for(var ____Classf____Key in ____Classf){if(____Classf.hasOwnProperty(____Classf____Key)){CommonButton[____Classf____Key]=____Classf[____Classf____Key];}}var ____SuperProtoOf____Classf=____Classf===null?null:____Classf.prototype;CommonButton.prototype=Object.create(____SuperProtoOf____Classf);CommonButton.prototype.constructor=CommonButton;CommonButton.__superConstructor__=____Classf;function CommonButton(){"use strict";if(____Classf!==null){____Classf.apply(this,arguments);}}
 	Object.defineProperty(CommonButton.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
 		if (this.props.to) {
 			return (
@@ -12280,7 +12281,7 @@ exports.save = function (data) {
 
 exports.retrieve = function (callback) {
 	const data = {}
-	let keys = ['tasks', 'projects', 'settings'];
+	let keys = ['tasks', 'projects'];
 	for (let i in keys) {
 		try {
 			if (localStorage[keys[i]]) {
@@ -24596,7 +24597,7 @@ const ProjectList = __webpack_require__(270);
 const ProjectView = __webpack_require__(272);
 const Settings = __webpack_require__(273);
 
-var ____ClassA=React.Component;for(var ____ClassA____Key in ____ClassA){if(____ClassA.hasOwnProperty(____ClassA____Key)){AppRouter[____ClassA____Key]=____ClassA[____ClassA____Key];}}var ____SuperProtoOf____ClassA=____ClassA===null?null:____ClassA.prototype;AppRouter.prototype=Object.create(____SuperProtoOf____ClassA);AppRouter.prototype.constructor=AppRouter;AppRouter.__superConstructor__=____ClassA;
+var ____Class0=React.Component;for(var ____Class0____Key in ____Class0){if(____Class0.hasOwnProperty(____Class0____Key)){AppRouter[____Class0____Key]=____Class0[____Class0____Key];}}var ____SuperProtoOf____Class0=____Class0===null?null:____Class0.prototype;AppRouter.prototype=Object.create(____SuperProtoOf____Class0);AppRouter.prototype.constructor=AppRouter;AppRouter.__superConstructor__=____Class0;
 
 	function AppRouter() {"use strict";
 		this.routes = (
@@ -27739,7 +27740,7 @@ const actionService = __webpack_require__(20);
 const browserService = __webpack_require__(9);
 const dataContainerService = __webpack_require__(12);
 
-var ____ClassB=React.Component;for(var ____ClassB____Key in ____ClassB){if(____ClassB.hasOwnProperty(____ClassB____Key)){TaskList[____ClassB____Key]=____ClassB[____ClassB____Key];}}var ____SuperProtoOf____ClassB=____ClassB===null?null:____ClassB.prototype;TaskList.prototype=Object.create(____SuperProtoOf____ClassB);TaskList.prototype.constructor=TaskList;TaskList.__superConstructor__=____ClassB;function TaskList(){"use strict";if(____ClassB!==null){____ClassB.apply(this,arguments);}}
+var ____Class1=React.Component;for(var ____Class1____Key in ____Class1){if(____Class1.hasOwnProperty(____Class1____Key)){TaskList[____Class1____Key]=____Class1[____Class1____Key];}}var ____SuperProtoOf____Class1=____Class1===null?null:____Class1.prototype;TaskList.prototype=Object.create(____SuperProtoOf____Class1);TaskList.prototype.constructor=TaskList;TaskList.__superConstructor__=____Class1;function TaskList(){"use strict";if(____Class1!==null){____Class1.apply(this,arguments);}}
 
 	Object.defineProperty(TaskList.prototype,"removeResolved",{writable:true,configurable:true,value:function( ) {"use strict";
 		const tasks = dataContainerService.getTasks();
@@ -29262,7 +29263,7 @@ const ReactRouterDom = __webpack_require__(28);
 
 const Link = ReactRouterDom.Link;
 
-var ____ClassQ=React.Component;for(var ____ClassQ____Key in ____ClassQ){if(____ClassQ.hasOwnProperty(____ClassQ____Key)){Menu[____ClassQ____Key]=____ClassQ[____ClassQ____Key];}}var ____SuperProtoOf____ClassQ=____ClassQ===null?null:____ClassQ.prototype;Menu.prototype=Object.create(____SuperProtoOf____ClassQ);Menu.prototype.constructor=Menu;Menu.__superConstructor__=____ClassQ;function Menu(){"use strict";if(____ClassQ!==null){____ClassQ.apply(this,arguments);}}
+var ____Classh=React.Component;for(var ____Classh____Key in ____Classh){if(____Classh.hasOwnProperty(____Classh____Key)){Menu[____Classh____Key]=____Classh[____Classh____Key];}}var ____SuperProtoOf____Classh=____Classh===null?null:____Classh.prototype;Menu.prototype=Object.create(____SuperProtoOf____Classh);Menu.prototype.constructor=Menu;Menu.__superConstructor__=____Classh;function Menu(){"use strict";if(____Classh!==null){____Classh.apply(this,arguments);}}
 
 	Object.defineProperty(Menu.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
 		const self = this;
@@ -29292,7 +29293,7 @@ module.exports = Menu;
 const stateContainerService = __webpack_require__(37);
 const browserService = __webpack_require__(9);
 
-var ____ClassR=React.Component;for(var ____ClassR____Key in ____ClassR){if(____ClassR.hasOwnProperty(____ClassR____Key)){Alerts[____ClassR____Key]=____ClassR[____ClassR____Key];}}var ____SuperProtoOf____ClassR=____ClassR===null?null:____ClassR.prototype;Alerts.prototype=Object.create(____SuperProtoOf____ClassR);Alerts.prototype.constructor=Alerts;Alerts.__superConstructor__=____ClassR;function Alerts(){"use strict";if(____ClassR!==null){____ClassR.apply(this,arguments);}}
+var ____Classg=React.Component;for(var ____Classg____Key in ____Classg){if(____Classg.hasOwnProperty(____Classg____Key)){Alerts[____Classg____Key]=____Classg[____Classg____Key];}}var ____SuperProtoOf____Classg=____Classg===null?null:____Classg.prototype;Alerts.prototype=Object.create(____SuperProtoOf____Classg);Alerts.prototype.constructor=Alerts;Alerts.__superConstructor__=____Classg;function Alerts(){"use strict";if(____Classg!==null){____Classg.apply(this,arguments);}}
 
 	Object.defineProperty(Alerts.prototype,"hide",{writable:true,configurable:true,value:function(index) {"use strict";
 		stateContainerService.clearAlert(index);
@@ -29336,7 +29337,7 @@ const actionsService = __webpack_require__(20);
 const browserService = __webpack_require__(9);
 const dataContainerService = __webpack_require__(12);
 
-var ____ClassK=React.Component;for(var ____ClassK____Key in ____ClassK){if(____ClassK.hasOwnProperty(____ClassK____Key)){Task[____ClassK____Key]=____ClassK[____ClassK____Key];}}var ____SuperProtoOf____ClassK=____ClassK===null?null:____ClassK.prototype;Task.prototype=Object.create(____SuperProtoOf____ClassK);Task.prototype.constructor=Task;Task.__superConstructor__=____ClassK;function Task(){"use strict";if(____ClassK!==null){____ClassK.apply(this,arguments);}}
+var ____Classa=React.Component;for(var ____Classa____Key in ____Classa){if(____Classa.hasOwnProperty(____Classa____Key)){Task[____Classa____Key]=____Classa[____Classa____Key];}}var ____SuperProtoOf____Classa=____Classa===null?null:____Classa.prototype;Task.prototype=Object.create(____SuperProtoOf____Classa);Task.prototype.constructor=Task;Task.__superConstructor__=____Classa;function Task(){"use strict";if(____Classa!==null){____Classa.apply(this,arguments);}}
 
 	Object.defineProperty(Task.prototype,"resolve",{writable:true,configurable:true,value:function(id) {"use strict";
 		const task = dataContainerService.getTask(id);
@@ -29491,6 +29492,7 @@ const browserService = __webpack_require__(9);
 const stateContainerService = __webpack_require__(37);
 
 const apiEndpoint = '/api';
+const queue = [];
 
 const call = function(uri, post, callback) {
 	const params = {
@@ -29561,7 +29563,7 @@ const dataContainerService = __webpack_require__(12);
 const browserService = __webpack_require__(9);
 const utilsService = __webpack_require__(72);
 
-var ____ClassP=React.Component;for(var ____ClassP____Key in ____ClassP){if(____ClassP.hasOwnProperty(____ClassP____Key)){NewTaskForm[____ClassP____Key]=____ClassP[____ClassP____Key];}}var ____SuperProtoOf____ClassP=____ClassP===null?null:____ClassP.prototype;NewTaskForm.prototype=Object.create(____SuperProtoOf____ClassP);NewTaskForm.prototype.constructor=NewTaskForm;NewTaskForm.__superConstructor__=____ClassP;
+var ____Classc=React.Component;for(var ____Classc____Key in ____Classc){if(____Classc.hasOwnProperty(____Classc____Key)){NewTaskForm[____Classc____Key]=____Classc[____Classc____Key];}}var ____SuperProtoOf____Classc=____Classc===null?null:____Classc.prototype;NewTaskForm.prototype=Object.create(____SuperProtoOf____Classc);NewTaskForm.prototype.constructor=NewTaskForm;NewTaskForm.__superConstructor__=____Classc;
 
 	Object.defineProperty(NewTaskForm.prototype,"handleInputKeyDown",{writable:true,configurable:true,value:function(event) {"use strict";
 		if (event.which == 13) {
@@ -29649,7 +29651,7 @@ const AppPage = __webpack_require__(19);
 
 const dataContainerService = __webpack_require__(12);
 
-var ____ClassC=React.Component;for(var ____ClassC____Key in ____ClassC){if(____ClassC.hasOwnProperty(____ClassC____Key)){TaskView[____ClassC____Key]=____ClassC[____ClassC____Key];}}var ____SuperProtoOf____ClassC=____ClassC===null?null:____ClassC.prototype;TaskView.prototype=Object.create(____SuperProtoOf____ClassC);TaskView.prototype.constructor=TaskView;TaskView.__superConstructor__=____ClassC;function TaskView(){"use strict";if(____ClassC!==null){____ClassC.apply(this,arguments);}}
+var ____Class2=React.Component;for(var ____Class2____Key in ____Class2){if(____Class2.hasOwnProperty(____Class2____Key)){TaskView[____Class2____Key]=____Class2[____Class2____Key];}}var ____SuperProtoOf____Class2=____Class2===null?null:____Class2.prototype;TaskView.prototype=Object.create(____SuperProtoOf____Class2);TaskView.prototype.constructor=TaskView;TaskView.__superConstructor__=____Class2;function TaskView(){"use strict";if(____Class2!==null){____Class2.apply(this,arguments);}}
 
 	Object.defineProperty(TaskView.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
 		const self = this;
@@ -29701,7 +29703,7 @@ const actionsService = __webpack_require__(20);
 const browserService = __webpack_require__(9);
 const dataContainerService = __webpack_require__(12);
 
-var ____ClassD=React.Component;for(var ____ClassD____Key in ____ClassD){if(____ClassD.hasOwnProperty(____ClassD____Key)){ProjectDelete[____ClassD____Key]=____ClassD[____ClassD____Key];}}var ____SuperProtoOf____ClassD=____ClassD===null?null:____ClassD.prototype;ProjectDelete.prototype=Object.create(____SuperProtoOf____ClassD);ProjectDelete.prototype.constructor=ProjectDelete;ProjectDelete.__superConstructor__=____ClassD;function ProjectDelete(){"use strict";if(____ClassD!==null){____ClassD.apply(this,arguments);}}
+var ____Class4=React.Component;for(var ____Class4____Key in ____Class4){if(____Class4.hasOwnProperty(____Class4____Key)){ProjectDelete[____Class4____Key]=____Class4[____Class4____Key];}}var ____SuperProtoOf____Class4=____Class4===null?null:____Class4.prototype;ProjectDelete.prototype=Object.create(____SuperProtoOf____Class4);ProjectDelete.prototype.constructor=ProjectDelete;ProjectDelete.__superConstructor__=____Class4;function ProjectDelete(){"use strict";if(____Class4!==null){____Class4.apply(this,arguments);}}
 
 	Object.defineProperty(ProjectDelete.prototype,"delete",{writable:true,configurable:true,value:function() {"use strict";
 		dataContainerService.deleteProject(this.props.match.params.id);
@@ -29784,7 +29786,7 @@ const browserService = __webpack_require__(9);
 const dataContainerService = __webpack_require__(12);
 const utilsService = __webpack_require__(72);
 
-var ____ClassE=React.Component;for(var ____ClassE____Key in ____ClassE){if(____ClassE.hasOwnProperty(____ClassE____Key)){ProjectEdit[____ClassE____Key]=____ClassE[____ClassE____Key];}}var ____SuperProtoOf____ClassE=____ClassE===null?null:____ClassE.prototype;ProjectEdit.prototype=Object.create(____SuperProtoOf____ClassE);ProjectEdit.prototype.constructor=ProjectEdit;ProjectEdit.__superConstructor__=____ClassE;function ProjectEdit(){"use strict";if(____ClassE!==null){____ClassE.apply(this,arguments);}}
+var ____Class3=React.Component;for(var ____Class3____Key in ____Class3){if(____Class3.hasOwnProperty(____Class3____Key)){ProjectEdit[____Class3____Key]=____Class3[____Class3____Key];}}var ____SuperProtoOf____Class3=____Class3===null?null:____Class3.prototype;ProjectEdit.prototype=Object.create(____SuperProtoOf____Class3);ProjectEdit.prototype.constructor=ProjectEdit;ProjectEdit.__superConstructor__=____Class3;function ProjectEdit(){"use strict";if(____Class3!==null){____Class3.apply(this,arguments);}}
 
 	Object.defineProperty(ProjectEdit.prototype,"create",{writable:true,configurable:true,value:function() {"use strict";
 		const id = utilsService.getNextProjectId();
@@ -29862,7 +29864,7 @@ const CommonButton = __webpack_require__(30);
 
 const constsService = __webpack_require__(115);
 
-var ____ClassO=React.Component;for(var ____ClassO____Key in ____ClassO){if(____ClassO.hasOwnProperty(____ClassO____Key)){ProjectEditForm[____ClassO____Key]=____ClassO[____ClassO____Key];}}var ____SuperProtoOf____ClassO=____ClassO===null?null:____ClassO.prototype;ProjectEditForm.prototype=Object.create(____SuperProtoOf____ClassO);ProjectEditForm.prototype.constructor=ProjectEditForm;ProjectEditForm.__superConstructor__=____ClassO;function ProjectEditForm(){"use strict";if(____ClassO!==null){____ClassO.apply(this,arguments);}}
+var ____Classe=React.Component;for(var ____Classe____Key in ____Classe){if(____Classe.hasOwnProperty(____Classe____Key)){ProjectEditForm[____Classe____Key]=____Classe[____Classe____Key];}}var ____SuperProtoOf____Classe=____Classe===null?null:____Classe.prototype;ProjectEditForm.prototype=Object.create(____SuperProtoOf____Classe);ProjectEditForm.prototype.constructor=ProjectEditForm;ProjectEditForm.__superConstructor__=____Classe;function ProjectEditForm(){"use strict";if(____Classe!==null){____Classe.apply(this,arguments);}}
 
 	Object.defineProperty(ProjectEditForm.prototype,"formFakeSubmit",{writable:true,configurable:true,value:function(event) {"use strict";
 		event.stopPropagation();
@@ -29947,7 +29949,7 @@ const utilsService = __webpack_require__(72);
 const storageService = __webpack_require__(114);
 const browserService = __webpack_require__(9);
 
-var ____ClassF=React.Component;for(var ____ClassF____Key in ____ClassF){if(____ClassF.hasOwnProperty(____ClassF____Key)){ProjectImport[____ClassF____Key]=____ClassF[____ClassF____Key];}}var ____SuperProtoOf____ClassF=____ClassF===null?null:____ClassF.prototype;ProjectImport.prototype=Object.create(____SuperProtoOf____ClassF);ProjectImport.prototype.constructor=ProjectImport;ProjectImport.__superConstructor__=____ClassF;function ProjectImport(){"use strict";if(____ClassF!==null){____ClassF.apply(this,arguments);}}
+var ____Class8=React.Component;for(var ____Class8____Key in ____Class8){if(____Class8.hasOwnProperty(____Class8____Key)){ProjectImport[____Class8____Key]=____Class8[____Class8____Key];}}var ____SuperProtoOf____Class8=____Class8===null?null:____Class8.prototype;ProjectImport.prototype=Object.create(____SuperProtoOf____Class8);ProjectImport.prototype.constructor=ProjectImport;ProjectImport.__superConstructor__=____Class8;function ProjectImport(){"use strict";if(____Class8!==null){____Class8.apply(this,arguments);}}
 
 	Object.defineProperty(ProjectImport.prototype,"import",{writable:true,configurable:true,value:function(name) {"use strict";
 		let id = utilsService.getNextProjectId();
@@ -30036,7 +30038,7 @@ const actionService = __webpack_require__(20);
 const browserService = __webpack_require__(9);
 const dataContainerService = __webpack_require__(12);
 
-var ____ClassG=React.Component;for(var ____ClassG____Key in ____ClassG){if(____ClassG.hasOwnProperty(____ClassG____Key)){ProjectList[____ClassG____Key]=____ClassG[____ClassG____Key];}}var ____SuperProtoOf____ClassG=____ClassG===null?null:____ClassG.prototype;ProjectList.prototype=Object.create(____SuperProtoOf____ClassG);ProjectList.prototype.constructor=ProjectList;ProjectList.__superConstructor__=____ClassG;function ProjectList(){"use strict";if(____ClassG!==null){____ClassG.apply(this,arguments);}}
+var ____Class6=React.Component;for(var ____Class6____Key in ____Class6){if(____Class6.hasOwnProperty(____Class6____Key)){ProjectList[____Class6____Key]=____Class6[____Class6____Key];}}var ____SuperProtoOf____Class6=____Class6===null?null:____Class6.prototype;ProjectList.prototype=Object.create(____SuperProtoOf____Class6);ProjectList.prototype.constructor=ProjectList;ProjectList.__superConstructor__=____Class6;function ProjectList(){"use strict";if(____Class6!==null){____Class6.apply(this,arguments);}}
 
 	Object.defineProperty(ProjectList.prototype,"changeVisibility",{writable:true,configurable:true,value:function(id) {"use strict";
 		const projects = dataContainerService.getProjects();
@@ -30099,7 +30101,7 @@ module.exports = ProjectList;
 /** @jsx React.DOM */
 const React = __webpack_require__(3);
 
-var ____ClassL=React.Component;for(var ____ClassL____Key in ____ClassL){if(____ClassL.hasOwnProperty(____ClassL____Key)){VisibleMarker[____ClassL____Key]=____ClassL[____ClassL____Key];}}var ____SuperProtoOf____ClassL=____ClassL===null?null:____ClassL.prototype;VisibleMarker.prototype=Object.create(____SuperProtoOf____ClassL);VisibleMarker.prototype.constructor=VisibleMarker;VisibleMarker.__superConstructor__=____ClassL;function VisibleMarker(){"use strict";if(____ClassL!==null){____ClassL.apply(this,arguments);}}
+var ____Classb=React.Component;for(var ____Classb____Key in ____Classb){if(____Classb.hasOwnProperty(____Classb____Key)){VisibleMarker[____Classb____Key]=____Classb[____Classb____Key];}}var ____SuperProtoOf____Classb=____Classb===null?null:____Classb.prototype;VisibleMarker.prototype=Object.create(____SuperProtoOf____Classb);VisibleMarker.prototype.constructor=VisibleMarker;VisibleMarker.__superConstructor__=____Classb;function VisibleMarker(){"use strict";if(____Classb!==null){____Classb.apply(this,arguments);}}
 	Object.defineProperty(VisibleMarker.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
 		return this.props.visible ? (
 			React.createElement("span", {className: "fa fa-eye color-yes", "aria-hidden": "true"})
@@ -30119,11 +30121,11 @@ module.exports = VisibleMarker;
 
 const AppPage = __webpack_require__(19);
 
-var ____ClassH=React.Component;for(var ____ClassH____Key in ____ClassH){if(____ClassH.hasOwnProperty(____ClassH____Key)){ProjectView[____ClassH____Key]=____ClassH[____ClassH____Key];}}var ____SuperProtoOf____ClassH=____ClassH===null?null:____ClassH.prototype;ProjectView.prototype=Object.create(____SuperProtoOf____ClassH);ProjectView.prototype.constructor=ProjectView;ProjectView.__superConstructor__=____ClassH;function ProjectView(){"use strict";if(____ClassH!==null){____ClassH.apply(this,arguments);}}
+var ____Class7=React.Component;for(var ____Class7____Key in ____Class7){if(____Class7.hasOwnProperty(____Class7____Key)){ProjectView[____Class7____Key]=____Class7[____Class7____Key];}}var ____SuperProtoOf____Class7=____Class7===null?null:____Class7.prototype;ProjectView.prototype=Object.create(____SuperProtoOf____Class7);ProjectView.prototype.constructor=ProjectView;ProjectView.__superConstructor__=____Class7;function ProjectView(){"use strict";if(____Class7!==null){____Class7.apply(this,arguments);}}
 	Object.defineProperty(ProjectView.prototype,"render",{writable:true,configurable:true,value:function( ) {"use strict";
 		return (
 			React.createElement(AppPage, {selectedMenu: "projects"}, 
-				React.createElement("table", {className: "list-table settings-list"}, 
+				React.createElement("table", {className: "list-table"}, 
 					React.createElement("tbody", null
 					)
 				)
@@ -30149,13 +30151,13 @@ const actionsService = __webpack_require__(20);
 const browserService = __webpack_require__(9);
 const dataContainerService = __webpack_require__(12);
 
-var ____ClassI=React.Component;for(var ____ClassI____Key in ____ClassI){if(____ClassI.hasOwnProperty(____ClassI____Key)){Settings[____ClassI____Key]=____ClassI[____ClassI____Key];}}var ____SuperProtoOf____ClassI=____ClassI===null?null:____ClassI.prototype;Settings.prototype=Object.create(____SuperProtoOf____ClassI);Settings.prototype.constructor=Settings;Settings.__superConstructor__=____ClassI;function Settings(){"use strict";if(____ClassI!==null){____ClassI.apply(this,arguments);}}
+var ____Class5=React.Component;for(var ____Class5____Key in ____Class5){if(____Class5.hasOwnProperty(____Class5____Key)){Settings[____Class5____Key]=____Class5[____Class5____Key];}}var ____SuperProtoOf____Class5=____Class5===null?null:____Class5.prototype;Settings.prototype=Object.create(____SuperProtoOf____Class5);Settings.prototype.constructor=Settings;Settings.__superConstructor__=____Class5;function Settings(){"use strict";if(____Class5!==null){____Class5.apply(this,arguments);}}
 
 	Object.defineProperty(Settings.prototype,"toggleTheme",{writable:true,configurable:true,value:function() {"use strict";
 		const settings = dataContainerService.getSettings();
 		const theme = settings.theme === 'dark' ? 'dark' : 'light';
 		settings.theme = theme === 'dark' ? 'light' : 'dark';
-		actionsService.saveData();
+		// actionsService.saveData();
 		browserService.render();
 	}});
 

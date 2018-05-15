@@ -34,6 +34,7 @@ html {
 				color: @text-color;
 				padding-left: 8px;
 				padding-right: 8px;
+				padding-top: 30px;
 				margin-left: auto;
 				margin-right: auto;
 				a.common-button {
@@ -68,9 +69,14 @@ html {
 				}
 
 				div.menu {
-					background-color: #CCC;
+					background-color: rgba(204, 204, 204, 0.3);
 					margin-bottom: 2px;
+					position: fixed;
+					top: 0px;
+					// width: 100%;
+					
 					.menu-entry {
+						background-color: rgba(204, 204, 204, 0.8);
 						display: inline-block;
 						width: 60px;
 						text-decoration: none;
@@ -165,12 +171,6 @@ html {
 					tr.status-done {
 						color: #888;
 					}
-					// td.actions {
-					// 	width: 84px;
-					// }
-					// td.project-label-container {
-					// 	width: 52px;
-					// }
 					input[type=text] {
 						width: 100%;
 					}
@@ -309,6 +309,9 @@ table[data-table=settings-list] {
 @media (min-width: 480px) {
 	html body #react-root .app-container {
 		max-width: 464px;
+		div.menu {
+			width: 464px;
+		}
 		.project-label {
 			width: 80px;
 		}
@@ -322,12 +325,12 @@ table[data-table=settings-list] {
 @media (min-width: 576px) {
 	html body #react-root .app-container {
 		max-width: 560px;
+		div.menu {
+			width: 560px;
+		}
 		.project-label {
 			width: 120px;
 		}
-		// td.project-label-container {
-		// 	width: 132px !important;
-		// }
 	}
 	table[data-table=task-list] {
 		td[data-column=project] {
@@ -338,12 +341,12 @@ table[data-table=settings-list] {
 @media (min-width: 768px) {
 	html body #react-root .app-container {
 		max-width: 752px;
+		div.menu {
+			width: 752px;
+		}
 		.project-label {
 			width: 160px;
 		}
-		// td.project-label-container {
-		// 	width: 172px !important;
-		// }
 	}
 	table[data-table=task-list] {
 		td[data-column=project] {
@@ -354,12 +357,12 @@ table[data-table=settings-list] {
 @media (min-width: 992px) {
 	html body #react-root .app-container {
 		max-width: 976px;
+		div.menu {
+			width: 976px;
+		}
 		.project-label {
 			width: 200px;
 		}
-		// td.project-label-container {
-		// 	width: 212px !important;
-		// }
 	}
 	table[data-table=task-list] {
 		td[data-column=project] {
@@ -370,12 +373,12 @@ table[data-table=settings-list] {
 @media (min-width: 1200px) {
 	html body #react-root .app-container {
 		max-width: 1180px;
+		div.menu {
+			width: 1180px;
+		}
 		.project-label {
 			width: 240px;
 		}
-		// td.project-label-container {
-		// 	width: 252px !important;
-		// }
 	}
 	table[data-table=task-list] {
 		td[data-column=project] {

@@ -3,7 +3,7 @@ exports.validateData = function (data) {
 	const validatedData = {
 		tasks : {},
 		projects : {},
-		settings : {},
+		// settings : {},
 	};
 	if (data.tasks) {
 		for (let k in data.tasks) {
@@ -28,10 +28,10 @@ exports.validateData = function (data) {
 			}
 		}
 	}
-	if (data.settings) {
-		for (let k in data.settings) {
-			validatedData.settings[k] = data.settings[k];
-		}
-	}
+	// if (data.settings) {
+	// 	for (let k in data.settings) {
+	// 		validatedData.settings[k] = data.settings[k];
+	// 	}
+	// }
 	return validatedData;
 }

@@ -1,6 +1,16 @@
 
 const browserService = require('./browser.js');
 
+let localStorage = window && window.localStorage ? window.localStorage : null;
+
+
+exports.setDependencies = function (deps) {
+	if (deps.localStorage) {
+		localStorage = deps.localStorage;
+	}
+}
+
+
 exports.save = function (data) {
 	for (let k in data) {
 		localStorage[k] = JSON.stringify(data[k]);
@@ -10,7 +20,7 @@ exports.save = function (data) {
 
 exports.retrieve = function (callback) {
 	const data = {}
-	let keys = ['tasks', 'projects', 'settings'];
+	let keys = ['tasks', 'projects'];
 	for (let i in keys) {
 		try {
 			if (localStorage[keys[i]]) {

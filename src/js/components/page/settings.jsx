@@ -15,7 +15,7 @@ class Settings extends React.Component {
 		const settings = dataContainerService.getSettings();
 		const theme = settings.theme === 'dark' ? 'dark' : 'light';
 		settings.theme = theme === 'dark' ? 'light' : 'dark';
-		actionsService.saveData();
+		// actionsService.saveData();
 		browserService.render();
 	}
 

@@ -142,4 +142,14 @@ exports.build = function(args) {
 }
 
 
+exports.help = function(args) {
+	console.log('Usage: github-todo [OPTION]');
+	console.log('Options:');
+	for (let k in exports) {
+		console.log ('  '+k+ '');
+	}
+}
+
+
 exports.default = exports.server;
+exports['--help'] = exports['-h'] = exports.help;

@@ -22,6 +22,16 @@ module.exports = function(callback) {
 	// Routing
 	const apiRouter = require('./api-router.js');
 
+	app.use(function errorHandler (err, req, res, next) {
+		if (res.headersSent) {
+			return next(err)
+		}
+		// res.status(500)
+		res.json({ 
+			error: err,
+		});
+	});
+
 	app.use('/api', apiRouter);
 
 

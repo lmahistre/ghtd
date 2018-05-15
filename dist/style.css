@@ -20,6 +20,7 @@ html body #react-root .app-container {
   color: #111;
   padding-left: 8px;
   padding-right: 8px;
+  padding-top: 30px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -53,10 +54,13 @@ html body #react-root .app-container .clearfix {
   clear: both;
 }
 html body #react-root .app-container div.menu {
-  background-color: #CCC;
+  background-color: rgba(204, 204, 204, 0.3);
   margin-bottom: 2px;
+  position: fixed;
+  top: 0px;
 }
 html body #react-root .app-container div.menu .menu-entry {
+  background-color: rgba(204, 204, 204, 0.8);
   display: inline-block;
   width: 60px;
   text-decoration: none;
@@ -250,6 +254,9 @@ table[data-table=settings-list] td[data-column=actions] {
   html body #react-root .app-container {
     max-width: 464px;
   }
+  html body #react-root .app-container div.menu {
+    width: 464px;
+  }
   html body #react-root .app-container .project-label {
     width: 80px;
   }
@@ -260,6 +267,9 @@ table[data-table=settings-list] td[data-column=actions] {
 @media (min-width: 576px) {
   html body #react-root .app-container {
     max-width: 560px;
+  }
+  html body #react-root .app-container div.menu {
+    width: 560px;
   }
   html body #react-root .app-container .project-label {
     width: 120px;
@@ -272,6 +282,9 @@ table[data-table=settings-list] td[data-column=actions] {
   html body #react-root .app-container {
     max-width: 752px;
   }
+  html body #react-root .app-container div.menu {
+    width: 752px;
+  }
   html body #react-root .app-container .project-label {
     width: 160px;
   }
@@ -283,6 +296,9 @@ table[data-table=settings-list] td[data-column=actions] {
   html body #react-root .app-container {
     max-width: 976px;
   }
+  html body #react-root .app-container div.menu {
+    width: 976px;
+  }
   html body #react-root .app-container .project-label {
     width: 200px;
   }
@@ -293,6 +309,9 @@ table[data-table=settings-list] td[data-column=actions] {
 @media (min-width: 1200px) {
   html body #react-root .app-container {
     max-width: 1180px;
+  }
+  html body #react-root .app-container div.menu {
+    width: 1180px;
   }
   html body #react-root .app-container .project-label {
     width: 240px;
