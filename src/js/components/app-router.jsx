@@ -18,6 +18,7 @@ const Settings = require("./page/settings.jsx");
 class AppRouter extends React.Component {
 
 	constructor() {
+		super();
 		this.routes = (
 			<Switch>
 				<Route exact path="/" component={TaskList} />

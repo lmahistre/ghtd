@@ -14,7 +14,14 @@ exports.css = function(args) {
  * Compile JS
  */
 exports.js = function(args) {
-	reactAppBase.js(config.js);
+	reactAppBase.js(config.js, function(error, result) {
+		if (error) {
+			console.error(error);
+		}
+		if (result) {
+			console.log('JS compilation successful');
+		}
+	});
 }
 
 

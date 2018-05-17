@@ -57,6 +57,7 @@ class NewTaskForm extends React.Component {
 
 
 	constructor() {
+		super();
 		this.state = {
 			name : '',
 		};
