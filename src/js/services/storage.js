@@ -51,3 +51,22 @@ exports.getImportProjects = function (callback) {
 		callback(importProjects);
 	}
 }
+
+
+exports.getSettings = function () {
+	try {
+		if (localStorage.settings) {
+			let settings = JSON.parse(localStorage.settings);
+			return settings;
+			// if (callback && typeof callback === 'function') {
+			// 	callback(importProjects);
+			// }
+		}
+		else {
+			return null;
+		}
+	}
+	catch (error) {
+		return null;
+	}
+}

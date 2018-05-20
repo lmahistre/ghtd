@@ -8,6 +8,7 @@ const CommonButton = require("../ui/common-button.jsx");
 const actionsService = require('../../services/actions.js');
 const browserService = require('../../services/browser.js');
 const dataContainerService = require('../../services/data-container.js');
+const storageService = require('../../services/storage.js');
 
 class Settings extends React.Component {
 
@@ -15,7 +16,7 @@ class Settings extends React.Component {
 		const settings = dataContainerService.getSettings();
 		const theme = settings.theme === 'dark' ? 'dark' : 'light';
 		settings.theme = theme === 'dark' ? 'light' : 'dark';
-		// actionsService.saveData();
+		storageService.save({settings});
 		browserService.render();
 	}
 

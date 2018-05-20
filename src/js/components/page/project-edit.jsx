@@ -36,7 +36,7 @@ class ProjectEdit extends React.Component {
 			color : document.forms['project-edit'].color.value,
 			repo : document.forms['project-edit'].repo.value,
 		};
-		dataContainerService.setProject(id, project);
+		dataContainerService.setProject(project.id, project);
 		actionsService.saveData();
 		browserService.redirect('projects');
 	}

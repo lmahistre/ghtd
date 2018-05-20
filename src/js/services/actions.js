@@ -62,7 +62,6 @@ exports.saveData = function (callback) {
 	const data = {
 		tasks : dataContainerService.getTasks(),
 		projects : dataContainerService.getProjects(),
-		settings : dataContainerService.getSettings(),
 	}
 	storageService.save(data);
 	httpService.post('/setData', data, function(response) {

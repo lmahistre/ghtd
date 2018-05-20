@@ -16,38 +16,54 @@ const call = function(uri, post, callback) {
 		params.headers = {  
 			"Content-type": "application/json; charset=UTF-8" 
 		};
-		// params.body = post;
 		params.body = JSON.stringify(post);
 	}
-	fetch(uri, params)
-	.then(function(response) {
-		return response.text();
-	})
-	.then(function(responseText) {
-		try {
-			const responseData = JSON.parse(responseText);
-			console.log(responseData);
 
-			if (responseData.warning) {
-				console.warn(responseData.warning);
+	const timeout = function(ms, promise) {
+	  return new Promise(function(resolve, reject) {
+	    setTimeout(function() {
+	      reject(new Error("timeout"))
+	    }, ms)
+	    promise.then(resolve, reject)
+	  })
+	}
+
+	timeout(1000,	fetch(uri, params).then(function(response) {
+			return response.text();
+		})
+		.then(function(responseText) {
+			try {
+				const responseData = JSON.parse(responseText);
+				// console.log(responseData);
+
+				if (responseData.warning) {
+					console.warn(responseData.warning);
+				}
+				if (responseData.error) {
+					browserService.error(responseData.error);
+				}
+				if (callback && typeof callback === 'function') {
+					callback(responseData);
+				}
 			}
-			if (responseData.error) {
-				browserService.error(responseData.error);
+			catch (error) {
+				browserService.error(error);
 			}
-			if (callback && typeof callback === 'function') {
-				callback(responseData);
-			}
-		}
-		catch (error) {
+			stateContainerService.decreasePleaseWait();
+			browserService.render();
+			return new Promise(function(resolve, reject) {
+				resolve(true);
+			});
+		})
+		.catch(function(error) {
 			browserService.error(error);
-		}
-		stateContainerService.decreasePleaseWait();
-		browserService.render();
-	})
-	.catch(function(error) {
-		browserService.error(error);
-	});
+			return new Promise(function(resolve, reject) {
+				reject(error);
+			});
+		})
+	);
 }
+
 
 
 exports.get = function(uri, callback) {

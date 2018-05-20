@@ -6,6 +6,7 @@ const SmallButton = require("../ui/small-button.jsx");
 const actionsService = require('../../services/actions.js');
 const dataContainerService = require('../../services/data-container.js');
 const browserService = require('../../services/browser.js');
+const storageService = require('../../services/storage.js');
 const utilsService = require('../../services/utils.js');
 
 class NewTaskForm extends React.Component {
@@ -28,8 +29,6 @@ class NewTaskForm extends React.Component {
 	addTask() {
 		const name = document.getElementById('new-task-name').value;
 		if (name.length > 0) {
-			// Project ID
-			// alert(document.getElementById('new-task-projectId').value);
 			let projectId = document.getElementById('new-task-projectId').value;
 			let task = {
 				id : utilsService.getNextTaskId(),
@@ -55,11 +54,21 @@ class NewTaskForm extends React.Component {
 		});
 	}
 
+	onChangeProject (event) {
+		const settings = storageService.getSettings();
+		settings.projectId = event.target.value;
+		storageService.save({settings});
+		this.setState({
+			projectId: event.target.value,
+		});
+	}
 
 	constructor() {
 		super();
+		const settings = storageService.getSettings();
 		this.state = {
 			name : '',
+			projectId : settings && settings.projectId ? settings.projectId : '',
 		};
 	}
 
@@ -71,14 +80,14 @@ class NewTaskForm extends React.Component {
 					<SmallButton fa="plus-circle" onClick={self.addTask.bind(self)} title={"Add task"} />
 				</td>
 				<td data-column="project">
-					<select className="project-label" name="projectId" id="new-task-projectId">
+					<select className="project-label" name="projectId" id="new-task-projectId" value={self.state.projectId} onChange={self.onChangeProject.bind(self)}>
 						{self.props.projectList.map(elt => (
 							<option key={elt.id} value={elt.id}>{elt.name}</option>
 						))}
 					</select>
 				</td>
 				<td>
-					<input id="new-task-name" type="text" name="name"value={self.state.name} onKeyDown={self.handleInputKeyDown.bind(self)} onChange={self.onChangeName.bind(self)} />
+					<input id="new-task-name" type="text" name="name" value={self.state.name} onKeyDown={self.handleInputKeyDown.bind(self)} onChange={self.onChangeName.bind(self)} />
 				</td>
 			</tr>
 		);

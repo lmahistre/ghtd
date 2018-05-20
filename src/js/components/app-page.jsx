@@ -5,13 +5,13 @@ const ReactTooltip = require("react-tooltip");
 const Menu = require('./menu.jsx');
 const Alerts = require('./alerts.jsx');
 
-const dataContainerService = require('../services/data-container.js');
+const storageService = require('../services/storage.js');
 const stateContainerService = require('../services/state-container.js');
 
 class AppPage extends React.Component {
 	render() {
 		const self = this;
-		const settings = dataContainerService.getSettings();
+		const settings = storageService.getSettings();
 		const theme = (settings.theme 
 			&& settings.theme === 'dark') ? 'dark' : 'light';
 		if (stateContainerService.getIsInitialized()) {
