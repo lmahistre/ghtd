@@ -13,7 +13,7 @@ const storageService = require('../../services/storage.js');
 class Settings extends React.Component {
 
 	toggleTheme() {
-		const settings = dataContainerService.getSettings();
+		const settings = storageService.getSettings();
 		const theme = settings.theme === 'dark' ? 'dark' : 'light';
 		settings.theme = theme === 'dark' ? 'light' : 'dark';
 		storageService.save({settings});
@@ -21,34 +21,46 @@ class Settings extends React.Component {
 	}
 
 
-	configure() {
-		
+	save() {
+		const settings = storageService.getSettings();
+		settings.user = document.getElementById('settings-user').value;
+		settings.token = document.getElementById('settings-token').value;
+		settings.gistId = document.getElementById('settings-gistId').value;
+		storageService.save({settings});
+		browserService.render();
 	}
 
 
 	render() {
+		const settings = storageService.getSettings();
 		return (
 			<AppPage selectedMenu="settings">
-				<CommonButton onClick={self.configure}>{"Configure"}</CommonButton>
+				<CommonButton onClick={self.save}>{"Save"}</CommonButton>
 				<table className="list-table" data-table="settings-list">
 					<tbody>
 						<tr>
-							<td data-column="actions">
+							<td>{"Toggle theme"}</td>
+							<td>
 								<SmallButton title={"Toggle theme"} fa="adjust" onClick={this.toggleTheme} />
 							</td>
-							<td>{"Toggle theme"}</td>
 						</tr>
 						<tr>
-							<td data-column="actions">
-								<SmallButton title={"Recompile CSS"} fa="css3" onClick={actionsService.recompileCss} />
+							<td>{"User"}</td>
+							<td>
+								<input name="user" id="settings-user" defaultValue={settings.user} />
 							</td>
-							<td>{"Recompile CSS"}</td>
 						</tr>
 						<tr>
-							<td data-column="actions">
-								<SmallButton title={"Recompile Javascript"} fa="jsfiddle" onClick={actionsService.recompileJs} />
+							<td>{"Token"}</td>
+							<td>
+								<input name="token" id="settings-token" defaultValue={settings.token} />
 							</td>
-							<td>{"Recompile Javascript"}</td>
+						</tr>
+						<tr>
+							<td>{"Gist ID"}</td>
+							<td>
+								<input name="gistId" id="settings-gistId" defaultValue={settings.gistId} />
+							</td>
 						</tr>
 					</tbody>
 				</table>

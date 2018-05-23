@@ -156,3 +156,6 @@ exports.setGistData = function(post, callback) {
 	postReq.write(postData);
 	postReq.end();
 }
+
+
+exports.config = config;

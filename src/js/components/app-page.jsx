@@ -12,7 +12,7 @@ class AppPage extends React.Component {
 	render() {
 		const self = this;
 		const settings = storageService.getSettings();
-		const theme = (settings.theme 
+		const theme = (settings && settings.theme 
 			&& settings.theme === 'dark') ? 'dark' : 'light';
 		if (stateContainerService.getIsInitialized()) {
 			return (

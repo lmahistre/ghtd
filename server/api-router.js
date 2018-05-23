@@ -59,6 +59,11 @@ router.post('/setData', function(req, res) {
 });
 
 
+router.post('/getConfig', function(req, res) {
+	res.json(github.config);
+});
+
+
 /**
  * Get data from Github
  */

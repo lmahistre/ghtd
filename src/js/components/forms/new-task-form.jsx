@@ -20,10 +20,10 @@ class NewTaskForm extends React.Component {
 	}
 
 
-	formFakeSubmit(event) {
-		event.stopPropagation();
-		event.preventDefault();
-	}
+	// formFakeSubmit(event) {
+	// 	event.stopPropagation();
+	// 	event.preventDefault();
+	// }
 
 
 	addTask() {
@@ -75,7 +75,7 @@ class NewTaskForm extends React.Component {
 	render() {
 		const self = this;
 		return (
-			<tr name="new-task" onSubmit={self.formFakeSubmit} className="list-elt new-task-form">
+			<tr name="new-task" className="list-elt new-task-form">
 				<td data-column="actions">
 					<SmallButton fa="plus-circle" onClick={self.addTask.bind(self)} title={"Add task"} />
 				</td>
