@@ -14,8 +14,7 @@ class Settings extends React.Component {
 
 	toggleTheme() {
 		const settings = storageService.getSettings();
-		const theme = settings.theme === 'dark' ? 'dark' : 'light';
-		settings.theme = theme === 'dark' ? 'light' : 'dark';
+		settings.theme = settings && settings.theme === 'dark' ? 'light' : 'dark';
 		storageService.save({settings});
 		browserService.render();
 	}
@@ -32,34 +31,34 @@ class Settings extends React.Component {
 
 
 	render() {
-		const settings = storageService.getSettings();
+		const settings = storageService.getSettings() ? storageService.getSettings() : {};
 		return (
 			<AppPage selectedMenu="settings">
-				<CommonButton onClick={self.save}>{"Save"}</CommonButton>
+				<CommonButton onClick={this.save}>{"Save"}</CommonButton>
 				<table className="list-table" data-table="settings-list">
 					<tbody>
 						<tr>
-							<td>{"Toggle theme"}</td>
+							<td data-column="label">{"Theme"}</td>
 							<td>
 								<SmallButton title={"Toggle theme"} fa="adjust" onClick={this.toggleTheme} />
 							</td>
 						</tr>
 						<tr>
-							<td>{"User"}</td>
+							<td data-column="label">{"User"}</td>
 							<td>
-								<input name="user" id="settings-user" defaultValue={settings.user} />
+								<input name="user" id="settings-user" type="text" defaultValue={settings.user} />
 							</td>
 						</tr>
 						<tr>
-							<td>{"Token"}</td>
+							<td data-column="label">{"Gist ID"}</td>
 							<td>
-								<input name="token" id="settings-token" defaultValue={settings.token} />
+								<input name="gistId" id="settings-gistId" type="text" defaultValue={settings.gistId} />
 							</td>
 						</tr>
 						<tr>
-							<td>{"Gist ID"}</td>
+							<td data-column="label">{"Token"}</td>
 							<td>
-								<input name="gistId" id="settings-gistId" defaultValue={settings.gistId} />
+								<input name="token" id="settings-token" type="text" defaultValue={settings.token} />
 							</td>
 						</tr>
 					</tbody>

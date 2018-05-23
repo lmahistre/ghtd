@@ -42,11 +42,6 @@ exports.getData = function (callback) {
 					dataContainerService.setProject(k, data.projects[k]);
 				}
 			}
-			if (data.settings) {
-				for (let k in data.settings) {
-					dataContainerService.setSetting(k, data.settings[k]);
-				}
-			}
 
 			if (callback && typeof callback == 'function') {
 				callback(data);

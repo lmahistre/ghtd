@@ -8,6 +8,8 @@ const NewTaskForm = require("../forms/new-task-form.jsx");
 
 const actionService = require('../../services/actions.js');
 const browserService = require('../../services/browser.js');
+const githubService = require('../../services/github.js');
+const storageService = require('../../services/storage.js');
 const dataContainerService = require('../../services/data-container.js');
 
 class TaskList extends React.Component {
@@ -21,6 +23,22 @@ class TaskList extends React.Component {
 		}
 		actionService.saveData();
 		browserService.render();
+	}
+
+
+	syncGitHub () {
+		githubService.getGistData(function(data) {
+			if (data.tasks) {
+				for (let k in data.tasks) {
+					dataContainerService.setTask(k, data.tasks[k]);
+				}
+			}
+			if (data.projects) {
+				for (let k in data.projects) {
+					dataContainerService.setProject(k, data.projects[k]);
+				}
+			}
+		});
 	}
 
 
@@ -72,6 +90,7 @@ class TaskList extends React.Component {
 		return (
 			<AppPage selectedMenu="tasks">
 				<CommonButton onClick={self.removeResolved}>{"Clean resolved"}</CommonButton>
+				<CommonButton onClick={self.syncGitHub}>{"Sync with GitHub"}</CommonButton>
 				<table className="list-table" data-table="task-list">
 					<tbody>
 						<NewTaskForm projectList={projectList} />

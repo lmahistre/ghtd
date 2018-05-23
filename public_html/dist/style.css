@@ -247,8 +247,8 @@ table[data-table=project-list] td[data-column=actions] {
 table[data-table=project-list] td[data-column=indicators] {
   width: 56px;
 }
-table[data-table=settings-list] td[data-column=actions] {
-  width: 28px;
+table[data-table=settings-list] td[data-column=label] {
+  width: 100px;
 }
 @media (min-width: 480px) {
   html body #react-root .app-container {

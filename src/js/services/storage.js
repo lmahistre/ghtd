@@ -63,10 +63,10 @@ exports.getSettings = function () {
 			// }
 		}
 		else {
-			return null;
+			return {};
 		}
 	}
 	catch (error) {
-		return null;
+		return {};
 	}
 }
