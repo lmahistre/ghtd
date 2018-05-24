@@ -38,6 +38,14 @@ class TaskList extends React.Component {
 					dataContainerService.setProject(k, data.projects[k]);
 				}
 			}
+			storageService.save(data);
+		});
+	}
+
+
+	saveToGitHub() {
+		storageService.retrieve(function(data) {
+			githubService.setGistData(data);
 		});
 	}
 
@@ -91,6 +99,7 @@ class TaskList extends React.Component {
 			<AppPage selectedMenu="tasks">
 				<CommonButton onClick={self.removeResolved}>{"Clean resolved"}</CommonButton>
 				<CommonButton onClick={self.syncGitHub}>{"Sync with GitHub"}</CommonButton>
+				<CommonButton onClick={self.saveToGitHub}>{"Save to GitHub"}</CommonButton>
 				<table className="list-table" data-table="task-list">
 					<tbody>
 						<NewTaskForm projectList={projectList} />

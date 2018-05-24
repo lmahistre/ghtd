@@ -15,12 +15,13 @@ const storageService = require('./storage.js');
 const config = {
 	filename : 'ght.json',
 	userAgent : 'GHT',
-	ndPoint : 'https://api.github.com/gists/',
+	endPoint : 'https://api.github.com/gists/',
 }
 
 
 const call = function(uri, post, callback) {
 	const settings = storageService.getSettings();
+	console.log(settings);
 	const params = {
 		credentials : 'same-origin',
 	};
@@ -141,6 +142,7 @@ exports.setGistData = function(post, callback) {
 	// let reqOptions = JSON.parse(JSON.stringify(options));
 	// reqOptions.method = 'POST';
 	// reqOptions.headers['Content-Type'] = 'application/json';
+	const settings = storageService.getSettings();
 	const postData = {
 		description : "Github-Todo",
 		files : {
@@ -149,7 +151,7 @@ exports.setGistData = function(post, callback) {
 			},
 		},
 	};
-	call(config.endPoint+settings.gistId, null, function(parsedData) {
+	call(config.endPoint+settings.gistId, postData, function(parsedData) {
 		const gistContent = parsedData.files[config.filename].content;
 		const gistData = JSON.parse(gistContent);
 		if (callback && typeof callback === 'function') {

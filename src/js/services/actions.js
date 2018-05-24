@@ -78,16 +78,16 @@ exports.getData = function (callback) {
 
 
 exports.saveData = function (callback) {
-	const data = {
-		tasks : dataContainerService.getTasks(),
-		projects : dataContainerService.getProjects(),
-	}
-	storageService.save(data);
-	httpService.post('/setData', data, function(response) {
-		if (callback && typeof callback == 'function') {
-			callback(response.data);
-		}
-	});
+	// const data = {
+	// 	tasks : dataContainerService.getTasks(),
+	// 	projects : dataContainerService.getProjects(),
+	// }
+	// storageService.save(data);
+	// httpService.post('/setData', data, function(response) {
+	// 	if (callback && typeof callback == 'function') {
+	// 		callback(response.data);
+	// 	}
+	// });
 }
 
 
@@ -98,22 +98,22 @@ exports.importProjects = function (callback) {
 }
 
 
-exports.recompileCss = function(callback) {
-	httpService.post('/compileCss', null, function(response) {
-		if (callback && typeof callback == 'function') {
-			callback(response.data);
-		}
-	});
-}
+// exports.recompileCss = function(callback) {
+// 	httpService.post('/compileCss', null, function(response) {
+// 		if (callback && typeof callback == 'function') {
+// 			callback(response.data);
+// 		}
+// 	});
+// }
 
 
-exports.recompileJs = function(callback) {
-	httpService.post('/compileJs', null, function(response) {
-		if (callback && typeof callback == 'function') {
-			callback(response.data);
-		}
-	});
-}
+// exports.recompileJs = function(callback) {
+// 	httpService.post('/compileJs', null, function(response) {
+// 		if (callback && typeof callback == 'function') {
+// 			callback(response.data);
+// 		}
+// 	});
+// }
 
 
 // exports.getConfig = function(callback) {
