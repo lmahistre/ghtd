@@ -20,19 +20,64 @@ exports.save = function (data) {
 
 exports.retrieve = function (callback) {
 	const data = {}
-	let keys = ['tasks', 'projects'];
-	for (let i in keys) {
-		try {
-			if (localStorage[keys[i]]) {
-				data[keys[i]] = JSON.parse(localStorage[keys[i]]);
-			}
-		}
-		catch (error) {
-			browserService.error(error);
-		}
+	try {
+		data.tasks = JSON.parse(localStorage.tasks);
+		data.projects = JSON.parse(localStorage.projects);
+		data.timestampSynchronized = parseInt(localStorage.timestampSynchronized);
+	}
+	catch (error) {
+		browserService.error(error);
 	}
 	if (callback && typeof callback === 'function') {
 		callback(data);
+	}
+}
+
+
+exports.getTimestampSynchronized = function () {
+	try {
+		if (localStorage.settings) {
+			let settings = JSON.parse(localStorage.timestampSynchronized);
+			return settings;
+		}
+		else {
+			return {};
+		}
+	}
+	catch (error) {
+		return {};
+	}
+}
+
+
+exports.getTasks = function () {
+	try {
+		if (localStorage.settings) {
+			let settings = JSON.parse(localStorage.tasks);
+			return settings;
+		}
+		else {
+			return {};
+		}
+	}
+	catch (error) {
+		return {};
+	}
+}
+
+
+exports.getProjects = function () {
+	try {
+		if (localStorage.settings) {
+			let settings = JSON.parse(localStorage.projects);
+			return settings;
+		}
+		else {
+			return {};
+		}
+	}
+	catch (error) {
+		return {};
 	}
 }
 
@@ -58,9 +103,6 @@ exports.getSettings = function () {
 		if (localStorage.settings) {
 			let settings = JSON.parse(localStorage.settings);
 			return settings;
-			// if (callback && typeof callback === 'function') {
-			// 	callback(importProjects);
-			// }
 		}
 		else {
 			return {};

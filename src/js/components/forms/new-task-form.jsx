@@ -42,7 +42,10 @@ class NewTaskForm extends React.Component {
 				name: '',
 			});
 			dataContainerService.setTask(task.id, task);
-			actionsService.saveData();
+			storageService.save({
+				tasks : dataContainerService.getTasks(),
+			});
+			// actionsService.saveData();
 			browserService.render();
 		}
 	}

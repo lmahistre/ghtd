@@ -28,6 +28,7 @@ class TaskList extends React.Component {
 
 	syncGitHub () {
 		githubService.getGistData(function(data) {
+			const tasks = dataContainerService.getTasks();
 			if (data.tasks) {
 				for (let k in data.tasks) {
 					dataContainerService.setTask(k, data.tasks[k]);

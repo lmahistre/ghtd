@@ -1,5 +1,5 @@
 
-const httpService = require('../services/http.js');
+// const httpService = require('../services/http.js');
 const githubService = require('../services/github.js');
 const browserService = require('../services/browser.js');
 const dataContainerService = require('../services/data-container.js');
@@ -92,9 +92,9 @@ exports.saveData = function (callback) {
 
 
 exports.importProjects = function (callback) {
-	httpService.get('/importProjects', function(response) {
-		callback(response.data);
-	});
+	// httpService.get('/importProjects', function(response) {
+	// 	callback(response.data);
+	// });
 }
 
 

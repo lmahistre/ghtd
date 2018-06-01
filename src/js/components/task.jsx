@@ -8,6 +8,7 @@ const SmallButton = require("./ui/small-button.jsx");
 const actionsService = require('../services/actions.js');
 const browserService = require('../services/browser.js');
 const dataContainerService = require('../services/data-container.js');
+const storageService = require('../services/storage.js');
 
 class Task extends React.Component {
 
@@ -37,7 +38,7 @@ class Task extends React.Component {
 			task.timestampModified = parseInt(Date.now()/1000);
 		}
 		dataContainerService.setTask(id, task);
-		actionsService.saveData();
+		// actionsService.saveData();
 		browserService.render();
 	}
 
@@ -72,7 +73,10 @@ class Task extends React.Component {
 			task.projectId = projectId;
 			task.timestampModified = parseInt(Date.now()/1000);
 			dataContainerService.setTask(id, task);
-			actionsService.saveData();
+			// actionsService.saveData();
+			storageService.save({
+				tasks : dataContainerService.getTasks(),
+			});
 			browserService.render();
 		}
 	}
