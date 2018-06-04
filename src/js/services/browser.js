@@ -2,7 +2,7 @@ const React = require("react");
 const ReactDOM = require("react-dom");
 const AppRouter = require("../components/app-router.jsx");
 
-const stateContainerService = require('../services/state-container.js');
+const stateContainerService = require('./state-container.js');
 
 /**
  * Set the title of the document
@@ -37,6 +37,7 @@ exports.notify = function (msg) {
 }
 
 
+// TODO : a deplacer
 exports.error = function (err) {
 	stateContainerService.addAlert(err.message ? err.message : err, 'error');
 	exports.render();

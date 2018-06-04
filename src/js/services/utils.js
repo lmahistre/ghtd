@@ -1,6 +1,16 @@
 
 const constsService = require('./consts.js');
-const dataContainerService = require('./data-container.js');
+const dataService = require('./data.js');
+
+exports.setDependencies = function (deps) {
+	if (deps.constsService) {
+		constsService = deps.constsService;
+	}
+	if (deps.dataService) {
+		dataService = deps.dataService;
+	}
+}
+
 
 /**
  * Transform the technical name of the project into human readable name
@@ -23,7 +33,7 @@ exports.renameProject = function(name) {
 exports.generateRandomColor = function() {
 	// selection of a random color
 	const colors = {};
-	const projects = dataContainerService.getProjects();
+	const projects = dataService.getProjects();
 	for (let i = 0; i < constsService.colors.length; i++) {
 		colors[constsService.colors[i].color] = 0;
 	}
@@ -66,7 +76,7 @@ exports.generateRandomId = function () {
 
 
 exports.getNextProjectId = function() {
-	const projects = dataContainerService.getProjects();
+	const projects = dataService.getProjects();
 	let id = exports.generateRandomId();
 	let idIsUnique = false;
 	while (!idIsUnique) {
@@ -86,7 +96,7 @@ exports.getNextProjectId = function() {
 
 
 exports.getNextTaskId = function() {
-	const tasks = dataContainerService.getTasks();
+	const tasks = dataService.getTasks();
 	let id = exports.generateRandomId();
 	let idIsUnique = false;
 	while (!idIsUnique) {

@@ -28,10 +28,5 @@ exports.validateData = function (data) {
 			}
 		}
 	}
-	// if (data.settings) {
-	// 	for (let k in data.settings) {
-	// 		validatedData.settings[k] = data.settings[k];
-	// 	}
-	// }
 	return validatedData;
 }

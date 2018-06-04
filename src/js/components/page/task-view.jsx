@@ -2,14 +2,14 @@ const React = require("react");
 
 const AppPage = require("../app-page.jsx");
 
-const dataContainerService = require('../../services/data-container.js');
+const dataService = require('../../services/data.js');
 
 class TaskView extends React.Component {
 
 	render() {
 		const self = this;
-		let task = dataContainerService.getTask(self.props.match.params.id);
-		let project = task.projectId ? dataContainerService.getProject(task.projectId) : null;
+		let task = dataService.getTask(self.props.match.params.id);
+		let project = task.projectId ? dataService.getProject(task.projectId) : null;
 		return (
 			<AppPage selectedMenu="tasks">
 				<table className="list-table">

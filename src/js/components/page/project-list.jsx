@@ -10,16 +10,16 @@ const SmallButton = require("../ui/small-button.jsx");
 
 const actionService = require('../../services/actions.js');
 const browserService = require('../../services/browser.js');
-const dataContainerService = require('../../services/data-container.js');
+const dataService = require('../../services/data.js');
 
 class ProjectList extends React.Component {
 
 	changeVisibility (id) {
-		const projects = dataContainerService.getProjects();
+		const projects = dataService.getProjects();
 		if (projects[id]) {
 			let project = new Object(projects[id]);
 			project.visible = !projects[id].visible;
-			dataContainerService.setProject(id, project);
+			dataService.setProject(id, project);
 			actionService.saveData();
 			browserService.render();
 		}
@@ -29,7 +29,7 @@ class ProjectList extends React.Component {
 	render () {
 		const self = this;
 		const projectList = [];
-		const projects = dataContainerService.getProjects();
+		const projects = dataService.getProjects();
 		if (projects) {
 			for (let i in projects) {
 				projectList.push(projects[i]);
@@ -46,6 +46,9 @@ class ProjectList extends React.Component {
 								<td data-column="actions">
 									<Link to={"/project-edit/"+elt.id} className="small-button">
 										<span className="glyphicon glyphicon-edit" aria-hidden="true"></span>
+									</Link>
+									<Link to={"/project-view/"+elt.id} className="small-button">
+										<span className="glyphicon glyphicon-eye" aria-hidden="true"></span>
 									</Link>
 									{elt.visible ? 
 										<SmallButton fa="eye" onClick={self.changeVisibility.bind(self, elt.id)} title={"Hide"} />

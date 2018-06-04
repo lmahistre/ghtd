@@ -3,23 +3,22 @@ const React = require("react");
 const AppPage = require("../app-page.jsx");
 const CommonButton = require("../ui/common-button.jsx");
 
-const actionsService = require('../../services/actions.js');
+const alertService = require('../../services/alert.js');
 const browserService = require('../../services/browser.js');
-const dataContainerService = require('../../services/data-container.js');
+const dataService = require('../../services/data.js');
 
 class ProjectDelete extends React.Component {
 
 	delete() {
-		dataContainerService.deleteProject(this.props.match.params.id);
-		actionsService.saveData();
-		window.location.href = '#/projects';
+		dataService.deleteProject(this.props.match.params.id);
+		browserService.redirect('projects');
 	}
 
 
 	render() {
 		const self = this;
-		const projects = dataContainerService.getProjects();
-		const tasks = dataContainerService.getTasks();
+		const projects = dataService.getProjects();
+		const tasks = dataService.getTasks();
 		// In case of edition
 		if (self.props.match 
 				&& self.props.match.params 
@@ -59,7 +58,7 @@ class ProjectDelete extends React.Component {
 		}
 		// If the project does not exist
 		else {
-			browserService.error("This project does not exist.");
+			alertService.error("This project does not exist.");
 			window.location.href = '#/projects';
 			return (
 				<AppPage selectedMenu="projects">

@@ -41,13 +41,3 @@ exports.increasePleaseWait = function () {
 exports.decreasePleaseWait = function () {
 	pleaseWait--;
 }
-
-
-exports.getIsInitialized = function () {
-	return isInitialized;
-}
-
-
-exports.setIsInitialized = function (value) {
-	isInitialized = value ? true : false;
-}

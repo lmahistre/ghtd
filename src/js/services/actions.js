@@ -1,125 +1,74 @@
 
-// const httpService = require('../services/http.js');
-const githubService = require('../services/github.js');
-const browserService = require('../services/browser.js');
-const dataContainerService = require('../services/data-container.js');
-const stateContainerService = require('../services/state-container.js');
-const storageService = require('../services/storage.js');
-
-exports.getData = function (callback) {
-	storageService.retrieve(function (data) {
-		dataContainerService.setDataIsLoaded(true);
-		if (data.tasks) {
-			for (let k in data.tasks) {
-				dataContainerService.setTask(k, data.tasks[k]);
-			}
-		}
-		if (data.projects) {
-			for (let k in data.projects) {
-				dataContainerService.setProject(k, data.projects[k]);
-			}
-		}
-		if (data.settings) {
-			for (let k in data.settings) {
-				dataContainerService.setSetting(k, data.settings[k]);
-			}
-		}
-		if (data.tasks || data.projects || data.settings) {
-			stateContainerService.setIsInitialized(true);
-		}
-		browserService.render();
-
-		githubService.getGistData(function(data) {
-			stateContainerService.setIsInitialized(true);
-			dataContainerService.setDataIsLoaded(true);
-			if (data.tasks) {
-				for (let k in data.tasks) {
-					dataContainerService.setTask(k, data.tasks[k]);
-				}
-			}
-			if (data.projects) {
-				for (let k in data.projects) {
-					dataContainerService.setProject(k, data.projects[k]);
-				}
-			}
-
-			if (callback && typeof callback == 'function') {
-				callback(data);
-			}
-		});
-
-		// httpService.get('/getData', function(response) {
-		// 	// console.log(response);
-		// 	data = response.data;
-		// 	stateContainerService.setIsInitialized(true);
-		// 	dataContainerService.setDataIsLoaded(true);
-		// 	if (data.tasks) {
-		// 		for (let k in data.tasks) {
-		// 			dataContainerService.setTask(k, data.tasks[k]);
-		// 		}
-		// 	}
-		// 	if (data.projects) {
-		// 		for (let k in data.projects) {
-		// 			dataContainerService.setProject(k, data.projects[k]);
-		// 		}
-		// 	}
-		// 	if (data.settings) {
-		// 		for (let k in data.settings) {
-		// 			dataContainerService.setSetting(k, data.settings[k]);
-		// 		}
-		// 	}
-
-		// 	if (callback && typeof callback == 'function') {
-		// 		callback(data);
-		// 	}
-		// });
-	});
-},
-
-
-exports.saveData = function (callback) {
-	// const data = {
-	// 	tasks : dataContainerService.getTasks(),
-	// 	projects : dataContainerService.getProjects(),
-	// }
-	// storageService.save(data);
-	// httpService.post('/setData', data, function(response) {
-	// 	if (callback && typeof callback == 'function') {
-	// 		callback(response.data);
-	// 	}
-	// });
-}
-
+const storageService = require('./storage.js');
+const githubService = require('./github.js');
+const dataService = require('./data.js');
 
 exports.importProjects = function (callback) {
-	// httpService.get('/importProjects', function(response) {
-	// 	callback(response.data);
-	// });
+	githubService.getProjects(function(error, data) {
+		if (callback && typeof callback === 'function') {
+			callback(data);
+		}
+	});
 }
 
 
-// exports.recompileCss = function(callback) {
-// 	httpService.post('/compileCss', null, function(response) {
-// 		if (callback && typeof callback == 'function') {
-// 			callback(response.data);
-// 		}
-// 	});
-// }
+exports.pullFromGitHub = function () {
+	githubService.getGistData(function(ghData) {
+		const localData = storageService.retrieve();
+		if (ghData.tasks) {
+			for (let k in ghData.tasks) {
+				if (!localData.tasks[k] || localData.tasks[k].timestampModified < ghData.tasks[k].timestampModified) {
+					localData.tasks[k] = ghData.tasks[k];
+				}
+			}
+		}
+		if (ghData.projects) {
+			for (let k in ghData.projects) {
+				if (!localData.projects[k] || localData.projects[k].timestampModified < ghData.projects[k].timestampModified) {
+					localData.projects[k] = ghData.projects[k];
+				}
+			}
+		}
+		storageService.save(localData);
+	});
+}
 
 
-// exports.recompileJs = function(callback) {
-// 	httpService.post('/compileJs', null, function(response) {
-// 		if (callback && typeof callback == 'function') {
-// 			callback(response.data);
-// 		}
-// 	});
-// }
+exports.saveToGitHub = function () {
+	let data = storageService.retrieve();
+	const validatedData = {
+		tasks : {},
+		projects : {},
+	};
+	if (data.tasks) {
+		for (let k in data.tasks) {
+			validatedData.tasks[k] = {
+				id : data.tasks[k].id,
+				name : data.tasks[k].name,
+				projectId : data.tasks[k].projectId,
+				status : data.tasks[k].status,
+				timestampCreated : isNaN(data.tasks[k].timestampCreated) ? 0 : data.tasks[k].timestampCreated,
+				timestampModified : isNaN(data.tasks[k].timestampModified) ? 0 : data.tasks[k].timestampModified,
+			}
+		}
+	}
+	if (data.projects) {
+		for (let k in data.projects) {
+			validatedData.projects[k] = {
+				id : data.projects[k].id,
+				name : data.projects[k].name,
+				visible : data.projects[k].visible,
+				color : data.projects[k].color,
+				repo : data.projects[k].repo,
+				timestampCreated : isNaN(data.projects[k].timestampCreated) ? 0 : data.projects[k].timestampCreated,
+				timestampModified : isNaN(data.projects[k].timestampModified) ? 0 : data.projects[k].timestampModified,
+			}
+		}
+	}
+	validatedData.timestampSynchronized = parseInt(data.timestampSynchronized);
+	githubService.setGistData(validatedData);
+}
 
 
-// exports.getConfig = function(callback) {
-// 	httpService.get('/getConfig', function(response) {
-// 		if (callback && typeof callback == 'function') {
-// 			callback(response.data);
-// 		}
-// 	});
-// }
+exports.syncWithGitHub = function () {
+}

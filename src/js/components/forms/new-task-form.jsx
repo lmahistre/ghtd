@@ -3,8 +3,7 @@ const React = require("react");
 
 const SmallButton = require("../ui/small-button.jsx");
 
-const actionsService = require('../../services/actions.js');
-const dataContainerService = require('../../services/data-container.js');
+const dataService = require('../../services/data.js');
 const browserService = require('../../services/browser.js');
 const storageService = require('../../services/storage.js');
 const utilsService = require('../../services/utils.js');
@@ -41,9 +40,9 @@ class NewTaskForm extends React.Component {
 			this.setState({
 				name: '',
 			});
-			dataContainerService.setTask(task.id, task);
+			dataService.setTask(task.id, task);
 			storageService.save({
-				tasks : dataContainerService.getTasks(),
+				tasks : dataService.getTasks(),
 			});
 			// actionsService.saveData();
 			browserService.render();

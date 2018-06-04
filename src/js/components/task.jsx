@@ -5,40 +5,36 @@ const Link = ReactRouterDom.Link;
 
 const SmallButton = require("./ui/small-button.jsx");
 
-const actionsService = require('../services/actions.js');
 const browserService = require('../services/browser.js');
-const dataContainerService = require('../services/data-container.js');
+const dataService = require('../services/data.js');
 const storageService = require('../services/storage.js');
 
 class Task extends React.Component {
 
 	resolve(id) {
-		const task = dataContainerService.getTask(id);
+		const task = dataService.getTask(id);
 		if (task) {
 			task.status = 'done';
 			task.timestampModified = parseInt(Date.now()/1000);
 		}
-		dataContainerService.setTask(id, task);
-		actionsService.saveData();
+		dataService.setTask(id, task);
 		browserService.render();
 	}
 
 
 	delete(id) {
-		dataContainerService.deleteTask(id);
-		actionsService.saveData();
+		dataService.deleteTask(id);
 		browserService.render();
 	}
 
 
 	unresolve(id) {
-		const task = dataContainerService.getTask(id);
+		const task = dataService.getTask(id);
 		if (task) {
 			task.status = 'active';
 			task.timestampModified = parseInt(Date.now()/1000);
 		}
-		dataContainerService.setTask(id, task);
-		// actionsService.saveData();
+		dataService.setTask(id, task);
 		browserService.render();
 	}
 
@@ -65,17 +61,16 @@ class Task extends React.Component {
 			isBeingEdited : false,
 		});
 		const id = self.props.task.id;
-		const task = dataContainerService.getTask(self.props.task.id);
+		const task = dataService.getTask(self.props.task.id);
 		const name = document.getElementById("task-edit-name-"+id).value;
 		const projectId = document.getElementById("task-edit-projectId-"+id).value;
 		if (task.name != name || task.projectId != projectId) {
 			task.name = name;
 			task.projectId = projectId;
 			task.timestampModified = parseInt(Date.now()/1000);
-			dataContainerService.setTask(id, task);
-			// actionsService.saveData();
+			dataService.setTask(id, task);
 			storageService.save({
-				tasks : dataContainerService.getTasks(),
+				tasks : dataService.getTasks(),
 			});
 			browserService.render();
 		}
@@ -106,7 +101,7 @@ class Task extends React.Component {
 					color : '',
 				}
 			];
-			const projects = dataContainerService.getProjects();
+			const projects = dataService.getProjects();
 			for (let i in projects) {
 				let project = projects[i];
 				projectList.push(project);

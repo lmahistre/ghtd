@@ -4,9 +4,8 @@ const AppPage = require("../app-page.jsx");
 const CommonButton = require("../ui/common-button.jsx");
 const ProjectEditForm = require("../forms/project-edit-form.jsx");
 
-const actionsService = require('../../services/actions.js');
 const browserService = require('../../services/browser.js');
-const dataContainerService = require('../../services/data-container.js');
+const dataService = require('../../services/data.js');
 const utilsService = require('../../services/utils.js');
 
 class ProjectEdit extends React.Component {
@@ -21,8 +20,7 @@ class ProjectEdit extends React.Component {
 			repo : document.forms['project-edit'].repo.value,
 		};
 		if (project.name.length > 0) {
-			dataContainerService.setProject(id, project);
-			actionsService.saveData();
+			dataService.setProject(id, project);
 			window.location.href = '#/projects';
 		}
 	}
@@ -36,8 +34,7 @@ class ProjectEdit extends React.Component {
 			color : document.forms['project-edit'].color.value,
 			repo : document.forms['project-edit'].repo.value,
 		};
-		dataContainerService.setProject(project.id, project);
-		actionsService.saveData();
+		dataService.setProject(project.id, project);
 		browserService.redirect('projects');
 	}
 
@@ -45,7 +42,7 @@ class ProjectEdit extends React.Component {
 	render() {
 		const self = this;
 		let save = self.create;
-		let project = dataContainerService.getProject(self.props.match.params.id);
+		let project = dataService.getProject(self.props.match.params.id);
 		// In case of edition
 		if (project) {
 			if (project.visible === undefined) {

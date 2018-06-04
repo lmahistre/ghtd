@@ -5,7 +5,7 @@ const AppPage = require("../app-page.jsx");
 const SmallButton = require("../ui/small-button.jsx");
 
 const actionsService = require('../../services/actions.js');
-const dataService = require('../../services/data-container.js');
+const dataService = require('../../services/data.js');
 const utilsService = require('../../services/utils.js');
 const storageService = require('../../services/storage.js');
 const browserService = require('../../services/browser.js');
@@ -22,7 +22,6 @@ class ProjectImport extends React.Component {
 			color : utilsService.generateRandomColor(),
 		};
 		dataService.setProject(id, project);
-		actionsService.saveData();
 		browserService.render();
 	}
 
@@ -40,16 +39,16 @@ class ProjectImport extends React.Component {
 	render () {
 		const self = this;
 		const importProjects = dataService.getImportProjects();
-		if (!dataService.getImportProjectsIsLoaded()) {
-			if (!dataService.getDataIsLoaded()) {
-				actionsService.getData(function() {
-					self.refresh();
-				})
-			}
-			else {
-				self.refresh();
-			}
-		}
+		// if (!dataService.getImportProjectsIsLoaded()) {
+		// 	if (!dataService.getDataIsLoaded()) {
+		// 		actionsService.getData(function() {
+		// 			self.refresh();
+		// 		})
+		// 	}
+		// 	else {
+		// 		self.refresh();
+		// 	}
+		// }
 
 		const projects = dataService.getProjects();
 		const alreadyExistingProjects = [];

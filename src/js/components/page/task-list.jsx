@@ -6,37 +6,36 @@ const SmallButton = require("../ui/small-button.jsx");
 const CommonButton = require("../ui/common-button.jsx");
 const NewTaskForm = require("../forms/new-task-form.jsx");
 
-const actionService = require('../../services/actions.js');
+const actionsService = require('../../services/actions.js');
 const browserService = require('../../services/browser.js');
 const githubService = require('../../services/github.js');
 const storageService = require('../../services/storage.js');
-const dataContainerService = require('../../services/data-container.js');
+const dataService = require('../../services/data.js');
 
 class TaskList extends React.Component {
 
 	removeResolved () {
-		const tasks = dataContainerService.getTasks();
+		const tasks = dataService.getTasks();
 		for (let i in tasks) {
 			if (tasks[i].status === 'done') {
-				dataContainerService.deleteTask(i);
+				dataService.deleteTask(i);
 			}
 		}
-		actionService.saveData();
 		browserService.render();
 	}
 
 
 	syncGitHub () {
 		githubService.getGistData(function(data) {
-			const tasks = dataContainerService.getTasks();
+			const tasks = dataService.getTasks();
 			if (data.tasks) {
 				for (let k in data.tasks) {
-					dataContainerService.setTask(k, data.tasks[k]);
+					dataService.setTask(k, data.tasks[k]);
 				}
 			}
 			if (data.projects) {
 				for (let k in data.projects) {
-					dataContainerService.setProject(k, data.projects[k]);
+					dataService.setProject(k, data.projects[k]);
 				}
 			}
 			storageService.save(data);
@@ -53,7 +52,7 @@ class TaskList extends React.Component {
 
 	sort (object) {
 		const list = [];
-		const projects = dataContainerService.getProjects();
+		const projects = dataService.getProjects();
 		for (let i in object) {
 			let task = object[i];
 			if (!task.status) {
@@ -83,8 +82,9 @@ class TaskList extends React.Component {
 	render() {
 		const self = this;
 		let taskList = [];
-		if (dataContainerService.getDataIsLoaded()) {
-			taskList = self.sort(dataContainerService.getTasks());
+		const tasks = dataService.getTasks();
+		if (tasks) {
+			taskList = self.sort(dataService.getTasks());
 		}
 		const projectList = [
 			{
@@ -92,15 +92,15 @@ class TaskList extends React.Component {
 				name : '',
 			},
 		];
-		const projects = dataContainerService.getProjects();
+		const projects = dataService.getProjects();
 		for (let i in projects) {
 			projectList.push(projects[i]);
 		}
 		return (
 			<AppPage selectedMenu="tasks">
 				<CommonButton onClick={self.removeResolved}>{"Clean resolved"}</CommonButton>
-				<CommonButton onClick={self.syncGitHub}>{"Sync with GitHub"}</CommonButton>
-				<CommonButton onClick={self.saveToGitHub}>{"Save to GitHub"}</CommonButton>
+				<CommonButton onClick={actionsService.pullFromGitHub}>{"Sync with GitHub"}</CommonButton>
+				<CommonButton onClick={actionsService.saveToGitHub}>{"Save to GitHub"}</CommonButton>
 				<table className="list-table" data-table="task-list">
 					<tbody>
 						<NewTaskForm projectList={projectList} />

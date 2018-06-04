@@ -5,9 +5,8 @@ const AppPage = require("../app-page.jsx");
 const SmallButton = require("../ui/small-button.jsx");
 const CommonButton = require("../ui/common-button.jsx");
 
-const actionsService = require('../../services/actions.js');
 const browserService = require('../../services/browser.js');
-const dataContainerService = require('../../services/data-container.js');
+const dataService = require('../../services/data.js');
 const storageService = require('../../services/storage.js');
 
 class Settings extends React.Component {

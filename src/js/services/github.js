@@ -1,14 +1,16 @@
 
 const browserService = require('./browser.js');
+const alertService = require('./alert.js');
 const stateContainerService = require('./state-container.js');
 const storageService = require('./storage.js');
 
 
 const config = {
-	filename : 'ght.json',
-	fileDescription : 'Github-Todo',
-	userAgent : 'GHT',
-	endPoint : 'https://api.github.com/gists/',
+	// filename : 'ght.json',
+	// fileDescription : 'Github-Todo',
+	// userAgent : 'GHT',
+	// endPoint : 'https://api.github.com/gists/',
+	site : 'https://api.github.com',
 }
 
 
@@ -34,7 +36,8 @@ const call = function(uri, post, callback) {
 		params.body = JSON.stringify(post);
 		params.headers = new Headers({  
 			'Content-type': "application/json; charset=UTF-8",
-			'User-Agent' : config.userAgent,
+			// 'User-Agent' : config.userAgent,
+			'User-Agent' : settings.appName,
 			'Authorization' : 'Basic '+btoa(settings.user+':'+settings.token),
 		});
 	}
@@ -45,20 +48,18 @@ const call = function(uri, post, callback) {
 	.then(function(responseText) {
 		try {
 			const responseData = JSON.parse(responseText);
-			console.log(responseData);
-
 			if (responseData.warning) {
 				console.warn(responseData.warning);
 			}
 			if (responseData.error) {
-				browserService.error(responseData.error);
+				alertService.error(responseData.error);
 			}
 			if (callback && typeof callback === 'function') {
 				callback(responseData);
 			}
 		}
 		catch (error) {
-			browserService.error(error);
+			alertService.error(error);
 		}
 		stateContainerService.decreasePleaseWait();
 		browserService.render();
@@ -67,7 +68,7 @@ const call = function(uri, post, callback) {
 		});
 	})
 	.catch(function(error) {
-		browserService.error(error);
+		alertService.error(error);
 		return new Promise(function(resolve, reject) {
 			reject(error);
 		});
@@ -80,8 +81,9 @@ const call = function(uri, post, callback) {
  */
 exports.getGistData = function(callback) {
 	const settings = storageService.getSettings();
-	call(config.endPoint+settings.gistId, null, function(parsedData) {
-		const gistContent = parsedData.files[config.filename].content;
+	call(config.site+'/gists/'+settings.gistId, null, function(parsedData) {
+		// const gistContent = parsedData.files[config.filename].content;
+		const gistContent = parsedData.files[settings.fileName].content;
 		const gistData = JSON.parse(gistContent);
 		if (callback && typeof callback === 'function') {
 			callback(gistData);
@@ -93,15 +95,18 @@ exports.getGistData = function(callback) {
 exports.setGistData = function(post, callback) {
 	const settings = storageService.getSettings();
 	const postData = {
-		description : config.fileDescription,
+		// description : config.fileDescription,
+		description : settings.appName,
 		files : {
-			[config.filename] : {
+			// [config.filename] : {
+			[settings.fileName] : {
 				content : JSON.stringify(post),
 			},
 		},
 	};
-	call(config.endPoint+settings.gistId, postData, function(parsedData) {
-		const gistContent = parsedData.files[config.filename].content;
+	call(config.site+'/gists/'+settings.gistId, postData, function(parsedData) {
+		// const gistContent = parsedData.files[config.filename].content;
+		const gistContent = parsedData.files[settings.fileName].content;
 		const gistData = JSON.parse(gistContent);
 		if (callback && typeof callback === 'function') {
 			callback(gistData);
@@ -112,7 +117,7 @@ exports.setGistData = function(post, callback) {
 
 exports.getProjects = function(callback) {
 	const settings = storageService.getSettings();
-	call('https://api.github.com/users/'+settings.user+'/repos', null, function(parsedData) {
+	call(config.site+'/users/'+settings.user+'/repos', null, function(parsedData) {
 		try {
 			const projects = [];
 			for (var i = 0; i < parsedData.length; i++) {
@@ -131,43 +136,5 @@ exports.getProjects = function(callback) {
 			}
 		}
 	});
-
-
-	// let reqOptions = JSON.parse(JSON.stringify(options));
-	// reqOptions.path = '/users/'+config.user+'/repos';
-	// reqOptions.auth = config.user+':'+config.token;
-	// https.get(reqOptions, function(response) {
-	// 	response.setEncoding('utf8');
-	// 	let content = '';
-	// 	response.on('data', function (chunk) {
-	// 		content += chunk;
-	// 	});
-	// 	response.on('end', function() {
-	// 		try {
-	// 			const parsedData = JSON.parse(content);
-	// 			const projects = [];
-	// 			for (var i = 0; i < parsedData.length; i++) {
-	// 				projects.push({
-	// 					name : parsedData[i].name,
-	// 				});
-	// 			}
-	// 			if (callback && typeof callback === 'function') {
-	// 				callback(null, projects);
-	// 			}
-	// 		}
-	// 		catch (err) {
-	// 			console.error(err);
-	// 			if (callback && typeof callback === 'function') {
-	// 				callback(err, null);
-	// 			}
-	// 		}
-	// 	});
-	// })
-	// .on('error', function(err) {
-	// 	console.error(err);
-	// 	if (callback && typeof callback === 'function') {
-	// 		callback(err, null);
-	// 	}
-	// });
 }
 

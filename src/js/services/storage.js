@@ -1,5 +1,6 @@
 
 const browserService = require('./browser.js');
+const alertService = require('./alert.js');
 
 let localStorage = window && window.localStorage ? window.localStorage : null;
 
@@ -26,11 +27,12 @@ exports.retrieve = function (callback) {
 		data.timestampSynchronized = parseInt(localStorage.timestampSynchronized);
 	}
 	catch (error) {
-		browserService.error(error);
+		alertService.error(error);
 	}
 	if (callback && typeof callback === 'function') {
 		callback(data);
 	}
+	return data;
 }
 
 
@@ -83,32 +85,32 @@ exports.getProjects = function () {
 
 
 exports.getImportProjects = function (callback) {
-	var importProjects;
+	var importProjects = [];
 	try {
 		if (localStorage.importProjects) {
 			importProjects = JSON.parse(localStorage.importProjects);
 		}
 	}
 	catch (error) {
-		browserService.error(error);
+		alertService.error(error);
 	}
-	if (callback && typeof callback === 'function') {
-		callback(importProjects);
-	}
+	return importProjects;
 }
 
 
 exports.getSettings = function () {
+	var settings = {};
 	try {
 		if (localStorage.settings) {
-			let settings = JSON.parse(localStorage.settings);
-			return settings;
-		}
-		else {
-			return {};
+			settings = JSON.parse(localStorage.settings);
 		}
 	}
-	catch (error) {
-		return {};
+	catch (error) {}
+	if (!settings.appName) {
+		settings.appName = 'GHT';
 	}
+	if (!settings.fileName) {
+		settings.fileName = 'ght.json';
+	}
+	return settings;
 }
