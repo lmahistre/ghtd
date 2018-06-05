@@ -58,7 +58,7 @@ class ProjectList extends React.Component {
 								</td>
 								<td data-column="name">{elt.name}</td>
 								<td data-column="indicators">
-									<SmallButton fa={elt.repo ? "github" : "square-o"} title={elt.repo} style={{backgroundColor : '#'+elt.color}} />
+									<SmallButton fa={elt.repo ? "github" : ""} title={elt.repo} style={{backgroundColor : '#'+elt.color}} />
 									<VisibleMarker visible={elt.visible} />
 								</td>
 							</tr>

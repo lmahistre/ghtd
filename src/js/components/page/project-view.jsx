@@ -2,12 +2,13 @@ const React = require("react");
 
 const AppPage = require("../app-page.jsx");
 
+const dataService = require('../../services/data.js');
+
 class ProjectView extends React.Component {
 
 	render () {
 		const self = this;
-		let task = dataService.getTask(self.props.match.params.id);
-		let project = task.projectId ? dataService.getProject(task.projectId) : null;
+		let project = dataService.getProject(self.props.match.params.id);
 		return (
 			<AppPage selectedMenu="projects">
 				<table className="list-table">

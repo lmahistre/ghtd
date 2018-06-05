@@ -15,38 +15,8 @@ const dataService = require('../../services/data.js');
 class TaskList extends React.Component {
 
 	removeResolved () {
-		const tasks = dataService.getTasks();
-		for (let i in tasks) {
-			if (tasks[i].status === 'done') {
-				dataService.deleteTask(i);
-			}
-		}
+		actionsService.removeResolvedTasks();
 		browserService.render();
-	}
-
-
-	syncGitHub () {
-		githubService.getGistData(function(data) {
-			const tasks = dataService.getTasks();
-			if (data.tasks) {
-				for (let k in data.tasks) {
-					dataService.setTask(k, data.tasks[k]);
-				}
-			}
-			if (data.projects) {
-				for (let k in data.projects) {
-					dataService.setProject(k, data.projects[k]);
-				}
-			}
-			storageService.save(data);
-		});
-	}
-
-
-	saveToGitHub() {
-		storageService.retrieve(function(data) {
-			githubService.setGistData(data);
-		});
 	}
 
 

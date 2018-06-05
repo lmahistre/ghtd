@@ -12,6 +12,17 @@ exports.importProjects = function (callback) {
 }
 
 
+exports.removeResolvedTasks = function () {
+	const tasks = dataService.getTasks();
+	for (let i in tasks) {
+		if (tasks[i].status === 'done') {
+			delete tasks[i];
+		}
+	}
+	storageService.save({tasks});
+}
+
+
 exports.pullFromGitHub = function () {
 	githubService.getGistData(function(ghData) {
 		const localData = storageService.retrieve();
