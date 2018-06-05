@@ -85,3 +85,6 @@ module.exports.colors = [
 		"color":"F7D",
 	},
 ];
+
+exports.appName = 'GHT';
+exports.fileName = 'ght.json';

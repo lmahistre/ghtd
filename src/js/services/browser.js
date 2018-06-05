@@ -20,7 +20,7 @@ exports.setTitle = function (str) {
 exports.notify = function (msg) {
 	if (window.Notification) {
 		var options = {
-			icon : $('head link[rel^=shortcut]').attr('href'),
+			// icon : $('head link[rel^=shortcut]').attr('href'),
 		};
 
 		if (Notification.permission === "granted") {
@@ -34,14 +34,6 @@ exports.notify = function (msg) {
 			});
 		}
 	}
-}
-
-
-// TODO : a deplacer
-exports.error = function (err) {
-	stateContainerService.addAlert(err.message ? err.message : err, 'error');
-	exports.render();
-	console.error(err);
 }
 
 

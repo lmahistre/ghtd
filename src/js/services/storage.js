@@ -19,18 +19,15 @@ exports.save = function (data) {
 }
 
 
-exports.retrieve = function (callback) {
+exports.retrieve = function () {
 	const data = {}
 	try {
-		data.tasks = JSON.parse(localStorage.tasks);
-		data.projects = JSON.parse(localStorage.projects);
+		data.tasks = localStorage.tasks ? JSON.parse(localStorage.tasks) : {};
+		data.projects = localStorage.projects ? JSON.parse(localStorage.projects) : {};
 		data.timestampSynchronized = parseInt(localStorage.timestampSynchronized);
 	}
 	catch (error) {
 		alertService.error(error);
-	}
-	if (callback && typeof callback === 'function') {
-		callback(data);
 	}
 	return data;
 }

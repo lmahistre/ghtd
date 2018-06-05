@@ -66,11 +66,19 @@ class TaskList extends React.Component {
 		for (let i in projects) {
 			projectList.push(projects[i]);
 		}
+
+		const settings = storageService.getSettings();
+		const isConnected = settings.user && settings.gistId && settings.token;
+
 		return (
 			<AppPage selectedMenu="tasks">
 				<CommonButton onClick={self.removeResolved}>{"Clean resolved"}</CommonButton>
-				<CommonButton onClick={actionsService.pullFromGitHub}>{"Sync with GitHub"}</CommonButton>
-				<CommonButton onClick={actionsService.saveToGitHub}>{"Save to GitHub"}</CommonButton>
+				{isConnected ? 
+					<CommonButton onClick={actionsService.pullFromGitHub}>{"Sync with GitHub"}</CommonButton>
+				: null}
+				{isConnected ? 
+					<CommonButton onClick={actionsService.saveToGitHub}>{"Save to GitHub"}</CommonButton>
+				: null}
 				<table className="list-table" data-table="task-list">
 					<tbody>
 						<NewTaskForm projectList={projectList} />
