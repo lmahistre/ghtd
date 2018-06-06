@@ -14,6 +14,7 @@ const ProjectImport = require("./page/project-import.jsx");
 const ProjectList = require("./page/project-list.jsx");
 const ProjectView = require("./page/project-view.jsx");
 const Settings = require("./page/settings.jsx");
+const SettingsEdit = require("./page/settings-edit.jsx");
 
 class AppRouter extends React.Component {
 
@@ -31,6 +32,7 @@ class AppRouter extends React.Component {
 				<Route exact path="/project-delete/:id" component={ProjectDelete} />
 				<Route exact path="/project-import" component={ProjectImport} />
 				<Route exact path="/settings" component={Settings} />
+				<Route exact path="/settings-edit" component={SettingsEdit} />
 				<Route exact path="*" component={TaskList} />
 			</Switch>
 		);

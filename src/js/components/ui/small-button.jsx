@@ -8,10 +8,7 @@ class SmallButton extends React.Component {
 
 	render() {
 		let className;
-		if (this.props.glyphicon) {
-			className = "glyphicon glyphicon-"+this.props.glyphicon;
-		}
-		else if (this.props.fa) {
+		if (this.props.fa) {
 			className = "fa fa-"+this.props.fa;
 		}
 		else {

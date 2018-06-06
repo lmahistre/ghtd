@@ -39,17 +39,6 @@ class ProjectImport extends React.Component {
 	render () {
 		const self = this;
 		const importProjects = dataService.getImportProjects();
-		// if (!dataService.getImportProjectsIsLoaded()) {
-		// 	if (!dataService.getDataIsLoaded()) {
-		// 		actionsService.getData(function() {
-		// 			self.refresh();
-		// 		})
-		// 	}
-		// 	else {
-		// 		self.refresh();
-		// 	}
-		// }
-
 		const projects = dataService.getProjects();
 		const alreadyExistingProjects = [];
 		for (var i in projects) {

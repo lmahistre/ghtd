@@ -1,6 +1,6 @@
 
-const browserService = require('./browser.js');
 const alertService = require('./alert.js');
+const constsService = require('./consts.js');
 
 let localStorage = window && window.localStorage ? window.localStorage : null;
 
@@ -16,6 +16,7 @@ exports.save = function (data) {
 	for (let k in data) {
 		localStorage[k] = JSON.stringify(data[k]);
 	}
+	localStorage.timestampSynchronized = parseInt(Date.now()/1000);
 }
 
 
@@ -24,7 +25,7 @@ exports.retrieve = function () {
 	try {
 		data.tasks = localStorage.tasks ? JSON.parse(localStorage.tasks) : {};
 		data.projects = localStorage.projects ? JSON.parse(localStorage.projects) : {};
-		data.timestampSynchronized = parseInt(localStorage.timestampSynchronized);
+		data.timestampSynchronized = isNaN(localStorage.timestampSynchronized) ? 0 : parseInt(localStorage.timestampSynchronized);
 	}
 	catch (error) {
 		alertService.error(error);
@@ -104,10 +105,10 @@ exports.getSettings = function () {
 	}
 	catch (error) {}
 	if (!settings.appName) {
-		settings.appName = 'GHT';
+		settings.appName = constsService.appName;
 	}
 	if (!settings.fileName) {
-		settings.fileName = 'ght.json';
+		settings.fileName = constsService.fileName;
 	}
 	return settings;
 }

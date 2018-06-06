@@ -74,10 +74,7 @@ class TaskList extends React.Component {
 			<AppPage selectedMenu="tasks">
 				<CommonButton onClick={self.removeResolved}>{"Clean resolved"}</CommonButton>
 				{isConnected ? 
-					<CommonButton onClick={actionsService.pullFromGitHub}>{"Sync with GitHub"}</CommonButton>
-				: null}
-				{isConnected ? 
-					<CommonButton onClick={actionsService.saveToGitHub}>{"Save to GitHub"}</CommonButton>
+					<CommonButton onClick={actionsService.syncWithGitHub}>{"Sync with GitHub"}</CommonButton>
 				: null}
 				<table className="list-table" data-table="task-list">
 					<tbody>

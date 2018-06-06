@@ -1,5 +1,6 @@
 
 const storageService = require('./storage.js');
+const alertService = require('./alert.js');
 
 
 exports.getProjects = storageService.getProjects;
@@ -64,8 +65,11 @@ exports.deleteTask = function(id) {
 	const tasks = exports.getTasks();
 	if (tasks[id]) {
 		delete tasks[id];
-		return true;
 		storageService.save({tasks});
+		return true;
+	}
+	else {
+		alertService.error('Task cannot be removed');
 	}
 	return false;
 }

@@ -18,7 +18,7 @@ class Alerts extends React.Component {
 					{self.props.alerts.map((elt, index) => (
 						<div key={index} className={"alert "+elt.type}>
 							{elt.message}
-							<span className="glyphicon glyphicon-remove alert-hide" aria-hidden="true" onClick={self.hide.bind(self, index)}></span>
+							<span className="fa fa-remove alert-hide" aria-hidden="true" onClick={self.hide.bind(self, index)}></span>
 						</div>
 					))}
 				</div>

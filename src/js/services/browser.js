@@ -3,12 +3,13 @@ const ReactDOM = require("react-dom");
 const AppRouter = require("../components/app-router.jsx");
 
 const stateContainerService = require('./state-container.js');
+const constsService = require('./consts.js');
 
 /**
  * Set the title of the document
  */
 exports.setTitle = function (str) {
-	var baseTitle = 'GHT';
+	var baseTitle = constsService.appName;
 	var title = baseTitle;
 	if (str.length > 0) {
 		title += ' - '+str;

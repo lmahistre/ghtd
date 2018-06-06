@@ -1,6 +1,7 @@
 const React = require("react");
 
 const AppPage = require("../app-page.jsx");
+const VisibleMarker = require("../visible-marker.jsx");
 
 const dataService = require('../../services/data.js');
 
@@ -22,8 +23,8 @@ class ProjectView extends React.Component {
 							<td>{project.name}</td>
 						</tr>
 						<tr>
-							<td>{"Project"}</td>
-							<td>{project.color}</td>
+							<td>{"Color"}</td>
+							<td style={{color : '#'+project.color}}>{project.color}</td>
 						</tr>
 						<tr>
 							<td>{"Repository"}</td>
@@ -31,7 +32,17 @@ class ProjectView extends React.Component {
 						</tr>
 						<tr>
 							<td>{"Visible"}</td>
-							<td>{project.visible}</td>
+							<td>
+								<VisibleMarker visible={project.visible} title={project.visible ? 'Visible' : 'Not visible'} />
+							</td>
+						</tr>
+						<tr>
+							<td>{"Creation time"}</td>
+							<td>{project.timestampCreated}</td>
+						</tr>
+						<tr>
+							<td>{"Modification time"}</td>
+							<td>{project.timestampModified}</td>
 						</tr>
 					</tbody>
 				</table>

@@ -6,10 +6,6 @@ const storageService = require('./storage.js');
 
 
 const config = {
-	// filename : 'ght.json',
-	// fileDescription : 'Github-Todo',
-	// userAgent : 'GHT',
-	// endPoint : 'https://api.github.com/gists/',
 	site : 'https://api.github.com',
 }
 
@@ -36,7 +32,6 @@ const call = function(uri, post, callback) {
 		params.body = JSON.stringify(post);
 		params.headers = new Headers({  
 			'Content-type': "application/json; charset=UTF-8",
-			// 'User-Agent' : config.userAgent,
 			'User-Agent' : settings.appName,
 			'Authorization' : 'Basic '+btoa(settings.user+':'+settings.token),
 		});
@@ -82,7 +77,6 @@ const call = function(uri, post, callback) {
 exports.getGistData = function(callback) {
 	const settings = storageService.getSettings();
 	call(config.site+'/gists/'+settings.gistId, null, function(parsedData) {
-		// const gistContent = parsedData.files[config.filename].content;
 		const gistContent = parsedData.files[settings.fileName].content;
 		const gistData = JSON.parse(gistContent);
 		if (callback && typeof callback === 'function') {
@@ -95,17 +89,14 @@ exports.getGistData = function(callback) {
 exports.setGistData = function(post, callback) {
 	const settings = storageService.getSettings();
 	const postData = {
-		// description : config.fileDescription,
 		description : settings.appName,
 		files : {
-			// [config.filename] : {
 			[settings.fileName] : {
 				content : JSON.stringify(post),
 			},
 		},
 	};
 	call(config.site+'/gists/'+settings.gistId, postData, function(parsedData) {
-		// const gistContent = parsedData.files[config.filename].content;
 		const gistContent = parsedData.files[settings.fileName].content;
 		const gistData = JSON.parse(gistContent);
 		if (callback && typeof callback === 'function') {
