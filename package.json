@@ -3,9 +3,7 @@
   "version": "0.1.0",
   "description": "Library",
   "main": "index.html",
-  "dependencies": {
-    "express": "^4.16.2"
-  },
+  "dependencies": {},
   "devDependencies": {
     "react": "^16.3.2",
     "react-app-base": "git+https://github.com/lmahistre/react-app-base.git",
