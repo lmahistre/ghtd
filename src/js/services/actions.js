@@ -3,6 +3,7 @@ const storageService = require('./storage.js');
 const githubService = require('./github.js');
 const dataService = require('./data.js');
 const validateService = require('./validate.js');
+const alertService = require('./alert.js');
 
 
 exports.importProjects = function (callback) {
@@ -26,12 +27,16 @@ exports.removeResolvedTasks = function () {
 
 
 const pullFromGitHub = function (callback) {
-	githubService.getGistData(function(ghData) {
+	githubService.getGistData(function(error, ghData) {
+		if (error) {
+			alertService.error(error);
+		}
 		const localData = storageService.retrieve();
-		if (ghData.tasks) {
+		if (ghData && ghData.tasks) {
 			for (let k in ghData.tasks) {
 				if ((typeof localData.tasks[k] === 'undefined'
-						&& localData.timestampSynchronized < ghData.timestampSynchronized) 
+						&& (!localData.timestampSynchronized
+							|| localData.timestampSynchronized < ghData.timestampSynchronized)) 
 					|| (localData.tasks[k] 
 						&& localData.tasks[k].timestampModified < ghData.tasks[k].timestampModified)
 				) {
@@ -39,11 +44,12 @@ const pullFromGitHub = function (callback) {
 				}
 			}
 		}
-		if (ghData.projects) {
+		if (ghData && ghData.projects) {
 			for (let k in ghData.projects) {
 				// if (!localData.projects[k] || localData.projects[k].timestampModified < ghData.projects[k].timestampModified) {
 				if ((typeof localData.projects[k] === 'undefined'
-						&& localData.timestampSynchronized < ghData.timestampSynchronized) 
+						&& (!localData.timestampSynchronized
+							|| localData.timestampSynchronized < ghData.timestampSynchronized)) 
 					|| (localData.projects[k] 
 						&& localData.projects[k].timestampModified < ghData.projects[k].timestampModified)
 				) {
@@ -52,7 +58,7 @@ const pullFromGitHub = function (callback) {
 			}
 		}
 		// Remove deleted tasks
-		if (localData.timestampSynchronized < ghData.timestampSynchronized) {
+		if (localData.timestampSynchronized && localData.timestampSynchronized < ghData.timestampSynchronized) {
 			for (let k in localData.tasks) {
 				if (typeof ghData.tasks[k] === 'undefined') {
 					delete localData.tasks[k];
@@ -62,32 +68,38 @@ const pullFromGitHub = function (callback) {
 		storageService.save(localData);
 
 		if (callback && typeof callback === 'function') {
-			callback(localData);
+			callback(ghData);
 		}
 	});
 }
 
 
 const saveToGitHub = function (data) {
-	const validatedData = {
-		tasks : {},
-		projects : {},
-	};
-	if (data.tasks) {
-		for (let k in data.tasks) {
-			validatedData.tasks[k] = validateService.task(data.tasks[k]);
+	if (data && data.tasks && data.projects) {
+		const validatedData = {
+			tasks : {},
+			projects : {},
+		};
+		if (data.tasks) {
+			for (let k in data.tasks) {
+				validatedData.tasks[k] = validateService.task(data.tasks[k]);
+			}
 		}
-	}
-	if (data.projects) {
-		for (let k in data.projects) {
-			validatedData.projects[k] = validateService.project(data.projects[k]);
+		if (data.projects) {
+			for (let k in data.projects) {
+				validatedData.projects[k] = validateService.project(data.projects[k]);
+			}
 		}
+		validatedData.timestampSynchronized = parseInt(Date.now()/1000);
+		githubService.setGistData(validatedData);
 	}
-	validatedData.timestampSynchronized = parseInt(Date.now()/1000);
-	githubService.setGistData(validatedData);
 }
 
 
 exports.syncWithGitHub = function () {
-	pullFromGitHub(saveToGitHub);
+	pullFromGitHub(function (ghData) {
+		if (ghData) {
+			saveToGitHub();
+		}
+	});
 }

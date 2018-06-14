@@ -77,10 +77,15 @@ const call = function(uri, post, callback) {
 exports.getGistData = function(callback) {
 	const settings = storageService.getSettings();
 	call(config.site+'/gists/'+settings.gistId, null, function(parsedData) {
-		const gistContent = parsedData.files[settings.fileName].content;
-		const gistData = JSON.parse(gistContent);
-		if (callback && typeof callback === 'function') {
-			callback(gistData);
+		try {
+			const gistContent = parsedData.files[settings.fileName].content;
+			const gistData = JSON.parse(gistContent);
+			if (callback && typeof callback === 'function') {
+				callback(null, gistData);
+			}
+		}
+		catch (error) {
+			callback(error);
 		}
 	});
 }

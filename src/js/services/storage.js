@@ -16,7 +16,9 @@ exports.save = function (data) {
 	for (let k in data) {
 		localStorage[k] = JSON.stringify(data[k]);
 	}
-	localStorage.timestampSynchronized = parseInt(Date.now()/1000);
+	if (data.tasks || data.projects) {
+		localStorage.timestampSynchronized = parseInt(Date.now()/1000);
+	}
 }
 
 
