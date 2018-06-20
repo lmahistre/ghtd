@@ -11,6 +11,7 @@ const browserService = require('../../services/browser.js');
 const githubService = require('../../services/github.js');
 const storageService = require('../../services/storage.js');
 const dataService = require('../../services/data.js');
+const L = require('../../services/i18n.js');
 
 class TaskList extends React.Component {
 
@@ -72,9 +73,9 @@ class TaskList extends React.Component {
 
 		return (
 			<AppPage selectedMenu="tasks">
-				<CommonButton onClick={self.removeResolved}>{"Clean resolved"}</CommonButton>
+				<CommonButton onClick={self.removeResolved}>{L("Clean resolved")}</CommonButton>
 				{isConnected ? 
-					<CommonButton onClick={actionsService.syncWithGitHub}>{"Sync with GitHub"}</CommonButton>
+					<CommonButton onClick={actionsService.syncWithGitHub}>{L("Sync with GitHub")}</CommonButton>
 				: null}
 				<table className="list-table" data-table="task-list">
 					<tbody>

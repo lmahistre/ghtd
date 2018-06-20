@@ -8,6 +8,8 @@ const browserService = require('../../services/browser.js');
 const dataService = require('../../services/data.js');
 const utilsService = require('../../services/utils.js');
 
+const L = require('../../services/i18n.js');
+
 class ProjectEdit extends React.Component {
 
 	create() {
@@ -17,11 +19,13 @@ class ProjectEdit extends React.Component {
 			name : document.forms['project-edit'].name.value,
 			visible : document.forms['project-edit'].visible.checked,
 			color : document.forms['project-edit'].color.value,
+			provider : document.forms['project-edit'].provider.value,
 			repo : document.forms['project-edit'].repo.value,
 		};
 		if (project.name.length > 0) {
 			dataService.setProject(id, project);
-			window.location.href = '#/projects';
+			// window.location.href = '#/projects';
+			browserService.redirect('projects');
 		}
 	}
 
@@ -32,6 +36,7 @@ class ProjectEdit extends React.Component {
 			name : document.forms['project-edit'].name.value,
 			visible : document.forms['project-edit'].visible.checked,
 			color : document.forms['project-edit'].color.value,
+			provider : document.forms['project-edit'].provider.value,
 			repo : document.forms['project-edit'].repo.value,
 		};
 		dataService.setProject(project.id, project);
@@ -62,9 +67,9 @@ class ProjectEdit extends React.Component {
 		}
 		return (
 			<AppPage selectedMenu="projects">
-				<CommonButton onClick={save}>{"Save"}</CommonButton>
-				<CommonButton to="/projects">{"Cancel"}</CommonButton>
-				<CommonButton to={"/project-delete/"+project.id}>{"Delete"}</CommonButton>
+				<CommonButton onClick={save}>{L("Save")}</CommonButton>
+				<CommonButton to="/projects">{L("Cancel")}</CommonButton>
+				<CommonButton to={"/project-delete/"+project.id}>{L("Delete")}</CommonButton>
 				<ProjectEditForm project={project} save={save} />
 			</AppPage>
 		);

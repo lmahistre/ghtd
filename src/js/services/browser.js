@@ -11,7 +11,7 @@ const constsService = require('./consts.js');
 exports.setTitle = function (str) {
 	var baseTitle = constsService.appName;
 	var title = baseTitle;
-	if (str.length > 0) {
+	if (str && str.length > 0) {
 		title += ' - '+str;
 	}
 	document.title = title;

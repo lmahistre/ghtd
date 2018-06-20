@@ -1,3 +1,6 @@
 
 const browserService = require('./services/browser.js');
-window.onload = browserService.render;
+window.onload = function () {
+	browserService.setTitle();
+	browserService.render();
+}

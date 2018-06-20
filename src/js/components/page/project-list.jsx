@@ -11,6 +11,7 @@ const SmallButton = require("../ui/small-button.jsx");
 const actionsService = require('../../services/actions.js');
 const browserService = require('../../services/browser.js');
 const dataService = require('../../services/data.js');
+const L = require('../../services/i18n.js');
 
 class ProjectList extends React.Component {
 
@@ -44,28 +45,28 @@ class ProjectList extends React.Component {
 		}
 		return (
 			<AppPage selectedMenu="projects">
-				<CommonButton to="/project-edit">{"New project"}</CommonButton>
-				<CommonButton onClick={self.import}>{"Import from GitHub"}</CommonButton>
+				<CommonButton to="/project-edit">{L("New project")}</CommonButton>
+				<CommonButton onClick={self.import}>{L("Import from GitHub")}</CommonButton>
 				<table className="list-table" data-table="project-list">
 					<tbody>
 						{projectList.map(elt => (
 							<tr key={elt.id}>
 								<td data-column="actions">
-									<Link to={"/project-edit/"+elt.id} className="small-button">
+									<Link to={"/project-edit/"+elt.id} className="small-button" title={L("Edit")}>
 										<span className="fa fa-edit" aria-hidden="true"></span>
 									</Link>
-									<Link to={"/project-view/"+elt.id} className="small-button">
+									<Link to={"/project-view/"+elt.id} className="small-button" title={L("View detail")}>
 										<span className="fa fa-eye" aria-hidden="true"></span>
 									</Link>
 									{elt.visible ? 
-										<SmallButton fa="eye" onClick={self.changeVisibility.bind(self, elt.id)} title={"Hide"} />
+										<SmallButton fa="eye" onClick={self.changeVisibility.bind(self, elt.id)} title={L("Hide")} />
 									:
-										<SmallButton fa="eye-slash" onClick={self.changeVisibility.bind(self, elt.id)} title={"Show"} />
+										<SmallButton fa="eye-slash" onClick={self.changeVisibility.bind(self, elt.id)} title={L("Show")} />
 									}
 								</td>
 								<td data-column="name">{elt.name}</td>
 								<td data-column="indicators">
-									<SmallButton fa={elt.repo ? "github" : ""} title={elt.repo} style={{backgroundColor : '#'+elt.color}} />
+									<SmallButton fa={elt.provider} title={elt.repo} style={{backgroundColor : '#'+elt.color}} />
 									<VisibleMarker visible={elt.visible} />
 								</td>
 							</tr>

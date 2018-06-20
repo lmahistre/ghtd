@@ -17,6 +17,7 @@ exports.project = function (obj) {
 		name : obj.name,
 		visible : obj.visible,
 		color : obj.color,
+		provider : obj.provider,
 		repo : obj.repo,
 		timestampCreated : isNaN(obj.timestampCreated) ? 0 : obj.timestampCreated,
 		timestampModified : isNaN(obj.timestampModified) ? 0 : obj.timestampModified,

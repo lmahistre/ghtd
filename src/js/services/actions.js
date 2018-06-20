@@ -101,5 +101,8 @@ exports.syncWithGitHub = function () {
 		if (ghData) {
 			saveToGitHub();
 		}
+		else {
+			alertService.warning('No data fetched');
+		}
 	});
 }

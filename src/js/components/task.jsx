@@ -8,6 +8,7 @@ const SmallButton = require("./ui/small-button.jsx");
 const browserService = require('../services/browser.js');
 const dataService = require('../services/data.js');
 const storageService = require('../services/storage.js');
+const L = require('../services/i18n.js');
 
 class Task extends React.Component {
 
@@ -109,8 +110,8 @@ class Task extends React.Component {
 			return (
 				<tr className={"status-"+elt.status}>
 					<td className="actions" data-column="actions">
-						<SmallButton fa="remove" onClick={self.cancel.bind(self)} title={"Cancel"} />
-						<SmallButton fa="check" onClick={self.save.bind(self)} title={"Save"} />
+						<SmallButton fa="remove" onClick={self.cancel.bind(self)} title={L("Cancel")} />
+						<SmallButton fa="check" onClick={self.save.bind(self)} title={L("Save")} />
 					</td>
 					<td data-column="project">
 						<select id={"task-edit-projectId-"+elt.id} className="project-label" name="projectId" defaultValue={elt.projectId}>
@@ -131,16 +132,16 @@ class Task extends React.Component {
 					<td className="actions" data-column="actions">
 						{elt.status == 'done' ? 
 							[
-								<SmallButton key={0} fa="trash" onClick={self.delete.bind(self, elt.id)} title={"Delete"} />,
-								<SmallButton key={1} fa="folder-open" onClick={self.unresolve.bind(self, elt.id)} title={"Reopen"} />
+								<SmallButton key={0} fa="trash" onClick={self.delete.bind(self, elt.id)} title={L("Delete")} />,
+								<SmallButton key={1} fa="folder-open" onClick={self.unresolve.bind(self, elt.id)} title={L("Reopen")} />
 							]
 						:
 							[
-								<SmallButton key={0} fa="edit" onClick={self.edit.bind(self, elt.id)} title={"Edit"} />,
-								<SmallButton key={1} fa="check" onClick={self.resolve.bind(self, elt.id)} title={"Resolve"} />
+								<SmallButton key={0} fa="edit" onClick={self.edit.bind(self, elt.id)} title={L("Edit")} />,
+								<SmallButton key={1} fa="check" onClick={self.resolve.bind(self, elt.id)} title={L("Resolve")} />
 							]
 						}
-						<SmallButton fa="eye" to={"/task-view/"+elt.id} title={"View"} />
+						<SmallButton fa="eye" to={"/task-view/"+elt.id} title={L("View detail")} />
 					</td>
 					<td className="project-label-container" data-column="project">
 						<div className="project-label" style={{backgroundColor : '#'+elt.projectColor}} title={elt.projectName} data-tip={elt.projectName}>{elt.projectName}</div>

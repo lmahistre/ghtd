@@ -3,6 +3,8 @@ const React = require("react");
 const AppPage = require("../app-page.jsx");
 
 const dataService = require('../../services/data.js');
+const L = require('../../services/i18n.js');
+const DateViewer = require('../ui/date-viewer.jsx');
 
 class TaskView extends React.Component {
 
@@ -15,24 +17,28 @@ class TaskView extends React.Component {
 				<table className="list-table">
 					<tbody>
 						<tr>
-							<td>{"Id"}</td>
+							<td>{L("Id")}</td>
 							<td>{task.id}</td>
 						</tr>
 						<tr>
-							<td>{"Label"}</td>
+							<td>{L("Label")}</td>
 							<td>{task.name}</td>
 						</tr>
 						<tr>
-							<td>{"Project"}</td>
+							<td>{L("Project")}</td>
 							<td style={{color: '#'+project.color}}>{project.name}</td>
 						</tr>
 						<tr>
-							<td>{"Creation time"}</td>
-							<td>{task.timestampCreated}</td>
+							<td>{L("Creation time")}</td>
+							<td>
+								<DateViewer time={task.timestampCreated} />
+							</td>
 						</tr>
 						<tr>
-							<td>{"Modification time"}</td>
-							<td>{task.timestampModified}</td>
+							<td>{L("Modification time")}</td>
+							<td>
+								<DateViewer time={task.timestampModified} />
+							</td>
 						</tr>
 					</tbody>
 				</table>

@@ -6,6 +6,7 @@ const HashRouter = ReactRouterDom.HashRouter;
 const Route = ReactRouterDom.Route;
 const Switch = ReactRouterDom.Switch;
 
+const About = require("./page/about.jsx");
 const TaskList = require("./page/task-list.jsx");
 const TaskView = require("./page/task-view.jsx");
 const ProjectDelete = require("./page/project-delete.jsx");
@@ -23,6 +24,7 @@ class AppRouter extends React.Component {
 		this.routes = (
 			<Switch>
 				<Route exact path="/" component={TaskList} />
+				<Route exact path="/about" component={About} />
 				<Route exact path="/tasks" component={TaskList} />
 				<Route exact path="/task-view/:id" component={TaskView} />
 				<Route exact path="/projects" component={ProjectList} />

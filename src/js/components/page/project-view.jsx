@@ -2,8 +2,11 @@ const React = require("react");
 
 const AppPage = require("../app-page.jsx");
 const VisibleMarker = require("../visible-marker.jsx");
+const CommonButton = require("../ui/common-button.jsx");
+const DateViewer = require('../ui/date-viewer.jsx');
 
 const dataService = require('../../services/data.js');
+const L = require('../../services/i18n.js');
 
 class ProjectView extends React.Component {
 
@@ -12,6 +15,7 @@ class ProjectView extends React.Component {
 		let project = dataService.getProject(self.props.match.params.id);
 		return (
 			<AppPage selectedMenu="projects">
+				<CommonButton to={"/project-edit/"+self.props.match.params.id}>{"Edit"}</CommonButton>
 				<table className="list-table">
 					<tbody>
 						<tr>
@@ -27,6 +31,10 @@ class ProjectView extends React.Component {
 							<td style={{color : '#'+project.color}}>{project.color}</td>
 						</tr>
 						<tr>
+							<td>{"Repository Provider"}</td>
+							<td>{project.provider}</td>
+						</tr>
+						<tr>
 							<td>{"Repository"}</td>
 							<td>{project.repo}</td>
 						</tr>
@@ -38,11 +46,15 @@ class ProjectView extends React.Component {
 						</tr>
 						<tr>
 							<td>{"Creation time"}</td>
-							<td>{project.timestampCreated}</td>
+							<td>
+								<DateViewer time={project.timestampCreated} />
+							</td>
 						</tr>
 						<tr>
 							<td>{"Modification time"}</td>
-							<td>{project.timestampModified}</td>
+							<td>
+								<DateViewer time={project.timestampModified}/>
+							</td>
 						</tr>
 					</tbody>
 				</table>

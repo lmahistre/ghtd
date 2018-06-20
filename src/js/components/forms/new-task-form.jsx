@@ -7,6 +7,7 @@ const dataService = require('../../services/data.js');
 const browserService = require('../../services/browser.js');
 const storageService = require('../../services/storage.js');
 const utilsService = require('../../services/utils.js');
+const L = require('../../services/i18n.js');
 
 class NewTaskForm extends React.Component {
 
@@ -44,7 +45,6 @@ class NewTaskForm extends React.Component {
 			storageService.save({
 				tasks : dataService.getTasks(),
 			});
-			// actionsService.saveData();
 			browserService.render();
 		}
 	}
@@ -79,7 +79,7 @@ class NewTaskForm extends React.Component {
 		return (
 			<tr name="new-task" className="list-elt new-task-form">
 				<td data-column="actions">
-					<SmallButton fa="plus-circle" onClick={self.addTask.bind(self)} title={"Add task"} />
+					<SmallButton fa="plus-circle" onClick={self.addTask.bind(self)} title={L("Add task")} />
 				</td>
 				<td data-column="project">
 					<select className="project-label" name="projectId" id="new-task-projectId" value={self.state.projectId} onChange={self.onChangeProject.bind(self)}>

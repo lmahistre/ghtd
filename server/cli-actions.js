@@ -158,5 +158,5 @@ exports.help = function(args) {
 }
 
 
-exports.default = exports.server;
+exports.default = exports.build;
 exports['--help'] = exports['-h'] = exports.help;

@@ -88,3 +88,14 @@ module.exports.colors = [
 
 exports.appName = 'GHT';
 exports.fileName = 'ght.json';
+
+exports.languages = [
+	{
+		key : 'en',
+		label : 'English',
+	},
+	{
+		key : 'fr',
+		label : 'French',
+	}
+]

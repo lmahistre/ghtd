@@ -4,6 +4,7 @@ const AppPage = require("../app-page.jsx");
 const CommonButton = require("../ui/common-button.jsx");
 
 const constsService = require('../../services/consts.js');
+const L = require('../../services/i18n.js');
 
 class ProjectEditForm extends React.Component {
 
@@ -59,7 +60,18 @@ class ProjectEditForm extends React.Component {
 							</td>
 						</tr>
 						<tr>
-							<td className="label">{"Github repo"}</td>
+							<td className="label">{L("Repository provider")}</td>
+							<td>
+								<select name="provider" defaultValue={self.props.project.provider}>
+									<option value=""></option>
+									<option value="github">{L("GitHub")}</option>
+									<option value="bitbucket">{L("Bitbucket")}</option>
+									<option value="gitlab">{L("GitLab")}</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td className="label">{L("Repository")}</td>
 							<td>
 								<input type="text" name="repo" defaultValue={self.props.project.repo} onKeyDown={self.handleInputKeyDown.bind(self, self.props.save)} />
 							</td>
