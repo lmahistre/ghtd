@@ -1,11 +1,30 @@
 const path = require('path');
 const appDirName = path.resolve(__dirname+'/..');
 
+const resolve = relativePath => path.resolve(__dirname, '..', relativePath)
+
 module.exports = {
 	js : {
-		inputFilepath : appDirName+"/src/js/entry.js",
-		outputFolder : appDirName +'/public_html',
-		outputFilename : 'bundle.js',
+		mode: 'development',
+		module: {
+			rules: [
+				{
+					test: /\.jsx$/,
+					exclude: /node_modules/,
+					use: {
+						loader: "babel-loader",
+						options: {
+							presets: ["env", "react"]
+						},
+					},
+				},
+			],
+		},
+		entry : appDirName+"/src/js/entry.js",
+		output : {
+			path : appDirName +'/public_html',
+			filename : 'bundle.js',
+		}
 	},
 	css : {
 		inputFolder : appDirName+'/src/less',
@@ -14,6 +33,13 @@ module.exports = {
 		outputFilename : 'style.css',
 	},
 	test : {
-		inputFolder : appDirName+'/src/spec',
+		rootDir : appDirName,
+		testMatch : [
+			'**/spec/**/?(*.)(spec|test).js?(x)',
+		],
+		verbose : false,
+		transform: {
+			"^.+\\.jsx?$": "babel-jest"
+		},
 	},
 };

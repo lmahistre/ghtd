@@ -1,6 +1,6 @@
 
-const constsService = require('./consts.js');
-const dataService = require('./data.js');
+let constsService = require('./consts.js');
+let dataService = require('./data.js');
 
 exports.setDependencies = function (deps) {
 	if (deps.constsService) {
