@@ -29,6 +29,7 @@ module.exports = {
 	"Sync with GitHub" : "Synchro GitHub",
 	"Tasks" : "Tâches",
 	"The project " : "Le projet ",
+	"Theme" : "Thème",
 	"Token" : "Jeton",
 	"User" : "Utilisateur",
 	"View detail" : "Voir le détail",

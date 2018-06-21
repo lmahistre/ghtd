@@ -52,12 +52,8 @@ class ProjectList extends React.Component {
 						{projectList.map(elt => (
 							<tr key={elt.id}>
 								<td data-column="actions">
-									<Link to={"/project-edit/"+elt.id} className="small-button" title={L("Edit")}>
-										<span className="fa fa-edit" aria-hidden="true"></span>
-									</Link>
-									<Link to={"/project-view/"+elt.id} className="small-button" title={L("View detail")}>
-										<span className="fa fa-eye" aria-hidden="true"></span>
-									</Link>
+									<SmallButton to={"/project-edit/"+elt.id} title={L("Edit")} fa="edit"></SmallButton>
+									<SmallButton to={"/project-view/"+elt.id} title={L("View detail")} fa="eye"></SmallButton>
 									{elt.visible ? 
 										<SmallButton fa="eye" onClick={self.changeVisibility.bind(self, elt.id)} title={L("Hide")} />
 									:

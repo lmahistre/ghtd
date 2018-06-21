@@ -2,13 +2,18 @@
 const React = require("react");
 
 class DateViewer extends React.Component {
+
+	format(n) {
+		return (''+n).padStart(2,0);
+	}
+
 	render() {
 		let time = this.props.time;
 		if (isNaN(time)) {
 			time = 0;
 		}
 		const date = new Date(time*1000);
-		return date.getDate()+'/'+date.getMonth()+'/'+date.getFullYear()+' '+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds();
+		return this.format(date.getDate())+'/'+this.format(date.getMonth())+'/'+date.getFullYear()+' '+this.format(date.getHours())+':'+this.format(date.getMinutes())+':'+this.format(date.getSeconds());
 	}
 }
 
