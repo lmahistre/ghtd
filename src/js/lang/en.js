@@ -1,7 +1,7 @@
 module.exports = {
 	"About" : "About",
 	"Cancel" : "Cancel",
-	"Edit" : "Editer",
+	"Edit" : "Edit",
 	"Projects" : "Projects",
 	"Save" : "Save",
 	"Settings" : "Settings",

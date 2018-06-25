@@ -7,7 +7,14 @@ const compiler = require('./compiler.js');
  * Compile CSS
  */
 exports.css = function(args) {
-	compiler.css(config.css);
+	compiler.css(config.css, function(error, success) {
+		if (success) {
+			console.log('CSS successfully compiled');
+		}
+		else {
+			console.log(error);
+		}
+	});
 }
 
 
@@ -15,7 +22,14 @@ exports.css = function(args) {
  * Compile JS
  */
 exports.js = function(args) {
-	compiler.js(config.js);
+	compiler.js(config.js, function(error, success) {
+		if (success) {
+			console.log('JS successfully compiled');
+		}
+		else {
+			console.log(error);
+		}
+	});
 }
 
 
@@ -90,8 +104,20 @@ exports.test = exports.jest;
  * Compilation JS et CSS
  */
 exports.build = function(args) {
-	compiler.js(config.js, function() {
-		compiler.css(config.css, function() {
+	compiler.js(config.js, function(error, success) {
+		if (success) {
+			console.log('JS successfully compiled');
+		}
+		else {
+			console.log(error);
+		}
+		compiler.css(config.css, function(error, success) {
+			if (success) {
+				console.log('CSS successfully compiled');
+			}
+			else {
+				console.log(error);
+			}
 			exports.test();
 		});
 	});

@@ -13,9 +13,9 @@ exports.getAlerts = function () {
  * types : error
  */
 exports.addAlert = function (message, type) {
-	if (type !== 'error') {
-		type = 'error';
-	}
+	// if (type !== 'error') {
+	// 	type = 'error';
+	// }
 	alerts.push ({
 		type,
 		message,

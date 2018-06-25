@@ -4,6 +4,7 @@ const githubService = require('./github.js');
 const dataService = require('./data.js');
 const validateService = require('./validate.js');
 const alertService = require('./alert.js');
+const browserService = require('./browser.js');
 
 
 exports.importProjects = function (callback) {
@@ -74,7 +75,8 @@ const pullFromGitHub = function (callback) {
 }
 
 
-const saveToGitHub = function (data) {
+const saveToGitHub = function () {
+	const data = storageService.retrieve();
 	if (data && data.tasks && data.projects) {
 		const validatedData = {
 			tasks : {},
@@ -103,6 +105,7 @@ exports.syncWithGitHub = function () {
 		}
 		else {
 			alertService.warning('No data fetched');
+			browserService.render();
 		}
 	});
 }

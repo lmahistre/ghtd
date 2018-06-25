@@ -1,4 +1,7 @@
 const React = require("react");
+const ReactRouterDom = require('react-router-dom');
+
+const Link = ReactRouterDom.Link;
 
 const AppPage = require("../app-page.jsx");
 
@@ -26,7 +29,9 @@ class TaskView extends React.Component {
 						</tr>
 						<tr>
 							<td>{L("Project")}</td>
-							<td style={{color: '#'+project.color}}>{project.name}</td>
+							<td>
+								<Link to={"/project-view/"+project.id} style={{color: '#'+project.color}}>{project.name}</Link>
+							</td>
 						</tr>
 						<tr>
 							<td>{L("Creation time")}</td>

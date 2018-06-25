@@ -11,7 +11,6 @@
 @button-hover-color : #8AE;
 
 html {
-	// height: 100%;
 
 	body {
 		font-family: Helvetica, sans-serif, Arial;
@@ -78,7 +77,8 @@ html {
 					.menu-entry {
 						background-color: rgba(204, 204, 204, 0.8);
 						display: inline-block;
-						width: 60px;
+						// width: 100%;
+						width: 48px;
 						text-decoration: none;
 						color: #000;
 						padding: 6px 12px;
@@ -148,6 +148,16 @@ html {
 								}
 							}
 						}
+						&.success {
+							background-color: #CFC;
+							color: #040;
+							.alert-hide {
+								color: #080;
+								&:hover {
+									color: #000;
+								}
+							}
+						}
 						.alert-hide {
 							float: right;
 							cursor: pointer;
@@ -205,7 +215,6 @@ html {
 						}
 					}
 				}
-
 				// Light theme
 				&[data-theme=light] {
 					background-color: #EEE;
@@ -258,28 +267,6 @@ html {
 					}
 				}
 			}
-
-			div.first-loader {
-				background-color: #FFF;
-				position: absolute;
-				height: 100%;
-				width: 100%;
-				display: flex;
-				align-items : center;
-				.loader-horizontal {
-					display: flex;
-					width: 100%;
-					align-items: center;
-					justify-content: center;
-					img {
-						max-width: 100%;
-						max-height: 100%;
-					}
-				}
-				&[data-theme=dark] {
-					background-color: #000;
-				}
-			}
 		}
 	}
 }
@@ -315,6 +302,9 @@ table[data-table=settings-list] {
 		max-width: 464px;
 		div.menu {
 			width: 464px;
+			.menu-entry {
+				width: 64px;
+			}
 		}
 		.project-label {
 			width: 80px;

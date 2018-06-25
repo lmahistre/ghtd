@@ -5,7 +5,7 @@ const resolve = relativePath => path.resolve(__dirname, '..', relativePath)
 
 module.exports = {
 	js : {
-		mode: 'development',
+		// mode: 'development',
 		module: {
 			rules: [
 				{

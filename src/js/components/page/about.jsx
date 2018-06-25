@@ -6,7 +6,7 @@ class About extends React.Component {
 	render () {
 		return (
 			<AppPage selectedMenu="about">
-				{"v 0.1.1"}
+				<p>{"GHT version 0.1.1"}</p>
 			</AppPage>
 		);
 	}
