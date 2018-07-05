@@ -114,7 +114,7 @@ class Task extends React.Component {
 						<SmallButton fa="check" onClick={self.save.bind(self)} title={L("Save")} />
 					</td>
 					<td data-column="project">
-						<select id={"task-edit-projectId-"+elt.id} className="project-label" name="projectId" defaultValue={elt.projectId}>
+						<select id={"task-edit-projectId-"+elt.id} className="project-label" name="projectId" defaultValue={elt.projectId} onKeyDown={self.handleInputKeyDown.bind(self)}>
 							{projectList.map(opt => (
 								<option key={opt.id} value={opt.id}>{opt.name}</option>
 							))}
@@ -127,6 +127,10 @@ class Task extends React.Component {
 			);
 		}
 		else {
+			const style = {};
+			if (elt.projectColor) {
+				style.backgroundColor = '#'+elt.projectColor;
+			}
 			return (
 				<tr className={"status-"+elt.status}>
 					<td className="actions" data-column="actions">
@@ -144,7 +148,7 @@ class Task extends React.Component {
 						<SmallButton fa="eye" to={"/task-view/"+elt.id} title={L("View detail")} />
 					</td>
 					<td className="project-label-container" data-column="project">
-						<div className="project-label" style={{backgroundColor : '#'+elt.projectColor}} title={elt.projectName} data-tip={elt.projectName}>{elt.projectName}</div>
+						<div className="project-label" style={style} title={elt.projectName} data-tip={elt.projectName}>{elt.projectName}</div>
 					</td>
 					<td data-column="name">{elt.name}</td>
 				</tr>

@@ -38,7 +38,7 @@ class TaskList extends React.Component {
 				}
 				else {
 					task.projectName = ' ';
-					task.projectColor = 'FFF';
+					// task.projectColor = 'FFF';
 				}
 				list.push(task);
 			}
@@ -74,9 +74,6 @@ class TaskList extends React.Component {
 		return (
 			<AppPage selectedMenu="tasks">
 				<CommonButton onClick={self.removeResolved}>{L("Clean resolved")}</CommonButton>
-				{isConnected ? 
-					<CommonButton onClick={actionsService.syncWithGitHub}>{L("Sync with GitHub")}</CommonButton>
-				: null}
 				<table className="list-table" data-table="task-list">
 					<tbody>
 						<NewTaskForm projectList={projectList} />

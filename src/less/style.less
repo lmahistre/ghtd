@@ -72,12 +72,10 @@ html {
 					margin-bottom: 2px;
 					position: fixed;
 					top: 0px;
-					// width: 100%;
 					
 					.menu-entry {
 						background-color: rgba(204, 204, 204, 0.8);
 						display: inline-block;
-						// width: 100%;
 						width: 48px;
 						text-decoration: none;
 						color: #000;
@@ -90,16 +88,22 @@ html {
 							background-color: @button-hover-color;
 						}
 					}
-					.please-wait {
+					.sync-indicator {
 						float: right;
 						color: #000;
 						display: block;
-						background-color: #F00;
+						background-color: #888;
 						width: 30px;
 						height: 30px;
 						span {
 							margin: 6px;
 							font-size: 20px;
+						}
+						&.connected {
+							background-color: #0A0;
+						}
+						&.busy {
+							background-color: #F00;
 						}
 					}
 				}

@@ -21,6 +21,7 @@ class Settings extends React.Component {
 		return (
 			<AppPage selectedMenu="settings">
 				<CommonButton to="settings-edit">{L("Edit")}</CommonButton>
+				<CommonButton to="settings-about">{L("About")}</CommonButton>
 				<table className="list-table" data-table="settings-list">
 					<tbody>
 						<tr>

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const args = process.argv.slice(2);
 
-const action = require('./server/cli-actions.js');
+const action = require('./server/cli.js');
 
 if (args.length) {
 	if (action[args[0]]) {

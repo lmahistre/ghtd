@@ -16,7 +16,6 @@ A personal access token is used to access the GitHub account. To set up a person
 
 ### Configuration
 
-Copy the file `includes/config.sample.json` to `includes/config.json` and fill in this information :
 * user : user name of the GitHub account
 * token : personal access token
 * gistId : ID of the Gist used. This ID is visible in the URL of the Gist
