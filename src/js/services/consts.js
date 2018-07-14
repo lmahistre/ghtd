@@ -99,3 +99,8 @@ exports.languages = [
 		label : 'French',
 	}
 ]
+
+exports.themes = {
+	dark : 'Dark',
+	light : 'Light',
+}

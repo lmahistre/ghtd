@@ -8,7 +8,7 @@ const storageService = require('../../services/storage.js');
 const constsService = require('../../services/consts.js');
 const L = require('../../services/i18n.js');
 
-class Settings extends React.Component {
+class SettingsView extends React.Component {
 
 	render() {
 		const settings = storageService.getSettings() ? storageService.getSettings() : {};
@@ -19,6 +19,9 @@ class Settings extends React.Component {
 			}
 		}
 		let themeLabel = '';
+		if (settings.theme && constsService.themes[settings.theme]) {
+			themeLabel = constsService.themes[settings.theme];
+		}
 		return (
 			<AppPage selectedMenu="settings">
 				<CommonButton to="settings-edit">{L("Edit")}</CommonButton>
@@ -52,4 +55,4 @@ class Settings extends React.Component {
 	}
 }
 
-module.exports = Settings;
+module.exports = SettingsView;

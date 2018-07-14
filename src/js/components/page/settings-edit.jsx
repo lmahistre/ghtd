@@ -5,6 +5,7 @@ const AppPage = require("../app-page.jsx");
 const SmallButton = require("../ui/small-button.jsx");
 const CommonButton = require("../ui/common-button.jsx");
 const RadioSelector = require("../ui/radio-selector.jsx");
+const Option = RadioSelector.Option;
 
 const browserService = require('../../services/browser.js');
 const dataService = require('../../services/data.js');
@@ -37,27 +38,20 @@ class SettingsEdit extends React.Component {
 						<tr>
 							<td data-column="label">{L("Theme")}</td>
 							<td>
-								<RadioSelector id="settings-theme" value={settings.theme} options={[
-									{
-										value : 'light',
-										label : 'Light',
-										title : 'Light Theme',
-									},
-									{
-										value : 'dark',
-										label : 'Dark',
-										title : 'Dark Theme',
-									},
-								]} />
+								<RadioSelector id="settings-theme" value={settings.theme}>
+									<Option value="light">{L("Light")}</Option>
+									<Option value="dark">{L("Dark")}</Option>
+								</RadioSelector>
 							</td>
 						</tr>
 						<tr>
 							<td data-column="label">{L("Language")}</td>
 							<td>
-								<RadioSelector id="language" name="language" value={settings.language} options={constsService.languages.map(elt => ({
-									value : elt.key,
-									label : L(elt.label),
-								}))} />
+								<RadioSelector id="language" name="language" value={settings.language}>
+									{constsService.languages.map(elt => (
+										<Option key={elt.key} value={elt.key}>{L(elt.label)}</Option>
+									))}
+								</RadioSelector>
 							</td>
 						</tr>
 						<tr>

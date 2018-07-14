@@ -13,7 +13,7 @@ const ProjectEdit = require("./page/project-edit.jsx");
 const ProjectImport = require("./page/project-import.jsx");
 const ProjectList = require("./page/project-list.jsx");
 const ProjectView = require("./page/project-view.jsx");
-const Settings = require("./page/settings.jsx");
+const SettingsView = require("./page/settings-view.jsx");
 const SettingsAbout = require("./page/settings-about.jsx");
 const SettingsEdit = require("./page/settings-edit.jsx");
 
@@ -32,7 +32,7 @@ class AppRouter extends React.Component {
 				<Route exact path="/project-view/:id" component={ProjectView} />
 				<Route exact path="/project-delete/:id" component={ProjectDelete} />
 				<Route exact path="/project-import" component={ProjectImport} />
-				<Route exact path="/settings" component={Settings} />
+				<Route exact path="/settings" component={SettingsView} />
 				<Route exact path="/settings-about" component={SettingsAbout} />
 				<Route exact path="/settings-edit" component={SettingsEdit} />
 				<Route exact path="*" component={TaskList} />
