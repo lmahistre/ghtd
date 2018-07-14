@@ -31,8 +31,6 @@ html {
 			.app-container {
 				background-color: #EEE;
 				color: @text-color;
-				padding-left: 8px;
-				padding-right: 8px;
 				padding-top: 30px;
 				margin-left: auto;
 				margin-right: auto;
@@ -43,7 +41,7 @@ html {
 					padding: 4px 8px;
 					display: inline-block;
 					border-radius: 2px;
-					margin: 3px 6px;
+					margin: 2px 4px;
 					&:hover {
 						background-color: @button-hover-color;
 					}
@@ -52,15 +50,57 @@ html {
 				a.small-button {
 					color: #000;
 					text-decoration: none;
-					background-color: @button-color;
+					background-color: #AAA;
 					width: 16px;
 					height: 16px;
 					margin: 1px 2px;
 					border-radius: 2px;
-					display: inline-block;
 					padding: 4px;
+					display: inline-block;
 					&:hover {
-						background-color: @button-hover-color;
+						background-color: #888;
+					}
+
+					&.small-button-blue {
+						background-color: #8BF;
+						&:hover {
+							background-color: #89D;
+						}
+					}
+
+					&.small-button-green {
+						background-color: #3C3;
+						&:hover {
+							background-color: #1A1;
+						}
+					}
+
+					&.small-button-yellow {
+						background-color: #CC4;
+						&:hover {
+							background-color: #AA0;
+						}
+					}
+
+					&.small-button-orange {
+						background-color: #EA2;
+						&:hover {
+							background-color: #D80;
+						}
+					}
+
+					&.small-button-red {
+						background-color: #F66;
+						&:hover {
+							background-color: #D44;
+						}
+					}
+
+					&.small-button-purple {
+						background-color: #B7B;
+						&:hover {
+							background-color: #A6A;
+						}
 					}
 				}
 				.clearfix {
@@ -70,17 +110,21 @@ html {
 				div.menu {
 					background-color: rgba(204, 204, 204, 0.3);
 					margin-bottom: 2px;
+					padding-left: 4px;
+					padding-right: 4px;
 					position: fixed;
 					top: 0px;
+					width: 100%;
 					
 					.menu-entry {
 						background-color: rgba(204, 204, 204, 0.8);
 						display: inline-block;
-						width: 48px;
+						width: 76px;
 						text-decoration: none;
 						color: #000;
-						padding: 6px 12px;
+						padding: 6px 6px;
 						text-align: center;
+						line-height: 18px;
 						&.active {
 							background-color: @button-color;
 						}
@@ -89,15 +133,18 @@ html {
 						}
 					}
 					.sync-indicator {
-						float: right;
 						color: #000;
-						display: block;
+						display: inline-block;
 						background-color: #888;
-						width: 30px;
-						height: 30px;
+						width: 18px;
+						padding: 5px 6px;
+						cursor: pointer;
 						span {
-							margin: 6px;
-							font-size: 20px;
+							font-size: 16px;
+							line-height: 18px;
+							display: block;
+							width: 18px;
+							height: 20px;
 						}
 						&.connected {
 							background-color: #0A0;
@@ -120,7 +167,7 @@ html {
 				}
 
 				.project-label {
-					// background-color: #CDE;
+					line-height: 18px;
 					color: #FFF;
 					border-radius: 2px;
 					padding: 3px 6px;
@@ -219,6 +266,31 @@ html {
 						}
 					}
 				}
+
+				.page-content {
+					padding-left: 4px;
+					padding-right: 4px;
+					padding-top: 4px;
+					padding-bottom: 4px;
+				}
+
+				// RadioSelector
+				.radio-selector {
+					.radio-selector-elt {
+						display: inline-block;
+						line-height: 18px;
+						text-decoration: none;
+						height: 18px;
+						margin: 2px 2px;
+						border-radius: 2px;
+						padding: 4px 8px;
+						&[data-selected=selected] {
+							color : @text-color;
+							background-color: @button-color;
+						}
+					}
+				}
+
 				// Light theme
 				&[data-theme=light] {
 					background-color: #EEE;
@@ -242,6 +314,12 @@ html {
 						border-color: #BBB;
 						color: @text-color-light;
 						background-color: #DDD;
+					}
+
+					.radio-selector {
+						.radio-selector-elt {
+							color : @text-color;
+						}
 					}
 				}
 
@@ -268,6 +346,15 @@ html {
 						border-color: #444;
 						color: @text-color-dark;
 						background-color: #222;
+					}
+
+					.radio-selector {
+						.radio-selector-elt {
+							color : @text-color-dark;
+							&[data-selected=selected] {
+								color : @text-color;
+							}
+						}
 					}
 				}
 			}
@@ -303,13 +390,6 @@ table[data-table=settings-list] {
 
 @media (min-width: 480px) {
 	html body #react-root .app-container {
-		max-width: 464px;
-		div.menu {
-			width: 464px;
-			.menu-entry {
-				width: 64px;
-			}
-		}
 		.project-label {
 			width: 80px;
 		}
@@ -322,10 +402,6 @@ table[data-table=settings-list] {
 }
 @media (min-width: 576px) {
 	html body #react-root .app-container {
-		max-width: 560px;
-		div.menu {
-			width: 560px;
-		}
 		.project-label {
 			width: 120px;
 		}
@@ -338,10 +414,6 @@ table[data-table=settings-list] {
 }
 @media (min-width: 768px) {
 	html body #react-root .app-container {
-		max-width: 752px;
-		div.menu {
-			width: 752px;
-		}
 		.project-label {
 			width: 160px;
 		}
@@ -354,10 +426,6 @@ table[data-table=settings-list] {
 }
 @media (min-width: 992px) {
 	html body #react-root .app-container {
-		max-width: 976px;
-		div.menu {
-			width: 976px;
-		}
 		.project-label {
 			width: 200px;
 		}
@@ -370,10 +438,6 @@ table[data-table=settings-list] {
 }
 @media (min-width: 1200px) {
 	html body #react-root .app-container {
-		max-width: 1180px;
-		div.menu {
-			width: 1180px;
-		}
 		.project-label {
 			width: 240px;
 		}

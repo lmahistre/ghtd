@@ -1,5 +1,4 @@
 
-// const reactAppBase = require('./react-app-base.js');
 const config = require('./compiler-config.js');
 const compiler = require('./compiler.js');
 
@@ -22,6 +21,7 @@ exports.css = function(args) {
  * Compile JS
  */
 exports.js = function(args) {
+	config.js.mode = 'development';
 	compiler.js(config.js, function(error, success) {
 		if (success) {
 			console.log('JS successfully compiled');
@@ -33,58 +33,28 @@ exports.js = function(args) {
 }
 
 
-/**
- * Compile JS and CSS
- */
-exports.compile = function(args) {
-	if (args.length) {
-		if (args[0] === 'js') {
-			compiler.js(config.js);
-		}
-		else if (args[0] === 'css') {
-			compiler.css(config.css);
+exports.dev = function(args) {
+	compiler.css(config.css, function(error, success) {
+		if (success) {
+			console.log('CSS successfully compiled');
 		}
 		else {
-			console.log('Invalid argument '+args[0]);
+			console.log(error);
 		}
-	}
-	else {
-		compiler.js(mergeConf.js(config.js), function() {
-			compiler.css(config.css);
+		config.js.mode = 'development';
+		compiler.js(config.js, function(error, success) {
+			if (success) {
+				console.log('JS successfully compiled');
+			}
+			else {
+				console.log(error);
+			}
 		});
-	}
+	});
 }
 
 
-// /**
-//  * Run unit tests
-//  */
-// exports.jasmine = function(args) {
-// 	const Jasmine = require('jasmine');
-// 	const jasmine = new Jasmine();
-// 	jasmine.loadConfig({
-// 		spec_dir: 'src/spec',
-// 		spec_files: [
-// 			'utils.test.js',
-// 		],
-// 		helpers: [
-// 			// 'helpers/**/*.js'
-// 		]
-// 	});
-// 	jasmine.onComplete(function(passed) {
-// 		console.log(' --- ')
-// 		if(passed) {
-// 			console.log('All tests pass');
-// 		}
-// 		else {
-// 			console.log('At least one test failed');
-// 		}
-// 	});
-// 	jasmine.execute();
-// }
-
-
-exports.jest = function (args) {
+exports.test = function (args) {
 	const jest = require('jest');
 	const path = require('path');
 	const appDirName = path.resolve(__dirname+'/../src/spec');
@@ -94,16 +64,8 @@ exports.jest = function (args) {
 }
 
 
-/**
- * Compile JS
- */
-exports.test = exports.jest;
-
-
-/**
- * Compilation JS et CSS
- */
 exports.build = function(args) {
+	config.js.mode = 'production';
 	compiler.js(config.js, function(error, success) {
 		if (success) {
 			console.log('JS successfully compiled');

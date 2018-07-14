@@ -21,7 +21,7 @@ class TaskList extends React.Component {
 	}
 
 
-	sort (object) {
+	retrieveList (object) {
 		const list = [];
 		const projects = dataService.getProjects();
 		for (let i in object) {
@@ -38,13 +38,20 @@ class TaskList extends React.Component {
 				}
 				else {
 					task.projectName = ' ';
-					// task.projectColor = 'FFF';
 				}
 				list.push(task);
 			}
 		}
 		list.sort(function(a, b) {
-			return a.timestampModified < b.timestampModified;
+			if (a.timestampModified < b.timestampModified) {
+				return 1;
+			}
+			else if (a.timestampModified > b.timestampModified) {
+				return -1;
+			}
+			else {
+				return 0;
+			}
 		});
 		return list;
 	}
@@ -55,7 +62,7 @@ class TaskList extends React.Component {
 		let taskList = [];
 		const tasks = dataService.getTasks();
 		if (tasks) {
-			taskList = self.sort(dataService.getTasks());
+			taskList = self.retrieveList(dataService.getTasks());
 		}
 		const projectList = [
 			{

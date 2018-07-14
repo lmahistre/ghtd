@@ -6,25 +6,34 @@ const Link = ReactRouterDom.Link;
 
 class SmallButton extends React.Component {
 
+	constructor() {
+		super();
+		this.colors = [
+			'blue', 'green', 'yellow', 'orange', 'red', 'purple',
+		];
+	}
+
+
 	render() {
-		let className;
+		let iconClassName = 'fa';
+		let linkClassName = 'small-button';
 		if (this.props.fa) {
-			className = "fa fa-"+this.props.fa;
+			iconClassName = "fa fa-"+this.props.fa;
 		}
-		else {
-			className = "fa";
+		if (this.props.color && this.colors.indexOf(this.props.color) > -1) {
+			linkClassName += ' small-button-'+this.props.color;
 		}
 		if (this.props.to) {
 			return (
-				<Link className="small-button" to={this.props.to} style={this.props.style} data-tip={this.props.title}>
-					<span className={className} aria-hidden="true" />
+				<Link className={linkClassName} to={this.props.to} style={this.props.style} data-tip={this.props.title}>
+					<span className={iconClassName} aria-hidden="true" />
 				</Link>
 			);
 		}
 		else {
 			return (
-				<a href="javascript:void(0);" className="small-button" onClick={this.props.onClick} style={this.props.style} data-tip={this.props.title}>
-					<span className={className} aria-hidden="true" />
+				<a href="javascript:void(0);" className={linkClassName} onClick={this.props.onClick} style={this.props.style} data-tip={this.props.title}>
+					<span className={iconClassName} aria-hidden="true" />
 				</a>
 			);
 		}

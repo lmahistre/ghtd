@@ -79,7 +79,7 @@ class NewTaskForm extends React.Component {
 		return (
 			<tr name="new-task" className="list-elt new-task-form">
 				<td data-column="actions">
-					<SmallButton fa="plus-circle" onClick={self.addTask.bind(self)} title={L("Add task")} />
+					<SmallButton fa="plus-circle" onClick={self.addTask.bind(self)} title={L("Add task")} color="blue" />
 				</td>
 				<td data-column="project">
 					<select className="project-label" name="projectId" id="new-task-projectId" value={self.state.projectId} onChange={self.onChangeProject.bind(self)}>

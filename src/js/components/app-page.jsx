@@ -19,7 +19,9 @@ class AppPage extends React.Component {
 				<Menu selectedMenu={self.props.selectedMenu} busy={stateContainerService.getPleaseWait()} />
 				<Alerts alerts={stateContainerService.getAlerts()} />
 				<ReactTooltip />
-				{self.props.children}
+				<div className="page-content">
+					{self.props.children}
+				</div>
 			</div>
 		);
 	}

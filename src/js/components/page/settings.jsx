@@ -18,12 +18,17 @@ class Settings extends React.Component {
 				languageLabel = constsService.languages[i].label;
 			}
 		}
+		let themeLabel = '';
 		return (
 			<AppPage selectedMenu="settings">
 				<CommonButton to="settings-edit">{L("Edit")}</CommonButton>
 				<CommonButton to="settings-about">{L("About")}</CommonButton>
 				<table className="list-table" data-table="settings-list">
 					<tbody>
+						<tr>
+							<td data-column="label">{L("Theme")}</td>
+							<td data-column="value">{L(themeLabel)}</td>
+						</tr>
 						<tr>
 							<td data-column="label">{L("Language")}</td>
 							<td data-column="value">{L(languageLabel)}</td>

@@ -6,7 +6,8 @@ module.exports = class SettingsAbout extends React.Component {
 	render () {
 		return (
 			<AppPage selectedMenu="settings">
-				<p>{"GHT version 0.1.1"}</p>
+				<p>{"GHT version 0.1.2"}</p>
+				<p>{""}</p>
 			</AppPage>
 		);
 	}

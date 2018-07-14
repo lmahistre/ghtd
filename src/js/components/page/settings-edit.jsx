@@ -4,6 +4,7 @@ const React = require("react");
 const AppPage = require("../app-page.jsx");
 const SmallButton = require("../ui/small-button.jsx");
 const CommonButton = require("../ui/common-button.jsx");
+const RadioSelector = require("../ui/radio-selector.jsx");
 
 const browserService = require('../../services/browser.js');
 const dataService = require('../../services/data.js');
@@ -13,16 +14,9 @@ const L = require('../../services/i18n.js');
 
 class SettingsEdit extends React.Component {
 
-	toggleTheme() {
-		const settings = storageService.getSettings();
-		settings.theme = settings && settings.theme === 'dark' ? 'light' : 'dark';
-		storageService.save({settings});
-		browserService.render();
-	}
-
-
 	save() {
 		const settings = storageService.getSettings();
+		settings.theme = document.getElementById('settings-theme').value;
 		settings.language = document.getElementById('language').value;
 		settings.user = document.getElementById('settings-user').value;
 		settings.token = document.getElementById('settings-token').value;
@@ -43,17 +37,27 @@ class SettingsEdit extends React.Component {
 						<tr>
 							<td data-column="label">{L("Theme")}</td>
 							<td>
-								<SmallButton title={L("Toggle theme")} fa="adjust" onClick={this.toggleTheme} />
+								<RadioSelector id="settings-theme" value={settings.theme} options={[
+									{
+										value : 'light',
+										label : 'Light',
+										title : 'Light Theme',
+									},
+									{
+										value : 'dark',
+										label : 'Dark',
+										title : 'Dark Theme',
+									},
+								]} />
 							</td>
 						</tr>
 						<tr>
 							<td data-column="label">{L("Language")}</td>
 							<td>
-								<select name="language" id="language" defaultValue={settings.language}>
-									{constsService.languages.map(elt => (
-										<option value={elt.key} key={elt.key}>{L(elt.label)}</option>
-									))}
-								</select>
+								<RadioSelector id="language" name="language" value={settings.language} options={constsService.languages.map(elt => ({
+									value : elt.key,
+									label : L(elt.label),
+								}))} />
 							</td>
 						</tr>
 						<tr>

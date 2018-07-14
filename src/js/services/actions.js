@@ -5,6 +5,7 @@ const dataService = require('./data.js');
 const validateService = require('./validate.js');
 const alertService = require('./alert.js');
 const browserService = require('./browser.js');
+const reducersService = require('./reducers.js');
 
 
 exports.importProjects = function (callback) {
@@ -18,12 +19,17 @@ exports.importProjects = function (callback) {
 
 exports.removeResolvedTasks = function () {
 	const tasks = dataService.getTasks();
-	for (let i in tasks) {
-		if (tasks[i].status === 'done') {
-			delete tasks[i];
-		}
-	}
-	storageService.save({tasks});
+	storageService.save({
+		tasks : reducersService.removeResolvedTasks(tasks),
+	});
+}
+
+
+exports.deleteRemovedTasks = function () {
+	const tasks = dataService.getTasks();
+	storageService.save({
+		tasks : reducersService.deleteRemovedTasks(tasks, parseInt(Date.now()/1000)),
+	});
 }
 
 
