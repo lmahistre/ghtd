@@ -30,7 +30,9 @@ class TaskView extends React.Component {
 						<tr>
 							<td>{L("Project")}</td>
 							<td>
-								<Link to={"/project-view/"+project.id} style={{color: '#'+project.color}}>{project.name}</Link>
+								{project ?
+									<Link to={"/project-view/"+project.id} style={{color: '#'+project.color}}>{project.name}</Link>
+								: null }
 							</td>
 						</tr>
 						<tr>

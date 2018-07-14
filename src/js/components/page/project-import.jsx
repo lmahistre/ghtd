@@ -21,6 +21,7 @@ class ProjectImport extends React.Component {
 			repo : name,
 			visible : true,
 			color : utilsService.generateRandomColor(),
+			provider : 'github',
 		};
 		dataService.setProject(id, project);
 		browserService.render();

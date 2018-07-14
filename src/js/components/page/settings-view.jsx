@@ -3,15 +3,53 @@ const React = require("react");
 
 const AppPage = require("../app-page.jsx");
 const CommonButton = require("../ui/common-button.jsx");
+const Upload = require("../ui/upload.jsx");
 
 const storageService = require('../../services/storage.js');
 const constsService = require('../../services/consts.js');
+const alertService = require('../../services/alert.js');
+const browserService = require('../../services/browser.js');
 const L = require('../../services/i18n.js');
 
 class SettingsView extends React.Component {
 
+	import(error, content) {
+		if (error) {
+			alertService.error(L(error.message));
+		}
+		else {
+			try {
+				let newSettings = JSON.parse(content);
+				if ('string' === typeof newSettings.user
+					&& 'string' === typeof newSettings.gistId
+					&& 'string' === typeof newSettings.token
+				) {
+					const settings = storageService.getSettings();
+					settings.user = newSettings.user;
+					settings.gistId = newSettings.gistId;
+					settings.token = newSettings.token;
+					storageService.save({settings});
+				}
+				else {
+					alertService.error(L("The file is invalid"));
+				}
+			}
+			catch (error) {
+				alertService.error(error.message);
+			}
+		}
+		browserService.render();
+	}
+
+
 	render() {
 		const settings = storageService.getSettings() ? storageService.getSettings() : {};
+		const toExports = (settings.user && settings.gistId && settings.token) ? JSON.stringify({
+			user : settings.user,
+			gistId : settings.gistId,
+			token : settings.token,
+		}) : false;
+
 		let languageLabel = '';
 		for (var i = 0; i < constsService.languages.length; i++) {
 			if (constsService.languages[i].key === settings.language) {
@@ -26,6 +64,11 @@ class SettingsView extends React.Component {
 			<AppPage selectedMenu="settings">
 				<CommonButton to="settings-edit">{L("Edit")}</CommonButton>
 				<CommonButton to="settings-about">{L("About")}</CommonButton>
+				{toExports ?
+					<CommonButton href={"data:application/octet-stream,"+toExports} download="ght-settings.json">{L("Export Settings")}</CommonButton>
+				:
+					<Upload onSelect={this.import}>{L("Import settings")}</Upload>
+				}
 				<table className="list-table" data-table="settings-list">
 					<tbody>
 						<tr>

@@ -20,9 +20,16 @@ module.exports = function (props) {
 			</Link>
 		);
 	}
-	else {
+	else if (props.onClick) {
 		return (
 			<a className={linkClassName} onClick={props.onClick} href="javascript:void(0);">
+				{props.children}
+			</a>
+		);
+	}
+	else {
+		return (
+			<a className={linkClassName} href={props.href} download={props.download}>
 				{props.children}
 			</a>
 		);

@@ -160,6 +160,7 @@ html body #react-root .app-container div.new-task-form {
   padding: 1px 4px;
 }
 html body #react-root .app-container div.alerts .alert {
+  margin: 4px 8px 0px 8px;
   padding: 4px 8px;
   border-radius: 2px;
 }
