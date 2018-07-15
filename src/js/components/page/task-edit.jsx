@@ -10,7 +10,21 @@ const DateViewer = require('../ui/date-viewer.jsx');
 const dataService = require('../../services/data.js');
 const L = require('../../services/i18n.js');
 
-class TaskView extends React.Component {
+class TaskEdit extends React.Component {
+
+	update(id) {
+		console.log(id);
+		let task = dataService.getTask(id);
+		// 	id : document.forms['project-edit'].id.value,
+		// task.name : document.forms['task-edit'].name.value,
+		// 	visible : document.forms['project-edit'].visible.checked,
+		// 	color : document.forms['project-edit'].color.value,
+		// 	provider : document.forms['project-edit'].provider.value,
+		// 	repo : document.forms['project-edit'].repo.value,
+		dataService.setTask(task.id, task);
+		browserService.redirect('tasks');
+	}
+
 
 	render() {
 		const self = this;
@@ -18,7 +32,8 @@ class TaskView extends React.Component {
 		let project = task.projectId ? dataService.getProject(task.projectId) : null;
 		return (
 			<AppPage selectedMenu="tasks">
-				<CommonButton to={"/task-edit/"+self.props.match.params.id}>{"Edit"}</CommonButton>
+				<CommonButton onClick={self.update.bind(self, task.id)}>{L("Save")}</CommonButton>
+				<CommonButton to={"/task-view/"+self.props.match.params.id}>{L("Cancel")}</CommonButton>
 				<table className="list-table">
 					<tbody>
 						<tr>
@@ -56,4 +71,4 @@ class TaskView extends React.Component {
 	}
 }
 
-module.exports = TaskView;
+module.exports = TaskEdit;

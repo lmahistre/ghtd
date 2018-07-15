@@ -5,7 +5,6 @@ const Link = ReactRouterDom.Link;
 
 const AppPage = require("../app-page.jsx");
 const CommonButton = require("../ui/common-button.jsx");
-const VisibleMarker = require("../visible-marker.jsx");
 const SmallButton = require("../ui/small-button.jsx");
 
 const actionsService = require('../../services/actions.js');
@@ -63,7 +62,6 @@ class ProjectList extends React.Component {
 								<td data-column="name">{elt.name}</td>
 								<td data-column="indicators">
 									<SmallButton fa={elt.provider} title={elt.repo} style={{backgroundColor : '#'+elt.color}} />
-									<VisibleMarker visible={elt.visible} />
 								</td>
 							</tr>
 						))}

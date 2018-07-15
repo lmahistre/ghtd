@@ -49,3 +49,13 @@ exports.render = function () {
 exports.redirect = function (uri) {
 	window.location.href = '#/'+uri;
 }
+
+
+exports.setBackgroundColor = function(theme) {
+	if ('dark' === theme) {
+		document.body.style.backgroundColor = '#111';
+	}
+	else {
+		document.body.style.backgroundColor = '#EEE';
+	}
+}

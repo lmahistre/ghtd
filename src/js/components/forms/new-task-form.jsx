@@ -5,7 +5,6 @@ const SmallButton = require("../ui/small-button.jsx");
 
 const dataService = require('../../services/data.js');
 const browserService = require('../../services/browser.js');
-const storageService = require('../../services/storage.js');
 const utilsService = require('../../services/utils.js');
 const L = require('../../services/i18n.js');
 
@@ -18,12 +17,6 @@ class NewTaskForm extends React.Component {
 		else {
 		}
 	}
-
-
-	// formFakeSubmit(event) {
-	// 	event.stopPropagation();
-	// 	event.preventDefault();
-	// }
 
 
 	addTask() {
@@ -42,9 +35,6 @@ class NewTaskForm extends React.Component {
 				name: '',
 			});
 			dataService.setTask(task.id, task);
-			storageService.save({
-				tasks : dataService.getTasks(),
-			});
 			browserService.render();
 		}
 	}
@@ -57,9 +47,9 @@ class NewTaskForm extends React.Component {
 	}
 
 	onChangeProject (event) {
-		const settings = storageService.getSettings();
+		const settings = dataService.getSettings();
 		settings.projectId = event.target.value;
-		storageService.save({settings});
+		dataService.setSettings(settings);
 		this.setState({
 			projectId: event.target.value,
 		});
@@ -67,7 +57,7 @@ class NewTaskForm extends React.Component {
 
 	constructor() {
 		super();
-		const settings = storageService.getSettings();
+		const settings = dataService.getSettings();
 		this.state = {
 			name : '',
 			projectId : settings && settings.projectId ? settings.projectId : '',

@@ -41,7 +41,7 @@ class ProjectDelete extends React.Component {
 			if (projectIsUsed) {
 				return (
 					<AppPage selectedMenu="projects">
-						<div>
+						<div className="text-page">
 							<p>{L("The project ")+project.name+L(" cannot be deleted because there are still tasks attached to it.")}</p>
 						</div>
 						<CommonButton to="/projects">{L("Cancel")}</CommonButton>
@@ -51,7 +51,7 @@ class ProjectDelete extends React.Component {
 			else {
 				return (
 					<AppPage selectedMenu="projects">
-						<div>
+						<div className="text-page">
 							<p>{L("Are you sure you want to delete the project ")+project.name+L("?")}</p>
 						</div>
 						<CommonButton onClick={self.delete.bind(self)}>{L("Delete")}</CommonButton>

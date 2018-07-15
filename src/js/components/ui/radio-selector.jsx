@@ -23,6 +23,7 @@ Option.propTypes = {
 	selected : PropTypes.bool,
 }
 
+
 class RadioSelector extends React.Component {
 
 	constructor(props) {
@@ -32,7 +33,7 @@ class RadioSelector extends React.Component {
 		if (props.children) {
 			if (Array.isArray(props.children)) {
 				for (let i=0; i<props.children.length; i++) {
-					if ('Option' === props.children[i].type.name) {
+					if ('option' === props.children[i].type) {
 						this.options.push(this.childrenToOptions(props.children[i].props));
 					}
 					else {
@@ -47,7 +48,7 @@ class RadioSelector extends React.Component {
 					}
 				}
 			}
-			else if ('Option' === props.children.type.name) {
+			else if ('option' === props.children.type) {
 				this.options.push(this.childrenToOptions(props.children.props));
 			}
 		}
@@ -102,7 +103,5 @@ RadioSelector.propTypes = {
 	className : PropTypes.string,
 	options : PropTypes.array,
 }
-
-RadioSelector.Option = Option;
 
 module.exports = RadioSelector;

@@ -19,17 +19,13 @@ exports.importProjects = function (callback) {
 
 exports.removeResolvedTasks = function () {
 	const tasks = dataService.getTasks();
-	storageService.save({
-		tasks : reducersService.removeResolvedTasks(tasks),
-	});
+	dataService.setTasks(reducersService.removeResolvedTasks(tasks));
 }
 
 
 exports.deleteRemovedTasks = function () {
 	const tasks = dataService.getTasks();
-	storageService.save({
-		tasks : reducersService.deleteRemovedTasks(tasks, parseInt(Date.now()/1000)),
-	});
+	dataService.setTasks(reducersService.deleteRemovedTasks(tasks));
 }
 
 

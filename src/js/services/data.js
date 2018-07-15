@@ -87,7 +87,9 @@ exports.setImportProjects = function (value) {
 exports.getSettings = storageService.getSettings;
 
 exports.setSettings = function (value) {
-	settings = value;
+	storageService.save({
+		settings : value,
+	});
 }
 
 

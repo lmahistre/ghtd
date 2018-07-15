@@ -24,16 +24,21 @@ html {
 		margin-left: 0px;
 		margin-right: 0px;
 		height: 100%;
-		background-color: #888;
+		background-color: #EEE;
 
 		#react-root {
-			height: 100%;
+			// height: 100%;
 			.app-container {
 				background-color: #EEE;
 				color: @text-color;
 				padding-top: 30px;
 				margin-left: auto;
 				margin-right: auto;
+
+				.text-page {
+					margin: 8px;
+				}
+
 				a.common-button {
 					text-decoration: none;
 					color: #000;
@@ -126,7 +131,7 @@ html {
 						text-align: center;
 						line-height: 18px;
 						&.active {
-							background-color: @button-color;
+							background-color: #D5E;
 						}
 						&:hover {
 							background-color: @button-hover-color;
@@ -376,7 +381,7 @@ table[data-table=project-list] {
 		width: 84px;
 	}
 	td[data-column=indicators] {
-		width: 56px;
+		width: 28px;
 	}
 }
 table[data-table=settings-list] {

@@ -2,7 +2,7 @@
 const browserService = require('./browser.js');
 const alertService = require('./alert.js');
 const stateContainerService = require('./state-container.js');
-const storageService = require('./storage.js');
+const dataService = require('./data.js');
 
 
 const config = {
@@ -21,7 +21,7 @@ const timeout = function(ms, promise) {
 
 
 const call = function(uri, post, callback) {
-	const settings = storageService.getSettings();
+	const settings = dataService.getSettings();
 	const params = {
 		credentials : 'omit',
 	};
@@ -75,7 +75,7 @@ const call = function(uri, post, callback) {
  * Gets Gist data from GitHub
  */
 exports.getGistData = function(callback) {
-	const settings = storageService.getSettings();
+	const settings = dataService.getSettings();
 	call(config.site+'/gists/'+settings.gistId, null, function(parsedData) {
 		try {
 			const gistContent = parsedData.files[settings.fileName].content;
@@ -92,7 +92,7 @@ exports.getGistData = function(callback) {
 
 
 exports.setGistData = function(post, callback) {
-	const settings = storageService.getSettings();
+	const settings = dataService.getSettings();
 	const postData = {
 		description : settings.appName,
 		files : {
@@ -112,7 +112,7 @@ exports.setGistData = function(post, callback) {
 
 
 exports.getProjects = function(callback) {
-	const settings = storageService.getSettings();
+	const settings = dataService.getSettings();
 	call(config.site+'/users/'+settings.user+'/repos', null, function(parsedData) {
 		try {
 			const projects = [];

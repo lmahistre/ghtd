@@ -3,7 +3,6 @@ const React = require("react");
 const ShallowRenderer = require('react-test-renderer/shallow');
 const Renderer = require('react-test-renderer');
 const RadioSelector = require('../js/components/ui/radio-selector.jsx');
-const Option = RadioSelector.Option;
 
 describe ('radio-selector', function() {
 	const renderer = new ShallowRenderer();
@@ -19,8 +18,8 @@ describe ('radio-selector', function() {
 	it ('renders with children', function() {
 		const result = Renderer.create(
 			<RadioSelector id="settings-theme" value="dark">
-				<Option value="light">Light</Option>
-				<Option value="dark">Dark</Option>
+				<option value="light">Light</option>
+				<option value="dark">Dark</option>
 			</RadioSelector>
 		).toJSON();
 

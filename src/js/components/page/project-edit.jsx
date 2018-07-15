@@ -24,7 +24,6 @@ class ProjectEdit extends React.Component {
 		};
 		if (project.name.length > 0) {
 			dataService.setProject(id, project);
-			// window.location.href = '#/projects';
 			browserService.redirect('projects');
 		}
 	}

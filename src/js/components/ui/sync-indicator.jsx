@@ -2,12 +2,12 @@
 const React = require("react");
 
 const actionsService = require('../../services/actions.js');
-const storageService = require('../../services/storage.js');
+const dataService = require('../../services/storage.js');
 const L = require('../../services/i18n.js');
 
 module.exports = class SyncIndicator extends React.Component {
 	render () {
-		const settings = storageService.getSettings();
+		const settings = dataService.getSettings();
 		const isConnected = settings.user && settings.gistId && settings.token;
 		if (isConnected) {
 			if (this.props.busy) {

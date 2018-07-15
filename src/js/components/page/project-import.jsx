@@ -7,7 +7,6 @@ const SmallButton = require("../ui/small-button.jsx");
 const actionsService = require('../../services/actions.js');
 const dataService = require('../../services/data.js');
 const utilsService = require('../../services/utils.js');
-const storageService = require('../../services/storage.js');
 const browserService = require('../../services/browser.js');
 // const L = require('../../services/i18n.js');
 
@@ -31,7 +30,6 @@ class ProjectImport extends React.Component {
 	refresh () {
 		const self = this;
 		actionsService.importProjects(function (importProjects) {
-			storageService.save({importProjects});
 			dataService.setImportProjects(importProjects);
 			dataService.setImportProjectsIsLoaded(true);
 		});

@@ -5,30 +5,29 @@ const AppPage = require("../app-page.jsx");
 const SmallButton = require("../ui/small-button.jsx");
 const CommonButton = require("../ui/common-button.jsx");
 const RadioSelector = require("../ui/radio-selector.jsx");
-const Option = RadioSelector.Option;
 
 const browserService = require('../../services/browser.js');
 const dataService = require('../../services/data.js');
-const storageService = require('../../services/storage.js');
 const constsService = require('../../services/consts.js');
 const L = require('../../services/i18n.js');
 
 class SettingsEdit extends React.Component {
 
 	save() {
-		const settings = storageService.getSettings();
+		const settings = dataService.getSettings();
 		settings.theme = document.getElementById('settings-theme').value;
 		settings.language = document.getElementById('language').value;
 		settings.user = document.getElementById('settings-user').value;
 		settings.token = document.getElementById('settings-token').value;
 		settings.gistId = document.getElementById('settings-gistId').value;
-		storageService.save({settings});
+		dataService.setSettings(settings);
+		browserService.setBackgroundColor(settings.theme);
 		browserService.redirect('settings');
 	}
 
 
 	render() {
-		const settings = storageService.getSettings() ? storageService.getSettings() : {};
+		const settings = dataService.getSettings() ? dataService.getSettings() : {};
 		return (
 			<AppPage selectedMenu="settings">
 				<CommonButton onClick={this.save}>{L("Save")}</CommonButton>
@@ -39,8 +38,8 @@ class SettingsEdit extends React.Component {
 							<td data-column="label">{L("Theme")}</td>
 							<td>
 								<RadioSelector id="settings-theme" value={settings.theme}>
-									<Option value="light">{L("Light")}</Option>
-									<Option value="dark">{L("Dark")}</Option>
+									<option value="light">{L("Light")}</option>
+									<option value="dark">{L("Dark")}</option>
 								</RadioSelector>
 							</td>
 						</tr>
@@ -49,7 +48,7 @@ class SettingsEdit extends React.Component {
 							<td>
 								<RadioSelector id="language" name="language" value={settings.language}>
 									{constsService.languages.map(elt => (
-										<Option key={elt.key} value={elt.key}>{L(elt.label)}</Option>
+										<option key={elt.key} value={elt.key}>{L(elt.label)}</option>
 									))}
 								</RadioSelector>
 							</td>

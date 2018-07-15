@@ -41,7 +41,7 @@ class Upload extends React.Component {
 
 	render() {
 		return (
-			<CommonButton onClick={this.buttonClick}>
+			<CommonButton onClick={this.buttonClick} title={this.props.title}>
 				<input type="file" id="file-select" onChange={this.onChange.bind(this)} style={{display:'none'}} />
 				{this.props.children}
 			</CommonButton>

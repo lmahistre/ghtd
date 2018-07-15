@@ -5,7 +5,7 @@ const AppPage = require("../app-page.jsx");
 const CommonButton = require("../ui/common-button.jsx");
 const Upload = require("../ui/upload.jsx");
 
-const storageService = require('../../services/storage.js');
+const dataService = require('../../services/data.js');
 const constsService = require('../../services/consts.js');
 const alertService = require('../../services/alert.js');
 const browserService = require('../../services/browser.js');
@@ -24,11 +24,11 @@ class SettingsView extends React.Component {
 					&& 'string' === typeof newSettings.gistId
 					&& 'string' === typeof newSettings.token
 				) {
-					const settings = storageService.getSettings();
+					const settings = dataService.getSettings();
 					settings.user = newSettings.user;
 					settings.gistId = newSettings.gistId;
 					settings.token = newSettings.token;
-					storageService.save({settings});
+					dataService.setSettings(settings);
 				}
 				else {
 					alertService.error(L("The file is invalid"));
@@ -43,7 +43,7 @@ class SettingsView extends React.Component {
 
 
 	render() {
-		const settings = storageService.getSettings() ? storageService.getSettings() : {};
+		const settings = dataService.getSettings() ? dataService.getSettings() : {};
 		const toExports = (settings.user && settings.gistId && settings.token) ? JSON.stringify({
 			user : settings.user,
 			gistId : settings.gistId,
@@ -65,9 +65,9 @@ class SettingsView extends React.Component {
 				<CommonButton to="settings-edit">{L("Edit")}</CommonButton>
 				<CommonButton to="settings-about">{L("About")}</CommonButton>
 				{toExports ?
-					<CommonButton href={"data:application/octet-stream,"+toExports} download="ght-settings.json">{L("Export Settings")}</CommonButton>
+					<CommonButton href={"data:application/octet-stream,"+toExports} download="ght-settings.json" title={L("Export settings")}>{L("Export")}</CommonButton>
 				:
-					<Upload onSelect={this.import}>{L("Import settings")}</Upload>
+					<Upload onSelect={this.import} title={L("Import settings")}>{L("Import")}</Upload>
 				}
 				<table className="list-table" data-table="settings-list">
 					<tbody>

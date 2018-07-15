@@ -7,7 +7,6 @@ const SmallButton = require("./ui/small-button.jsx");
 
 const browserService = require('../services/browser.js');
 const dataService = require('../services/data.js');
-const storageService = require('../services/storage.js');
 const L = require('../services/i18n.js');
 
 class Task extends React.Component {
@@ -75,9 +74,6 @@ class Task extends React.Component {
 			task.projectId = projectId;
 			task.timestampModified = parseInt(Date.now()/1000);
 			dataService.setTask(id, task);
-			storageService.save({
-				tasks : dataService.getTasks(),
-			});
 			browserService.render();
 		}
 	}

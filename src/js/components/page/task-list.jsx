@@ -9,7 +9,6 @@ const NewTaskForm = require("../forms/new-task-form.jsx");
 const actionsService = require('../../services/actions.js');
 const browserService = require('../../services/browser.js');
 const githubService = require('../../services/github.js');
-const storageService = require('../../services/storage.js');
 const dataService = require('../../services/data.js');
 const L = require('../../services/i18n.js');
 
@@ -75,7 +74,7 @@ class TaskList extends React.Component {
 			projectList.push(projects[i]);
 		}
 
-		const settings = storageService.getSettings();
+		const settings = dataService.getSettings();
 		const isConnected = settings.user && settings.gistId && settings.token;
 
 		return (

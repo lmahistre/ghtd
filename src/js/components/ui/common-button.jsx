@@ -15,21 +15,24 @@ module.exports = function (props) {
 	}
 	if (props.to) {
 		return (
-			<Link className={linkClassName} to={props.to}>
+			<Link className={linkClassName} to={props.to} data-tip={props.title}>
 				{props.children}
 			</Link>
 		);
 	}
 	else if (props.onClick) {
 		return (
-			<a className={linkClassName} onClick={props.onClick} href="javascript:void(0);">
+			<a className={linkClassName} 
+				onClick={props.onClick} 
+				href="javascript:void(0);" 
+				data-tip={props.title}>
 				{props.children}
 			</a>
 		);
 	}
 	else {
 		return (
-			<a className={linkClassName} href={props.href} download={props.download}>
+			<a className={linkClassName} href={props.href} download={props.download} data-tip={props.title}>
 				{props.children}
 			</a>
 		);
