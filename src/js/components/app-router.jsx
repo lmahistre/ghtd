@@ -1,5 +1,6 @@
 
 const React = require("react");
+const ReactRedux = require('react-redux');
 
 const ReactRouterDom = require('react-router-dom');
 const HashRouter = ReactRouterDom.HashRouter;
@@ -17,6 +18,8 @@ const ProjectView = require("./page/project-view.jsx");
 const SettingsView = require("./page/settings-view.jsx");
 const SettingsAbout = require("./page/settings-about.jsx");
 const SettingsEdit = require("./page/settings-edit.jsx");
+
+const ConfigureStore = require('../services/configure-store.js');
 
 class AppRouter extends React.Component {
 
@@ -43,10 +46,13 @@ class AppRouter extends React.Component {
 	}
 
 	render() {
+		const store = ConfigureStore();
 		return (
-			<HashRouter>
-				{this.routes}
-			</HashRouter>
+			<ReactRedux.Provider store={store}>
+				<HashRouter>
+					{this.routes}
+				</HashRouter>
+			</ReactRedux.Provider>
 		);
 	}
 }

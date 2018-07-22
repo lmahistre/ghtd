@@ -1,4 +1,5 @@
 const React = require("react");
+const ReactRedux = require('react-redux')
 
 const AppPage = require("../app-page.jsx");
 const Task = require("../task.jsx");
@@ -11,6 +12,8 @@ const browserService = require('../../services/browser.js');
 const githubService = require('../../services/github.js');
 const dataService = require('../../services/data.js');
 const L = require('../../services/i18n.js');
+const reduxActions = require('../services/redux-actions.js')
+
 
 class TaskList extends React.Component {
 
@@ -93,4 +96,8 @@ class TaskList extends React.Component {
 	}
 }
 
-module.exports = TaskList;
+function mapStateToProps(state, ownProps) {
+	console.log(state);
+}
+
+module.exports = ReactRedux.connect(mapStateToProps)(TaskList);

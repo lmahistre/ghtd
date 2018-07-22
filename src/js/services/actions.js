@@ -49,7 +49,6 @@ const pullFromGitHub = function (callback) {
 		}
 		if (ghData && ghData.projects) {
 			for (let k in ghData.projects) {
-				// if (!localData.projects[k] || localData.projects[k].timestampModified < ghData.projects[k].timestampModified) {
 				if ((typeof localData.projects[k] === 'undefined'
 						&& (!localData.timestampSynchronized
 							|| localData.timestampSynchronized < ghData.timestampSynchronized)) 

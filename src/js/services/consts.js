@@ -86,7 +86,7 @@ module.exports.colors = [
 	},
 ];
 
-exports.appName = 'GHT';
+exports.appName = 'GHTD';
 exports.fileName = 'ght.json';
 
 exports.languages = [
