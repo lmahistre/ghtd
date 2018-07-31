@@ -1,6 +1,6 @@
 const React = require("react");
 const ReactDOM = require("react-dom");
-const AppRouter = require("../components/app-router.jsx");
+const Main = require("../components/main.jsx");
 
 const stateContainerService = require('./state-container.js');
 const constsService = require('./consts.js');
@@ -40,7 +40,7 @@ exports.notify = function (msg) {
 
 exports.render = function () {
 	ReactDOM.render(
-		React.createElement(AppRouter, null), 
+		React.createElement(Main, null), 
 		document.getElementById('react-root')
 	);
 }

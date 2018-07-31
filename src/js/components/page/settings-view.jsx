@@ -65,7 +65,7 @@ class SettingsView extends React.Component {
 				<CommonButton to="settings-edit">{L("Edit")}</CommonButton>
 				<CommonButton to="settings-about">{L("About")}</CommonButton>
 				{toExports ?
-					<CommonButton href={"data:application/octet-stream,"+toExports} download="ght-settings.json" title={L("Export settings")}>{L("Export")}</CommonButton>
+					<CommonButton href={"data:application/octet-stream,"+toExports} download={constsService.settingsFileName} title={L("Export settings")}>{L("Export")}</CommonButton>
 				:
 					<Upload onSelect={this.import} title={L("Import settings")}>{L("Import")}</Upload>
 				}

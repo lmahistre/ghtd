@@ -19,8 +19,6 @@ const SettingsView = require("./page/settings-view.jsx");
 const SettingsAbout = require("./page/settings-about.jsx");
 const SettingsEdit = require("./page/settings-edit.jsx");
 
-const ConfigureStore = require('../services/configure-store.js');
-
 class AppRouter extends React.Component {
 
 	constructor() {
@@ -46,13 +44,10 @@ class AppRouter extends React.Component {
 	}
 
 	render() {
-		const store = ConfigureStore();
 		return (
-			<ReactRedux.Provider store={store}>
-				<HashRouter>
-					{this.routes}
-				</HashRouter>
-			</ReactRedux.Provider>
+			<HashRouter>
+				{this.routes}
+			</HashRouter>
 		);
 	}
 }
