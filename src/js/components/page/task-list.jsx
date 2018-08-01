@@ -1,5 +1,5 @@
 const React = require("react");
-const ReactRedux = require('react-redux')
+const ReactRedux = require('react-redux');
 
 const AppPage = require("../app-page.jsx");
 const Task = require("../task.jsx");
@@ -12,7 +12,7 @@ const browserService = require('../../services/browser.js');
 const githubService = require('../../services/github.js');
 const dataService = require('../../services/data.js');
 const L = require('../../services/i18n.js');
-// const reduxActions = require('../../services/redux-actions.js')
+const reduxActions = require('../../services/redux-actions.js');
 
 
 class TaskList extends React.Component {
@@ -23,11 +23,10 @@ class TaskList extends React.Component {
 	}
 
 
-	retrieveList (object) {
+	formatList (tasks, projects) {
 		const list = [];
-		const projects = dataService.getProjects();
-		for (let i in object) {
-			let task = object[i];
+		for (let i in tasks) {
+			let task = tasks[i];
 			if (!task.status) {
 				task.status = 'active';
 			}
@@ -62,9 +61,11 @@ class TaskList extends React.Component {
 	render() {
 		const self = this;
 		let taskList = [];
-		const tasks = dataService.getTasks();
+		// const tasks = dataService.getTasks();
+		const tasks = self.props.tasks;
+		const projects = self.props.projects;
 		if (tasks) {
-			taskList = self.retrieveList(dataService.getTasks());
+			taskList = self.formatList(tasks, projects);
 		}
 		const projectList = [
 			{
@@ -72,12 +73,11 @@ class TaskList extends React.Component {
 				name : '',
 			},
 		];
-		const projects = dataService.getProjects();
 		for (let i in projects) {
 			projectList.push(projects[i]);
 		}
 
-		const settings = dataService.getSettings();
+		const settings = self.props.settings;
 		const isConnected = settings.user && settings.gistId && settings.token;
 
 		return (
@@ -96,9 +96,13 @@ class TaskList extends React.Component {
 	}
 }
 
-// function mapStateToProps(state, ownProps) {
-// 	console.log(state);
-// }
 
-// module.exports = ReactRedux.connect(mapStateToProps)(TaskList);
-module.exports = TaskList;
+function mapStateToProps(state, ownProps) {
+	return {
+		tasks : state && state.tasks ? state.tasks : {},
+		projects : state && state.projects ? state.projects : {},
+		settings : state && state.settings ? state.settings : {},
+	}
+}
+
+module.exports = ReactRedux.connect(mapStateToProps)(TaskList);

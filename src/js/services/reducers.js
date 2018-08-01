@@ -1,4 +1,6 @@
 
+const clone = require('clone');
+
 // TO REMOVE
 exports.removeResolvedTasks = function(tasks) {
 	for (let i in tasks) {
@@ -21,3 +23,10 @@ exports.deleteRemovedTasks = function(tasks, currentTimestamp) {
 }
 
 
+exports.INIT = function(state, action) {
+	return {
+		tasks : action.tasks,
+		projects : action.projects,
+		settings : action.settings,
+	};
+}
