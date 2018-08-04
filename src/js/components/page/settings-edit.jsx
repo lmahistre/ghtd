@@ -1,5 +1,6 @@
 
 const React = require("react");
+const ReactRedux = require('react-redux');
 
 const AppPage = require("../app-page.jsx");
 const SmallButton = require("../ui/small-button.jsx");
@@ -78,4 +79,12 @@ class SettingsEdit extends React.Component {
 	}
 }
 
-module.exports = SettingsEdit;
+function mapStateToProps(state, ownProps) {
+	return {
+		tasks : state && state.tasks ? state.tasks : {},
+		projects : state && state.projects ? state.projects : {},
+		settings : state && state.settings ? state.settings : {},
+	}
+}
+
+module.exports = ReactRedux.connect(mapStateToProps)(SettingsEdit);

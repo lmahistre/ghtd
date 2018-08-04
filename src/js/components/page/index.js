@@ -1,0 +1,11 @@
+exports.TaskList = require("./task-list.jsx");
+exports.TaskEdit = require("./task-edit.jsx");
+exports.TaskView = require("./task-view.jsx");
+exports.ProjectDelete = require("./project-delete.jsx");
+exports.ProjectEdit = require("./project-edit.jsx");
+exports.ProjectImport = require("./project-import.jsx");
+exports.ProjectList = require("./project-list.jsx");
+exports.ProjectView = require("./project-view.jsx");
+exports.SettingsView = require("./settings-view.jsx");
+exports.SettingsAbout = require("./settings-about.jsx");
+exports.SettingsEdit = require("./settings-edit.jsx");

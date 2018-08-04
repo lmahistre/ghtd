@@ -7,6 +7,7 @@ const alertService = require('./alert.js');
 const browserService = require('./browser.js');
 const reducersService = require('./reducers.js');
 
+console.warn('actions service is deprecated')
 
 exports.importProjects = function (callback) {
 	githubService.getProjects(function(error, data) {
@@ -17,16 +18,10 @@ exports.importProjects = function (callback) {
 }
 
 
-exports.removeResolvedTasks = function () {
-	const tasks = dataService.getTasks();
-	dataService.setTasks(reducersService.removeResolvedTasks(tasks));
-}
-
-
-exports.deleteRemovedTasks = function () {
-	const tasks = dataService.getTasks();
-	dataService.setTasks(reducersService.deleteRemovedTasks(tasks));
-}
+// exports.deleteRemovedTasks = function () {
+// 	const tasks = dataService.getTasks();
+// 	dataService.setTasks(reducersService.deleteRemovedTasks(tasks));
+// }
 
 
 const pullFromGitHub = function (callback) {

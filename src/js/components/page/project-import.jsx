@@ -1,5 +1,6 @@
 
 const React = require("react");
+const ReactRedux = require('react-redux');
 
 const AppPage = require("../app-page.jsx");
 const SmallButton = require("../ui/small-button.jsx");
@@ -8,7 +9,8 @@ const actionsService = require('../../services/actions.js');
 const dataService = require('../../services/data.js');
 const utilsService = require('../../services/utils.js');
 const browserService = require('../../services/browser.js');
-// const L = require('../../services/i18n.js');
+const reduxActions = require('../../services/redux-actions.js');
+const store = require('../../services/store.js');
 
 class ProjectImport extends React.Component {
 
@@ -22,8 +24,9 @@ class ProjectImport extends React.Component {
 			color : utilsService.generateRandomColor(),
 			provider : 'github',
 		};
-		dataService.setProject(id, project);
-		browserService.render();
+		store.dispatch(reduxActions.addProject(project));
+		// dataService.setProject(id, project);
+		// browserService.render();
 	}
 
 
@@ -67,4 +70,12 @@ class ProjectImport extends React.Component {
 	}
 }
 
-module.exports = ProjectImport;
+function mapStateToProps(state, ownProps) {
+	return {
+		tasks : state && state.tasks ? state.tasks : {},
+		projects : state && state.projects ? state.projects : {},
+		settings : state && state.settings ? state.settings : {},
+	}
+}
+
+module.exports = ReactRedux.connect(mapStateToProps)(ProjectImport);

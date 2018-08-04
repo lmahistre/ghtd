@@ -3,6 +3,7 @@ const alerts = [];
 let pleaseWait = 0;
 let isInitialized = false;
 
+console.warn('state container service is deprecated')
 
 exports.getAlerts = function () {
 	return alerts;

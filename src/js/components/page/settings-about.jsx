@@ -1,4 +1,5 @@
 const React = require("react");
+const ReactRedux = require('react-redux');
 
 const AppPage = require("../app-page.jsx");
 

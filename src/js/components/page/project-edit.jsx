@@ -1,21 +1,21 @@
 const React = require("react");
+const ReactRedux = require('react-redux');
 
 const AppPage = require("../app-page.jsx");
 const CommonButton = require("../ui/common-button.jsx");
 const ProjectEditForm = require("../forms/project-edit-form.jsx");
 
 const browserService = require('../../services/browser.js');
-const dataService = require('../../services/data.js');
 const utilsService = require('../../services/utils.js');
+const reduxActions = require('../../services/redux-actions.js');
+const store = require('../../services/store.js');
 
 const L = require('../../services/i18n.js');
 
 class ProjectEdit extends React.Component {
 
 	create() {
-		const id = utilsService.getNextProjectId();
-		let project = {
-			id : id,
+		const project = {			// id : id,
 			name : document.forms['project-edit'].name.value,
 			visible : document.forms['project-edit'].visible.checked,
 			color : document.forms['project-edit'].color.value,
@@ -23,14 +23,14 @@ class ProjectEdit extends React.Component {
 			repo : document.forms['project-edit'].repo.value,
 		};
 		if (project.name.length > 0) {
-			dataService.setProject(id, project);
+			store.dispatch(reduxActions.addProject(project));
 			browserService.redirect('projects');
 		}
 	}
 
 
 	update() {
-		let project = {
+		const project = {
 			id : document.forms['project-edit'].id.value,
 			name : document.forms['project-edit'].name.value,
 			visible : document.forms['project-edit'].visible.checked,
@@ -38,7 +38,7 @@ class ProjectEdit extends React.Component {
 			provider : document.forms['project-edit'].provider.value,
 			repo : document.forms['project-edit'].repo.value,
 		};
-		dataService.setProject(project.id, project);
+		store.dispatch(reduxActions.updateProject(project));
 		browserService.redirect('projects');
 	}
 
@@ -46,7 +46,7 @@ class ProjectEdit extends React.Component {
 	render() {
 		const self = this;
 		let save = self.create;
-		let project = dataService.getProject(self.props.match.params.id);
+		let project = self.props.projects[self.props.match.params.id];
 		// In case of edition
 		if (project) {
 			if (project.visible === undefined) {
@@ -75,4 +75,12 @@ class ProjectEdit extends React.Component {
 	}
 }
 
-module.exports = ProjectEdit;
+function mapStateToProps(state, ownProps) {
+	return {
+		tasks : state && state.tasks ? state.tasks : {},
+		projects : state && state.projects ? state.projects : {},
+		settings : state && state.settings ? state.settings : {},
+	}
+}
+
+module.exports = ReactRedux.connect(mapStateToProps)(ProjectEdit);

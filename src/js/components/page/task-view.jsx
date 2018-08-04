@@ -1,4 +1,5 @@
 const React = require("react");
+const ReactRedux = require('react-redux');
 const ReactRouterDom = require('react-router-dom');
 
 const Link = ReactRouterDom.Link;
@@ -33,7 +34,10 @@ class TaskView extends React.Component {
 							<td>{L("Project")}</td>
 							<td>
 								{project ?
-									<Link to={"/project-view/"+project.id} style={{color: '#'+project.color}}>{project.name}</Link>
+									<Link to={"/project-view/"+project.id} 
+										style={{color: '#'+project.color}}>
+										{project.name}
+									</Link>
 								: null }
 							</td>
 						</tr>
@@ -56,4 +60,12 @@ class TaskView extends React.Component {
 	}
 }
 
-module.exports = TaskView;
+function mapStateToProps(state, ownProps) {
+	return {
+		tasks : state && state.tasks ? state.tasks : {},
+		projects : state && state.projects ? state.projects : {},
+		settings : state && state.settings ? state.settings : {},
+	}
+}
+
+module.exports = ReactRedux.connect(mapStateToProps)(TaskView);

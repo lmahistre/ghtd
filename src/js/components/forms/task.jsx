@@ -3,44 +3,28 @@ const React = require("react");
 const ReactRouterDom = require('react-router-dom');
 const Link = ReactRouterDom.Link;
 
-const SmallButton = require("./ui/small-button.jsx");
+const SmallButton = require("../ui/small-button.jsx");
 
-const browserService = require('../services/browser.js');
-const dataService = require('../services/data.js');
-const L = require('../services/i18n.js');
+const browserService = require('../../services/browser.js');
+const dataService = require('../../services/data.js');
+const L = require('../../services/i18n.js');
+const reduxActions = require('../../services/redux-actions.js');
+const store = require('../../services/store.js');
 
 class Task extends React.Component {
 
 	resolve(id) {
-		const task = dataService.getTask(id);
-		if (task) {
-			task.status = 'done';
-			task.timestampModified = parseInt(Date.now()/1000);
-		}
-		dataService.setTask(id, task);
-		browserService.render();
+		store.dispatch(reduxActions.setTaskStatus(id, 'done'));
 	}
 
 
 	remove(id) {
-		const task = dataService.getTask(id);
-		if (task) {
-			task.status = 'removed';
-			task.timestampModified = parseInt(Date.now()/1000);
-		}
-		dataService.setTask(id, task);
-		browserService.render();
+		store.dispatch(reduxActions.setTaskStatus(id, 'removed'));
 	}
 
 
 	unresolve(id) {
-		const task = dataService.getTask(id);
-		if (task) {
-			task.status = 'active';
-			task.timestampModified = parseInt(Date.now()/1000);
-		}
-		dataService.setTask(id, task);
-		browserService.render();
+		store.dispatch(reduxActions.setTaskStatus(id, 'active'));
 	}
 
 
@@ -61,12 +45,11 @@ class Task extends React.Component {
 
 
 	save() {
-		const self = this;
-		self.setState({
+		this.setState({
 			isBeingEdited : false,
 		});
-		const id = self.props.task.id;
-		const task = dataService.getTask(self.props.task.id);
+		const id = this.props.task.id;
+		const task = dataService.getTask(this.props.task.id);
 		const name = document.getElementById("task-edit-name-"+id).value;
 		const projectId = document.getElementById("task-edit-projectId-"+id).value;
 		if (task.name != name || task.projectId != projectId) {

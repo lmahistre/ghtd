@@ -29,6 +29,7 @@ module.exports = {
 	"New project" : "Nouveau projet",
 	"No file selected" : "Aucun fichier sélectionné",
 	"Not connected" : "Non connecté",
+	"Not visible" : "Non visible",
 	"Project" : "Projet",
 	"Projects" : "Projets",
 	"Reopen" : "Réouvrir",

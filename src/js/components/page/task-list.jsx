@@ -2,24 +2,21 @@ const React = require("react");
 const ReactRedux = require('react-redux');
 
 const AppPage = require("../app-page.jsx");
-const Task = require("../task.jsx");
+const Task = require("../forms/task.jsx");
 const SmallButton = require("../ui/small-button.jsx");
 const CommonButton = require("../ui/common-button.jsx");
 const NewTaskForm = require("../forms/new-task-form.jsx");
 
-const actionsService = require('../../services/actions.js');
 const browserService = require('../../services/browser.js');
 const githubService = require('../../services/github.js');
-const dataService = require('../../services/data.js');
 const L = require('../../services/i18n.js');
 const reduxActions = require('../../services/redux-actions.js');
-
+const store = require('../../services/store.js');
 
 class TaskList extends React.Component {
 
 	removeResolved () {
-		actionsService.removeResolvedTasks();
-		browserService.render();
+		store.dispatch(reduxActions.removeResolvedTasks());
 	}
 
 

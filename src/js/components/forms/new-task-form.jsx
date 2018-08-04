@@ -7,6 +7,8 @@ const dataService = require('../../services/data.js');
 const browserService = require('../../services/browser.js');
 const utilsService = require('../../services/utils.js');
 const L = require('../../services/i18n.js');
+const reduxActions = require('../../services/redux-actions.js');
+const store = require('../../services/store.js');
 
 class NewTaskForm extends React.Component {
 
@@ -24,18 +26,16 @@ class NewTaskForm extends React.Component {
 		if (name.length > 0) {
 			let projectId = document.getElementById('new-task-projectId').value;
 			let task = {
-				id : utilsService.getNextTaskId(),
 				name : name,
 				projectId : projectId,
 				status : 'active',
-				timestampCreated : parseInt(Date.now()/1000),
-				timestampModified : parseInt(Date.now()/1000),
+				// timestampCreated : parseInt(Date.now()/1000),
+				// timestampModified : parseInt(Date.now()/1000),
 			};
 			this.setState({
 				name: '',
 			});
-			dataService.setTask(task.id, task);
-			browserService.render();
+			store.dispatch(reduxActions.addTask(task));
 		}
 	}
 

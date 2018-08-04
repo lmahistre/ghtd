@@ -12,17 +12,13 @@ const actionsService = require('../../services/actions.js');
 const browserService = require('../../services/browser.js');
 const dataService = require('../../services/data.js');
 const L = require('../../services/i18n.js');
+const reduxActions = require('../../services/redux-actions.js');
+const store = require('../../services/store.js');
 
 class ProjectList extends React.Component {
 
 	changeVisibility (id) {
-		const projects = dataService.getProjects();
-		if (projects[id]) {
-			let project = new Object(projects[id]);
-			project.visible = !projects[id].visible;
-			dataService.setProject(id, project);
-			browserService.render();
-		}
+		store.dispatch(reduxActions.changeProjectVisibility(id));
 	}
 
 
@@ -37,7 +33,6 @@ class ProjectList extends React.Component {
 	render () {
 		const self = this;
 		const projectList = [];
-		// const projects = dataService.getProjects();
 		const projects = self.props.projects;
 		if (projects) {
 			for (let i in projects) {
@@ -84,4 +79,3 @@ function mapStateToProps(state, ownProps) {
 }
 
 module.exports = ReactRedux.connect(mapStateToProps)(ProjectList);
-// module.exports = ProjectList;

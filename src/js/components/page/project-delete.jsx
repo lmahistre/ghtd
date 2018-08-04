@@ -1,4 +1,5 @@
 const React = require("react");
+const ReactRedux = require('react-redux');
 const ReactRouterDom = require('react-router-dom');
 
 const Redirect = ReactRouterDom.Redirect;
@@ -63,20 +64,19 @@ class ProjectDelete extends React.Component {
 		// If the project does not exist
 		else {
 			alertService.error(L("This project does not exist."));
-			// window.location.href = '#/projects';
 			return (
 				<Redirect to="/projects" />
 			);
-			// return (
-			// 	<AppPage selectedMenu="projects">
-			// 		<div>
-			// 			<p>{L("This project does not exist.")}</p>
-			// 		</div>
-			// 		<CommonButton to="/projects">{L("Cancel")}</CommonButton>
-			// 	</AppPage>
-			// );
 		}
 	}
 }
 
-module.exports = ProjectDelete;
+function mapStateToProps(state, ownProps) {
+	return {
+		tasks : state && state.tasks ? state.tasks : {},
+		projects : state && state.projects ? state.projects : {},
+		settings : state && state.settings ? state.settings : {},
+	}
+}
+
+module.exports = ReactRedux.connect(mapStateToProps)(ProjectDelete);

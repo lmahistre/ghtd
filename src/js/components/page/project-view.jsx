@@ -1,18 +1,18 @@
 const React = require("react");
+const ReactRedux = require('react-redux');
 
 const AppPage = require("../app-page.jsx");
 const VisibleMarker = require("../visible-marker.jsx");
 const CommonButton = require("../ui/common-button.jsx");
 const DateViewer = require('../ui/date-viewer.jsx');
 
-const dataService = require('../../services/data.js');
 const L = require('../../services/i18n.js');
 
 class ProjectView extends React.Component {
 
 	render () {
 		const self = this;
-		let project = dataService.getProject(self.props.match.params.id);
+		const project = self.props.projects[self.props.match.params.id];
 		return (
 			<AppPage selectedMenu="projects">
 				<CommonButton to={"/project-edit/"+self.props.match.params.id}>{"Edit"}</CommonButton>
@@ -41,7 +41,7 @@ class ProjectView extends React.Component {
 						<tr>
 							<td>{"Visible"}</td>
 							<td>
-								<VisibleMarker visible={project.visible} title={project.visible ? 'Visible' : 'Not visible'} />
+								<VisibleMarker visible={project.visible} title={project.visible ? L('Visible') : L('Not visible')} />
 							</td>
 						</tr>
 						<tr>
@@ -63,4 +63,12 @@ class ProjectView extends React.Component {
 	}
 }
 
-module.exports = ProjectView;
+function mapStateToProps(state, ownProps) {
+	return {
+		tasks : state && state.tasks ? state.tasks : {},
+		projects : state && state.projects ? state.projects : {},
+		settings : state && state.settings ? state.settings : {},
+	}
+}
+
+module.exports = ReactRedux.connect(mapStateToProps)(ProjectView);

@@ -2,6 +2,7 @@
 const storageService = require('./storage.js');
 const alertService = require('./alert.js');
 
+console.warn('data service is deprecated')
 
 exports.getProjects = storageService.getProjects;
 
