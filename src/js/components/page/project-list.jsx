@@ -8,12 +8,11 @@ const AppPage = require("../app-page.jsx");
 const CommonButton = require("../ui/common-button.jsx");
 const SmallButton = require("../ui/small-button.jsx");
 
-const actionsService = require('../../services/actions.js');
 const browserService = require('../../services/browser.js');
-const dataService = require('../../services/data.js');
 const L = require('../../services/i18n.js');
 const reduxActions = require('../../services/redux-actions.js');
 const store = require('../../services/store.js');
+const githubSync = require('../../services/github-sync.js');
 
 class ProjectList extends React.Component {
 
@@ -23,8 +22,9 @@ class ProjectList extends React.Component {
 
 
 	import () {
-		actionsService.importProjects(function (importProjects) {
-			dataService.setImportProjects(importProjects);
+		store.dispatch(reduxActions.importProjects());
+		githubSync.importProjects(function (importProjects) {
+			store.dispatch(reduxActions.setImportProjects(importProjects));
 			browserService.redirect('project-import');
 		});
 	}
@@ -69,13 +69,4 @@ class ProjectList extends React.Component {
 	}
 }
 
-
-function mapStateToProps(state, ownProps) {
-	return {
-		tasks : state && state.tasks ? state.tasks : {},
-		projects : state && state.projects ? state.projects : {},
-		settings : state && state.settings ? state.settings : {},
-	}
-}
-
-module.exports = ReactRedux.connect(mapStateToProps)(ProjectList);
+module.exports = store.connect(ProjectList);

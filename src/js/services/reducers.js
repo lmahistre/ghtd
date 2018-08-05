@@ -19,11 +19,13 @@ exports.INIT = function(state, action) {
 		tasks : action.tasks,
 		projects : action.projects,
 		settings : action.settings,
+		alerts : [],
+		busy : false,
 	};
 }
 
 
-exports.ADD_TASK = function(state, action) {
+exports.SET_TASK = function(state, action) {
 	const newState = clone(state);
 	if (action.task && action.task.id) {
 		newState.tasks[action.task.id] = action.task;
@@ -64,5 +66,63 @@ exports.SET_PROJECT = function(state, action) {
 exports.SET_PROJECT_VISIBLE = function(state, action) {
 	const newState = clone(state);
 	newState.projects[action.id].visible = !state.projects[action.id].visible;
+	return newState;
+}
+
+
+exports.IMPORT_PROJECTS = function(state, action) {
+	const newState = clone(state);
+	newState.busy = true;
+	return newState;
+}
+
+
+exports.DELETE_PROJECT = function(state, action) {
+	const newState = clone(state);
+	if (newState.projects && action.id && newState.projects[action.id]) {
+		delete newState.projects[action.id];
+	}
+	return newState;
+}
+
+exports.SET_SELECTED_PROJECT = function(state, action) {
+	const newState = clone(state);
+	newState.settings.projectId = action.id;
+	return newState;
+}
+
+
+exports.IMPORT_SETTINGS = function(state, action) {
+	const newState = clone(state);
+	newState.settings.user = action.settings.user;
+	newState.settings.gistId = action.settings.gistId;
+	newState.settings.token = action.settings.token;
+	return newState;
+}
+
+
+exports.SET_IMPORT_PROJECTS = function(state, action) {
+	const newState = clone(state);
+	newState.importProjects = action.importProjects ? action.importProjects : [];
+	newState.busy = false;
+	return newState;
+}
+
+
+exports.ADD_ALERT = function(state, action) {
+	const newState = clone(state);
+	newState.alerts.push({
+		type : action.alertType,
+		message : action.message,
+	});
+	return newState;
+}
+
+
+exports.CLEAR_ALERT = function(state, action) {
+	const newState = clone(state);
+	if (newState.alerts && newState.alerts[action.index]) {
+		delete newState.alerts[action.index];
+	}
 	return newState;
 }

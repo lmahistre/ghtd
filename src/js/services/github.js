@@ -1,6 +1,6 @@
 
 const browserService = require('./browser.js');
-const alertService = require('./alert.js');
+// const alertService = require('./alert.js');
 const stateContainerService = require('./state-container.js');
 const dataService = require('./data.js');
 
@@ -47,14 +47,16 @@ const call = function(uri, post, callback) {
 				console.warn(responseData.warning);
 			}
 			if (responseData.error) {
-				alertService.error(responseData.error);
+				// alertService.error(responseData.error);
+				store.dispatch(reduxActions.addAlert('error', responseData.error));
 			}
 			if (callback && typeof callback === 'function') {
 				callback(responseData);
 			}
 		}
 		catch (error) {
-			alertService.error(error);
+			// alertService.error(error);
+			store.dispatch(reduxActions.addAlert('error', error));
 		}
 		stateContainerService.decreasePleaseWait();
 		browserService.render();
@@ -63,7 +65,8 @@ const call = function(uri, post, callback) {
 		});
 	})
 	.catch(function(error) {
-		alertService.error(error);
+		// alertService.error(error);
+		store.dispatch(reduxActions.addAlert('error', error));
 		return new Promise(function(resolve, reject) {
 			reject(error);
 		});

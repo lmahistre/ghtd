@@ -1,5 +1,5 @@
 
-const alertService = require('./alert.js');
+// const alertService = require('./alert.js');
 const constsService = require('./consts.js');
 
 let localStorage = window && window.localStorage ? window.localStorage : null;
@@ -30,7 +30,8 @@ exports.retrieve = function () {
 		data.timestampSynchronized = isNaN(localStorage.timestampSynchronized) ? 0 : parseInt(localStorage.timestampSynchronized);
 	}
 	catch (error) {
-		alertService.error(error);
+		// alertService.error(error);
+		store.dispatch(reduxActions.addAlert('error', error));
 	}
 	return data;
 }
@@ -92,7 +93,8 @@ exports.getImportProjects = function (callback) {
 		}
 	}
 	catch (error) {
-		alertService.error(error);
+		// alertService.error(error);
+		store.dispatch(reduxActions.addAlert('error', error));
 	}
 	return importProjects;
 }

@@ -8,15 +8,18 @@ const AppPage = require("../app-page.jsx");
 const CommonButton = require("../ui/common-button.jsx");
 const DateViewer = require('../ui/date-viewer.jsx');
 
-const dataService = require('../../services/data.js');
+// const dataService = require('../../services/data.js');
+const store = require('../../services/store.js');
 const L = require('../../services/i18n.js');
 
 class TaskView extends React.Component {
 
 	render() {
 		const self = this;
-		let task = dataService.getTask(self.props.match.params.id);
-		let project = task.projectId ? dataService.getProject(task.projectId) : null;
+		// let task = dataService.getTask(self.props.match.params.id);
+		const task = self.props.tasks 
+			&& self.props.tasks[self.props.match.params.id] ? self.props.tasks[self.props.match.params.id] : {};
+		const project = task.projectId ? self.props.projects[task.projectId] : null;
 		return (
 			<AppPage selectedMenu="tasks">
 				<CommonButton to={"/task-edit/"+self.props.match.params.id}>{"Edit"}</CommonButton>
@@ -60,12 +63,12 @@ class TaskView extends React.Component {
 	}
 }
 
-function mapStateToProps(state, ownProps) {
-	return {
-		tasks : state && state.tasks ? state.tasks : {},
-		projects : state && state.projects ? state.projects : {},
-		settings : state && state.settings ? state.settings : {},
-	}
-}
+// function mapStateToProps(state, ownProps) {
+// 	return {
+// 		tasks : state && state.tasks ? state.tasks : {},
+// 		projects : state && state.projects ? state.projects : {},
+// 		settings : state && state.settings ? state.settings : {},
+// 	}
+// }
 
-module.exports = ReactRedux.connect(mapStateToProps)(TaskView);
+module.exports = store.connect(TaskView);

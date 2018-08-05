@@ -3,6 +3,7 @@ exports.browser = require('./browser.js');
 exports.consts = require('./consts.js');
 exports.dispatcher = require('./dispatcher.js');
 exports.github = require('./github.js');
+exports.githubSync = require('./github-sync.js');
 exports.i18n = require('./i18n.js');
 exports.reducers = require('./reducers.js');
 exports.reduxActions = require('./redux-actions.js');

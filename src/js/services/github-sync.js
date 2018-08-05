@@ -1,13 +1,11 @@
 
 const storageService = require('./storage.js');
 const githubService = require('./github.js');
-const dataService = require('./data.js');
 const validateService = require('./validate.js');
-const alertService = require('./alert.js');
-const browserService = require('./browser.js');
-const reducersService = require('./reducers.js');
+// const alertService = require('./alert.js');
+const store = require('./store.js');
 
-console.warn('actions service is deprecated')
+
 
 exports.importProjects = function (callback) {
 	githubService.getProjects(function(error, data) {
@@ -18,16 +16,11 @@ exports.importProjects = function (callback) {
 }
 
 
-// exports.deleteRemovedTasks = function () {
-// 	const tasks = dataService.getTasks();
-// 	dataService.setTasks(reducersService.deleteRemovedTasks(tasks));
-// }
-
-
 const pullFromGitHub = function (callback) {
 	githubService.getGistData(function(error, ghData) {
 		if (error) {
-			alertService.error(error);
+			// alertService.error(error);
+			store.dispatch(reduxActions.addAlert('error', error));
 		}
 		const localData = storageService.retrieve();
 		if (ghData && ghData.tasks) {
@@ -100,8 +93,8 @@ exports.syncWithGitHub = function () {
 			saveToGitHub();
 		}
 		else {
-			alertService.warning('No data fetched');
-			browserService.render();
+			// alertService.warning('No data fetched');
+			store.dispatch(reduxActions.addAlert('warning', 'No data fetched'));
 		}
 	});
 }

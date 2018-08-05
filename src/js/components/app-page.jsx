@@ -5,26 +5,28 @@ const ReactTooltip = require("react-tooltip");
 const Menu = require('./menu.jsx');
 const Alerts = require('./alerts.jsx');
 
-const dataService = require('../services/data.js');
-const stateContainerService = require('../services/state-container.js');
+const store = require('../services/store.js');
 
 class AppPage extends React.Component {
+
 	render() {
-		const self = this;
-		const settings = dataService.getSettings();
-		const theme = (settings && settings.theme 
-			&& settings.theme === 'dark') ? 'dark' : 'light';
+		const theme = (this.props.settings 
+			&& this.props.settings.theme 
+			&& this.props.settings.theme === 'dark') ? 'dark' : 'light';
 		return (
 			<div className="app-container" data-theme={theme}>
-				<Menu selectedMenu={self.props.selectedMenu} busy={stateContainerService.getPleaseWait()} />
-				<Alerts alerts={stateContainerService.getAlerts()} />
+				<Menu selectedMenu={this.props.selectedMenu} 
+					busy={this.props.busy} 
+					settings={this.props.settings} />
+				<Alerts alerts={this.props.alerts} />
 				<ReactTooltip />
 				<div className="page-content">
-					{self.props.children}
+					{this.props.children}
 				</div>
 			</div>
 		);
 	}
 }
 
-module.exports = AppPage;
+// module.exports = AppPage;
+module.exports = store.connect(AppPage);

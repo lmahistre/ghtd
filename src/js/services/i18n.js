@@ -1,5 +1,5 @@
 
-const dataService = require('./data.js');
+const store = require('./store.js');
 
 const langs = {
 	en : require('../lang/en.js'),
@@ -7,7 +7,7 @@ const langs = {
 }
 
 module.exports = function(key) {
-	const settings = dataService.getSettings();
+	const settings = store.getState().settings;
 	let lang = settings && settings.language ? settings.language : 'en';
 	if (langs[lang] && langs[lang][key]) {
 		return langs[lang][key];

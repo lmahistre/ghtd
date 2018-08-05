@@ -6,17 +6,20 @@ const AppPage = require("../app-page.jsx");
 const CommonButton = require("../ui/common-button.jsx");
 const Upload = require("../ui/upload.jsx");
 
-const dataService = require('../../services/data.js');
+// const dataService = require('../../services/data.js');
 const constsService = require('../../services/consts.js');
-const alertService = require('../../services/alert.js');
+// const alertService = require('../../services/alert.js');
 const browserService = require('../../services/browser.js');
 const L = require('../../services/i18n.js');
+const reduxActions = require('../../services/redux-actions.js');
+const store = require('../../services/store.js');
 
 class SettingsView extends React.Component {
 
 	import(error, content) {
 		if (error) {
-			alertService.error(L(error.message));
+			// alertService.error(L(error.message));
+			store.dispatch(reduxActions.addAlert('error', L(error.message)));
 		}
 		else {
 			try {
@@ -25,26 +28,29 @@ class SettingsView extends React.Component {
 					&& 'string' === typeof newSettings.gistId
 					&& 'string' === typeof newSettings.token
 				) {
-					const settings = dataService.getSettings();
-					settings.user = newSettings.user;
-					settings.gistId = newSettings.gistId;
-					settings.token = newSettings.token;
-					dataService.setSettings(settings);
+					store.dispatch(reduxActions.importSettings(newSettings));
+					// const settings = dataService.getSettings();
+					// settings.user = newSettings.user;
+					// settings.gistId = newSettings.gistId;
+					// settings.token = newSettings.token;
+					// dataService.setSettings(settings);
 				}
 				else {
-					alertService.error(L("The file is invalid"));
+					// alertService.error(L("The file is invalid"));
+					store.dispatch(reduxActions.addAlert('error', L("The file is invalid")));
 				}
 			}
 			catch (error) {
-				alertService.error(error.message);
+				// alertService.error(error.message);
+				store.dispatch(reduxActions.addAlert('error', error.message));
 			}
 		}
-		browserService.render();
+		// browserService.render();
 	}
 
 
 	render() {
-		const settings = dataService.getSettings() ? dataService.getSettings() : {};
+		const settings = this.props.settings;
 		const toExports = (settings.user && settings.gistId && settings.token) ? JSON.stringify({
 			user : settings.user,
 			gistId : settings.gistId,

@@ -1,6 +1,6 @@
 
 const storageService = require('./storage.js');
-const alertService = require('./alert.js');
+// const alertService = require('./alert.js');
 
 console.warn('data service is deprecated')
 
@@ -70,7 +70,8 @@ exports.deleteTask = function(id) {
 		return true;
 	}
 	else {
-		alertService.error('Task cannot be removed');
+		// alertService.error('Task cannot be removed');
+		// store.dispatch(reduxActions.addAlert('error', L(error.message)));
 	}
 	return false;
 }

@@ -5,8 +5,6 @@ const ReactRedux = require('react-redux');
 const AppPage = require("../app-page.jsx");
 const SmallButton = require("../ui/small-button.jsx");
 
-const actionsService = require('../../services/actions.js');
-const dataService = require('../../services/data.js');
 const utilsService = require('../../services/utils.js');
 const browserService = require('../../services/browser.js');
 const reduxActions = require('../../services/redux-actions.js');
@@ -25,24 +23,13 @@ class ProjectImport extends React.Component {
 			provider : 'github',
 		};
 		store.dispatch(reduxActions.addProject(project));
-		// dataService.setProject(id, project);
-		// browserService.render();
-	}
-
-
-	refresh () {
-		const self = this;
-		actionsService.importProjects(function (importProjects) {
-			dataService.setImportProjects(importProjects);
-			dataService.setImportProjectsIsLoaded(true);
-		});
 	}
 
 
 	render () {
 		const self = this;
-		const importProjects = dataService.getImportProjects();
-		const projects = dataService.getProjects();
+		const importProjects = self.props.importProjects;
+		const projects = self.props.projects;
 		const alreadyExistingProjects = [];
 		for (var i in projects) {
 			alreadyExistingProjects.push(projects[i].repo);
@@ -70,12 +57,4 @@ class ProjectImport extends React.Component {
 	}
 }
 
-function mapStateToProps(state, ownProps) {
-	return {
-		tasks : state && state.tasks ? state.tasks : {},
-		projects : state && state.projects ? state.projects : {},
-		settings : state && state.settings ? state.settings : {},
-	}
-}
-
-module.exports = ReactRedux.connect(mapStateToProps)(ProjectImport);
+module.exports = store.connect(ProjectImport);

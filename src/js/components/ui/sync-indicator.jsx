@@ -1,13 +1,16 @@
 
 const React = require("react");
 
-const actionsService = require('../../services/actions.js');
-const dataService = require('../../services/storage.js');
 const L = require('../../services/i18n.js');
 
 module.exports = class SyncIndicator extends React.Component {
+
+	syncWithGitHub() {
+
+	}
+
 	render () {
-		const settings = dataService.getSettings();
+		const settings = this.props.settings;
 		const isConnected = settings.user && settings.gistId && settings.token;
 		if (isConnected) {
 			if (this.props.busy) {
@@ -19,7 +22,9 @@ module.exports = class SyncIndicator extends React.Component {
 			}
 			else {
 				return (
-					<span className="sync-indicator connected" data-tip={L("Sync with GitHub")} onClick={actionsService.syncWithGitHub}>
+					<span className="sync-indicator connected" 
+							data-tip={L("Sync with GitHub")} 
+							onClick={this.syncWithGitHub}>
 						<span className="fa fa-refresh" aria-hidden="true" />
 					</span>
 				);

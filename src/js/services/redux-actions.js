@@ -18,7 +18,16 @@ exports.addTask = function(elt) {
 	elt.timestampCreated = parseInt(Date.now()/1000);
 	elt.timestampModified = elt.timestampCreated;
 	return {
-		type : 'ADD_TASK',
+		type : 'SET_TASK',
+		task : elt,
+	}
+}
+
+
+exports.updateTask = function(elt) {
+	// elt.timestampModified = parseInt(Date.now()/1000);
+	return {
+		type : 'SET_TASK',
 		task : elt,
 	}
 }
@@ -63,5 +72,60 @@ exports.changeProjectVisibility = function(id) {
 	return {
 		type : 'SET_PROJECT_VISIBLE',
 		id : id,
+	}
+}
+
+exports.importProjects = function() {
+	return {
+		type : 'IMPORT_PROJECTS',
+	}
+}
+
+exports.setSelectedProject = function(id) {
+	return {
+		type : 'SET_SELECTED_PROJECT',
+		id : id,
+	}
+}
+
+
+exports.deleteProject = function(id) {
+	return {
+		type : 'DELETE_PROJECT',
+		id : id,
+	}
+}
+
+
+exports.importSettings = function(settings) {
+	return {
+		type : 'IMPORT_SETTINGS',
+		settings : settings,
+	}
+}
+
+
+exports.setImportProjects = function(elts) {
+	return {
+		type : 'SET_IMPORT_PROJECTS',
+		importProjects : elts,
+	}
+}
+
+
+exports.addAlert = function(type, msg) {
+	const types = ['info', 'warning', 'success', 'error'];
+	return {
+		type : 'ADD_ALERT',
+		message : msg,
+		alertType : types.indexOf(type) > -1 ? type : 'error',
+	}
+}
+
+
+exports.clearAlert = function(index) {
+	return {
+		type : 'CLEAR_ALERT',
+		index : index,
 	}
 }

@@ -82,9 +82,9 @@ class TaskList extends React.Component {
 				<CommonButton onClick={self.removeResolved}>{L("Clean resolved")}</CommonButton>
 				<table className="list-table" data-table="task-list">
 					<tbody>
-						<NewTaskForm projectList={projectList} />
+						<NewTaskForm projectList={projectList} settings={settings} />
 						{taskList.map(elt => (
-							<Task key={elt.id} task={elt} />
+							<Task key={elt.id} task={elt} projects={projects} />
 						))}
 					</tbody>
 				</table>
@@ -93,13 +93,4 @@ class TaskList extends React.Component {
 	}
 }
 
-
-function mapStateToProps(state, ownProps) {
-	return {
-		tasks : state && state.tasks ? state.tasks : {},
-		projects : state && state.projects ? state.projects : {},
-		settings : state && state.settings ? state.settings : {},
-	}
-}
-
-module.exports = ReactRedux.connect(mapStateToProps)(TaskList);
+module.exports = store.connect(TaskList);

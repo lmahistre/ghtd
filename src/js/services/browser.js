@@ -39,6 +39,7 @@ exports.notify = function (msg) {
 
 
 exports.render = function () {
+	console.warn('render should not be called after init')
 	ReactDOM.render(
 		React.createElement(Main, null), 
 		document.getElementById('react-root')

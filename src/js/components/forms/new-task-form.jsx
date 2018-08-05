@@ -3,7 +3,6 @@ const React = require("react");
 
 const SmallButton = require("../ui/small-button.jsx");
 
-const dataService = require('../../services/data.js');
 const browserService = require('../../services/browser.js');
 const utilsService = require('../../services/utils.js');
 const L = require('../../services/i18n.js');
@@ -47,20 +46,17 @@ class NewTaskForm extends React.Component {
 	}
 
 	onChangeProject (event) {
-		const settings = dataService.getSettings();
-		settings.projectId = event.target.value;
-		dataService.setSettings(settings);
+		store.dispatch(reduxActions.setSelectedProject(event.target.value));
 		this.setState({
 			projectId: event.target.value,
 		});
 	}
 
-	constructor() {
+	constructor(props) {
 		super();
-		const settings = dataService.getSettings();
 		this.state = {
 			name : '',
-			projectId : settings && settings.projectId ? settings.projectId : '',
+			projectId : props.settings && props.settings.projectId ? props.settings.projectId : '',
 		};
 	}
 

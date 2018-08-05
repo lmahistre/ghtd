@@ -5,8 +5,6 @@ const Link = ReactRouterDom.Link;
 
 const SmallButton = require("../ui/small-button.jsx");
 
-const browserService = require('../../services/browser.js');
-const dataService = require('../../services/data.js');
 const L = require('../../services/i18n.js');
 const reduxActions = require('../../services/redux-actions.js');
 const store = require('../../services/store.js');
@@ -45,20 +43,21 @@ class Task extends React.Component {
 
 
 	save() {
-		this.setState({
+		const newState = {
 			isBeingEdited : false,
-		});
+		}
 		const id = this.props.task.id;
-		const task = dataService.getTask(this.props.task.id);
+		const task = self.props.task;
 		const name = document.getElementById("task-edit-name-"+id).value;
 		const projectId = document.getElementById("task-edit-projectId-"+id).value;
 		if (task.name != name || task.projectId != projectId) {
 			task.name = name;
 			task.projectId = projectId;
 			task.timestampModified = parseInt(Date.now()/1000);
-			dataService.setTask(id, task);
-			browserService.render();
+			newState.task = task;
+			store.dispatch(reduxActions.updateTask(task));
 		}
+		this.setState();
 	}
 
 
@@ -66,11 +65,6 @@ class Task extends React.Component {
 		if (event.which == 13) {
 			this.save();
 		}
-	}
-
-
-	viewTaskDetail() {
-		browserService.redirect('task-view/'+this.props.task.id);
 	}
 
 
@@ -87,7 +81,7 @@ class Task extends React.Component {
 						color : '',
 					}
 				];
-				const projects = dataService.getProjects();
+				const projects = self.props.projects;
 				for (let i in projects) {
 					let project = projects[i];
 					projectList.push(project);

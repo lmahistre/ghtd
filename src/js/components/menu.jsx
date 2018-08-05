@@ -16,7 +16,7 @@ class Menu extends React.Component {
 				<Link className={"menu-entry"+(self.props.selectedMenu == 'tasks' ? ' active' : '')} to="/tasks" replace>{L("Tasks")}</Link>
 				<Link className={"menu-entry"+(self.props.selectedMenu == 'projects' ? ' active' : '')} to="/projects" replace>{L("Projects")}</Link>
 				<Link className={"menu-entry"+(self.props.selectedMenu == 'settings' ? ' active' : '')} to="/settings" replace>{L("Settings")}</Link>
-				<SyncIndicator busy={self.props.busy} />
+				<SyncIndicator busy={self.props.busy} settings={self.props.settings} />
 			</div>
 		);
 	}

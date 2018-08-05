@@ -11,6 +11,7 @@ const browserService = require('../../services/browser.js');
 const dataService = require('../../services/data.js');
 const constsService = require('../../services/consts.js');
 const L = require('../../services/i18n.js');
+const store = require('../../services/store.js');
 
 class SettingsEdit extends React.Component {
 
@@ -79,12 +80,4 @@ class SettingsEdit extends React.Component {
 	}
 }
 
-function mapStateToProps(state, ownProps) {
-	return {
-		tasks : state && state.tasks ? state.tasks : {},
-		projects : state && state.projects ? state.projects : {},
-		settings : state && state.settings ? state.settings : {},
-	}
-}
-
-module.exports = ReactRedux.connect(mapStateToProps)(SettingsEdit);
+module.exports = store.connect(SettingsEdit);

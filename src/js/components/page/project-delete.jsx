@@ -7,24 +7,23 @@ const Redirect = ReactRouterDom.Redirect;
 const AppPage = require("../app-page.jsx");
 const CommonButton = require("../ui/common-button.jsx");
 
-const alertService = require('../../services/alert.js');
 const browserService = require('../../services/browser.js');
-const dataService = require('../../services/data.js');
 const L = require('../../services/i18n.js');
+const reduxActions = require('../../services/redux-actions.js');
+const store = require('../../services/store.js');
 
 class ProjectDelete extends React.Component {
 
 	delete() {
-		dataService.deleteProject(this.props.match.params.id);
-		browserService.redirect('projects');
+		store.dispatch(reduxActions.deleteProject(this.props.match.params.id));
+		// browserService.redirect('projects');
 	}
 
 
 	render() {
 		const self = this;
-		const projects = dataService.getProjects();
-		const tasks = dataService.getTasks();
-		// In case of edition
+		const projects = self.props.projects;
+		const tasks = self.props.tasks;
 		if (self.props.match 
 				&& self.props.match.params 
 				&& self.props.match.params.id
@@ -63,7 +62,7 @@ class ProjectDelete extends React.Component {
 		}
 		// If the project does not exist
 		else {
-			alertService.error(L("This project does not exist."));
+			// store.dispatch(reduxActions.addAlert('error', L("This project does not exist.")));
 			return (
 				<Redirect to="/projects" />
 			);
@@ -71,12 +70,4 @@ class ProjectDelete extends React.Component {
 	}
 }
 
-function mapStateToProps(state, ownProps) {
-	return {
-		tasks : state && state.tasks ? state.tasks : {},
-		projects : state && state.projects ? state.projects : {},
-		settings : state && state.settings ? state.settings : {},
-	}
-}
-
-module.exports = ReactRedux.connect(mapStateToProps)(ProjectDelete);
+module.exports = store.connect(ProjectDelete);
