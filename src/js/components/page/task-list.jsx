@@ -58,7 +58,6 @@ class TaskList extends React.Component {
 	render() {
 		const self = this;
 		let taskList = [];
-		// const tasks = dataService.getTasks();
 		const tasks = self.props.tasks;
 		const projects = self.props.projects;
 		if (tasks) {

@@ -38,31 +38,26 @@ class ProjectDelete extends React.Component {
 					projectIsUsed = true;
 				}
 			}
-			if (projectIsUsed) {
-				return (
-					<AppPage selectedMenu="projects">
-						<div className="text-page">
-							<p>{L("The project ")+project.name+L(" cannot be deleted because there are still tasks attached to it.")}</p>
-						</div>
-						<CommonButton to="/projects">{L("Cancel")}</CommonButton>
-					</AppPage>
-				);
-			}
-			else {
-				return (
-					<AppPage selectedMenu="projects">
-						<div className="text-page">
-							<p>{L("Are you sure you want to delete the project ")+project.name+L("?")}</p>
-						</div>
+			return (
+				<AppPage selectedMenu="projects">
+					<div className="text-page">
+						<p>
+							{ projectIsUsed ?
+								L("The project ")+project.name+L(" cannot be deleted because there are still tasks attached to it.")
+							:
+								L("Are you sure you want to delete the project ")+project.name+L("?")
+							}
+						</p>
+					</div>
+					{ projectIsUsed ? null : 
 						<CommonButton onClick={self.delete.bind(self)}>{L("Delete")}</CommonButton>
-						<CommonButton to="/projects">{L("Cancel")}</CommonButton>
-					</AppPage>
-				);
-			}
+					}
+					<CommonButton to="/projects">{L("Cancel")}</CommonButton>
+				</AppPage>
+			);
 		}
 		// If the project does not exist
 		else {
-			// store.dispatch(reduxActions.addAlert('error', L("This project does not exist.")));
 			return (
 				<Redirect to="/projects" />
 			);

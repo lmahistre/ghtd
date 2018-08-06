@@ -2,7 +2,7 @@ const React = require("react");
 const ReactDOM = require("react-dom");
 const Main = require("../components/main.jsx");
 
-const stateContainerService = require('./state-container.js');
+// const stateContainerService = require('./state-container.js');
 const constsService = require('./consts.js');
 
 /**
@@ -21,7 +21,7 @@ exports.setTitle = function (str) {
 exports.notify = function (msg) {
 	if (window.Notification) {
 		var options = {
-			// icon : $('head link[rel^=shortcut]').attr('href'),
+			icon : document.querySelector('head link[rel^=shortcut]').href,
 		};
 
 		if (Notification.permission === "granted") {
@@ -39,7 +39,6 @@ exports.notify = function (msg) {
 
 
 exports.render = function () {
-	console.warn('render should not be called after init')
 	ReactDOM.render(
 		React.createElement(Main, null), 
 		document.getElementById('react-root')

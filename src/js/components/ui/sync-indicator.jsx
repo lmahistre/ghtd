@@ -6,7 +6,7 @@ const L = require('../../services/i18n.js');
 module.exports = class SyncIndicator extends React.Component {
 
 	syncWithGitHub() {
-
+		
 	}
 
 	render () {

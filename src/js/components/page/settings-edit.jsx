@@ -8,28 +8,28 @@ const CommonButton = require("../ui/common-button.jsx");
 const RadioSelector = require("../ui/radio-selector.jsx");
 
 const browserService = require('../../services/browser.js');
-const dataService = require('../../services/data.js');
 const constsService = require('../../services/consts.js');
 const L = require('../../services/i18n.js');
 const store = require('../../services/store.js');
+const reduxActions = require('../../services/redux-actions.js');
 
 class SettingsEdit extends React.Component {
 
 	save() {
-		const settings = dataService.getSettings();
+		const settings = {};
 		settings.theme = document.getElementById('settings-theme').value;
 		settings.language = document.getElementById('language').value;
 		settings.user = document.getElementById('settings-user').value;
 		settings.token = document.getElementById('settings-token').value;
 		settings.gistId = document.getElementById('settings-gistId').value;
-		dataService.setSettings(settings);
+		store.dispatch(reduxActions.updateSettings(settings));
 		browserService.setBackgroundColor(settings.theme);
 		browserService.redirect('settings');
 	}
 
 
 	render() {
-		const settings = dataService.getSettings() ? dataService.getSettings() : {};
+		const settings = this.props.settings;
 		return (
 			<AppPage selectedMenu="settings">
 				<CommonButton onClick={this.save}>{L("Save")}</CommonButton>

@@ -1,4 +1,3 @@
-exports.alert = require('./alert.js');
 exports.browser = require('./browser.js');
 exports.consts = require('./consts.js');
 exports.dispatcher = require('./dispatcher.js');

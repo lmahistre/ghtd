@@ -70,9 +70,9 @@ exports.SET_PROJECT_VISIBLE = function(state, action) {
 }
 
 
-exports.IMPORT_PROJECTS = function(state, action) {
+exports.SET_BUSY = function(state, action) {
 	const newState = clone(state);
-	newState.busy = true;
+	newState.busy = action.busy;
 	return newState;
 }
 
@@ -97,6 +97,17 @@ exports.IMPORT_SETTINGS = function(state, action) {
 	newState.settings.user = action.settings.user;
 	newState.settings.gistId = action.settings.gistId;
 	newState.settings.token = action.settings.token;
+	return newState;
+}
+
+
+exports.SET_SETTINGS = function(state, action) {
+	const newState = clone(state);
+	newState.settings.user = action.settings.user;
+	newState.settings.gistId = action.settings.gistId;
+	newState.settings.token = action.settings.token;
+	newState.settings.language = action.settings.language;
+	newState.settings.theme = action.settings.theme;
 	return newState;
 }
 

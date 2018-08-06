@@ -8,7 +8,6 @@ const AppPage = require("../app-page.jsx");
 const CommonButton = require("../ui/common-button.jsx");
 const DateViewer = require('../ui/date-viewer.jsx');
 
-// const dataService = require('../../services/data.js');
 const store = require('../../services/store.js');
 const L = require('../../services/i18n.js');
 
@@ -16,7 +15,6 @@ class TaskView extends React.Component {
 
 	render() {
 		const self = this;
-		// let task = dataService.getTask(self.props.match.params.id);
 		const task = self.props.tasks 
 			&& self.props.tasks[self.props.match.params.id] ? self.props.tasks[self.props.match.params.id] : {};
 		const project = task.projectId ? self.props.projects[task.projectId] : null;

@@ -93,7 +93,6 @@ exports.syncWithGitHub = function () {
 			saveToGitHub();
 		}
 		else {
-			// alertService.warning('No data fetched');
 			store.dispatch(reduxActions.addAlert('warning', 'No data fetched'));
 		}
 	});

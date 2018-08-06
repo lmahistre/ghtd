@@ -53,7 +53,6 @@ exports.setTaskStatus = function(id, status) {
 
 exports.addProject = function(elt) {
 	elt.id = utilsService.getNextProjectId();
-	// elt.
 	return {
 		type : 'SET_PROJECT',
 		project : elt,
@@ -77,7 +76,8 @@ exports.changeProjectVisibility = function(id) {
 
 exports.importProjects = function() {
 	return {
-		type : 'IMPORT_PROJECTS',
+		type : 'SET_BUSY',
+		busy : true,
 	}
 }
 
@@ -127,5 +127,13 @@ exports.clearAlert = function(index) {
 	return {
 		type : 'CLEAR_ALERT',
 		index : index,
+	}
+}
+
+
+exports.updateSettings = function(elt) {
+	return {
+		type : 'SET_SETTINGS',
+		settings : elt,
 	}
 }
