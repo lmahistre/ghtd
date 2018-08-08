@@ -2,11 +2,17 @@
 const React = require("react");
 
 const L = require('../../services/i18n.js');
+const reduxActions = require('../../services/redux-actions.js');
+const store = require('../../services/store.js');
+const githubSync = require('../../services/github-sync.js');
 
 module.exports = class SyncIndicator extends React.Component {
 
 	syncWithGitHub() {
-		
+		store.dispatch(reduxActions.setBusy(true));
+		githubSync.syncWithGitHub(function() {
+			store.dispatch(reduxActions.setBusy(false));
+		});
 	}
 
 	render () {

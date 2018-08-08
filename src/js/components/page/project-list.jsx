@@ -22,7 +22,7 @@ class ProjectList extends React.Component {
 
 
 	import () {
-		store.dispatch(reduxActions.importProjects());
+		store.dispatch(reduxActions.setBusy());
 		githubSync.importProjects(function (importProjects) {
 			store.dispatch(reduxActions.setImportProjects(importProjects));
 			browserService.redirect('project-import');

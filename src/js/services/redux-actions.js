@@ -74,10 +74,10 @@ exports.changeProjectVisibility = function(id) {
 	}
 }
 
-exports.importProjects = function() {
+exports.setBusy = function(busy) {
 	return {
 		type : 'SET_BUSY',
-		busy : true,
+		busy : busy ? true : false,
 	}
 }
 
@@ -137,3 +137,11 @@ exports.updateSettings = function(elt) {
 		settings : elt,
 	}
 }
+
+
+// exports.syncWithGithub = function() {
+// 	syncWithGitHub();
+// 	return {
+// 		type : '',
+// 	}
+// }

@@ -6,7 +6,6 @@ const validateService = require('./validate.js');
 const store = require('./store.js');
 
 
-
 exports.importProjects = function (callback) {
 	githubService.getProjects(function(error, data) {
 		if (callback && typeof callback === 'function') {
@@ -64,7 +63,7 @@ const pullFromGitHub = function (callback) {
 }
 
 
-const saveToGitHub = function () {
+const saveToGitHub = function (callback) {
 	const data = storageService.retrieve();
 	if (data && data.tasks && data.projects) {
 		const validatedData = {
@@ -82,18 +81,27 @@ const saveToGitHub = function () {
 			}
 		}
 		validatedData.timestampSynchronized = parseInt(Date.now()/1000);
-		githubService.setGistData(validatedData);
+		githubService.setGistData(validatedData, callback);
+	}
+	else {
+		store.dispatch(reduxActions.addAlert('warning', 'No data to write'));
+		if (callback && typeof callback === 'function') {
+			callback();
+		}
 	}
 }
 
 
-exports.syncWithGitHub = function () {
+exports.syncWithGitHub = function (callback) {
 	pullFromGitHub(function (ghData) {
 		if (ghData) {
-			saveToGitHub();
+			saveToGitHub(callback);
 		}
 		else {
 			store.dispatch(reduxActions.addAlert('warning', 'No data fetched'));
+			if (callback && typeof callback === 'function') {
+				callback();
+			}
 		}
 	});
 }

@@ -1,8 +1,4 @@
 
-// const browserService = require('./browser.js');
-// const stateContainerService = require('./state-container.js');
-// const dataService = require('./data.js');
-
 const reduxActions = require('./redux-actions.js');
 const store = require('./store.js');
 
@@ -50,7 +46,6 @@ const call = function(uri, post, callback) {
 				console.warn(responseData.warning);
 			}
 			if (responseData.error) {
-				// alertService.error(responseData.error);
 				store.dispatch(reduxActions.addAlert('error', responseData.error));
 			}
 			if (callback && typeof callback === 'function') {

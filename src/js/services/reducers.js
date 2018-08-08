@@ -10,7 +10,7 @@ exports.DELETE_REMOVED_TASKS = function(state, action) {
 			delete newState.tasks[i];
 		}
 	}
-	return tasks;
+	return newState;
 }
 
 
