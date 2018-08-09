@@ -1,9 +1,9 @@
 
 describe ('reducers', function() {
-	const reducersService = require('../js/services/reducers.js');
+	const reducers = require('../js/services/reducers.js');
 
-	it ('removeResolvedTasks', function() {
-		expect(reducersService.REMOVE_RESOLVED_TASKS({
+	it ('REMOVE_RESOLVED_TASKS', function() {
+		expect(reducers.REMOVE_RESOLVED_TASKS({
 			tasks : {
 				'1' : {
 					id : '1',
@@ -34,8 +34,9 @@ describe ('reducers', function() {
 		});
 	});
 
-	it ('deleteRemovedTasks', function() {
-		expect(reducersService.DELETE_REMOVED_TASKS({
+
+	it ('DELETE_REMOVED_TASKS', function() {
+		expect(reducers.DELETE_REMOVED_TASKS({
 			tasks : {
 				'1' : {
 					id : '1',
@@ -65,7 +66,7 @@ describe ('reducers', function() {
 			},
 		});
 
-		expect(reducersService.DELETE_REMOVED_TASKS({
+		expect(reducers.DELETE_REMOVED_TASKS({
 			tasks : {
 				'1' : {
 					id : '1',
@@ -88,6 +89,480 @@ describe ('reducers', function() {
 					timestampModified : 1531075147,
 				},
 			},
+		});
+	});
+
+
+	it ('INIT', function() {
+		expect(reducers.INIT(null, {
+			tasks : {
+				'1' : {
+					id : '1',
+					status : 'removed',
+					timestampModified : 1531075147,
+				},
+				'2' : {
+					id : '2',
+					status : 'done',
+					timestampModified : 1531075147,
+				},
+			},
+			projects : {},
+			settings : {},
+		})).toEqual({
+			tasks : {
+				'1' : {
+					id : '1',
+					status : 'removed',
+					timestampModified : 1531075147,
+				},
+				'2' : {
+					id : '2',
+					status : 'done',
+					timestampModified : 1531075147,
+				},
+			},
+			projects : {},
+			settings : {},
+			alerts : [],
+			busy : false,
+		});
+	})
+
+
+	it ('SET_TASK', function() {
+		expect(reducers.SET_TASK({
+			tasks : {
+				'1' : {
+					id : '1',
+					status : 'removed',
+					timestampModified : 1531075147,
+				},
+				'2' : {
+					id : '2',
+					status : 'done',
+					timestampModified : 1531075147,
+				},
+			},
+		}, {
+			task : {
+				id : '3',
+				status : 'active',
+				timestampModified : 1531075047,
+			},
+		})).toEqual({
+			tasks : {
+				'1' : {
+					id : '1',
+					status : 'removed',
+					timestampModified : 1531075147,
+				},
+				'2' : {
+					id : '2',
+					status : 'done',
+					timestampModified : 1531075147,
+				},
+				'3' : {
+					id : '3',
+					status : 'active',
+					timestampModified : 1531075047,
+				},
+			},
+		});
+
+		expect(reducers.SET_TASK({
+			tasks : {
+				'1' : {
+					id : '1',
+					status : 'removed',
+					timestampModified : 1531075147,
+				},
+				'2' : {
+					id : '2',
+					status : 'done',
+					timestampModified : 1531075147,
+				},
+				'3' : {
+					id : '3',
+					status : 'active',
+					timestampModified : 1531075047,
+				},
+			},
+		}, {
+			task : {
+				id : '3',
+				status : 'done',
+				name : 'test',
+				timestampModified : 1531075347,
+			},
+		})).toEqual({
+			tasks : {
+				'1' : {
+					id : '1',
+					status : 'removed',
+					timestampModified : 1531075147,
+				},
+				'2' : {
+					id : '2',
+					status : 'done',
+					timestampModified : 1531075147,
+				},
+				'3' : {
+					id : '3',
+					status : 'done',
+					name : 'test',
+					timestampModified : 1531075347,
+				},
+			},
+		});
+	});
+
+
+	it ('SET_TASK_STATUS', function() {
+		expect(reducers.SET_TASK_STATUS({
+			tasks : {
+				'1' : {
+					id : '1',
+					name : 'test1',
+					status : 'removed',
+					timestampModified : 1531075147,
+				},
+				'2' : {
+					id : '2',
+					name : 'task 2',
+					status : 'active',
+					timestampModified : 1531075147,
+				},
+				'3' : {
+					id : '3',
+					status : 'active',
+					name : 'test',
+					timestampModified : 1531075347,
+				},
+			},
+		}, {
+			status : 'done',
+			currentTimestamp : 1531075233,
+			id : '2',
+		})).toEqual({
+			tasks : {
+				'1' : {
+					id : '1',
+					name : 'test1',
+					status : 'removed',
+					timestampModified : 1531075147,
+				},
+				'2' : {
+					id : '2',
+					name : 'task 2',
+					status : 'done',
+					timestampModified : 1531075233,
+				},
+				'3' : {
+					id : '3',
+					status : 'active',
+					name : 'test',
+					timestampModified : 1531075347,
+				},
+			},
+		});
+	});
+
+
+	it ('SET_PROJECT', function() {
+		expect(reducers.SET_PROJECT({
+			projects : {
+				'1' : {
+					id : '1',
+					name : 'project',
+					timestampModified : 1531075147,
+				},
+				'2' : {
+					id : '2',
+					name : 'project 2',
+					timestampModified : 1531075233,
+				},
+			}, 
+		}, {
+			project : {
+				id : '3',
+				name : 'project 3',
+				timestampModified : 1531075347,
+			}
+		})).toEqual({
+			projects : {
+				'1' : {
+					id : '1',
+					name : 'project',
+					timestampModified : 1531075147,
+				},
+				'2' : {
+					id : '2',
+					name : 'project 2',
+					timestampModified : 1531075233,
+				},
+				'3' : {
+					id : '3',
+					name : 'project 3',
+					timestampModified : 1531075347,
+				},
+			}, 
+		})
+	});
+
+
+	it ('SET_PROJECT_VISIBLE', function() {
+		expect(reducers.SET_PROJECT_VISIBLE({
+			projects : {
+				'1' : {
+					id : '1',
+					visible : false,
+					name : 'project',
+					timestampModified : 1531075147,
+				},
+				'2' : {
+					id : '2',
+					visible : true,
+					name : 'project 2',
+					timestampModified : 1531075233,
+				},
+			}, 
+		}, {
+			id : '1',
+			visible : true,
+		})).toEqual({
+			projects : {
+				'1' : {
+					id : '1',
+					visible : true,
+					name : 'project',
+					timestampModified : 1531075147,
+				},
+				'2' : {
+					id : '2',
+					visible : true,
+					name : 'project 2',
+					timestampModified : 1531075233,
+				},
+			}, 
+		});
+	});
+
+
+	it ('SET_BUSY', function() {
+		expect(reducers.SET_BUSY({
+			busy : false,
+		}, {
+			busy : true,
+		}).busy).toBe(true);
+
+		expect(reducers.SET_BUSY({
+			busy : true,
+		}, {
+			busy : false,
+		}).busy).toBe(false);
+	});
+
+
+	it ('DELETE_PROJECT', function() {
+		expect(reducers.DELETE_PROJECT({
+			projects : {
+				'1' : {
+					id : '1',
+					name : 'project',
+					timestampModified : 1531075147,
+				},
+				'2' : {
+					id : '2',
+					name : 'project 2',
+					timestampModified : 1531075233,
+				},
+				'3' : {
+					id : '3',
+					name : 'project 3',
+					timestampModified : 1531075347,
+				},
+			}, 
+		}, {
+			id : '2',
+		})).toEqual({
+			projects : {
+				'1' : {
+					id : '1',
+					name : 'project',
+					timestampModified : 1531075147,
+				},
+				'3' : {
+					id : '3',
+					name : 'project 3',
+					timestampModified : 1531075347,
+				},
+			}, 
+		});
+	});
+
+
+	it ('SET_SELECTED_PROJECT', function() {
+		expect(reducers.SET_SELECTED_PROJECT({
+			settings : {},
+		}, {
+			id : '3',
+		}).settings.projectId).toBe('3');
+	});
+
+
+	it ('IMPORT_SETTINGS', function() {
+		expect(reducers.IMPORT_SETTINGS({
+			settings : {},
+		}, {
+			settings : {
+				user : 'user',
+				gistId : '222',
+				token : '333',
+			},
+		})).toEqual({
+			settings : {
+				user : 'user',
+				gistId : '222',
+				token : '333',
+			}
+		});
+
+		expect(reducers.IMPORT_SETTINGS({
+			settings : {
+				projectId : '2',
+				user : 'dd',
+			},
+		}, {
+			settings : {
+				user : 'user',
+				gistId : '222',
+				token : '333',
+			},
+		})).toEqual({
+			settings : {
+				projectId : '2',
+				user : 'user',
+				gistId : '222',
+				token : '333',
+			}
+		});
+	});
+
+
+	it ('SET_SETTINGS', function() {
+		expect(reducers.SET_SETTINGS({
+			settings : {},
+		}, {
+			settings : {
+				user : 'user',
+				gistId : '222',
+				token : '333',
+				language : 'english',
+				theme : 'dark',
+			},
+		})).toEqual({
+			settings : {
+				user : 'user',
+				gistId : '222',
+				token : '333',
+				language : 'english',
+				theme : 'dark',
+			}
+		});
+
+		expect(reducers.SET_SETTINGS({
+			settings : {
+				projectId : '2',
+				user : 'dd',
+				theme : 'light',
+			},
+		}, {
+			settings : {
+				user : 'user',
+				gistId : '222',
+				token : '333',
+				language : 'english',
+				theme : 'dark',
+			},
+		})).toEqual({
+			settings : {
+				projectId : '2',
+				user : 'user',
+				gistId : '222',
+				token : '333',
+				language : 'english',
+				theme : 'dark',
+			},
+		});
+	});
+
+
+	it ('SET_IMPORT_PROJECTS', function() {
+		expect(reducers.SET_IMPORT_PROJECTS({}, {
+			importProjects : {
+				'1' : {
+					id : '1',
+					name : 'project',
+				},
+				'2' : {
+					id : '2',
+					name : 'project 2',
+				},
+				'3' : {
+					id : '3',
+					name : 'project 3',
+				},
+			},
+		})).toEqual({
+			busy : false,
+			importProjects : {
+				'1' : {
+					id : '1',
+					name : 'project',
+				},
+				'2' : {
+					id : '2',
+					name : 'project 2',
+				},
+				'3' : {
+					id : '3',
+					name : 'project 3',
+				},
+			},
+		});
+	});
+
+
+	it ('ADD_ALERT', function() {
+		expect(reducers.ADD_ALERT({
+			alerts : [],
+		}, {
+			alertType : 'success',
+			message : 'content of alert',
+		})).toEqual({
+			alerts : [
+				{
+					type : 'success',
+					message : 'content of alert',
+				},
+			],
+		});
+	});
+
+
+	it ('CLEAR_ALERT', function() {
+		expect(reducers.CLEAR_ALERT({
+			alerts : [
+				{
+					type : 'success',
+					message : 'content of alert',
+				},
+			],
+		}, {
+			index : 0,
+		})).toEqual({
+			alerts : [],
 		});
 	});
 });

@@ -133,7 +133,8 @@ exports.ADD_ALERT = function(state, action) {
 exports.CLEAR_ALERT = function(state, action) {
 	const newState = clone(state);
 	if (newState.alerts && newState.alerts[action.index]) {
-		delete newState.alerts[action.index];
+		// delete newState.alerts[action.index];
+		newState.alerts.splice(action.index, 1);
 	}
 	return newState;
 }

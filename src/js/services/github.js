@@ -18,14 +18,12 @@ const timeout = function(ms, promise) {
 
 
 const call = function(uri, post, callback) {
-	// const settings = dataService.getSettings();
 	const state = store.getState();
 	const settings = state.settings;
 	const params = {
 		credentials : 'omit',
 	};
-	// stateContainerService.increasePleaseWait();
-	// browserService.render();
+
 	if (post) {
 		params.method = 'PATCH';
 		params.body = JSON.stringify(post);
@@ -53,11 +51,9 @@ const call = function(uri, post, callback) {
 			}
 		}
 		catch (error) {
-			// alertService.error(error);
 			store.dispatch(reduxActions.addAlert('error', error));
 		}
-		// stateContainerService.decreasePleaseWait();
-		// browserService.render();
+
 		return new Promise(function(resolve, reject) {
 			resolve(true);
 		});
@@ -76,7 +72,6 @@ const call = function(uri, post, callback) {
  * Gets Gist data from GitHub
  */
 exports.getGistData = function(callback) {
-	// const settings = dataService.getSettings();
 	const state = store.getState();
 	const settings = state.settings;
 	call(config.site+'/gists/'+settings.gistId, null, function(parsedData) {
@@ -95,7 +90,6 @@ exports.getGistData = function(callback) {
 
 
 exports.setGistData = function(post, callback) {
-	// const settings = dataService.getSettings();
 	const state = store.getState();
 	const settings = state.settings;
 	const postData = {
@@ -117,7 +111,6 @@ exports.setGistData = function(post, callback) {
 
 
 exports.getProjects = function(callback) {
-	// const settings = dataService.getSettings();
 	const state = store.getState();
 	const settings = state.settings;
 	call(config.site+'/users/'+settings.user+'/repos', null, function(parsedData) {

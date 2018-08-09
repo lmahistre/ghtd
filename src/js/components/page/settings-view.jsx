@@ -18,7 +18,6 @@ class SettingsView extends React.Component {
 
 	import(error, content) {
 		if (error) {
-			// alertService.error(L(error.message));
 			store.dispatch(reduxActions.addAlert('error', L(error.message)));
 		}
 		else {
@@ -29,23 +28,15 @@ class SettingsView extends React.Component {
 					&& 'string' === typeof newSettings.token
 				) {
 					store.dispatch(reduxActions.importSettings(newSettings));
-					// const settings = dataService.getSettings();
-					// settings.user = newSettings.user;
-					// settings.gistId = newSettings.gistId;
-					// settings.token = newSettings.token;
-					// dataService.setSettings(settings);
 				}
 				else {
-					// alertService.error(L("The file is invalid"));
 					store.dispatch(reduxActions.addAlert('error', L("The file is invalid")));
 				}
 			}
 			catch (error) {
-				// alertService.error(error.message);
 				store.dispatch(reduxActions.addAlert('error', error.message));
 			}
 		}
-		// browserService.render();
 	}
 
 
