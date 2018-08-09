@@ -1,7 +1,7 @@
 
-let constsService = require('./consts.js');
-// let dataService = require('./data.js');
+const constsService = require('./consts.js');
 const store = require('./store.js');
+const clone = require('clone');
 
 exports.setDependencies = function (deps) {
 	if (deps.constsService) {
@@ -118,3 +118,45 @@ exports.getNextTaskId = function() {
 	return id;
 }
 
+
+exports.mergeData = function(localData, extData) {
+	const newData = {};
+	const oldExtData = clone(extData);
+
+	// tasks
+	if (extData && extData.tasks) {
+		for (let k in extData.tasks) {
+			if ((typeof localData.tasks[k] === 'undefined'
+					&& (!localData.timestampSynchronized
+						|| localData.timestampSynchronized < extData.timestampSynchronized)) 
+				|| (localData.tasks[k] 
+					&& localData.tasks[k].timestampModified < extData.tasks[k].timestampModified)
+			) {
+				localData.tasks[k] = extData.tasks[k];
+			}
+		}
+	}
+
+	// Remove deleted tasks
+	if (localData.timestampSynchronized && localData.timestampSynchronized < extData.timestampSynchronized) {
+		for (let k in localData.tasks) {
+			if (typeof extData.tasks[k] === 'undefined') {
+				delete localData.tasks[k];
+			}
+		}
+	}
+
+	if (extData && extData.projects) {
+		for (let k in extData.projects) {
+			if ((typeof localData.projects[k] === 'undefined'
+					&& (!localData.timestampSynchronized
+						|| localData.timestampSynchronized < extData.timestampSynchronized)) 
+				|| (localData.projects[k] 
+					&& localData.projects[k].timestampModified < extData.projects[k].timestampModified)
+			) {
+				localData.projects[k] = extData.projects[k];
+			}
+		}
+	}
+	return localData;
+}

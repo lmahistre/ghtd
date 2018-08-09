@@ -22,6 +22,7 @@ class ProjectView extends React.Component {
 			return (
 				<AppPage selectedMenu="projects">
 					<CommonButton to={"/project-edit/"+self.props.match.params.id}>{"Edit"}</CommonButton>
+					<CommonButton to={"/project-delete/"+project.id}>{L("Delete")}</CommonButton>
 					<table className="list-table">
 						<tbody>
 							<tr>

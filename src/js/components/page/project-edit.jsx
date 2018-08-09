@@ -68,7 +68,6 @@ class ProjectEdit extends React.Component {
 			<AppPage selectedMenu="projects">
 				<CommonButton onClick={save}>{L("Save")}</CommonButton>
 				<CommonButton to="/projects">{L("Cancel")}</CommonButton>
-				<CommonButton to={"/project-delete/"+project.id}>{L("Delete")}</CommonButton>
 				<ProjectEditForm project={project} save={save} />
 			</AppPage>
 		);

@@ -4,6 +4,7 @@ const githubService = require('./github.js');
 const validateService = require('./validate.js');
 // const alertService = require('./alert.js');
 const store = require('./store.js');
+const utils = require('./utils.js');
 
 
 exports.importProjects = function (callback) {
@@ -22,39 +23,39 @@ const pullFromGitHub = function (callback) {
 			store.dispatch(reduxActions.addAlert('error', error));
 		}
 		const localData = storageService.retrieve();
-		if (ghData && ghData.tasks) {
-			for (let k in ghData.tasks) {
-				if ((typeof localData.tasks[k] === 'undefined'
-						&& (!localData.timestampSynchronized
-							|| localData.timestampSynchronized < ghData.timestampSynchronized)) 
-					|| (localData.tasks[k] 
-						&& localData.tasks[k].timestampModified < ghData.tasks[k].timestampModified)
-				) {
-					localData.tasks[k] = ghData.tasks[k];
-				}
-			}
-		}
-		if (ghData && ghData.projects) {
-			for (let k in ghData.projects) {
-				if ((typeof localData.projects[k] === 'undefined'
-						&& (!localData.timestampSynchronized
-							|| localData.timestampSynchronized < ghData.timestampSynchronized)) 
-					|| (localData.projects[k] 
-						&& localData.projects[k].timestampModified < ghData.projects[k].timestampModified)
-				) {
-					localData.projects[k] = ghData.projects[k];
-				}
-			}
-		}
-		// Remove deleted tasks
-		if (localData.timestampSynchronized && localData.timestampSynchronized < ghData.timestampSynchronized) {
-			for (let k in localData.tasks) {
-				if (typeof ghData.tasks[k] === 'undefined') {
-					delete localData.tasks[k];
-				}
-			}
-		}
-		storageService.save(localData);
+		// if (ghData && ghData.tasks) {
+		// 	for (let k in ghData.tasks) {
+		// 		if ((typeof localData.tasks[k] === 'undefined'
+		// 				&& (!localData.timestampSynchronized
+		// 					|| localData.timestampSynchronized < ghData.timestampSynchronized)) 
+		// 			|| (localData.tasks[k] 
+		// 				&& localData.tasks[k].timestampModified < ghData.tasks[k].timestampModified)
+		// 		) {
+		// 			localData.tasks[k] = ghData.tasks[k];
+		// 		}
+		// 	}
+		// }
+		// if (ghData && ghData.projects) {
+		// 	for (let k in ghData.projects) {
+		// 		if ((typeof localData.projects[k] === 'undefined'
+		// 				&& (!localData.timestampSynchronized
+		// 					|| localData.timestampSynchronized < ghData.timestampSynchronized)) 
+		// 			|| (localData.projects[k] 
+		// 				&& localData.projects[k].timestampModified < ghData.projects[k].timestampModified)
+		// 		) {
+		// 			localData.projects[k] = ghData.projects[k];
+		// 		}
+		// 	}
+		// }
+		// // Remove deleted tasks
+		// if (localData.timestampSynchronized && localData.timestampSynchronized < ghData.timestampSynchronized) {
+		// 	for (let k in localData.tasks) {
+		// 		if (typeof ghData.tasks[k] === 'undefined') {
+		// 			delete localData.tasks[k];
+		// 		}
+		// 	}
+		// }
+		storageService.save(utils.mergeData(localData, ghData));
 
 		if (callback && typeof callback === 'function') {
 			callback(ghData);
