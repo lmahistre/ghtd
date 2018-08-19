@@ -1,5 +1,5 @@
 
-const constsService = require('./consts.js');
+var constsService = require('./consts.js');
 const store = require('./store.js');
 const clone = require('clone');
 
@@ -34,7 +34,6 @@ exports.renameProject = function(name) {
 exports.generateRandomColor = function() {
 	// selection of a random color
 	const colors = {};
-	// const projects = dataService.getProjects();
 	const projects = store.getState().projects;
 	for (let i = 0; i < constsService.colors.length; i++) {
 		colors[constsService.colors[i].color] = 0;
@@ -78,7 +77,6 @@ exports.generateRandomId = function () {
 
 
 exports.getNextProjectId = function() {
-	// const projects = dataService.getProjects();
 	const projects = store.getState().projects;
 	let id = exports.generateRandomId();
 	let idIsUnique = false;
@@ -119,7 +117,7 @@ exports.getNextTaskId = function() {
 }
 
 
-exports.mergeData = function(localData, extData) {
+exports.mergeData = function(localData, extData, timestampSynchronized) {
 	const newData = {};
 	const oldExtData = clone(extData);
 
@@ -158,5 +156,7 @@ exports.mergeData = function(localData, extData) {
 			}
 		}
 	}
+
+	localData.timestampSynchronized = timestampSynchronized;
 	return localData;
 }
