@@ -1,5 +1,5 @@
-
 const clone = require('clone');
+const utils = require('./utils.js');
 
 
 exports.DELETE_REMOVED_TASKS = function(state, action) {
@@ -22,6 +22,14 @@ exports.INIT = function(state, action) {
 		alerts : [],
 		busy : false,
 	};
+}
+
+
+exports.SET_DATA = function(state, action) {
+	const newState = clone(state);
+	newState.tasks = action.tasks;
+	newState.projects = action.projects;
+	return newState;
 }
 
 
@@ -84,6 +92,25 @@ exports.DELETE_PROJECT = function(state, action) {
 	}
 	return newState;
 }
+
+
+exports.REMOVE_PROJECT = function(state, action) {
+	const newState = clone(state);
+	if (newState.projects && action.id && newState.projects[action.id]) {
+		if (utils.projectIsUsedByVisibleTasks(action.id, newState.tasks)) {
+			newState.alerts.push({
+				type : 'error',
+				message : 'Project '+action.id+' is still in use',
+			});
+		}
+		else {
+			newState.projects[action.id].status = 'removed';
+			newState.projects[action.id].timestampModified = action.timestampModified;
+		}
+	}
+	return newState;
+}
+
 
 exports.SET_SELECTED_PROJECT = function(state, action) {
 	const newState = clone(state);

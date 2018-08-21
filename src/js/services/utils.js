@@ -97,7 +97,6 @@ exports.getNextProjectId = function() {
 
 
 exports.getNextTaskId = function() {
-	// const tasks = dataService.getTasks();
 	const tasks = store.getState().tasks;
 	let id = exports.generateRandomId();
 	let idIsUnique = false;
@@ -118,45 +117,93 @@ exports.getNextTaskId = function() {
 
 
 exports.mergeData = function(localData, extData, timestampSynchronized) {
-	const newData = {};
-	const oldExtData = clone(extData);
+	const newData = {
+		tasks : {},
+		projects : {},
+		timestampSynchronized,
+	};
 
 	// tasks
 	if (extData && extData.tasks) {
 		for (let k in extData.tasks) {
 			if ((typeof localData.tasks[k] === 'undefined'
-					&& (!localData.timestampSynchronized
-						|| localData.timestampSynchronized < extData.timestampSynchronized)) 
+					&& (extData.tasks[k].status === 'active' || extData.tasks[k].status === 'done')) 
 				|| (localData.tasks[k] 
 					&& localData.tasks[k].timestampModified < extData.tasks[k].timestampModified)
 			) {
-				localData.tasks[k] = extData.tasks[k];
+				newData.tasks[k] = extData.tasks[k];
+			}
+			else {
+				if (typeof localData.tasks[k] !== 'undefined') {
+					newData.tasks[k] = localData.tasks[k];
+				}
 			}
 		}
 	}
 
-	// Remove deleted tasks
-	if (localData.timestampSynchronized && localData.timestampSynchronized < extData.timestampSynchronized) {
-		for (let k in localData.tasks) {
-			if (typeof extData.tasks[k] === 'undefined') {
-				delete localData.tasks[k];
+	// Tasks existing locally but not externally
+	for (let k in localData.tasks) {
+		if ('undefined' === typeof extData.tasks[k]) {
+			if (localData.tasks[k].status === 'active' || localData.tasks[k].status === 'done') {
+				newData.tasks[k] = localData.tasks[k];
 			}
 		}
 	}
 
+	// Projects
 	if (extData && extData.projects) {
 		for (let k in extData.projects) {
 			if ((typeof localData.projects[k] === 'undefined'
-					&& (!localData.timestampSynchronized
-						|| localData.timestampSynchronized < extData.timestampSynchronized)) 
+					&& (extData.projects[k].status === 'active' 
+						|| exports.projectIsUsed(extData.projects[k].id, newData.tasks))
+					) 
 				|| (localData.projects[k] 
 					&& localData.projects[k].timestampModified < extData.projects[k].timestampModified)
 			) {
-				localData.projects[k] = extData.projects[k];
+				newData.projects[k] = extData.projects[k];
+			}
+			else {
+				if (typeof localData.projects[k] !== 'undefined') {
+					newData.projects[k] = localData.projects[k];
+				}
 			}
 		}
 	}
 
-	localData.timestampSynchronized = timestampSynchronized;
-	return localData;
+	// Projects existing locally but not externally
+	for (let k in localData.projects) {
+		if ('undefined' === typeof extData.projects[k]) {
+			if (localData.projects[k].status === 'active'
+				|| exports.projectIsUsed(localData.projects[k].id, newData.tasks)
+			) {
+				newData.projects[k] = localData.projects[k];
+			}
+		}
+	}
+
+	return newData;
+}
+
+
+exports.projectIsUsedByVisibleTasks = function(projectId, tasks) {
+	let projectIsUsed = false;
+	for (let taskId in tasks) {
+		if (tasks[taskId].projectId == projectId
+			&& (tasks[taskId].status == 'active' || tasks[taskId].status == 'done')
+		) {
+			projectIsUsed = true;
+		}
+	}
+	return projectIsUsed;
+}
+
+
+exports.projectIsUsed = function(projectId, tasks) {
+	let projectIsUsed = false;
+	for (let taskId in tasks) {
+		if (tasks[taskId] && tasks[taskId].projectId == projectId) {
+			projectIsUsed = true;
+		}
+	}
+	return projectIsUsed;
 }

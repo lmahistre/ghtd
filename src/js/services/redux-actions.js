@@ -139,9 +139,10 @@ exports.updateSettings = function(elt) {
 }
 
 
-// exports.syncWithGithub = function() {
-// 	syncWithGitHub();
-// 	return {
-// 		type : '',
-// 	}
-// }
+exports.setData = function(data) {
+	return {
+		type : 'SET_DATA',
+		tasks : data.tasks,
+		projects : data.projects,
+	}
+}

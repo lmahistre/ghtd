@@ -11,6 +11,7 @@ const browserService = require('../../services/browser.js');
 const L = require('../../services/i18n.js');
 const reduxActions = require('../../services/redux-actions.js');
 const store = require('../../services/store.js');
+const utils = require('../../services/utils.js');
 
 class ProjectDelete extends React.Component {
 
@@ -32,12 +33,7 @@ class ProjectDelete extends React.Component {
 			const project = projects[self.props.match.params.id];
 
 			// Check if there are tasks using this project
-			let projectIsUsed = false;
-			for (let taskId in tasks) {
-				if (tasks[taskId].projectId == project.id) {
-					projectIsUsed = true;
-				}
-			}
+			const projectIsUsed = utils.projectIsUsedByVisibleTasks(project.id, tasks);
 			return (
 				<AppPage selectedMenu="projects">
 					<div className="text-page">

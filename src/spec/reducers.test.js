@@ -130,6 +130,85 @@ describe ('reducers', function() {
 	})
 
 
+	it ('SET_DATA', function() {
+		expect(reducers.SET_DATA({
+			tasks : {
+				'1' : {
+					id : '1',
+					status : 'removed',
+					timestampModified : 1531075147,
+				},
+				'2' : {
+					id : '2',
+					status : 'done',
+					timestampModified : 1531075147,
+				},
+			},
+			projects : {},
+			settings : {},
+			alerts : [],
+			busy : false,
+		}, {
+			tasks : {
+				'1' : {
+					id : '1',
+					status : 'removed',
+					timestampModified : 1531075147,
+				},
+				'2' : {
+					id : '2',
+					status : 'done',
+					timestampModified : 1531075147,
+				},
+			},
+			projects : {
+				'1' : {
+					id : '1',
+					visible : true,
+					name : 'project',
+					timestampModified : 1531075147,
+				},
+				'2' : {
+					id : '2',
+					visible : true,
+					name : 'project 2',
+					timestampModified : 1531075233,
+				},
+			},
+		})).toEqual({
+			tasks : {
+				'1' : {
+					id : '1',
+					status : 'removed',
+					timestampModified : 1531075147,
+				},
+				'2' : {
+					id : '2',
+					status : 'done',
+					timestampModified : 1531075147,
+				},
+			},
+			projects : {
+				'1' : {
+					id : '1',
+					visible : true,
+					name : 'project',
+					timestampModified : 1531075147,
+				},
+				'2' : {
+					id : '2',
+					visible : true,
+					name : 'project 2',
+					timestampModified : 1531075233,
+				},
+			},
+			settings : {},
+			alerts : [],
+			busy : false,
+		});
+	});
+
+
 	it ('SET_TASK', function() {
 		expect(reducers.SET_TASK({
 			tasks : {
@@ -395,6 +474,56 @@ describe ('reducers', function() {
 				'3' : {
 					id : '3',
 					name : 'project 3',
+					timestampModified : 1531075347,
+				},
+			}, 
+		});
+	});
+
+
+	it ('REMOVE_PROJECT', function() {
+		expect(reducers.REMOVE_PROJECT({
+			projects : {
+				'1' : {
+					id : '1',
+					name : 'project',
+					status : 'active',
+					timestampModified : 1531075147,
+				},
+				'2' : {
+					id : '2',
+					name : 'project 2',
+					status : 'active',
+					timestampModified : 1531075233,
+				},
+				'3' : {
+					id : '3',
+					name : 'project 3',
+					status : 'active',
+					timestampModified : 1531075347,
+				},
+			}, 
+		}, {
+			id : '2',
+			timestampModified : 1531075540, 
+		})).toEqual({
+			projects : {
+				'1' : {
+					id : '1',
+					name : 'project',
+					status : 'active',
+					timestampModified : 1531075147,
+				},
+				'2' : {
+					id : '2',
+					name : 'project 2',
+					status : 'removed',
+					timestampModified : 1531075540,
+				},
+				'3' : {
+					id : '3',
+					name : 'project 3',
+					status : 'active',
 					timestampModified : 1531075347,
 				},
 			}, 
