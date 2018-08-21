@@ -47,7 +47,7 @@ class Task extends React.Component {
 			isBeingEdited : false,
 		}
 		const id = this.props.task.id;
-		const task = self.props.task;
+		const task = this.props.task;
 		const name = document.getElementById("task-edit-name-"+id).value;
 		const projectId = document.getElementById("task-edit-projectId-"+id).value;
 		if (task.name != name || task.projectId != projectId) {
@@ -57,7 +57,9 @@ class Task extends React.Component {
 			newState.task = task;
 			store.dispatch(reduxActions.updateTask(task));
 		}
-		this.setState();
+		this.setState({
+			isBeingEdited : false,
+		});
 	}
 
 
