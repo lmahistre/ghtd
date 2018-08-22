@@ -124,6 +124,9 @@ exports.IMPORT_SETTINGS = function(state, action) {
 	newState.settings.user = action.settings.user;
 	newState.settings.gistId = action.settings.gistId;
 	newState.settings.token = action.settings.token;
+	if (action.settings.fileName) {
+		newState.settings.fileName = action.settings.fileName;
+	}
 	return newState;
 }
 
@@ -135,6 +138,7 @@ exports.SET_SETTINGS = function(state, action) {
 	newState.settings.token = action.settings.token;
 	newState.settings.language = action.settings.language;
 	newState.settings.theme = action.settings.theme;
+	newState.settings.fileName = action.settings.fileName;
 	return newState;
 }
 

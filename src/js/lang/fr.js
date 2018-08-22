@@ -14,6 +14,7 @@ module.exports = {
 	"English" : "Anglais",
 	"Export" : "Exporter",
 	"Export settings" : "Exporter les paramètres",
+	"File name" : "Nom de fichier",
 	"File too big" : "Fichier trop volumineux",
 	"French" : "Français",
 	"Gist ID" : "ID du Gist",

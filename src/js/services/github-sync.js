@@ -19,14 +19,13 @@ exports.importProjects = function (callback) {
 const pullFromGitHub = function (callback) {
 	githubService.getGistData(function(error, ghData) {
 		if (error) {
-			store.dispatch(reduxActions.addAlert('error', error));
+			store.dispatch(reduxActions.addAlert('error', error.message));
+			callback(false);
 		}
 		else {
-
 			const localData = storageService.retrieve();
 			const mergedData = utils.mergeData(localData, ghData);
 			store.dispatch(reduxActions.setData(mergedData));
-			// storageService.save(utils.mergeData(localData, ghData));
 
 			if (callback && typeof callback === 'function') {
 				callback(ghData);

@@ -46,6 +46,7 @@ class SettingsView extends React.Component {
 			user : settings.user,
 			gistId : settings.gistId,
 			token : settings.token,
+			fileName : settings.fileName,
 		}) : false;
 
 		let languageLabel = '';
@@ -88,6 +89,10 @@ class SettingsView extends React.Component {
 						<tr>
 							<td data-column="label">{L("Token")}</td>
 							<td data-column="value">{settings.token}</td>
+						</tr>
+						<tr>
+							<td data-column="label">{L("File name")}</td>
+							<td data-column="value">{settings.fileName}</td>
 						</tr>
 					</tbody>
 				</table>

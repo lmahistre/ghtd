@@ -22,6 +22,7 @@ class SettingsEdit extends React.Component {
 		settings.user = document.getElementById('settings-user').value;
 		settings.token = document.getElementById('settings-token').value;
 		settings.gistId = document.getElementById('settings-gistId').value;
+		settings.fileName = document.getElementById('settings-fileName').value;
 		store.dispatch(reduxActions.updateSettings(settings));
 		browserService.setBackgroundColor(settings.theme);
 		browserService.redirect('settings');
@@ -71,6 +72,12 @@ class SettingsEdit extends React.Component {
 							<td data-column="label">{L("Token")}</td>
 							<td>
 								<input name="token" id="settings-token" type="text" defaultValue={settings.token} />
+							</td>
+						</tr>
+						<tr>
+							<td data-column="label">{L("File name")}</td>
+							<td>
+								<input name="token" id="settings-fileName" type="text" defaultValue={settings.fileName} />
 							</td>
 						</tr>
 					</tbody>

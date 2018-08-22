@@ -76,13 +76,20 @@ exports.getGistData = function(callback) {
 	const settings = state.settings;
 	call(config.site+'/gists/'+settings.gistId, null, function(parsedData) {
 		try {
-			const gistContent = parsedData.files[settings.fileName].content;
-			const gistData = JSON.parse(gistContent);
-			if (callback && typeof callback === 'function') {
-				callback(null, gistData);
+			const gistFile = parsedData.files[settings.fileName];
+			if (gistFile) {
+				const gistContent = gistFile.content;
+				const gistData = JSON.parse(gistContent);
+				if (callback && typeof callback === 'function') {
+					callback(null, gistData);
+				}
+			}
+			else {
+				callback(new Error("Gist file "+settings.fileName+" is empty"));
 			}
 		}
 		catch (error) {
+			store.dispatch(reduxActions.addAlert('error', responseData.error.message));
 			callback(error);
 		}
 	});
