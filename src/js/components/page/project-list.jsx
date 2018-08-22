@@ -39,10 +39,16 @@ class ProjectList extends React.Component {
 				projectList.push(projects[i]);
 			}
 		}
+
+		const settings = this.props.settings;
+		const isConnected = settings.user && settings.gistId && settings.token;
+
 		return (
 			<AppPage selectedMenu="projects">
 				<CommonButton to="/project-edit">{L("New project")}</CommonButton>
-				<CommonButton onClick={self.import}>{L("Import from GitHub")}</CommonButton>
+				{ isConnected ?
+					<CommonButton onClick={self.import}>{L("Import from GitHub")}</CommonButton>
+				: null }
 				<table className="list-table" data-table="project-list">
 					<tbody>
 						{projectList.map(elt => (
