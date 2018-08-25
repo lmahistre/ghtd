@@ -130,6 +130,9 @@ html body #react-root .app-container div.menu .sync-indicator span {
 html body #react-root .app-container div.menu .sync-indicator.connected {
   background-color: #0A0;
 }
+html body #react-root .app-container div.menu .sync-indicator.sync-dirty {
+  background-color: #BB0;
+}
 html body #react-root .app-container div.menu .sync-indicator.busy {
   background-color: #F00;
 }

@@ -694,4 +694,13 @@ describe ('reducers', function() {
 			alerts : [],
 		});
 	});
+
+
+	it ('END_SYNC', function() {
+		expect(reducers.END_SYNC({}).busy).toBe(false);
+		expect(reducers.END_SYNC({
+			settings : {},
+		}).settings.isSyncDirty).toBe(false);
+	});
 });
+

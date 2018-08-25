@@ -11,7 +11,7 @@ module.exports = class SyncIndicator extends React.Component {
 	syncWithGitHub() {
 		store.dispatch(reduxActions.setBusy(true));
 		githubSync.syncWithGitHub(function() {
-			store.dispatch(reduxActions.setBusy(false));
+			store.dispatch(reduxActions.endSync());
 		});
 	}
 
@@ -27,13 +27,24 @@ module.exports = class SyncIndicator extends React.Component {
 				);
 			}
 			else {
-				return (
-					<span className="sync-indicator connected" 
-							data-tip={L("Sync with GitHub")} 
-							onClick={this.syncWithGitHub}>
-						<span className="fa fa-refresh" aria-hidden="true" />
-					</span>
-				);
+				if (this.props.settings.isSyncDirty) {
+					return (
+						<span className="sync-indicator sync-dirty" 
+								data-tip={L("Sync with GitHub")} 
+								onClick={this.syncWithGitHub}>
+							<span className="fa fa-refresh" aria-hidden="true" />
+						</span>
+					);
+				}
+				else {
+					return (
+						<span className="sync-indicator connected" 
+								data-tip={L("Sync with GitHub")} 
+								onClick={this.syncWithGitHub}>
+							<span className="fa fa-refresh" aria-hidden="true" />
+						</span>
+					);
+				}
 			}
 		}
 		else {

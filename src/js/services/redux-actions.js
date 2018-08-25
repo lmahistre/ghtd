@@ -146,3 +146,10 @@ exports.setData = function(data) {
 		projects : data.projects,
 	}
 }
+
+
+exports.endSync = function(data) {
+	return {
+		type : 'END_SYNC',
+	}
+}
