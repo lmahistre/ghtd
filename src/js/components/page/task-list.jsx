@@ -36,6 +36,7 @@ class TaskList extends React.Component {
 				}
 				else {
 					task.projectName = ' ';
+					task.projectColor = null;
 				}
 				list.push(task);
 			}
