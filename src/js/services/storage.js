@@ -111,5 +111,11 @@ exports.getSettings = function () {
 	if (!settings.fileName) {
 		settings.fileName = constsService.fileName;
 	}
+	if (!settings.language) {
+		settings.language = 'en';
+	}
+	if (!settings.theme) {
+		settings.theme = 'light';
+	}
 	return settings;
 }
