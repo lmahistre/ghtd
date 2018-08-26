@@ -554,6 +554,7 @@ describe ('reducers', function() {
 				user : 'user',
 				gistId : '222',
 				token : '333',
+				isSyncDirty : true,
 			}
 		});
 
@@ -574,6 +575,7 @@ describe ('reducers', function() {
 				user : 'user',
 				gistId : '222',
 				token : '333',
+				isSyncDirty : true,
 			}
 		});
 	});

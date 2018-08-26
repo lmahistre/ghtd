@@ -1,6 +1,7 @@
 
 const React = require("react");
 const ReactRedux = require('react-redux');
+const crypto = require('crypto');
 
 const AppPage = require("../app-page.jsx");
 const CommonButton = require("../ui/common-button.jsx");
@@ -20,7 +21,6 @@ class SettingsView extends React.Component {
 		}
 		else {
 			try {
-				// let newSettings = JSON.parse(content);
 				const newSettings = this.settingsDecode(content);
 				if ('string' === typeof newSettings.user
 					&& 'string' === typeof newSettings.gistId
@@ -40,7 +40,9 @@ class SettingsView extends React.Component {
 
 
 	settingsDecode(str) {
-		const obj = JSON.parse(str);
+    const ciph = crypto.createDecipher('aes-128-cfb', constsService.settingsKey);
+    const p = ciph.update(str, 'base64', 'utf8') + ciph.final('utf8').toString('utf8');
+		const obj = JSON.parse(p);
 		const ret = {};
 		if (obj.user) {
 			ret.user = obj.user;
@@ -59,12 +61,14 @@ class SettingsView extends React.Component {
 
 
 	settingsEncode(settings) {
-		return JSON.stringify({
-			user : settings.user,
-			gistId : settings.gistId,
-			token : settings.token,
-			fileName : settings.fileName,
-		})
+		var ciph = crypto.createCipher('aes-128-cfb', constsService.settingsKey);
+		var p = ciph.update(JSON.stringify({
+				user : settings.user,
+				gistId : settings.gistId,
+				token : settings.token,
+				fileName : settings.fileName,
+			}), 'utf8', 'base64') + ciph.final('base64').toString('utf8');
+		return p;
 	}
 
 

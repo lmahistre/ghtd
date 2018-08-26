@@ -89,7 +89,9 @@ module.exports.colors = [
 exports.version = '0.1.4';
 exports.appName = 'GHTD';
 exports.fileName = 'ghtd.json';
-exports.settingsFileName = "ghtd-settings.json";
+
+exports.settingsFileName = "ghtd.cfg";
+exports.settingsKey = '6NbXGcOnkfUzDoD8';
 
 exports.languages = [
 	{
