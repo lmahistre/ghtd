@@ -3,11 +3,13 @@ const ReactRedux = require('react-redux');
 
 const AppPage = require("../app-page.jsx");
 
+const consts = require('../../services/consts.js');
+
 module.exports = function(props) {
 	return (
 		<AppPage selectedMenu="settings">
 			<div className="text-page">
-				<p>{"GHT version 0.1.3"}</p>
+				<p>{"GHT version "+consts.version}</p>
 				<h2>{"Data storage"}</h2>
 				<p>{"Data managed by the application is stored in local storage. It does not use cookies to store data. It is possible to use a GitHub account to store and synchronize data."}</p>
 				<h2>{"Setup a GitHub account"}</h2>

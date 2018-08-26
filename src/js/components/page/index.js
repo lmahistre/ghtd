@@ -1,3 +1,4 @@
+exports.Home = require("./home.jsx");
 exports.TaskList = require("./task-list.jsx");
 exports.TaskEdit = require("./task-edit.jsx");
 exports.TaskView = require("./task-view.jsx");

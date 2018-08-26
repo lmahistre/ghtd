@@ -7,7 +7,7 @@ const HashRouter = ReactRouterDom.HashRouter;
 const Route = ReactRouterDom.Route;
 const Switch = ReactRouterDom.Switch;
 
-const { TaskList, TaskEdit, TaskView, ProjectDelete, ProjectEdit, ProjectImport,
+const { Home, TaskList, TaskEdit, TaskView, ProjectDelete, ProjectEdit, ProjectImport,
 	ProjectList, ProjectView, SettingsView, SettingsAbout, SettingsEdit, 
 } = require('./page/index.js');
 
@@ -17,7 +17,7 @@ class AppRouter extends React.Component {
 		super();
 		this.routes = (
 			<Switch>
-				<Route exact path="/" component={TaskList} />
+				<Route exact path="/" component={Home} />
 				<Route exact path="/tasks" component={TaskList} />
 				<Route exact path="/task-edit/:id" component={TaskEdit} />
 				<Route exact path="/task-view/:id" component={TaskView} />
@@ -30,7 +30,7 @@ class AppRouter extends React.Component {
 				<Route exact path="/settings" component={SettingsView} />
 				<Route exact path="/settings-about" component={SettingsAbout} />
 				<Route exact path="/settings-edit" component={SettingsEdit} />
-				<Route exact path="*" component={TaskList} />
+				<Route exact path="*" component={Home} />
 			</Switch>
 		);
 	}
