@@ -6,9 +6,7 @@ const AppPage = require("../app-page.jsx");
 const CommonButton = require("../ui/common-button.jsx");
 const Upload = require("../ui/upload.jsx");
 
-// const dataService = require('../../services/data.js');
 const constsService = require('../../services/consts.js');
-// const alertService = require('../../services/alert.js');
 const browserService = require('../../services/browser.js');
 const L = require('../../services/i18n.js');
 const reduxActions = require('../../services/redux-actions.js');
@@ -22,7 +20,8 @@ class SettingsView extends React.Component {
 		}
 		else {
 			try {
-				let newSettings = JSON.parse(content);
+				// let newSettings = JSON.parse(content);
+				const newSettings = this.settingsDecode(content);
 				if ('string' === typeof newSettings.user
 					&& 'string' === typeof newSettings.gistId
 					&& 'string' === typeof newSettings.token
@@ -40,14 +39,38 @@ class SettingsView extends React.Component {
 	}
 
 
-	render() {
-		const settings = this.props.settings;
-		const toExports = (settings.user && settings.gistId && settings.token) ? JSON.stringify({
+	settingsDecode(str) {
+		const obj = JSON.parse(str);
+		const ret = {};
+		if (obj.user) {
+			ret.user = obj.user;
+		}
+		if (obj.gistId) {
+			ret.gistId = obj.gistId;
+		}
+		if (obj.token) {
+			ret.token = obj.token;
+		}
+		if (obj.fileName) {
+			ret.fileName = obj.fileName;
+		}
+		return ret;
+	}
+
+
+	settingsEncode(settings) {
+		return JSON.stringify({
 			user : settings.user,
 			gistId : settings.gistId,
 			token : settings.token,
 			fileName : settings.fileName,
-		}) : false;
+		})
+	}
+
+
+	render() {
+		const settings = this.props.settings;
+		const toExports = (settings.user && settings.gistId && settings.token) ? this.settingsEncode(settings) : false;
 
 		let languageLabel = '';
 		for (var i = 0; i < constsService.languages.length; i++) {
@@ -66,7 +89,7 @@ class SettingsView extends React.Component {
 				{toExports ?
 					<CommonButton href={"data:application/octet-stream,"+toExports} download={constsService.settingsFileName} title={L("Export settings")}>{L("Export")}</CommonButton>
 				:
-					<Upload onSelect={this.import} title={L("Import settings")}>{L("Import")}</Upload>
+					<Upload onSelect={this.import.bind(this)} title={L("Import settings")}>{L("Import")}</Upload>
 				}
 				<table className="list-table" data-table="settings-list">
 					<tbody>

@@ -147,6 +147,7 @@ exports.IMPORT_SETTINGS = function(state, action) {
 	newState.settings.user = action.settings.user;
 	newState.settings.gistId = action.settings.gistId;
 	newState.settings.token = action.settings.token;
+	newState.settings.isSyncDirty = true;
 	if (action.settings.fileName) {
 		newState.settings.fileName = action.settings.fileName;
 	}
