@@ -21,14 +21,6 @@ class ProjectEditForm extends React.Component {
 	}
 
 
-	// changeVisible(event) {
-	// 	this.props.project.visible = event.target.checked;
-	// 	this.setState({
-	// 		project : this.props.project,
-	// 	});
-	// }
-
-
 	render() {
 		const self = this;
 		return (
@@ -40,6 +32,16 @@ class ProjectEditForm extends React.Component {
 							<td className="label">{"Name"}</td>
 							<td className="value">
 								<input type="text" name="name" defaultValue={self.props.task.name} onKeyDown={self.handleInputKeyDown.bind(self, self.props.save)} />
+							</td>
+						</tr>
+						<tr>
+							<td className="label">{"Project"}</td>
+							<td className="value">
+								<select className="project-label" name="projectId" id="new-task-projectId" defaultValue={self.props.task.projectId}>
+									{self.props.projectList.map(elt => (
+										<option key={elt.id} value={elt.id}>{elt.name}</option>
+									))}
+								</select>
 							</td>
 						</tr>
 					</tbody>

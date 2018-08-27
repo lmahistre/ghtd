@@ -7,67 +7,46 @@ const Link = ReactRouterDom.Link;
 const AppPage = require("../app-page.jsx");
 const CommonButton = require("../ui/common-button.jsx");
 const DateViewer = require('../ui/date-viewer.jsx');
+const TaskEditForm = require('../forms/task-edit.jsx');
 
 const L = require('../../services/i18n.js');
 const reduxActions = require('../../services/redux-actions.js');
 const store = require('../../services/store.js');
+const browserService = require('../../services/browser.js');
 
 class TaskEdit extends React.Component {
 
-	update(id) {
-		console.log(id);
-		// let task = dataService.getTask(id);
-		// 	id : document.forms['project-edit'].id.value,
-		// task.name : document.forms['task-edit'].name.value,
-		// 	visible : document.forms['project-edit'].visible.checked,
-		// 	color : document.forms['project-edit'].color.value,
-		// 	provider : document.forms['project-edit'].provider.value,
-		// 	repo : document.forms['project-edit'].repo.value,
-		// dataService.setTask(task.id, task);
+	update(task) {
+		const form = document.forms['task-edit'];
+		task.name = form.name.value;
+		task.projectId = form.projectId.value;
+		task.timestampModified = parseInt(Date.now()/1000);
+		store.dispatch(reduxActions.updateTask(task));
 		browserService.redirect('tasks');
 	}
 
 
 	render() {
-		const self = this;
-		let task = self.props.tasks[self.props.match.params.id];
-		let project = task.projectId ? self.props.projects[task.projectId] : null;
+		let task = this.props.tasks[this.props.match.params.id];
+		// let project = task.projectId ? this.props.projects[task.projectId] : null;
+		const projectList = [
+			{
+				id : 0,
+				name : '',
+			},
+		];
+		for (let i in this.props.projects) {
+			projectList.push(this.props.projects[i]);
+		}
 		return (
 			<AppPage selectedMenu="tasks">
-				<CommonButton onClick={self.update.bind(self, task.id)}>{L("Save")}</CommonButton>
-				<CommonButton to={"/task-view/"+self.props.match.params.id}>{L("Cancel")}</CommonButton>
-				<table className="list-table">
-					<tbody>
-						<tr>
-							<td>{L("Id")}</td>
-							<td>{task.id}</td>
-						</tr>
-						<tr>
-							<td>{L("Label")}</td>
-							<td>{task.name}</td>
-						</tr>
-						<tr>
-							<td>{L("Project")}</td>
-							<td>
-								{project ?
-									<Link to={"/project-view/"+project.id} style={{color: '#'+project.color}}>{project.name}</Link>
-								: null }
-							</td>
-						</tr>
-						<tr>
-							<td>{L("Creation time")}</td>
-							<td>
-								<DateViewer time={task.timestampCreated} />
-							</td>
-						</tr>
-						<tr>
-							<td>{L("Modification time")}</td>
-							<td>
-								<DateViewer time={task.timestampModified} />
-							</td>
-						</tr>
-					</tbody>
-				</table>
+				<CommonButton onClick={this.update.bind(this, task)}>{L("Save")}</CommonButton>
+				<CommonButton to={"/task-view/"+this.props.match.params.id}>{L("Cancel")}</CommonButton>
+				<TaskEditForm 
+					task={task} 
+					projectList={projectList} 
+					save={this.update.bind(this, task)} 
+				/>
 			</AppPage>
 		);
 	}
