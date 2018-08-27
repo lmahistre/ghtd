@@ -92,6 +92,7 @@ exports.fileName = 'ghtd.json';
 
 exports.settingsFileName = "ghtd.cfg";
 exports.settingsKey = '6NbXGcOnkfUzDoD8';
+exports.settingsCipher = 'aes-128-cfb';
 
 exports.languages = [
 	{

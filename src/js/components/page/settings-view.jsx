@@ -1,7 +1,6 @@
 
 const React = require("react");
 const ReactRedux = require('react-redux');
-const crypto = require('crypto');
 
 const AppPage = require("../app-page.jsx");
 const CommonButton = require("../ui/common-button.jsx");
@@ -12,6 +11,7 @@ const browserService = require('../../services/browser.js');
 const L = require('../../services/i18n.js');
 const reduxActions = require('../../services/redux-actions.js');
 const store = require('../../services/store.js');
+const utils = require('../../services/utils.js');
 
 class SettingsView extends React.Component {
 
@@ -21,7 +21,7 @@ class SettingsView extends React.Component {
 		}
 		else {
 			try {
-				const newSettings = this.settingsDecode(content);
+				const newSettings = utils.settingsDecode(content);
 				if ('string' === typeof newSettings.user
 					&& 'string' === typeof newSettings.gistId
 					&& 'string' === typeof newSettings.token
@@ -39,42 +39,9 @@ class SettingsView extends React.Component {
 	}
 
 
-	settingsDecode(str) {
-    const ciph = crypto.createDecipher('aes-128-cfb', constsService.settingsKey);
-    const p = ciph.update(str, 'base64', 'utf8') + ciph.final('utf8').toString('utf8');
-		const obj = JSON.parse(p);
-		const ret = {};
-		if (obj.user) {
-			ret.user = obj.user;
-		}
-		if (obj.gistId) {
-			ret.gistId = obj.gistId;
-		}
-		if (obj.token) {
-			ret.token = obj.token;
-		}
-		if (obj.fileName) {
-			ret.fileName = obj.fileName;
-		}
-		return ret;
-	}
-
-
-	settingsEncode(settings) {
-		var ciph = crypto.createCipher('aes-128-cfb', constsService.settingsKey);
-		var p = ciph.update(JSON.stringify({
-				user : settings.user,
-				gistId : settings.gistId,
-				token : settings.token,
-				fileName : settings.fileName,
-			}), 'utf8', 'base64') + ciph.final('base64').toString('utf8');
-		return p;
-	}
-
-
 	render() {
 		const settings = this.props.settings;
-		const toExports = (settings.user && settings.gistId && settings.token) ? this.settingsEncode(settings) : false;
+		const toExports = (settings.user && settings.gistId && settings.token) ? utils.settingsEncode(settings) : false;
 
 		let languageLabel = '';
 		for (var i = 0; i < constsService.languages.length; i++) {
@@ -93,7 +60,7 @@ class SettingsView extends React.Component {
 				{toExports ?
 					<CommonButton href={"data:application/octet-stream,"+toExports} download={constsService.settingsFileName} title={L("Export settings")}>{L("Export")}</CommonButton>
 				:
-					<Upload onSelect={this.import.bind(this)} title={L("Import settings")}>{L("Import")}</Upload>
+					<Upload onSelect={this.import} title={L("Import settings")}>{L("Import")}</Upload>
 				}
 				<table className="list-table" data-table="settings-list">
 					<tbody>

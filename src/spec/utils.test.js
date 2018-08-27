@@ -879,3 +879,17 @@ describe('projectIsUsedByVisibleTasks', function() {
 		})).toBe(false);
 	});
 });
+
+
+describe('settingsDecode', function() {
+	it ('encodes then decodes', function() {
+		let settings = {
+			user : 'test',
+			gistId : 'gist_id',
+			token : 'settings_token',
+			fileName : 'test.json',
+		}
+		expect(utils.settingsDecode(utils.settingsEncode(settings))).toEqual(settings);
+		
+	});
+});

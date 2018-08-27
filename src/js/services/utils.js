@@ -1,5 +1,5 @@
 
-var constsService = require('./consts.js');
+let constsService = require('./consts.js');
 const store = require('./store.js');
 const clone = require('clone');
 
@@ -7,9 +7,6 @@ exports.setDependencies = function (deps) {
 	if (deps.constsService) {
 		constsService = deps.constsService;
 	}
-	// if (deps.dataService) {
-	// 	dataService = deps.dataService;
-	// }
 }
 
 
@@ -206,4 +203,39 @@ exports.projectIsUsed = function(projectId, tasks) {
 		}
 	}
 	return projectIsUsed;
+}
+
+
+exports.settingsDecode = function(str) {
+	const crypto = require('crypto');
+  const ciph = crypto.createDecipher(constsService.settingsCipher, constsService.settingsKey);
+  const p = ciph.update(str, 'base64', 'utf8') + ciph.final('utf8').toString('utf8');
+	const obj = JSON.parse(p);
+	const ret = {};
+	if (obj.user) {
+		ret.user = obj.user;
+	}
+	if (obj.gistId) {
+		ret.gistId = obj.gistId;
+	}
+	if (obj.token) {
+		ret.token = obj.token;
+	}
+	if (obj.fileName) {
+		ret.fileName = obj.fileName;
+	}
+	return ret;
+}
+
+
+exports.settingsEncode = function(settings) {
+	const crypto = require('crypto');
+	const ciph = crypto.createCipher(constsService.settingsCipher, constsService.settingsKey);
+	const p = ciph.update(JSON.stringify({
+		user : settings.user,
+		gistId : settings.gistId,
+		token : settings.token,
+		fileName : settings.fileName,
+	}), 'utf8', 'base64') + ciph.final('base64').toString('utf8');
+	return p;
 }
