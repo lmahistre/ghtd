@@ -599,6 +599,7 @@ describe ('reducers', function() {
 				token : '333',
 				language : 'english',
 				theme : 'dark',
+				isSyncDirty : true,
 			}
 		});
 
@@ -624,6 +625,7 @@ describe ('reducers', function() {
 				token : '333',
 				language : 'english',
 				theme : 'dark',
+				isSyncDirty : true,
 			},
 		});
 	});

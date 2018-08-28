@@ -157,12 +157,23 @@ exports.IMPORT_SETTINGS = function(state, action) {
 
 exports.SET_SETTINGS = function(state, action) {
 	const newState = clone(state);
+	if (newState.settings 
+		&& (newState.settings.user != action.settings.user
+			|| newState.settings.gistId != action.settings.gistId
+			|| newState.settings.token != action.settings.token
+			|| newState.settings.fileName != action.settings.fileName
+		)
+	) {
+		newState.settings.isSyncDirty = true;
+	}
 	newState.settings.user = action.settings.user;
 	newState.settings.gistId = action.settings.gistId;
 	newState.settings.token = action.settings.token;
 	newState.settings.language = action.settings.language;
 	newState.settings.theme = action.settings.theme;
-	newState.settings.fileName = action.settings.fileName;
+	if (action.settings.fileName) {
+		newState.settings.fileName = action.settings.fileName;
+	}
 	return newState;
 }
 
