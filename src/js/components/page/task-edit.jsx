@@ -18,10 +18,14 @@ class TaskEdit extends React.Component {
 
 	update(task) {
 		const form = document.forms['task-edit'];
-		task.name = form.name.value;
-		task.projectId = form.projectId.value;
-		task.timestampModified = parseInt(Date.now()/1000);
-		store.dispatch(reduxActions.updateTask(task));
+		if (task.name != form.name.value
+			|| task.projectId != form.projectId.value
+		) {
+			task.name = form.name.value;
+			task.projectId = form.projectId.value;
+			task.timestampModified = parseInt(Date.now()/1000);
+			store.dispatch(reduxActions.updateTask(task));
+		}
 		browserService.redirect('tasks');
 	}
 
