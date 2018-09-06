@@ -89,9 +89,9 @@ exports.setSelectedProject = function(id) {
 }
 
 
-exports.deleteProject = function(id) {
+exports.removeProject = function(id) {
 	return {
-		type : 'DELETE_PROJECT',
+		type : 'REMOVE_PROJECT',
 		id : id,
 	}
 }

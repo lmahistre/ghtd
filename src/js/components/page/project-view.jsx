@@ -46,6 +46,10 @@ class ProjectView extends React.Component {
 								<td>{project.repo}</td>
 							</tr>
 							<tr>
+								<td>{"Status"}</td>
+								<td>{project.status}</td>
+							</tr>
+							<tr>
 								<td>{"Visible"}</td>
 								<td>
 									<VisibleMarker visible={project.visible} title={project.visible ? L('Visible') : L('Not visible')} />

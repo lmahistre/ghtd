@@ -514,6 +514,41 @@ describe ('merge projects', function() {
 		});
 	});
 
+	it ('same project, removed', function() {
+		expect(utils.mergeData({
+			timestampSynchronized : 1540001000,
+			projects : {
+				'p1' : {
+					id : 'p1',
+					timestampModified : 1540000500,
+					name : 'project 1',
+					status : 'active',
+				},
+			},
+		}, {
+			timestampSynchronized : 1540000500,
+			projects : {
+				'p1' : {
+					id : 'p1',
+					timestampModified : 1540000800,
+					name : 'project 1',
+					status : 'removed',
+				},
+			},
+		}, 1540002000)).toEqual({
+			timestampSynchronized : 1540002000,
+			tasks : {},
+			projects : {
+				'p1' : {
+					id : 'p1',
+					timestampModified : 1540000800,
+					name : 'project 1',
+					status : 'removed',
+				},
+			},
+		});
+	});
+
 	it ('same project modified locally before', function() {
 		expect(utils.mergeData({
 			timestampSynchronized : 1540001000,

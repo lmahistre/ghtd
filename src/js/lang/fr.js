@@ -38,6 +38,7 @@ module.exports = {
 	"Save" : "Enregistrer",
 	"Settings" : "Paramètres",
 	"Show" : "Rendre visible",
+	"Status" : "Statut",
 	"Sync with GitHub" : "Synchro GitHub",
 	"Synchronizing" : "Synchronisation en cours",
 	"Tasks" : "Tâches",

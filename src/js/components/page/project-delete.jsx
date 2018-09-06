@@ -16,8 +16,7 @@ const utils = require('../../services/utils.js');
 class ProjectDelete extends React.Component {
 
 	delete() {
-		store.dispatch(reduxActions.deleteProject(this.props.match.params.id));
-		// browserService.redirect('projects');
+		store.dispatch(reduxActions.removeProject(this.props.match.params.id));
 	}
 
 

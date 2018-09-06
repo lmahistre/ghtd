@@ -102,16 +102,16 @@ exports.SET_BUSY = function(state, action) {
 }
 
 
-exports.DELETE_PROJECT = function(state, action) {
-	const newState = clone(state);
-	if (newState.projects && action.id && newState.projects[action.id]) {
-		delete newState.projects[action.id];
-	}
-	if (newState.settings) {
-		newState.settings.isSyncDirty = true;
-	}
-	return newState;
-}
+// exports.DELETE_PROJECT = function(state, action) {
+// 	const newState = clone(state);
+// 	if (newState.projects && action.id && newState.projects[action.id]) {
+// 		delete newState.projects[action.id];
+// 	}
+// 	if (newState.settings) {
+// 		newState.settings.isSyncDirty = true;
+// 	}
+// 	return newState;
+// }
 
 
 exports.REMOVE_PROJECT = function(state, action) {

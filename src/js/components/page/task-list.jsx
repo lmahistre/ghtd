@@ -70,7 +70,9 @@ class TaskList extends React.Component {
 			},
 		];
 		for (let i in projects) {
-			projectList.push(projects[i]);
+			if (projects[i].status === 'active') {
+				projectList.push(projects[i]);
+			}
 		}
 
 		const settings = self.props.settings;
