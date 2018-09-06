@@ -29,6 +29,13 @@ class SettingsEdit extends React.Component {
 	}
 
 
+	handleInputKeyDown(event) {
+		if (event.which == 13) {
+			this.save();
+		}
+	}
+
+
 	render() {
 		const settings = this.props.settings;
 		return (
@@ -59,25 +66,25 @@ class SettingsEdit extends React.Component {
 						<tr>
 							<td data-column="label">{L("User")}</td>
 							<td>
-								<input name="user" id="settings-user" type="text" defaultValue={settings.user} />
+								<input name="user" id="settings-user" type="text" defaultValue={settings.user} onKeyDown={this.handleInputKeyDown.bind(this)} />
 							</td>
 						</tr>
 						<tr>
 							<td data-column="label">{L("Gist ID")}</td>
 							<td>
-								<input name="gistId" id="settings-gistId" type="text" defaultValue={settings.gistId} />
+								<input name="gistId" id="settings-gistId" type="text" defaultValue={settings.gistId} onKeyDown={this.handleInputKeyDown.bind(this)} />
 							</td>
 						</tr>
 						<tr>
 							<td data-column="label">{L("Token")}</td>
 							<td>
-								<input name="token" id="settings-token" type="text" defaultValue={settings.token} />
+								<input name="token" id="settings-token" type="text" defaultValue={settings.token} onKeyDown={this.handleInputKeyDown.bind(this)} />
 							</td>
 						</tr>
 						<tr>
 							<td data-column="label">{L("File name")}</td>
 							<td>
-								<input name="token" id="settings-fileName" type="text" defaultValue={settings.fileName} />
+								<input name="token" id="settings-fileName" type="text" defaultValue={settings.fileName} onKeyDown={this.handleInputKeyDown.bind(this)} />
 							</td>
 						</tr>
 					</tbody>

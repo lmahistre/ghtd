@@ -21,6 +21,7 @@ class ProjectEdit extends React.Component {
 			color : document.forms['project-edit'].color.value,
 			provider : document.forms['project-edit'].provider.value,
 			repo : document.forms['project-edit'].repo.value,
+			status : 'active',
 		};
 		if (project.name.length > 0) {
 			store.dispatch(reduxActions.addProject(project));
@@ -29,16 +30,24 @@ class ProjectEdit extends React.Component {
 	}
 
 
-	update() {
-		const project = {
-			id : document.forms['project-edit'].id.value,
-			name : document.forms['project-edit'].name.value,
-			visible : document.forms['project-edit'].visible.checked,
-			color : document.forms['project-edit'].color.value,
-			provider : document.forms['project-edit'].provider.value,
-			repo : document.forms['project-edit'].repo.value,
-		};
-		store.dispatch(reduxActions.updateProject(project));
+	update(project) {
+		if (project.name != document.forms['project-edit'].name.value
+			|| project.visible != document.forms['project-edit'].visible.checked
+			|| project.color != document.forms['project-edit'].color.value
+			|| project.provider != document.forms['project-edit'].provider.value
+			|| project.repo != document.forms['project-edit'].repo.value
+		) {
+			project.name = document.forms['project-edit'].name.value;
+			project.visible = document.forms['project-edit'].visible.checked;
+			project.color = document.forms['project-edit'].color.value;
+			project.provider = document.forms['project-edit'].provider.value;
+			project.repo = document.forms['project-edit'].repo.value;
+			if (!project.status) {
+				project.status = 'active';
+			}
+			project.timestampModified = parseInt(Date.now()/1000);
+			store.dispatch(reduxActions.updateProject(project));
+		}
 		browserService.redirect('projects');
 	}
 
@@ -52,7 +61,7 @@ class ProjectEdit extends React.Component {
 			if (project.visible === undefined) {
 				project.visible = true;
 			}
-			save = self.update;
+			save = self.update.bind(self, project);
 		}
 		// Case of creation
 		else {

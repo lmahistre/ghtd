@@ -64,6 +64,7 @@ exports.updateProject = function(elt) {
 	return {
 		type : 'SET_PROJECT',
 		project : elt,
+		currentTimestamp : parseInt(Date.now()/1000),
 	}
 }
 
