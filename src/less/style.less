@@ -194,6 +194,12 @@ html {
 					padding: 1px 4px;
 				}
 
+				div.tr {
+					&>div.td {
+						display: inline-block;
+					}
+				}
+
 				div.alerts {
 					.alert {
 						margin: 4px 8px 0px 8px;
@@ -243,9 +249,9 @@ html {
 					color: #A00;
 				}
 
-				table.list-table {
+				.list-table {
 					width: 100%;
-					table-layout: fixed;
+					// table-layout: fixed;
 					tr.status-active {
 						color: @text-color;
 					}
@@ -307,73 +313,6 @@ html {
 						&[data-selected=selected] {
 							color : @text-color;
 							background-color: @button-color;
-						}
-					}
-				}
-
-				// Light theme
-				&[data-theme=light] {
-					background-color: #EEE;
-					color: @text-color-light;
-
-					table.list-table {
-						tr.status-active {
-							color: @text-color-light;
-						}
-					}
-					select {
-						color: @text-color-light;
-						background-color: #DDD;
-						border-color: #BBB;
-						option {
-							color: @text-color-light;
-							background-color: #DDD;
-						}
-					}
-					input[type=text] {
-						border-color: #BBB;
-						color: @text-color-light;
-						background-color: #DDD;
-					}
-
-					.radio-selector {
-						.radio-selector-elt {
-							color : @text-color;
-						}
-					}
-				}
-
-				// Dark theme
-				&[data-theme=dark] {
-					background-color: #111;
-					color: @text-color-dark;
-
-					table.list-table {
-						tr.status-active {
-							color: @text-color-dark;
-						}
-					}
-					select {
-						color: @text-color-dark;
-						background-color: #222;
-						border-color: #444;
-						option {
-							color: @text-color-dark;
-							background-color: #222;
-						}
-					}
-					input[type=text] {
-						border-color: #444;
-						color: @text-color-dark;
-						background-color: #222;
-					}
-
-					.radio-selector {
-						.radio-selector-elt {
-							color : @text-color-dark;
-							&[data-selected=selected] {
-								color : @text-color;
-							}
 						}
 					}
 				}

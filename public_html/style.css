@@ -163,6 +163,9 @@ html body #react-root .app-container select.project-label {
 html body #react-root .app-container div.new-task-form {
   padding: 1px 4px;
 }
+html body #react-root .app-container div.tr > div.td {
+  display: inline-block;
+}
 html body #react-root .app-container div.alerts .alert {
   margin: 4px 8px 0px 8px;
   padding: 4px 8px;
@@ -208,17 +211,16 @@ html body #react-root .app-container span.color-yes {
 html body #react-root .app-container span.color-no {
   color: #A00;
 }
-html body #react-root .app-container table.list-table {
+html body #react-root .app-container .list-table {
   width: 100%;
-  table-layout: fixed;
 }
-html body #react-root .app-container table.list-table tr.status-active {
+html body #react-root .app-container .list-table tr.status-active {
   color: #111;
 }
-html body #react-root .app-container table.list-table tr.status-done {
+html body #react-root .app-container .list-table tr.status-done {
   color: #888;
 }
-html body #react-root .app-container table.list-table input[type=text] {
+html body #react-root .app-container .list-table input[type=text] {
   width: 100%;
 }
 html body #react-root .app-container form select {
@@ -263,57 +265,6 @@ html body #react-root .app-container .radio-selector .radio-selector-elt {
 html body #react-root .app-container .radio-selector .radio-selector-elt[data-selected=selected] {
   color: #111;
   background-color: #8BF;
-}
-html body #react-root .app-container[data-theme=light] {
-  background-color: #EEE;
-  color: #111;
-}
-html body #react-root .app-container[data-theme=light] table.list-table tr.status-active {
-  color: #111;
-}
-html body #react-root .app-container[data-theme=light] select {
-  color: #111;
-  background-color: #DDD;
-  border-color: #BBB;
-}
-html body #react-root .app-container[data-theme=light] select option {
-  color: #111;
-  background-color: #DDD;
-}
-html body #react-root .app-container[data-theme=light] input[type=text] {
-  border-color: #BBB;
-  color: #111;
-  background-color: #DDD;
-}
-html body #react-root .app-container[data-theme=light] .radio-selector .radio-selector-elt {
-  color: #111;
-}
-html body #react-root .app-container[data-theme=dark] {
-  background-color: #111;
-  color: #EEE;
-}
-html body #react-root .app-container[data-theme=dark] table.list-table tr.status-active {
-  color: #EEE;
-}
-html body #react-root .app-container[data-theme=dark] select {
-  color: #EEE;
-  background-color: #222;
-  border-color: #444;
-}
-html body #react-root .app-container[data-theme=dark] select option {
-  color: #EEE;
-  background-color: #222;
-}
-html body #react-root .app-container[data-theme=dark] input[type=text] {
-  border-color: #444;
-  color: #EEE;
-  background-color: #222;
-}
-html body #react-root .app-container[data-theme=dark] .radio-selector .radio-selector-elt {
-  color: #EEE;
-}
-html body #react-root .app-container[data-theme=dark] .radio-selector .radio-selector-elt[data-selected=selected] {
-  color: #111;
 }
 table[data-table=task-list] td[data-column=actions] {
   width: 84px;
@@ -2580,4 +2531,55 @@ table[data-table=settings-list] td[data-column=value] {
   margin: 0;
   overflow: visible;
   clip: auto;
+}
+html body #react-root .app-container[data-theme=light] {
+  background-color: #888;
+  color: #111;
+}
+html body #react-root .app-container[data-theme=light] .content {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+html body #react-root .app-container[data-theme=light] select {
+  color: #111;
+  background-color: #DDD;
+  border-color: #BBB;
+}
+html body #react-root .app-container[data-theme=light] select option {
+  color: #111;
+  background-color: #DDD;
+}
+html body #react-root .app-container[data-theme=light] input[type=text] {
+  border-color: #BBB;
+  color: #111;
+  background-color: #DDD;
+}
+html body #react-root .app-container[data-theme=light] .radio-selector .radio-selector-elt {
+  color: #111;
+}
+html body #react-root .app-container[data-theme=dark] {
+  background-color: #888;
+  color: #EEE;
+}
+html body #react-root .app-container[data-theme=dark] .content {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+html body #react-root .app-container[data-theme=dark] select {
+  color: #EEE;
+  background-color: #222;
+  border-color: #444;
+}
+html body #react-root .app-container[data-theme=dark] select option {
+  color: #EEE;
+  background-color: #222;
+}
+html body #react-root .app-container[data-theme=dark] input[type=text] {
+  border-color: #444;
+  color: #EEE;
+  background-color: #222;
+}
+html body #react-root .app-container[data-theme=dark] .radio-selector .radio-selector-elt {
+  color: #EEE;
+}
+html body #react-root .app-container[data-theme=dark] .radio-selector .radio-selector-elt[data-selected=selected] {
+  color: #111;
 }

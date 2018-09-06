@@ -89,22 +89,22 @@ class Task extends React.Component {
 					projectList.push(project);
 				}
 				return (
-					<tr className={"status-"+elt.status}>
-						<td className="actions" data-column="actions">
+					<div className={"content tr task status-"+elt.status}>
+						<div className="td actions" data-column="actions">
 							<SmallButton fa="remove" onClick={self.cancel.bind(self)} title={L("Cancel")} color="red" />
 							<SmallButton fa="check" onClick={self.save.bind(self)} title={L("Save")} color="green" />
-						</td>
-						<td data-column="project">
+						</div>
+						<div className="td" data-column="project">
 							<select id={"task-edit-projectId-"+elt.id} className="project-label" name="projectId" defaultValue={elt.projectId} onKeyDown={self.handleInputKeyDown.bind(self)}>
 								{projectList.map(opt => (
 									<option key={opt.id} value={opt.id}>{opt.name}</option>
 								))}
 							</select>
-						</td>
-						<td data-column="name">
+						</div>
+						<div className="td" data-column="name">
 							<input id={"task-edit-name-"+elt.id} type="text" name="name" defaultValue={elt.name} onKeyDown={self.handleInputKeyDown.bind(self)} />
-						</td>
-					</tr>
+						</div>
+					</div>
 				);
 			}
 			else {
@@ -113,8 +113,8 @@ class Task extends React.Component {
 					style.backgroundColor = '#'+elt.projectColor;
 				}
 				return (
-					<tr className={"status-"+elt.status}>
-						<td className="actions" data-column="actions">
+					<div className={"content tr task status-"+elt.status}>
+						<div className="td actions" data-column="actions">
 							{elt.status == 'done' ? 
 								[
 									<SmallButton key={0} fa="trash" onClick={self.remove.bind(self, elt.id)} title={L("Delete")} color="red" />,
@@ -127,12 +127,12 @@ class Task extends React.Component {
 								]
 							}
 							<SmallButton fa="eye" to={"/task-view/"+elt.id} title={L("View detail")} color="blue" />
-						</td>
-						<td className="project-label-container" data-column="project">
+						</div>
+						<div className="td project-label-container" data-column="project">
 							<div className="project-label" style={style} title={elt.projectName} data-tip={elt.projectName}>{elt.projectName}</div>
-						</td>
-						<td data-column="name">{elt.name}</td>
-					</tr>
+						</div>
+						<div className="td" data-column="name">{elt.name}</div>
+					</div>
 				);
 			}
 		}
