@@ -11,6 +11,7 @@ html body {
   margin-right: 0px;
   height: 100%;
   background-color: #EEE;
+  max-width: 416px;
 }
 html body #react-root .app-container {
   background-color: #EEE;
@@ -333,6 +334,11 @@ table[data-table=settings-list] td[data-column=label] {
 table[data-table=settings-list] td[data-column=value] {
   overflow: hidden;
   text-overflow: ellipsis;
+}
+@media (min-width: 420px) {
+  html body {
+    max-width: none;
+  }
 }
 @media (min-width: 480px) {
   html body #react-root .app-container .project-label {
