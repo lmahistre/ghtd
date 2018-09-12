@@ -25,6 +25,7 @@ html {
 		margin-right: 0px;
 		height: 100%;
 		background-color: #EEE;
+		max-width: 416px;
 
 		#react-root {
 			// height: 100%;
@@ -351,6 +352,11 @@ table[data-table=settings-list] {
 	}
 }
 
+@media (min-width: 420px) {
+  html body {
+    max-width: none;
+  }
+}
 @media (min-width: 480px) {
 	html body #react-root .app-container {
 		.project-label {
