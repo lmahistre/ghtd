@@ -238,13 +238,13 @@ html body #react-root .app-container form select option {
   height: 24px;
   background-color: #FFF;
 }
-html body #react-root .app-container form table.form-table {
+html body #react-root .app-container form div.form-table {
   width: 100%;
 }
-html body #react-root .app-container form table.form-table select {
+html body #react-root .app-container form div.form-table select {
   width: 100%;
 }
-html body #react-root .app-container form table.form-table input[type=text] {
+html body #react-root .app-container form div.form-table input[type=text] {
   width: 100%;
 }
 html body #react-root .app-container .page-content {

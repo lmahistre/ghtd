@@ -51,27 +51,25 @@ class ProjectList extends React.Component {
 				{ isConnected ?
 					<CommonButton onClick={self.import}>{L("Import from GitHub")}</CommonButton>
 				: null }
-				<table className="list-table" data-table="project-list">
-					<tbody>
-						{projectList.map(elt => (
-							<tr key={elt.id}>
-								<td data-column="actions">
-									<SmallButton to={"/project-edit/"+elt.id} title={L("Edit")} fa="edit" color="blue" />
-									<SmallButton to={"/project-view/"+elt.id} title={L("View detail")} fa="eye" color="blue" />
-									{elt.visible ? 
-										<SmallButton fa="eye" onClick={self.changeVisibility.bind(self, elt.id)} title={L("Hide")} color="green" />
-									:
-										<SmallButton fa="eye-slash" onClick={self.changeVisibility.bind(self, elt.id)} title={L("Show")} color="red" />
-									}
-								</td>
-								<td data-column="name">{elt.name}</td>
-								<td data-column="indicators">
-									<SmallButton fa={elt.provider} title={elt.repo} style={{backgroundColor : '#'+elt.color}} />
-								</td>
-							</tr>
-						))}
-					</tbody>
-				</table>
+				<div className="list-table" data-table="project-list">
+					{projectList.map(elt => (
+						<div className="tr" key={elt.id}>
+							<div className="td" data-column="actions">
+								<SmallButton to={"/project-edit/"+elt.id} title={L("Edit")} fa="edit" color="blue" />
+								<SmallButton to={"/project-view/"+elt.id} title={L("View detail")} fa="eye" color="blue" />
+								{elt.visible ? 
+									<SmallButton fa="eye" onClick={self.changeVisibility.bind(self, elt.id)} title={L("Hide")} color="green" />
+								:
+									<SmallButton fa="eye-slash" onClick={self.changeVisibility.bind(self, elt.id)} title={L("Show")} color="red" />
+								}
+							</div>
+							<div className="td" data-column="name">{elt.name}</div>
+							<div className="td" data-column="indicators">
+								<SmallButton fa={elt.provider} title={elt.repo} style={{backgroundColor : '#'+elt.color}} />
+							</div>
+						</div>
+					))}
+				</div>
 			</AppPage>
 		);
 	}

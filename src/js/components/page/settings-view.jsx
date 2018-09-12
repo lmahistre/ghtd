@@ -62,34 +62,32 @@ class SettingsView extends React.Component {
 				:
 					<Upload onSelect={this.import} title={L("Import settings")}>{L("Import")}</Upload>
 				}
-				<table className="list-table" data-table="settings-list">
-					<tbody>
-						<tr>
-							<td data-column="label">{L("Theme")}</td>
-							<td data-column="value">{L(themeLabel)}</td>
-						</tr>
-						<tr>
-							<td data-column="label">{L("Language")}</td>
-							<td data-column="value">{L(languageLabel)}</td>
-						</tr>
-						<tr>
-							<td data-column="label">{L("User")}</td>
-							<td data-column="value">{settings.user}</td>
-						</tr>
-						<tr>
-							<td data-column="label">{L("Gist ID")}</td>
-							<td data-column="value">{settings.gistId}</td>
-						</tr>
-						<tr>
-							<td data-column="label">{L("Token")}</td>
-							<td data-column="value">{settings.token}</td>
-						</tr>
-						<tr>
-							<td data-column="label">{L("File name")}</td>
-							<td data-column="value">{settings.fileName}</td>
-						</tr>
-					</tbody>
-				</table>
+				<div className="list-table" data-table="settings-list">
+					<div>
+						<div data-column="label">{L("Theme")}</div>
+						<div data-column="value">{L(themeLabel)}</div>
+					</div>
+					<div>
+						<div data-column="label">{L("Language")}</div>
+						<div data-column="value">{L(languageLabel)}</div>
+					</div>
+					<div>
+						<div data-column="label">{L("User")}</div>
+						<div data-column="value">{settings.user}</div>
+					</div>
+					<div>
+						<div data-column="label">{L("Gist ID")}</div>
+						<div data-column="value">{settings.gistId}</div>
+					</div>
+					<div>
+						<div data-column="label">{L("Token")}</div>
+						<div data-column="value">{settings.token}</div>
+					</div>
+					<div>
+						<div data-column="label">{L("File name")}</div>
+						<div data-column="value">{settings.fileName}</div>
+					</div>
+				</div>
 			</AppPage>
 		);
 	}

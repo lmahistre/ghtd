@@ -34,50 +34,48 @@ class ProjectEditForm extends React.Component {
 		return (
 			<form name="project-edit" onSubmit={self.formFakeSubmit}>
 				<input type="hidden" name="id" value={self.props.project.id} />
-				<table className="form-table">
-					<tbody>
-						<tr>
-							<td className="label">{"Name"}</td>
-							<td className="value">
+				<div className="form-table">
+						<div className="tr">
+							<div className="label">{"Name"}</div>
+							<div className="value">
 								<input type="text" name="name" defaultValue={self.props.project.name} onKeyDown={self.handleInputKeyDown.bind(self, self.props.save)} />
-							</td>
-						</tr>
-						<tr>
-							<td className="label">{"Visible"}</td>
-							<td className="value">
+							</div>
+						</div>
+						<div className="tr">
+							<div className="label">{"Visible"}</div>
+							<div className="value">
 								<input type="checkbox" name="visible" checked={self.props.project.visible} onChange={self.changeVisible.bind(self)} />
-							</td>
-						</tr>
-						<tr>
-							<td className="label">{"Color"}</td>
-							<td className="value">
+							</div>
+						</div>
+						<div className="tr">
+							<div className="label">{"Color"}</div>
+							<div className="value">
 								<select name="color" defaultValue={self.props.project.color}>
 									<option value=""></option>
 									{constsService.colors.map(elt => (
 										<option key={elt.id} value={elt.color} style={{color : '#'+elt.color}}>{elt.name}</option>
 									))}
 								</select>
-							</td>
-						</tr>
-						<tr>
-							<td className="label">{L("Repository provider")}</td>
-							<td>
+							</div>
+						</div>
+						<div className="tr">
+							<div className="label">{L("Repository provider")}</div>
+							<div>
 								<select name="provider" defaultValue={self.props.project.provider}>
 									<option value=""></option>
 									<option value="github">{L("GitHub")}</option>
 									<option value="bitbucket">{L("Bitbucket")}</option>
 									<option value="gitlab">{L("GitLab")}</option>
 								</select>
-							</td>
-						</tr>
-						<tr>
-							<td className="label">{L("Repository")}</td>
-							<td>
+							</div>
+						</div>
+						<div className="tr">
+							<div className="label">{L("Repository")}</div>
+							<div>
 								<input type="text" name="repo" defaultValue={self.props.project.repo} onKeyDown={self.handleInputKeyDown.bind(self, self.props.save)} />
-							</td>
-						</tr>
-					</tbody>
-				</table>
+							</div>
+						</div>
+				</div>
 			</form>
 		);
 	}

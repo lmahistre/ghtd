@@ -21,52 +21,42 @@ class TaskView extends React.Component {
 		return (
 			<AppPage selectedMenu="tasks">
 				<CommonButton to={"/task-edit/"+self.props.match.params.id}>{"Edit"}</CommonButton>
-				<table className="list-table">
-					<tbody>
-						<tr>
-							<td>{L("Id")}</td>
-							<td>{task.id}</td>
-						</tr>
-						<tr>
-							<td>{L("Label")}</td>
-							<td>{task.name}</td>
-						</tr>
-						<tr>
-							<td>{L("Project")}</td>
-							<td>
+				<div className="list-table">
+						<div>
+							<div>{L("Id")}</div>
+							<div>{task.id}</div>
+						</div>
+						<div>
+							<div>{L("Label")}</div>
+							<div>{task.name}</div>
+						</div>
+						<div>
+							<div>{L("Project")}</div>
+							<div>
 								{project ?
 									<Link to={"/project-view/"+project.id} 
 										style={{color: '#'+project.color}}>
 										{project.name}
 									</Link>
 								: null }
-							</td>
-						</tr>
-						<tr>
-							<td>{L("Creation time")}</td>
-							<td>
+							</div>
+						</div>
+						<div>
+							<div>{L("Creation time")}</div>
+							<div>
 								<DateViewer time={task.timestampCreated} />
-							</td>
-						</tr>
-						<tr>
-							<td>{L("Modification time")}</td>
-							<td>
+							</div>
+						</div>
+						<div>
+							<div>{L("Modification time")}</div>
+							<div>
 								<DateViewer time={task.timestampModified} />
-							</td>
-						</tr>
-					</tbody>
-				</table>
+							</div>
+						</div>
+				</div>
 			</AppPage>
 		);
 	}
 }
-
-// function mapStateToProps(state, ownProps) {
-// 	return {
-// 		tasks : state && state.tasks ? state.tasks : {},
-// 		projects : state && state.projects ? state.projects : {},
-// 		settings : state && state.settings ? state.settings : {},
-// 	}
-// }
 
 module.exports = store.connect(TaskView);

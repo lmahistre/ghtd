@@ -42,53 +42,51 @@ class SettingsEdit extends React.Component {
 			<AppPage selectedMenu="settings">
 				<CommonButton onClick={this.save}>{L("Save")}</CommonButton>
 				<CommonButton to="/settings">{L("Cancel")}</CommonButton>
-				<table className="list-table" data-table="settings-list">
-					<tbody>
-						<tr>
-							<td data-column="label">{L("Theme")}</td>
-							<td>
+				<div className="list-table" data-table="settings-list">
+						<div>
+							<div data-column="label">{L("Theme")}</div>
+							<div>
 								<RadioSelector id="settings-theme" value={settings.theme}>
 									<option value="light">{L("Light")}</option>
 									<option value="dark">{L("Dark")}</option>
 								</RadioSelector>
-							</td>
-						</tr>
-						<tr>
-							<td data-column="label">{L("Language")}</td>
-							<td>
+							</div>
+						</div>
+						<div>
+							<div data-column="label">{L("Language")}</div>
+							<div>
 								<RadioSelector id="language" name="language" value={settings.language}>
 									{constsService.languages.map(elt => (
 										<option key={elt.key} value={elt.key}>{L(elt.label)}</option>
 									))}
 								</RadioSelector>
-							</td>
-						</tr>
-						<tr>
-							<td data-column="label">{L("User")}</td>
-							<td>
+							</div>
+						</div>
+						<div>
+							<div data-column="label">{L("User")}</div>
+							<div>
 								<input name="user" id="settings-user" type="text" defaultValue={settings.user} onKeyDown={this.handleInputKeyDown.bind(this)} />
-							</td>
-						</tr>
-						<tr>
-							<td data-column="label">{L("Gist ID")}</td>
-							<td>
+							</div>
+						</div>
+						<div>
+							<div data-column="label">{L("Gist ID")}</div>
+							<div>
 								<input name="gistId" id="settings-gistId" type="text" defaultValue={settings.gistId} onKeyDown={this.handleInputKeyDown.bind(this)} />
-							</td>
-						</tr>
-						<tr>
-							<td data-column="label">{L("Token")}</td>
-							<td>
+							</div>
+						</div>
+						<div>
+							<div data-column="label">{L("Token")}</div>
+							<div>
 								<input name="token" id="settings-token" type="text" defaultValue={settings.token} onKeyDown={this.handleInputKeyDown.bind(this)} />
-							</td>
-						</tr>
-						<tr>
-							<td data-column="label">{L("File name")}</td>
-							<td>
+							</div>
+						</div>
+						<div>
+							<div data-column="label">{L("File name")}</div>
+							<div>
 								<input name="token" id="settings-fileName" type="text" defaultValue={settings.fileName} onKeyDown={this.handleInputKeyDown.bind(this)} />
-							</td>
-						</tr>
-					</tbody>
-				</table>
+							</div>
+						</div>
+				</div>
 			</AppPage>
 		);
 	}

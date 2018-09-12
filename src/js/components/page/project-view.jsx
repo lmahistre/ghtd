@@ -23,52 +23,50 @@ class ProjectView extends React.Component {
 				<AppPage selectedMenu="projects">
 					<CommonButton to={"/project-edit/"+self.props.match.params.id}>{"Edit"}</CommonButton>
 					<CommonButton to={"/project-delete/"+project.id}>{L("Delete")}</CommonButton>
-					<table className="list-table">
-						<tbody>
-							<tr>
-								<td>{"Id"}</td>
-								<td>{project.id}</td>
-							</tr>
-							<tr>
-								<td>{"Label"}</td>
-								<td>{project.name}</td>
-							</tr>
-							<tr>
-								<td>{"Color"}</td>
-								<td style={{color : '#'+project.color}}>{project.color}</td>
-							</tr>
-							<tr>
-								<td>{"Repository Provider"}</td>
-								<td>{project.provider}</td>
-							</tr>
-							<tr>
-								<td>{"Repository"}</td>
-								<td>{project.repo}</td>
-							</tr>
-							<tr>
-								<td>{"Status"}</td>
-								<td>{project.status}</td>
-							</tr>
-							<tr>
-								<td>{"Visible"}</td>
-								<td>
-									<VisibleMarker visible={project.visible} title={project.visible ? L('Visible') : L('Not visible')} />
-								</td>
-							</tr>
-							<tr>
-								<td>{"Creation time"}</td>
-								<td>
-									<DateViewer time={project.timestampCreated} />
-								</td>
-							</tr>
-							<tr>
-								<td>{"Modification time"}</td>
-								<td>
-									<DateViewer time={project.timestampModified}/>
-								</td>
-							</tr>
-						</tbody>
-					</table>
+					<div className="list-table">
+						<div>
+							<div>{"Id"}</div>
+							<div>{project.id}</div>
+						</div>
+						<div>
+							<div>{"Label"}</div>
+							<div>{project.name}</div>
+						</div>
+						<div>
+							<div>{"Color"}</div>
+							<div style={{color : '#'+project.color}}>{project.color}</div>
+						</div>
+						<div>
+							<div>{"Repository Provider"}</div>
+							<div>{project.provider}</div>
+						</div>
+						<div>
+							<div>{"Repository"}</div>
+							<div>{project.repo}</div>
+						</div>
+						<div>
+							<div>{"Status"}</div>
+							<div>{project.status}</div>
+						</div>
+						<div>
+							<div>{"Visible"}</div>
+							<div>
+								<VisibleMarker visible={project.visible} title={project.visible ? L('Visible') : L('Not visible')} />
+							</div>
+						</div>
+						<div>
+							<div>{"Creation time"}</div>
+							<div>
+								<DateViewer time={project.timestampCreated} />
+							</div>
+						</div>
+						<div>
+							<div>{"Modification time"}</div>
+							<div>
+								<DateViewer time={project.timestampModified}/>
+							</div>
+						</div>
+					</div>
 				</AppPage>
 			);
 		}

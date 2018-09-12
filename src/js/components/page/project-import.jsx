@@ -40,18 +40,16 @@ class ProjectImport extends React.Component {
 
 		return (
 			<AppPage selectedMenu="projects">
-				<table className="list-table">
-					<tbody>
-						{importProjects.map(elt => (
-							<tr key={elt.name}>
-								<td>{elt.name}</td>
-								<td>
-									{elt.imported ? null : <SmallButton fa="download" onClick={self.import.bind(self, elt.name)} />}
-								</td>
-							</tr>
-						))}
-					</tbody>
-				</table>
+				<div className="list-table">
+					{importProjects.map(elt => (
+						<div key={elt.name}>
+							<div>{elt.name}</div>
+							<div>
+								{elt.imported ? null : <SmallButton fa="download" onClick={self.import.bind(self, elt.name)} />}
+							</div>
+						</div>
+					))}
+				</div>
 			</AppPage>
 		);
 	}
