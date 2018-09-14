@@ -1,3 +1,6 @@
+html {
+  background-color: #888;
+}
 html body {
   font-family: Helvetica, sans-serif, Arial;
   font-size: 15px;
@@ -10,11 +13,9 @@ html body {
   margin-left: 0px;
   margin-right: 0px;
   height: 100%;
-  background-color: #EEE;
   max-width: 416px;
 }
 html body #react-root .app-container {
-  background-color: #EEE;
   color: #111;
   padding-top: 30px;
   margin-left: auto;
@@ -89,7 +90,7 @@ html body #react-root .app-container .clearfix {
   clear: both;
 }
 html body #react-root .app-container div.menu {
-  background-color: rgba(204, 204, 204, 0.3);
+  background-color: rgba(204, 204, 204, 0.4);
   margin-bottom: 2px;
   padding-left: 4px;
   padding-right: 4px;
@@ -164,8 +165,13 @@ html body #react-root .app-container select.project-label {
 html body #react-root .app-container div.new-task-form {
   padding: 1px 4px;
 }
-html body #react-root .app-container div.tr > div.td {
+html body #react-root .app-container div.ui-tr {
+  border-radius: 4px;
+  margin: 4px;
+}
+html body #react-root .app-container div.ui-tr > div.td {
   display: inline-block;
+  vertical-align: middle;
 }
 html body #react-root .app-container div.alerts .alert {
   margin: 4px 8px 0px 8px;
@@ -224,6 +230,10 @@ html body #react-root .app-container .list-table tr.status-done {
 html body #react-root .app-container .list-table input[type=text] {
   width: 100%;
 }
+html body #react-root .app-container .label {
+  border-radius: 4px;
+  padding: 2px 1px;
+}
 html body #react-root .app-container form select {
   height: 24px;
   background-color: #222;
@@ -267,22 +277,28 @@ html body #react-root .app-container .radio-selector .radio-selector-elt[data-se
   color: #111;
   background-color: #8BF;
 }
-table[data-table=task-list] td[data-column=actions] {
+div[data-table=task-list] div.td[data-column=actions] {
   width: 84px;
 }
-table[data-table=task-list] td[data-column=project] {
+div[data-table=task-list] div.td[data-column=project] {
   width: 52px;
 }
-table[data-table=project-list] td[data-column=actions] {
+div[data-table=task-list] div.td[data-column=name] {
+  width: calc(100% - 138px);
+}
+div[data-table=project-list] div.td[data-column=actions] {
   width: 84px;
 }
-table[data-table=project-list] td[data-column=indicators] {
+div[data-table=project-list] div.td[data-column=indicators] {
   width: 28px;
 }
-table[data-table=settings-list] td[data-column=label] {
+div[data-table=project-list] div.td[data-column=name] {
+  width: calc(100% - 114px);
+}
+div[data-table=settings-list] div.td[data-column=label] {
   width: 100px;
 }
-table[data-table=settings-list] td[data-column=value] {
+div[data-table=settings-list] div.td[data-column=value] {
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -295,40 +311,55 @@ table[data-table=settings-list] td[data-column=value] {
   html body #react-root .app-container .project-label {
     width: 80px;
   }
-  table[data-table=task-list] td[data-column=project] {
+  div[data-table=task-list] div.td[data-column=project] {
     width: 92px;
+  }
+  div[data-table=task-list] div.td[data-column=name] {
+    width: calc(100% - 178px);
   }
 }
 @media (min-width: 576px) {
   html body #react-root .app-container .project-label {
     width: 120px;
   }
-  table[data-table=task-list] td[data-column=project] {
+  div[data-table=task-list] div.td[data-column=project] {
     width: 132px;
+  }
+  div[data-table=task-list] div.td[data-column=name] {
+    width: calc(100% - 218px);
   }
 }
 @media (min-width: 768px) {
   html body #react-root .app-container .project-label {
     width: 160px;
   }
-  table[data-table=task-list] td[data-column=project] {
+  div[data-table=task-list] div.td[data-column=project] {
     width: 172px;
+  }
+  div[data-table=task-list] div.td[data-column=name] {
+    width: calc(100% - 258px);
   }
 }
 @media (min-width: 992px) {
   html body #react-root .app-container .project-label {
     width: 200px;
   }
-  table[data-table=task-list] td[data-column=project] {
+  div[data-table=task-list] div.td[data-column=project] {
     width: 212px;
+  }
+  div[data-table=task-list] div.td[data-column=name] {
+    width: calc(100% - 298px);
   }
 }
 @media (min-width: 1200px) {
   html body #react-root .app-container .project-label {
     width: 240px;
   }
-  table[data-table=task-list] td[data-column=project] {
+  div[data-table=task-list] div.td[data-column=project] {
     width: 252px;
+  }
+  div[data-table=task-list] div.td[data-column=name] {
+    width: calc(100% - 338px);
   }
 }
 /*!
@@ -2539,11 +2570,10 @@ table[data-table=settings-list] td[data-column=value] {
   clip: auto;
 }
 html body #react-root .app-container[data-theme=light] {
-  background-color: #888;
   color: #111;
 }
 html body #react-root .app-container[data-theme=light] .content {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.4);
 }
 html body #react-root .app-container[data-theme=light] select {
   color: #111;
@@ -2563,11 +2593,10 @@ html body #react-root .app-container[data-theme=light] .radio-selector .radio-se
   color: #111;
 }
 html body #react-root .app-container[data-theme=dark] {
-  background-color: #888;
   color: #EEE;
 }
 html body #react-root .app-container[data-theme=dark] .content {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 html body #react-root .app-container[data-theme=dark] select {
   color: #EEE;

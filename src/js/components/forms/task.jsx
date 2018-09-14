@@ -4,6 +4,7 @@ const ReactRouterDom = require('react-router-dom');
 const Link = ReactRouterDom.Link;
 
 const SmallButton = require("../ui/small-button.jsx");
+const Row = require("../ui/row.jsx");
 
 const L = require('../../services/i18n.js');
 const reduxActions = require('../../services/redux-actions.js');
@@ -89,7 +90,7 @@ class Task extends React.Component {
 					projectList.push(project);
 				}
 				return (
-					<div className={"content tr task status-"+elt.status}>
+					<Row className={"task status-"+elt.status}>
 						<div className="td actions" data-column="actions">
 							<SmallButton fa="remove" onClick={self.cancel.bind(self)} title={L("Cancel")} color="red" />
 							<SmallButton fa="check" onClick={self.save.bind(self)} title={L("Save")} color="green" />
@@ -104,7 +105,7 @@ class Task extends React.Component {
 						<div className="td" data-column="name">
 							<input id={"task-edit-name-"+elt.id} type="text" name="name" defaultValue={elt.name} onKeyDown={self.handleInputKeyDown.bind(self)} />
 						</div>
-					</div>
+					</Row>
 				);
 			}
 			else {
@@ -113,7 +114,7 @@ class Task extends React.Component {
 					style.backgroundColor = '#'+elt.projectColor;
 				}
 				return (
-					<div className={"content tr task status-"+elt.status}>
+					<Row className={"task status-"+elt.status}>
 						<div className="td actions" data-column="actions">
 							{elt.status == 'done' ? 
 								[
@@ -131,8 +132,8 @@ class Task extends React.Component {
 						<div className="td project-label-container" data-column="project">
 							<div className="project-label" style={style} title={elt.projectName} data-tip={elt.projectName}>{elt.projectName}</div>
 						</div>
-						<div className="td" data-column="name">{elt.name}</div>
-					</div>
+						<div className="td content label" data-column="name">{elt.name}</div>
+					</Row>
 				);
 			}
 		}

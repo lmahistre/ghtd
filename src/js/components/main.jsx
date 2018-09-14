@@ -11,7 +11,7 @@ store.dispatch(reduxActions.init());
 
 class Main extends React.Component {
 	render() {
-		browserService.setBackgroundColor(store.getState().settings.theme);
+		// browserService.setBackgroundColor(store.getState().settings.theme);
 		return (
 			<ReactRedux.Provider store={store}>
 				<AppRouter />

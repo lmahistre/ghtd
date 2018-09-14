@@ -7,6 +7,7 @@ const Link = ReactRouterDom.Link;
 const AppPage = require("../app-page.jsx");
 const CommonButton = require("../ui/common-button.jsx");
 const SmallButton = require("../ui/small-button.jsx");
+const Row = require("../ui/row.jsx");
 
 const browserService = require('../../services/browser.js');
 const L = require('../../services/i18n.js');
@@ -51,9 +52,9 @@ class ProjectList extends React.Component {
 				{ isConnected ?
 					<CommonButton onClick={self.import}>{L("Import from GitHub")}</CommonButton>
 				: null }
-				<div className="list-table" data-table="project-list">
+				<div className="table list-table" data-table="project-list">
 					{projectList.map(elt => (
-						<div className="tr" key={elt.id}>
+						<Row key={elt.id}>
 							<div className="td" data-column="actions">
 								<SmallButton to={"/project-edit/"+elt.id} title={L("Edit")} fa="edit" color="blue" />
 								<SmallButton to={"/project-view/"+elt.id} title={L("View detail")} fa="eye" color="blue" />
@@ -63,11 +64,11 @@ class ProjectList extends React.Component {
 									<SmallButton fa="eye-slash" onClick={self.changeVisibility.bind(self, elt.id)} title={L("Show")} color="red" />
 								}
 							</div>
-							<div className="td" data-column="name">{elt.name}</div>
+							<div className="td content label" data-column="name">{elt.name}</div>
 							<div className="td" data-column="indicators">
 								<SmallButton fa={elt.provider} title={elt.repo} style={{backgroundColor : '#'+elt.color}} />
 							</div>
-						</div>
+						</Row>
 					))}
 				</div>
 			</AppPage>

@@ -24,7 +24,7 @@ class SettingsEdit extends React.Component {
 		settings.gistId = document.getElementById('settings-gistId').value;
 		settings.fileName = document.getElementById('settings-fileName').value;
 		store.dispatch(reduxActions.updateSettings(settings));
-		browserService.setBackgroundColor(settings.theme);
+		// browserService.setBackgroundColor(settings.theme);
 		browserService.redirect('settings');
 	}
 
@@ -43,49 +43,49 @@ class SettingsEdit extends React.Component {
 				<CommonButton onClick={this.save}>{L("Save")}</CommonButton>
 				<CommonButton to="/settings">{L("Cancel")}</CommonButton>
 				<div className="list-table" data-table="settings-list">
+					<div>
+						<div data-column="label">{L("Theme")}</div>
 						<div>
-							<div data-column="label">{L("Theme")}</div>
-							<div>
-								<RadioSelector id="settings-theme" value={settings.theme}>
-									<option value="light">{L("Light")}</option>
-									<option value="dark">{L("Dark")}</option>
-								</RadioSelector>
-							</div>
+							<RadioSelector id="settings-theme" value={settings.theme}>
+								<option value="light">{L("Light")}</option>
+								<option value="dark">{L("Dark")}</option>
+							</RadioSelector>
 						</div>
+					</div>
+					<div>
+						<div data-column="label">{L("Language")}</div>
 						<div>
-							<div data-column="label">{L("Language")}</div>
-							<div>
-								<RadioSelector id="language" name="language" value={settings.language}>
-									{constsService.languages.map(elt => (
-										<option key={elt.key} value={elt.key}>{L(elt.label)}</option>
-									))}
-								</RadioSelector>
-							</div>
+							<RadioSelector id="language" name="language" value={settings.language}>
+								{constsService.languages.map(elt => (
+									<option key={elt.key} value={elt.key}>{L(elt.label)}</option>
+								))}
+							</RadioSelector>
 						</div>
+					</div>
+					<div>
+						<div data-column="label">{L("User")}</div>
 						<div>
-							<div data-column="label">{L("User")}</div>
-							<div>
-								<input name="user" id="settings-user" type="text" defaultValue={settings.user} onKeyDown={this.handleInputKeyDown.bind(this)} />
-							</div>
+							<input name="user" id="settings-user" type="text" defaultValue={settings.user} onKeyDown={this.handleInputKeyDown.bind(this)} />
 						</div>
+					</div>
+					<div>
+						<div data-column="label">{L("Gist ID")}</div>
 						<div>
-							<div data-column="label">{L("Gist ID")}</div>
-							<div>
-								<input name="gistId" id="settings-gistId" type="text" defaultValue={settings.gistId} onKeyDown={this.handleInputKeyDown.bind(this)} />
-							</div>
+							<input name="gistId" id="settings-gistId" type="text" defaultValue={settings.gistId} onKeyDown={this.handleInputKeyDown.bind(this)} />
 						</div>
+					</div>
+					<div>
+						<div data-column="label">{L("Token")}</div>
 						<div>
-							<div data-column="label">{L("Token")}</div>
-							<div>
-								<input name="token" id="settings-token" type="text" defaultValue={settings.token} onKeyDown={this.handleInputKeyDown.bind(this)} />
-							</div>
+							<input name="token" id="settings-token" type="text" defaultValue={settings.token} onKeyDown={this.handleInputKeyDown.bind(this)} />
 						</div>
+					</div>
+					<div>
+						<div data-column="label">{L("File name")}</div>
 						<div>
-							<div data-column="label">{L("File name")}</div>
-							<div>
-								<input name="token" id="settings-fileName" type="text" defaultValue={settings.fileName} onKeyDown={this.handleInputKeyDown.bind(this)} />
-							</div>
+							<input name="token" id="settings-fileName" type="text" defaultValue={settings.fileName} onKeyDown={this.handleInputKeyDown.bind(this)} />
 						</div>
+					</div>
 				</div>
 			</AppPage>
 		);

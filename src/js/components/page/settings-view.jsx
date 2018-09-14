@@ -62,7 +62,7 @@ class SettingsView extends React.Component {
 				:
 					<Upload onSelect={this.import} title={L("Import settings")}>{L("Import")}</Upload>
 				}
-				<div className="list-table" data-table="settings-list">
+				<div className="list-table content" data-table="settings-list">
 					<div>
 						<div data-column="label">{L("Theme")}</div>
 						<div data-column="value">{L(themeLabel)}</div>

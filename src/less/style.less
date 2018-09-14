@@ -11,6 +11,7 @@
 @button-hover-color : #8AE;
 
 html {
+	background-color: #888;
 
 	body {
 		font-family: Helvetica, sans-serif, Arial;
@@ -24,13 +25,13 @@ html {
 		margin-left: 0px;
 		margin-right: 0px;
 		height: 100%;
-		background-color: #EEE;
+		// background-color: #EEE;
 		max-width: 416px;
 
 		#react-root {
 			// height: 100%;
 			.app-container {
-				background-color: #EEE;
+				// background-color: #EEE;
 				color: @text-color;
 				padding-top: 30px;
 				margin-left: auto;
@@ -53,68 +54,14 @@ html {
 					}
 				}
 
-				a.small-button {
-					color: #000;
-					text-decoration: none;
-					background-color: #AAA;
-					width: 16px;
-					height: 16px;
-					margin: 1px 2px;
-					border-radius: 2px;
-					padding: 4px;
-					display: inline-block;
-					&:hover {
-						background-color: #888;
-					}
+				@import "small-button.less";
 
-					&.small-button-blue {
-						background-color: #8BF;
-						&:hover {
-							background-color: #89D;
-						}
-					}
-
-					&.small-button-green {
-						background-color: #3C3;
-						&:hover {
-							background-color: #1A1;
-						}
-					}
-
-					&.small-button-yellow {
-						background-color: #CC4;
-						&:hover {
-							background-color: #AA0;
-						}
-					}
-
-					&.small-button-orange {
-						background-color: #EA2;
-						&:hover {
-							background-color: #D80;
-						}
-					}
-
-					&.small-button-red {
-						background-color: #F66;
-						&:hover {
-							background-color: #D44;
-						}
-					}
-
-					&.small-button-purple {
-						background-color: #B7B;
-						&:hover {
-							background-color: #A6A;
-						}
-					}
-				}
 				.clearfix {
 					clear: both;
 				}
 
 				div.menu {
-					background-color: rgba(204, 204, 204, 0.3);
+					background-color: rgba(204, 204, 204, 0.4);
 					margin-bottom: 2px;
 					padding-left: 4px;
 					padding-right: 4px;
@@ -195,9 +142,13 @@ html {
 					padding: 1px 4px;
 				}
 
-				div.tr {
+				div.ui-tr {
+					border-radius: 4px;
+					margin:	4px;
 					&>div.td {
+						// float: left;
 						display: inline-block;
+						vertical-align: middle;
 					}
 				}
 
@@ -241,7 +192,7 @@ html {
 							cursor: pointer;
 						}
 					}
-				}
+				} // div.alerts
 
 				span.color-yes {
 					color: #0A0;
@@ -262,6 +213,11 @@ html {
 					input[type=text] {
 						width: 100%;
 					}
+				}
+
+				.label {
+					border-radius: 4px;
+					padding: 2px 1px;
 				}
 
 				form {
@@ -292,7 +248,7 @@ html {
 							width: 100%;
 						}
 					}
-				}
+				} // form
 
 				.page-content {
 					padding-left: 4px;
@@ -317,36 +273,38 @@ html {
 						}
 					}
 				}
-
-				.ui-block {
-
-				}
 			}
 		}
 	}
 }
 
-table[data-table=task-list] {
-	td[data-column=actions] {
+div[data-table=task-list] {
+	div.td[data-column=actions] {
 		width: 84px;
 	}
-	td[data-column=project] {
+	div.td[data-column=project] {
 		width: 52px;
 	}
+	div.td[data-column=name] {
+		width: calc(100% - 138px);
+	}
 }
-table[data-table=project-list] {
-	td[data-column=actions] {
+div[data-table=project-list] {
+	div.td[data-column=actions] {
 		width: 84px;
 	}
-	td[data-column=indicators] {
+	div.td[data-column=indicators] {
 		width: 28px;
 	}
+	div.td[data-column=name] {
+		width: calc(100% - 114px);
+	}
 }
-table[data-table=settings-list] {
-	td[data-column=label] {
+div[data-table=settings-list] {
+	div.td[data-column=label] {
 		width: 100px;
 	}
-	td[data-column=value] {
+	div.td[data-column=value] {
 		overflow: hidden;
 		text-overflow: ellipsis;
 	}
@@ -363,9 +321,12 @@ table[data-table=settings-list] {
 			width: 80px;
 		}
 	}
-	table[data-table=task-list] {
-		td[data-column=project] {
+	div[data-table=task-list] {
+		div.td[data-column=project] {
 			width: 92px;
+		}
+		div.td[data-column=name] {
+			width: calc(100% - 178px);
 		}
 	}
 }
@@ -375,9 +336,12 @@ table[data-table=settings-list] {
 			width: 120px;
 		}
 	}
-	table[data-table=task-list] {
-		td[data-column=project] {
+	div[data-table=task-list] {
+		div.td[data-column=project] {
 			width: 132px;
+		}
+		div.td[data-column=name] {
+			width: calc(100% - 218px);
 		}
 	}
 }
@@ -387,9 +351,12 @@ table[data-table=settings-list] {
 			width: 160px;
 		}
 	}
-	table[data-table=task-list] {
-		td[data-column=project] {
+	div[data-table=task-list] {
+		div.td[data-column=project] {
 			width: 172px;
+		}
+		div.td[data-column=name] {
+			width: calc(100% - 258px);
 		}
 	}
 }
@@ -399,9 +366,12 @@ table[data-table=settings-list] {
 			width: 200px;
 		}
 	}
-	table[data-table=task-list] {
-		td[data-column=project] {
+	div[data-table=task-list] {
+		div.td[data-column=project] {
 			width: 212px;
+		}
+		div.td[data-column=name] {
+			width: calc(100% - 298px);
 		}
 	}
 }
@@ -411,9 +381,12 @@ table[data-table=settings-list] {
 			width: 240px;
 		}
 	}
-	table[data-table=task-list] {
-		td[data-column=project] {
+	div[data-table=task-list] {
+		div.td[data-column=project] {
 			width: 252px;
+		}
+		div.td[data-column=name] {
+			width: calc(100% - 338px);
 		}
 	}
 }
