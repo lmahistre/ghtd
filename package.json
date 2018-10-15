@@ -3,7 +3,9 @@
   "version": "0.1.4",
   "description": "Library",
   "main": "index.html",
-  "dependencies": {},
+  "dependencies": {
+    "express": "^4.16.4"
+  },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-jest": "^23.0.1",
@@ -29,7 +31,9 @@
   "scripts": {
     "test": "node index.js test",
     "dev": "node index.js dev",
-    "build": "node index.js build"
+    "js": "node index.js js",
+    "build": "node index.js build",
+    "start": "node index.js start"
   },
   "repository": {
     "type": "git",

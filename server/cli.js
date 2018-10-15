@@ -95,5 +95,25 @@ exports.help = function(args) {
 }
 
 
+exports.start = function(args) {
+	const express = require('express');
+	const app = express();
+	const path = require('path');
+
+	const port = 3002;
+
+	app.get('/', function (req, res) {
+		res.sendFile(path.resolve(__dirname+'/../public_html/index.html'));
+	});
+
+	// Static files
+	app.use('/', express.static(path.resolve(__dirname+'/../public_html')));
+
+	app.listen(port);
+
+	console.log('Server is listening on port '+port);
+}
+
+
 exports.default = exports.build;
 exports['--help'] = exports['-h'] = exports.help;

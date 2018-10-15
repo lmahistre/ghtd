@@ -19,7 +19,7 @@ exports.project = function (obj) {
 		color : obj.color,
 		provider : obj.provider,
 		repo : obj.repo,
-		status : obj.status ? obj.status : 'active',
+		status : obj.status && ['active', 'removed'].indexOf(obj.status) ? obj.status : 'active',
 		timestampCreated : isNaN(obj.timestampCreated) ? 0 : obj.timestampCreated,
 		timestampModified : isNaN(obj.timestampModified) ? 0 : obj.timestampModified,
 	}
