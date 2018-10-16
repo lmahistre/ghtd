@@ -11,7 +11,7 @@
 @button-hover-color : #8AE;
 
 html {
-	background-color: #888;
+	background-color: #78A;
 
 	body {
 		font-family: Helvetica, sans-serif, Arial;
@@ -54,62 +54,13 @@ html {
 					}
 				}
 
-				@import "small-button.less";
+				@import "components/small-button.less";
+				@import "components/menu.less";
+				@import "components/alerts.less";
+				@import "components/radio-selector.less";
 
 				.clearfix {
 					clear: both;
-				}
-
-				div.menu {
-					background-color: rgba(204, 204, 204, 0.4);
-					margin-bottom: 2px;
-					padding-left: 4px;
-					padding-right: 4px;
-					position: fixed;
-					top: 0px;
-					width: 100%;
-					
-					.menu-entry {
-						background-color: rgba(204, 204, 204, 0.8);
-						display: inline-block;
-						width: 76px;
-						text-decoration: none;
-						color: #000;
-						padding: 6px 6px;
-						text-align: center;
-						line-height: 18px;
-						&.active {
-							background-color: #D5E;
-						}
-						&:hover {
-							background-color: @button-hover-color;
-						}
-					}
-					.sync-indicator {
-						color: #000;
-						display: inline-block;
-						background-color: #888;
-						width: 18px;
-						padding: 6px 6px;
-						cursor: pointer;
-						vertical-align: bottom;
-						span {
-							font-size: 18px;
-							line-height: 18px;
-							display: block;
-							width: 18px;
-							height: 18px;
-						}
-						&.connected {
-							background-color: #0A0;
-						}
-						&.sync-dirty {
-							background-color: #BB0;
-						}
-						&.busy {
-							background-color: #F00;
-						}
-					}
 				}
 
 				select, 
@@ -139,7 +90,7 @@ html {
 				}
 
 				div.new-task-form {
-					padding: 1px 4px;
+					padding: 2px 4px;
 				}
 
 				div.ui-tr {
@@ -151,48 +102,10 @@ html {
 						vertical-align: middle;
 					}
 				}
-
-				div.alerts {
-					.alert {
-						margin: 4px 8px 0px 8px;
-						padding: 4px 8px;
-						border-radius: 2px;
-						&.error {
-							background-color: #FCC;
-							color: #300;
-							.alert-hide {
-								color: #800;
-								&:hover {
-									color: #000;
-								}
-							}
-						}
-						&.warning {
-							background-color: #FFC;
-							color: #330;
-							.alert-hide {
-								color: #880;
-								&:hover {
-									color: #000;
-								}
-							}
-						}
-						&.success {
-							background-color: #CFC;
-							color: #030;
-							.alert-hide {
-								color: #080;
-								&:hover {
-									color: #000;
-								}
-							}
-						}
-						.alert-hide {
-							float: right;
-							cursor: pointer;
-						}
-					}
-				} // div.alerts
+				div.ui-block {
+					border-radius: 4px;
+					padding:	4px;
+				}
 
 				span.color-yes {
 					color: #0A0;
@@ -204,14 +117,29 @@ html {
 				.list-table {
 					width: 100%;
 					// table-layout: fixed;
-					tr.status-active {
-						color: @text-color;
-					}
-					tr.status-done {
-						color: #888;
-					}
+					// tr.status-active {
+					// 	color: @text-color;
+					// }
+					// tr.status-done {
+					// 	color: #888;
+					// }
+				}
+
+				.view-table {
+					width: 100%;
 					input[type=text] {
 						width: 100%;
+					}
+					.view-row {
+						padding: 2px 4px;
+						div[data-column=label] {
+							display: inline-block;
+							width: 30%;
+						}
+						div[data-column=value] {
+							display: inline-block;
+							width: 70%;
+						}
 					}
 				}
 
@@ -255,23 +183,6 @@ html {
 					padding-right: 4px;
 					padding-top: 4px;
 					padding-bottom: 4px;
-				}
-
-				// RadioSelector
-				.radio-selector {
-					.radio-selector-elt {
-						display: inline-block;
-						line-height: 18px;
-						text-decoration: none;
-						height: 18px;
-						margin: 2px 2px;
-						border-radius: 2px;
-						padding: 4px 8px;
-						&[data-selected=selected] {
-							color : @text-color;
-							background-color: @button-color;
-						}
-					}
 				}
 			}
 		}

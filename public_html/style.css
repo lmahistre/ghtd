@@ -1,5 +1,5 @@
 html {
-  background-color: #888;
+  background-color: #78A;
 }
 html body {
   font-family: Helvetica, sans-serif, Arial;
@@ -86,9 +86,6 @@ html body #react-root .app-container a.small-button.small-button-purple {
 html body #react-root .app-container a.small-button.small-button-purple:hover {
   background-color: #A6A;
 }
-html body #react-root .app-container .clearfix {
-  clear: both;
-}
 html body #react-root .app-container div.menu {
   background-color: rgba(204, 204, 204, 0.4);
   margin-bottom: 2px;
@@ -122,6 +119,7 @@ html body #react-root .app-container div.menu .sync-indicator {
   padding: 6px 6px;
   cursor: pointer;
   vertical-align: bottom;
+  text-decoration: none;
 }
 html body #react-root .app-container div.menu .sync-indicator span {
   font-size: 18px;
@@ -138,40 +136,6 @@ html body #react-root .app-container div.menu .sync-indicator.sync-dirty {
 }
 html body #react-root .app-container div.menu .sync-indicator.busy {
   background-color: #F00;
-}
-html body #react-root .app-container select,
-html body #react-root .app-container input[type=text] {
-  border-style: solid;
-  border-width: 1px;
-  border-radius: 4px;
-  box-sizing: border-box;
-  padding: 4px 8px;
-  border-color: #CCC;
-  color: #111;
-}
-html body #react-root .app-container .project-label {
-  line-height: 18px;
-  color: #FFF;
-  border-radius: 2px;
-  padding: 3px 6px;
-  width: 40px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow-x: hidden;
-}
-html body #react-root .app-container select.project-label {
-  width: 100%;
-}
-html body #react-root .app-container div.new-task-form {
-  padding: 1px 4px;
-}
-html body #react-root .app-container div.ui-tr {
-  border-radius: 4px;
-  margin: 4px;
-}
-html body #react-root .app-container div.ui-tr > div.td {
-  display: inline-block;
-  vertical-align: middle;
 }
 html body #react-root .app-container div.alerts .alert {
   margin: 4px 8px 0px 8px;
@@ -212,6 +176,60 @@ html body #react-root .app-container div.alerts .alert .alert-hide {
   float: right;
   cursor: pointer;
 }
+html body #react-root .app-container .radio-selector .radio-selector-elt {
+  display: inline-block;
+  line-height: 18px;
+  text-decoration: none;
+  height: 18px;
+  margin: 2px 2px;
+  border-radius: 2px;
+  padding: 4px 8px;
+}
+html body #react-root .app-container .radio-selector .radio-selector-elt[data-selected=selected] {
+  color: #111;
+  background-color: #8BF;
+}
+html body #react-root .app-container .clearfix {
+  clear: both;
+}
+html body #react-root .app-container select,
+html body #react-root .app-container input[type=text] {
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 4px;
+  box-sizing: border-box;
+  padding: 4px 8px;
+  border-color: #CCC;
+  color: #111;
+}
+html body #react-root .app-container .project-label {
+  line-height: 18px;
+  color: #FFF;
+  border-radius: 2px;
+  padding: 3px 6px;
+  width: 40px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+}
+html body #react-root .app-container select.project-label {
+  width: 100%;
+}
+html body #react-root .app-container div.new-task-form {
+  padding: 2px 4px;
+}
+html body #react-root .app-container div.ui-tr {
+  border-radius: 4px;
+  margin: 4px;
+}
+html body #react-root .app-container div.ui-tr > div.td {
+  display: inline-block;
+  vertical-align: middle;
+}
+html body #react-root .app-container div.ui-block {
+  border-radius: 4px;
+  padding: 4px;
+}
 html body #react-root .app-container span.color-yes {
   color: #0A0;
 }
@@ -221,14 +239,22 @@ html body #react-root .app-container span.color-no {
 html body #react-root .app-container .list-table {
   width: 100%;
 }
-html body #react-root .app-container .list-table tr.status-active {
-  color: #111;
-}
-html body #react-root .app-container .list-table tr.status-done {
-  color: #888;
-}
-html body #react-root .app-container .list-table input[type=text] {
+html body #react-root .app-container .view-table {
   width: 100%;
+}
+html body #react-root .app-container .view-table input[type=text] {
+  width: 100%;
+}
+html body #react-root .app-container .view-table .view-row {
+  padding: 2px 4px;
+}
+html body #react-root .app-container .view-table .view-row div[data-column=label] {
+  display: inline-block;
+  width: 30%;
+}
+html body #react-root .app-container .view-table .view-row div[data-column=value] {
+  display: inline-block;
+  width: 70%;
 }
 html body #react-root .app-container .label {
   border-radius: 4px;
@@ -263,19 +289,6 @@ html body #react-root .app-container .page-content {
   padding-right: 4px;
   padding-top: 4px;
   padding-bottom: 4px;
-}
-html body #react-root .app-container .radio-selector .radio-selector-elt {
-  display: inline-block;
-  line-height: 18px;
-  text-decoration: none;
-  height: 18px;
-  margin: 2px 2px;
-  border-radius: 2px;
-  padding: 4px 8px;
-}
-html body #react-root .app-container .radio-selector .radio-selector-elt[data-selected=selected] {
-  color: #111;
-  background-color: #8BF;
 }
 div[data-table=task-list] div.td[data-column=actions] {
   width: 84px;

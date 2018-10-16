@@ -1,0 +1,52 @@
+div.menu {
+	background-color: rgba(204, 204, 204, 0.4);
+	margin-bottom: 2px;
+	padding-left: 4px;
+	padding-right: 4px;
+	position: fixed;
+	top: 0px;
+	width: 100%;
+	
+	.menu-entry {
+		background-color: rgba(204, 204, 204, 0.8);
+		display: inline-block;
+		width: 76px;
+		text-decoration: none;
+		color: #000;
+		padding: 6px 6px;
+		text-align: center;
+		line-height: 18px;
+		&.active {
+			background-color: #D5E;
+		}
+		&:hover {
+			background-color: @button-hover-color;
+		}
+	}
+	.sync-indicator {
+		color: #000;
+		display: inline-block;
+		background-color: #888;
+		width: 18px;
+		padding: 6px 6px;
+		cursor: pointer;
+		vertical-align: bottom;
+		text-decoration: none;
+		span {
+			font-size: 18px;
+			line-height: 18px;
+			display: block;
+			width: 18px;
+			height: 18px;
+		}
+		&.connected {
+			background-color: #0A0;
+		}
+		&.sync-dirty {
+			background-color: #BB0;
+		}
+		&.busy {
+			background-color: #F00;
+		}
+	}
+}

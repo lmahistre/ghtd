@@ -1,5 +1,8 @@
 
 const React = require("react");
+const ReactRouterDom = require('react-router-dom');
+
+const Link = ReactRouterDom.Link;
 
 const L = require('../../services/i18n.js');
 const reduxActions = require('../../services/redux-actions.js');
@@ -49,9 +52,9 @@ module.exports = class SyncIndicator extends React.Component {
 		}
 		else {
 			return (
-				<span className="sync-indicator" data-tip={L("Not connected")}>
+				<Link className="sync-indicator" to="/settings" data-tip={L("Not connected")}>
 					<span className="fa fa-user-times" aria-hidden="true" />
-				</span>
+				</Link>
 			);
 		}
 	}

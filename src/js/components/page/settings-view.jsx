@@ -5,6 +5,7 @@ const ReactRedux = require('react-redux');
 const AppPage = require("../app-page.jsx");
 const CommonButton = require("../ui/common-button.jsx");
 const Upload = require("../ui/upload.jsx");
+const Block = require("../ui/block.jsx");
 
 const constsService = require('../../services/consts.js');
 const browserService = require('../../services/browser.js');
@@ -62,32 +63,34 @@ class SettingsView extends React.Component {
 				:
 					<Upload onSelect={this.import} title={L("Import settings")}>{L("Import")}</Upload>
 				}
-				<div className="list-table content" data-table="settings-list">
-					<div>
-						<div data-column="label">{L("Theme")}</div>
-						<div data-column="value">{L(themeLabel)}</div>
+				<Block>
+					<div className="view-table" data-table="settings-list">
+						<div className="view-row">
+							<div data-column="label">{L("Theme")}</div>
+							<div data-column="value">{L(themeLabel)}</div>
+						</div>
+						<div className="view-row">
+							<div data-column="label">{L("Language")}</div>
+							<div data-column="value">{L(languageLabel)}</div>
+						</div>
+						<div className="view-row">
+							<div data-column="label">{L("User")}</div>
+							<div data-column="value">{settings.user}</div>
+						</div>
+						<div className="view-row">
+							<div data-column="label">{L("Gist ID")}</div>
+							<div data-column="value">{settings.gistId}</div>
+						</div>
+						<div className="view-row">
+							<div data-column="label">{L("Token")}</div>
+							<div data-column="value">{settings.token}</div>
+						</div>
+						<div className="view-row">
+							<div data-column="label">{L("File name")}</div>
+							<div data-column="value">{settings.fileName}</div>
+						</div>
 					</div>
-					<div>
-						<div data-column="label">{L("Language")}</div>
-						<div data-column="value">{L(languageLabel)}</div>
-					</div>
-					<div>
-						<div data-column="label">{L("User")}</div>
-						<div data-column="value">{settings.user}</div>
-					</div>
-					<div>
-						<div data-column="label">{L("Gist ID")}</div>
-						<div data-column="value">{settings.gistId}</div>
-					</div>
-					<div>
-						<div data-column="label">{L("Token")}</div>
-						<div data-column="value">{settings.token}</div>
-					</div>
-					<div>
-						<div data-column="label">{L("File name")}</div>
-						<div data-column="value">{settings.fileName}</div>
-					</div>
-				</div>
+				</Block>
 			</AppPage>
 		);
 	}

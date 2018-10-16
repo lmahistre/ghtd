@@ -8,6 +8,7 @@ const AppPage = require("../app-page.jsx");
 const VisibleMarker = require("../visible-marker.jsx");
 const CommonButton = require("../ui/common-button.jsx");
 const DateViewer = require('../ui/date-viewer.jsx');
+const Block = require("../ui/block.jsx");
 
 const store = require('../../services/store.js');
 const reduxActions = require('../../services/redux-actions.js');
@@ -23,50 +24,52 @@ class ProjectView extends React.Component {
 				<AppPage selectedMenu="projects">
 					<CommonButton to={"/project-edit/"+self.props.match.params.id}>{"Edit"}</CommonButton>
 					<CommonButton to={"/project-delete/"+project.id}>{L("Delete")}</CommonButton>
-					<div className="list-table">
-						<div>
-							<div>{"Id"}</div>
-							<div>{project.id}</div>
-						</div>
-						<div>
-							<div>{"Label"}</div>
-							<div>{project.name}</div>
-						</div>
-						<div>
-							<div>{"Color"}</div>
-							<div style={{color : '#'+project.color}}>{project.color}</div>
-						</div>
-						<div>
-							<div>{"Repository Provider"}</div>
-							<div>{project.provider}</div>
-						</div>
-						<div>
-							<div>{"Repository"}</div>
-							<div>{project.repo}</div>
-						</div>
-						<div>
-							<div>{"Status"}</div>
-							<div>{project.status}</div>
-						</div>
-						<div>
-							<div>{"Visible"}</div>
-							<div>
-								<VisibleMarker visible={project.visible} title={project.visible ? L('Visible') : L('Not visible')} />
+					<Block>
+						<div className="view-table">
+							<div className="view-row">
+								<div data-column="label">{"Id"}</div>
+								<div data-column="value">{project.id}</div>
+							</div>
+							<div className="view-row">
+								<div data-column="label">{"Label"}</div>
+								<div data-column="value">{project.name}</div>
+							</div>
+							<div className="view-row">
+								<div data-column="label">{"Color"}</div>
+								<div data-column="value" style={{color : '#'+project.color}}>{project.color}</div>
+							</div>
+							<div className="view-row">
+								<div data-column="label">{"Repository Provider"}</div>
+								<div data-column="value">{project.provider}</div>
+							</div>
+							<div className="view-row">
+								<div data-column="label">{"Repository"}</div>
+								<div data-column="value">{project.repo}</div>
+							</div>
+							<div className="view-row">
+								<div data-column="label">{"Status"}</div>
+								<div data-column="value">{project.status}</div>
+							</div>
+							<div className="view-row">
+								<div data-column="label">{"Visible"}</div>
+								<div data-column="value">
+									<VisibleMarker visible={project.visible} title={project.visible ? L('Visible') : L('Not visible')} />
+								</div>
+							</div>
+							<div className="view-row">
+								<div data-column="label">{"Creation time"}</div>
+								<div data-column="value">
+									<DateViewer time={project.timestampCreated} />
+								</div>
+							</div>
+							<div className="view-row">
+								<div data-column="label">{"Modification time"}</div>
+								<div data-column="value">
+									<DateViewer time={project.timestampModified}/>
+								</div>
 							</div>
 						</div>
-						<div>
-							<div>{"Creation time"}</div>
-							<div>
-								<DateViewer time={project.timestampCreated} />
-							</div>
-						</div>
-						<div>
-							<div>{"Modification time"}</div>
-							<div>
-								<DateViewer time={project.timestampModified}/>
-							</div>
-						</div>
-					</div>
+					</Block>
 				</AppPage>
 			);
 		}
