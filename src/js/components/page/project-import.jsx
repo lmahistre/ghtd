@@ -4,6 +4,7 @@ const ReactRedux = require('react-redux');
 
 const AppPage = require("../app-page.jsx");
 const SmallButton = require("../ui/small-button.jsx");
+const Row = require("../ui/row.jsx");
 
 const utilsService = require('../../services/utils.js');
 const browserService = require('../../services/browser.js');
@@ -40,14 +41,16 @@ class ProjectImport extends React.Component {
 
 		return (
 			<AppPage selectedMenu="projects">
-				<div className="list-table">
+				<div className="list-table" data-table="import-project-list">
 					{importProjects.map(elt => (
-						<div key={elt.name}>
-							<div>{elt.name}</div>
-							<div>
-								{elt.imported ? null : <SmallButton fa="download" onClick={self.import.bind(self, elt.name)} />}
+						<Row key={elt.name}>
+							<div className="td" data-column="name">
+								<div className="label content">{elt.name}</div>
 							</div>
-						</div>
+							<div className="td" data-column="actions">
+								{elt.imported ? null : <SmallButton fa="download" onClick={self.import.bind(self, elt.name)} color="blue" />}
+							</div>
+						</Row>
 					))}
 				</div>
 			</AppPage>

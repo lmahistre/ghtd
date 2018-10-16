@@ -46,6 +46,7 @@ html body #react-root .app-container a.small-button {
   border-radius: 2px;
   padding: 4px;
   display: inline-block;
+  line-height: 18px;
 }
 html body #react-root .app-container a.small-button:hover {
   background-color: #888;
@@ -239,6 +240,9 @@ html body #react-root .app-container span.color-no {
 html body #react-root .app-container .list-table {
   width: 100%;
 }
+html body #react-root .app-container .list-table .ui-tr {
+  padding: 2px 2px;
+}
 html body #react-root .app-container .view-table {
   width: 100%;
 }
@@ -258,7 +262,8 @@ html body #react-root .app-container .view-table .view-row div[data-column=value
 }
 html body #react-root .app-container .label {
   border-radius: 4px;
-  padding: 2px 1px;
+  padding: 2px 4px;
+  line-height: 16px;
 }
 html body #react-root .app-container form select {
   height: 24px;
@@ -295,9 +300,10 @@ div[data-table=task-list] div.td[data-column=actions] {
 }
 div[data-table=task-list] div.td[data-column=project] {
   width: 52px;
+  margin: 0px 2px;
 }
 div[data-table=task-list] div.td[data-column=name] {
-  width: calc(100% - 138px);
+  width: calc(100% - 148px);
 }
 div[data-table=project-list] div.td[data-column=actions] {
   width: 84px;
@@ -306,7 +312,7 @@ div[data-table=project-list] div.td[data-column=indicators] {
   width: 28px;
 }
 div[data-table=project-list] div.td[data-column=name] {
-  width: calc(100% - 114px);
+  width: calc(100% - 120px);
 }
 div[data-table=settings-list] div.td[data-column=label] {
   width: 100px;
@@ -314,6 +320,12 @@ div[data-table=settings-list] div.td[data-column=label] {
 div[data-table=settings-list] div.td[data-column=value] {
   overflow: hidden;
   text-overflow: ellipsis;
+}
+div[data-table=import-project-list] div.td[data-column=name] {
+  width: calc(100% - 28px);
+}
+div[data-table=import-project-list] div.td[data-column=actions] {
+  width: 28px;
 }
 @media (min-width: 420px) {
   html body {
@@ -328,7 +340,7 @@ div[data-table=settings-list] div.td[data-column=value] {
     width: 92px;
   }
   div[data-table=task-list] div.td[data-column=name] {
-    width: calc(100% - 178px);
+    width: calc(100% - 188px);
   }
 }
 @media (min-width: 576px) {
@@ -339,7 +351,7 @@ div[data-table=settings-list] div.td[data-column=value] {
     width: 132px;
   }
   div[data-table=task-list] div.td[data-column=name] {
-    width: calc(100% - 218px);
+    width: calc(100% - 228px);
   }
 }
 @media (min-width: 768px) {
@@ -350,7 +362,7 @@ div[data-table=settings-list] div.td[data-column=value] {
     width: 172px;
   }
   div[data-table=task-list] div.td[data-column=name] {
-    width: calc(100% - 258px);
+    width: calc(100% - 268px);
   }
 }
 @media (min-width: 992px) {
@@ -361,7 +373,7 @@ div[data-table=settings-list] div.td[data-column=value] {
     width: 212px;
   }
   div[data-table=task-list] div.td[data-column=name] {
-    width: calc(100% - 298px);
+    width: calc(100% - 308px);
   }
 }
 @media (min-width: 1200px) {
@@ -372,7 +384,7 @@ div[data-table=settings-list] div.td[data-column=value] {
     width: 252px;
   }
   div[data-table=task-list] div.td[data-column=name] {
-    width: calc(100% - 338px);
+    width: calc(100% - 348px);
   }
 }
 /*!

@@ -123,6 +123,9 @@ html {
 					// tr.status-done {
 					// 	color: #888;
 					// }
+					.ui-tr {
+						padding: 2px 2px;
+					}
 				}
 
 				.view-table {
@@ -145,7 +148,8 @@ html {
 
 				.label {
 					border-radius: 4px;
-					padding: 2px 1px;
+					padding: 2px 4px;
+					line-height: 16px;
 				}
 
 				form {
@@ -195,9 +199,10 @@ div[data-table=task-list] {
 	}
 	div.td[data-column=project] {
 		width: 52px;
+		margin: 0px 2px;
 	}
 	div.td[data-column=name] {
-		width: calc(100% - 138px);
+		width: calc(100% - 148px);
 	}
 }
 div[data-table=project-list] {
@@ -208,7 +213,7 @@ div[data-table=project-list] {
 		width: 28px;
 	}
 	div.td[data-column=name] {
-		width: calc(100% - 114px);
+		width: calc(100% - 120px);
 	}
 }
 div[data-table=settings-list] {
@@ -218,6 +223,14 @@ div[data-table=settings-list] {
 	div.td[data-column=value] {
 		overflow: hidden;
 		text-overflow: ellipsis;
+	}
+}
+div[data-table=import-project-list] {
+	div.td[data-column=name] {
+		width: calc(100% - 28px);
+	}
+	div.td[data-column=actions] {
+		width: 28px;
 	}
 }
 
@@ -237,7 +250,7 @@ div[data-table=settings-list] {
 			width: 92px;
 		}
 		div.td[data-column=name] {
-			width: calc(100% - 178px);
+			width: calc(100% - 188px);
 		}
 	}
 }
@@ -252,7 +265,7 @@ div[data-table=settings-list] {
 			width: 132px;
 		}
 		div.td[data-column=name] {
-			width: calc(100% - 218px);
+			width: calc(100% - 228px);
 		}
 	}
 }
@@ -267,7 +280,7 @@ div[data-table=settings-list] {
 			width: 172px;
 		}
 		div.td[data-column=name] {
-			width: calc(100% - 258px);
+			width: calc(100% - 268px);
 		}
 	}
 }
@@ -282,7 +295,7 @@ div[data-table=settings-list] {
 			width: 212px;
 		}
 		div.td[data-column=name] {
-			width: calc(100% - 298px);
+			width: calc(100% - 308px);
 		}
 	}
 }
@@ -297,7 +310,7 @@ div[data-table=settings-list] {
 			width: 252px;
 		}
 		div.td[data-column=name] {
-			width: calc(100% - 338px);
+			width: calc(100% - 348px);
 		}
 	}
 }

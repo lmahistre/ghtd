@@ -64,7 +64,9 @@ class ProjectList extends React.Component {
 									<SmallButton fa="eye-slash" onClick={self.changeVisibility.bind(self, elt.id)} title={L("Show")} color="red" />
 								}
 							</div>
-							<div className="td content label" data-column="name">{elt.name}</div>
+							<div className="td" data-column="name">
+								<div className="label content">{elt.name}</div>
+							</div>
 							<div className="td" data-column="indicators">
 								<SmallButton fa={elt.provider} title={elt.repo} style={{backgroundColor : '#'+elt.color}} />
 							</div>
