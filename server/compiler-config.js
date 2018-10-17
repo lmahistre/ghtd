@@ -1,11 +1,17 @@
 const path = require('path');
 const appDirName = path.resolve(__dirname+'/..');
 
-const resolve = relativePath => path.resolve(__dirname, '..', relativePath)
+// const resolve = relativePath => path.resolve(__dirname, '..', relativePath)
+// const resolve = function(relativePath) {
+// 	path.resolve(__dirname, '..', relativePath);
+// }
+
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
-	js : {
-		// mode: 'development',
+	webpack : {
+		mode: 'production',
 		module: {
 			rules: [
 				{
@@ -18,19 +24,49 @@ module.exports = {
 						},
 					},
 				},
+				{
+					test : /\.less$/,
+					use : [
+						{ 
+							loader : MiniCssExtractPlugin.loader 
+						},
+						{
+							loader : 'css-loader',
+						},
+						{
+							loader : 'less-loader',
+						},
+					],
+				},
+				{
+					test: /\.(eot|svg|ttf|woff|woff2)$/,
+					loader: 'file-loader?name=fonts/[name].[ext]'
+				}
 			],
 		},
-		entry : appDirName+"/src/js/entry.js",
+		entry : [
+			appDirName+"/src/js/entry.js",
+			appDirName+"/src/less/index.less",
+		],
 		output : {
 			path : appDirName +'/public_html',
 			filename : 'bundle.js',
-		}
-	},
-	css : {
-		inputFolder : appDirName+'/src/less',
-		inputFilename : 'index.less',
-		outputFolder : appDirName+'/public_html',
-		outputFilename : 'style.css',
+		},
+		optimization : {
+			minimize : false,
+		},
+		plugins: [
+			new MiniCssExtractPlugin({
+				filename: "style.css",
+			}),
+			new CleanWebpackPlugin([
+				appDirName+'/public_html/fonts',
+				appDirName+'/public_html/bundle.js',
+				appDirName+'/public_html/style.css',
+			], {
+				allowExternal : true,
+			}),
+		],
 	},
 	test : {
 		rootDir : appDirName,
@@ -41,5 +77,8 @@ module.exports = {
 		transform: {
 			"^.+\\.jsx?$": "babel-jest"
 		},
+	},
+	app : {
+		port : 3002,
 	},
 };

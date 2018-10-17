@@ -2,56 +2,38 @@
 const config = require('./compiler-config.js');
 const compiler = require('./compiler.js');
 
-/**
- * Compile CSS
- */
-exports.css = function(args) {
-	compiler.css(config.css, function(error, success) {
-		if (success) {
-			console.log('CSS successfully compiled');
-		}
-		else {
-			console.log(error);
-		}
-	});
-}
-
-
-/**
- * Compile JS
- */
-exports.js = function(args) {
-	config.js.mode = 'development';
-	compiler.js(config.js, function(error, success) {
-		if (success) {
-			console.log('JS successfully compiled');
-		}
-		else {
-			console.log(error);
-		}
-	});
-}
-
 
 exports.dev = function(args) {
-	compiler.css(config.css, function(error, success) {
+	compiler.webpack(config.webpack, function(error, success) {
 		if (success) {
-			console.log('CSS successfully compiled');
+			console.log('Successfully compiled');
 		}
 		else {
 			console.log(error);
 		}
-		config.js.mode = 'development';
-		compiler.js(config.js, function(error, success) {
-			if (success) {
-				console.log('JS successfully compiled');
-			}
-			else {
-				console.log(error);
-			}
-		});
 	});
 }
+
+
+// exports.dev = function(args) {
+// 	compiler.css(config.css, function(error, success) {
+// 		if (success) {
+// 			console.log('CSS successfully compiled');
+// 		}
+// 		else {
+// 			console.log(error);
+// 		}
+// 		config.js.mode = 'development';
+// 		compiler.js(config.js, function(error, success) {
+// 			if (success) {
+// 				console.log('JS successfully compiled');
+// 			}
+// 			else {
+// 				console.log(error);
+// 			}
+// 		});
+// 	});
+// }
 
 
 exports.test = function (args) {
@@ -65,23 +47,14 @@ exports.test = function (args) {
 
 
 exports.build = function(args) {
-	config.js.mode = 'production';
-	compiler.js(config.js, function(error, success) {
+	compiler.webpack(config.webpack, function(error, success) {
 		if (success) {
-			console.log('JS successfully compiled');
+			console.log('Successfully compiled');
 		}
 		else {
 			console.log(error);
 		}
-		compiler.css(config.css, function(error, success) {
-			if (success) {
-				console.log('CSS successfully compiled');
-			}
-			else {
-				console.log(error);
-			}
-			exports.test();
-		});
+		exports.test();
 	});
 }
 
@@ -100,7 +73,7 @@ exports.start = function(args) {
 	const app = express();
 	const path = require('path');
 
-	const port = 3002;
+	const port = config.app.port || 3002;
 
 	app.get('/', function (req, res) {
 		res.sendFile(path.resolve(__dirname+'/../public_html/index.html'));
