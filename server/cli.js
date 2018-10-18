@@ -1,39 +1,19 @@
 
 const config = require('./compiler-config.js');
 const compiler = require('./compiler.js');
+const chalk = require('chalk');
 
 
 exports.dev = function(args) {
 	compiler.webpack(config.webpack, function(error, success) {
 		if (success) {
-			console.log('Successfully compiled');
+			console.log(chalk.green('Successfully compiled'));
 		}
 		else {
-			console.log(error);
+			console.log(chalk.red(error));
 		}
 	});
 }
-
-
-// exports.dev = function(args) {
-// 	compiler.css(config.css, function(error, success) {
-// 		if (success) {
-// 			console.log('CSS successfully compiled');
-// 		}
-// 		else {
-// 			console.log(error);
-// 		}
-// 		config.js.mode = 'development';
-// 		compiler.js(config.js, function(error, success) {
-// 			if (success) {
-// 				console.log('JS successfully compiled');
-// 			}
-// 			else {
-// 				console.log(error);
-// 			}
-// 		});
-// 	});
-// }
 
 
 exports.test = function (args) {
@@ -49,10 +29,10 @@ exports.test = function (args) {
 exports.build = function(args) {
 	compiler.webpack(config.webpack, function(error, success) {
 		if (success) {
-			console.log('Successfully compiled');
+			console.log(chalk.green('Successfully compiled'));
 		}
 		else {
-			console.log(error);
+			console.log(chalk.red(error));
 		}
 		exports.test();
 	});
@@ -85,6 +65,18 @@ exports.start = function(args) {
 	app.listen(port);
 
 	console.log('Server is listening on port '+port);
+}
+
+
+exports.watch = function(args) {
+	const watch = require('node-watch');
+	console.log('Watching src');
+	watch('./src', { 
+		recursive: true 
+	}, function(evt, name) {
+		console.log('%s changed.', name);
+		exports.build();
+	});
 }
 
 

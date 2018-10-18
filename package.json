@@ -13,6 +13,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "babel-runtime": "^6.26.0",
+    "chalk": "^2.4.1",
     "clean-webpack-plugin": "^0.1.19",
     "clone": "^2.1.1",
     "css-loader": "^1.0.0",
@@ -21,6 +22,7 @@
     "less": "^3.8.1",
     "less-loader": "^4.1.0",
     "mini-css-extract-plugin": "^0.4.4",
+    "node-watch": "^0.5.8",
     "prop-types": "^15.6.2",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
@@ -30,13 +32,15 @@
     "react-test-renderer": "^16.4.1",
     "react-tooltip": "^3.6.0",
     "redux": "^4.0.0",
-    "webpack": "^4.6.0"
+    "webpack": "^4.6.0",
+    "webpack-cli": "^3.1.2"
   },
   "scripts": {
     "test": "node index.js test",
     "dev": "node index.js dev",
     "build": "node index.js build",
-    "start": "node index.js start"
+    "start": "node index.js start",
+    "watch": "node index.js watch"
   },
   "repository": {
     "type": "git",
