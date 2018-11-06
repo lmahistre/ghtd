@@ -1,4 +1,4 @@
-
+const tasks = require('./tasks.js');
 const config = require('./compiler-config.js');
 const compiler = require('./compiler.js');
 const chalk = require('chalk');
