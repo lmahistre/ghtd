@@ -4,7 +4,7 @@ const AppPage = require("../app-page.jsx");
 const Task = require("../forms/task.jsx");
 const SmallButton = require("../ui/small-button.jsx");
 const CommonButton = require("../ui/common-button.jsx");
-const NewTaskForm = require("../forms/new-task-form.jsx");
+const NewTaskForm = require("../forms/new-task.jsx");
 
 const browserService = require('../../services/browser.js');
 const githubService = require('../../services/github.js');

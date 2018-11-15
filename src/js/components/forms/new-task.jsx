@@ -29,8 +29,6 @@ class NewTaskForm extends React.Component {
 				name : name,
 				projectId : projectId,
 				status : 'active',
-				// timestampCreated : parseInt(Date.now()/1000),
-				// timestampModified : parseInt(Date.now()/1000),
 			};
 			this.setState({
 				name: '',
@@ -75,7 +73,7 @@ class NewTaskForm extends React.Component {
 						))}
 					</select>
 				</div>
-				<div className="td">
+				<div className="td" data-column="name">
 					<input id="new-task-name" type="text" name="name" value={self.state.name} onKeyDown={self.handleInputKeyDown.bind(self)} onChange={self.onChangeName.bind(self)} />
 				</div>
 			</Row>

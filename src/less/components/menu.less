@@ -6,6 +6,7 @@ div.menu {
 	position: fixed;
 	top: 0px;
 	width: 100%;
+	z-index: 100;
 	
 	.menu-entry {
 		background-color: rgba(204, 204, 204, 0.8);
@@ -17,7 +18,8 @@ div.menu {
 		text-align: center;
 		line-height: 18px;
 		&.active {
-			background-color: #D5E;
+			// background-color: #D5E;
+			background-color: @button-hover-color;
 		}
 		&:hover {
 			background-color: @button-hover-color;

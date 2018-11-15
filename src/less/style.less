@@ -11,10 +11,10 @@
 @button-hover-color : #8AE;
 
 html {
-	background-color: #78A;
+	background-color: #889;
 
 	body {
-		font-family: Helvetica, sans-serif, Arial;
+		font-family: Arial,sans-serif;
 		font-size: @font-size-default;
 		padding-top: 0px;
 		padding-bottom: 0px;
@@ -25,13 +25,10 @@ html {
 		margin-left: 0px;
 		margin-right: 0px;
 		height: 100%;
-		// background-color: #EEE;
 		max-width: 416px;
 
 		#react-root {
-			// height: 100%;
 			.app-container {
-				// background-color: #EEE;
 				color: @text-color;
 				padding-top: 30px;
 				margin-left: auto;
@@ -72,6 +69,7 @@ html {
 					padding: 4px 8px;
 					border-color:	#CCC;
 					color: @text-color;
+					font-size: @font-size-default;
 				}
 
 				.project-label {
@@ -116,15 +114,18 @@ html {
 
 				.list-table {
 					width: 100%;
-					// table-layout: fixed;
-					// tr.status-active {
-					// 	color: @text-color;
-					// }
-					// tr.status-done {
-					// 	color: #888;
-					// }
 					.ui-tr {
 						padding: 2px 2px;
+
+						&.status-done {
+							color: #888;
+							opacity: 0.8;
+							z-index: 0;
+						}
+
+						input {
+							width: 100%;
+						}
 					}
 				}
 
@@ -149,7 +150,8 @@ html {
 				.label {
 					border-radius: 4px;
 					padding: 2px 4px;
-					line-height: 16px;
+					line-height: 20px;
+					min-height: 20px;
 				}
 
 				form {
@@ -168,19 +170,30 @@ html {
 							background-color: #FFF;
 						}
 					}
+				} // form
 
-					// Form on full page
-					div.form-table {
+				// Form on full page
+				div.form-table {
+					width: 100%;
+					div.view-row {
 						width: 100%;
-						select {
-							width: 100%;
+						padding: 2px 4px;
+						div[data-column=label] {
+							display: inline-block;
+							width: 30%;
 						}
-
-						input[type=text] {
-							width: 100%;
+						div[data-column=value] {
+							display: inline-block;
+							width: 70%;
+							select {
+								width: 100%;
+							}
+							input[type=text] {
+								width: 100%;
+							}
 						}
 					}
-				} // form
+				}
 
 				.page-content {
 					padding-left: 4px;
@@ -202,7 +215,7 @@ div[data-table=task-list] {
 		margin: 0px 2px;
 	}
 	div.td[data-column=name] {
-		width: calc(100% - 148px);
+		width: calc(100% - 140px);
 	}
 }
 div[data-table=project-list] {
@@ -213,7 +226,7 @@ div[data-table=project-list] {
 		width: 28px;
 	}
 	div.td[data-column=name] {
-		width: calc(100% - 120px);
+		width: calc(100% - 112px);
 	}
 }
 div[data-table=settings-list] {
@@ -250,7 +263,7 @@ div[data-table=import-project-list] {
 			width: 92px;
 		}
 		div.td[data-column=name] {
-			width: calc(100% - 188px);
+			width: calc(100% - 180px);
 		}
 	}
 }
@@ -265,7 +278,7 @@ div[data-table=import-project-list] {
 			width: 132px;
 		}
 		div.td[data-column=name] {
-			width: calc(100% - 228px);
+			width: calc(100% - 220px);
 		}
 	}
 }
@@ -280,7 +293,7 @@ div[data-table=import-project-list] {
 			width: 172px;
 		}
 		div.td[data-column=name] {
-			width: calc(100% - 268px);
+			width: calc(100% - 260px);
 		}
 	}
 }
@@ -295,7 +308,7 @@ div[data-table=import-project-list] {
 			width: 212px;
 		}
 		div.td[data-column=name] {
-			width: calc(100% - 308px);
+			width: calc(100% - 300px);
 		}
 	}
 }
@@ -310,7 +323,7 @@ div[data-table=import-project-list] {
 			width: 252px;
 		}
 		div.td[data-column=name] {
-			width: calc(100% - 348px);
+			width: calc(100% - 340px);
 		}
 	}
 }

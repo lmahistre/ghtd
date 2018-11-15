@@ -1,6 +1,5 @@
 const webpack = require('webpack');
 const fs = require('fs');
-const webpack = require('webpack');
 const config = require('./compiler-config.js');
 
 
@@ -42,15 +41,15 @@ exports.css = function() {
 			});
 		}
 		catch(err) {
-			reject(error);
+			reject(err);
 		}
 	});
 }
 
 
 exports.js = function() {
-	const webpackCompiler = webpack(config.js);
 	return new Promise(function(resolve, reject) {
+		const webpackCompiler = webpack(config.js);
 		try {
 			webpackCompiler.run(function(err, stats) {
 				try {
@@ -76,7 +75,33 @@ exports.js = function() {
 }
 
 
-exports.test = function (args) {
+exports.test = function () {
 	const jest = require('jest');
 	return jest.runCLI(config.test, [config.test.rootDir]);
+}
+
+
+exports.start = function () {
+	return new Promise(function(resolve, reject) {
+		try {
+			const express = require('express');
+			const app = express();
+			const path = require('path');
+
+			const port = config.app.port || 3002;
+
+			app.get('/', function (req, res) {
+				res.sendFile(path.resolve(__dirname+'/../public_html/index.html'));
+			});
+
+			// Static files
+			app.use('/', express.static(path.resolve(__dirname+'/../public_html')));
+
+			app.listen(port);
+			resolve(port);
+		}
+		catch (error) {
+			reject(error);
+		}
+	});
 }

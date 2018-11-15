@@ -25,7 +25,6 @@ class SettingsEdit extends React.Component {
 		settings.gistId = document.getElementById('settings-gistId').value;
 		settings.fileName = document.getElementById('settings-fileName').value;
 		store.dispatch(reduxActions.updateSettings(settings));
-		// browserService.setBackgroundColor(settings.theme);
 		browserService.redirect('settings');
 	}
 
@@ -44,19 +43,19 @@ class SettingsEdit extends React.Component {
 				<CommonButton onClick={this.save}>{L("Save")}</CommonButton>
 				<CommonButton to="/settings">{L("Cancel")}</CommonButton>
 				<Block>
-					<div className="edit-table" data-table="settings-list">
-						<div>
+					<div className="form-table" data-table="settings-list">
+						<div className="view-row">
 							<div data-column="label">{L("Theme")}</div>
-							<div>
+							<div data-column="value">
 								<RadioSelector id="settings-theme" value={settings.theme}>
 									<option value="light">{L("Light")}</option>
 									<option value="dark">{L("Dark")}</option>
 								</RadioSelector>
 							</div>
 						</div>
-						<div>
+						<div className="view-row">
 							<div data-column="label">{L("Language")}</div>
-							<div>
+							<div data-column="value">
 								<RadioSelector id="language" name="language" value={settings.language}>
 									{constsService.languages.map(elt => (
 										<option key={elt.key} value={elt.key}>{L(elt.label)}</option>
@@ -64,27 +63,27 @@ class SettingsEdit extends React.Component {
 								</RadioSelector>
 							</div>
 						</div>
-						<div>
+						<div className="view-row">
 							<div data-column="label">{L("User")}</div>
-							<div>
+							<div data-column="value">
 								<input name="user" id="settings-user" type="text" defaultValue={settings.user} onKeyDown={this.handleInputKeyDown.bind(this)} />
 							</div>
 						</div>
-						<div>
+						<div className="view-row">
 							<div data-column="label">{L("Gist ID")}</div>
-							<div>
+							<div data-column="value">
 								<input name="gistId" id="settings-gistId" type="text" defaultValue={settings.gistId} onKeyDown={this.handleInputKeyDown.bind(this)} />
 							</div>
 						</div>
-						<div>
+						<div className="view-row">
 							<div data-column="label">{L("Token")}</div>
-							<div>
+							<div data-column="value">
 								<input name="token" id="settings-token" type="text" defaultValue={settings.token} onKeyDown={this.handleInputKeyDown.bind(this)} />
 							</div>
 						</div>
-						<div>
+						<div className="view-row">
 							<div data-column="label">{L("File name")}</div>
-							<div>
+							<div data-column="value">
 								<input name="token" id="settings-fileName" type="text" defaultValue={settings.fileName} onKeyDown={this.handleInputKeyDown.bind(this)} />
 							</div>
 						</div>

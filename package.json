@@ -14,14 +14,9 @@
     "babel-preset-react": "^6.24.1",
     "babel-runtime": "^6.26.0",
     "chalk": "^2.4.1",
-    "clean-webpack-plugin": "^0.1.19",
     "clone": "^2.1.1",
-    "css-loader": "^1.0.0",
-    "file-loader": "^2.0.0",
     "jest": "^22.4.3",
     "less": "^3.8.1",
-    "less-loader": "^4.1.0",
-    "mini-css-extract-plugin": "^0.4.4",
     "node-watch": "^0.5.8",
     "prop-types": "^15.6.2",
     "react": "^16.3.2",
@@ -36,6 +31,8 @@
     "webpack-cli": "^3.1.2"
   },
   "scripts": {
+    "css": "node index.js css",
+    "js": "node index.js js",
     "test": "node index.js test",
     "dev": "node index.js dev",
     "build": "node index.js build",

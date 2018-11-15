@@ -3,7 +3,7 @@ const ReactRedux = require('react-redux');
 
 const AppPage = require("../app-page.jsx");
 const CommonButton = require("../ui/common-button.jsx");
-const ProjectEditForm = require("../forms/project-edit-form.jsx");
+const ProjectEditForm = require("../forms/project-edit.jsx");
 
 const browserService = require('../../services/browser.js');
 const utilsService = require('../../services/utils.js');

@@ -2,6 +2,7 @@ const React = require("react");
 
 const AppPage = require("../app-page.jsx");
 const CommonButton = require("../ui/common-button.jsx");
+const Block = require("../ui/block.jsx");
 
 const constsService = require('../../services/consts.js');
 const L = require('../../services/i18n.js');
@@ -32,24 +33,25 @@ class ProjectEditForm extends React.Component {
 	render() {
 		const self = this;
 		return (
-			<form name="project-edit" onSubmit={self.formFakeSubmit}>
-				<input type="hidden" name="id" value={self.props.project.id} />
-				<div className="form-table">
-						<div className="tr">
-							<div className="label">{"Name"}</div>
-							<div className="value">
+			<Block>
+				<form name="project-edit" onSubmit={self.formFakeSubmit}>
+					<input type="hidden" name="id" value={self.props.project.id} />
+					<div className="form-table">
+						<div className="view-row">
+							<div data-column="label">{"Name"}</div>
+							<div data-column="value">
 								<input type="text" name="name" defaultValue={self.props.project.name} onKeyDown={self.handleInputKeyDown.bind(self, self.props.save)} />
 							</div>
 						</div>
-						<div className="tr">
-							<div className="label">{"Visible"}</div>
-							<div className="value">
+						<div className="view-row">
+							<div data-column="label">{"Visible"}</div>
+							<div data-column="value">
 								<input type="checkbox" name="visible" checked={self.props.project.visible} onChange={self.changeVisible.bind(self)} />
 							</div>
 						</div>
-						<div className="tr">
-							<div className="label">{"Color"}</div>
-							<div className="value">
+						<div className="view-row">
+							<div data-column="label">{"Color"}</div>
+							<div data-column="value">
 								<select name="color" defaultValue={self.props.project.color}>
 									<option value=""></option>
 									{constsService.colors.map(elt => (
@@ -58,9 +60,9 @@ class ProjectEditForm extends React.Component {
 								</select>
 							</div>
 						</div>
-						<div className="tr">
-							<div className="label">{L("Repository provider")}</div>
-							<div>
+						<div className="view-row">
+							<div data-column="label">{L("Repository provider")}</div>
+							<div data-column="value">
 								<select name="provider" defaultValue={self.props.project.provider}>
 									<option value=""></option>
 									<option value="github">{L("GitHub")}</option>
@@ -69,14 +71,15 @@ class ProjectEditForm extends React.Component {
 								</select>
 							</div>
 						</div>
-						<div className="tr">
-							<div className="label">{L("Repository")}</div>
-							<div>
+						<div className="view-row">
+							<div data-column="label">{L("Repository")}</div>
+							<div data-column="value">
 								<input type="text" name="repo" defaultValue={self.props.project.repo} onKeyDown={self.handleInputKeyDown.bind(self, self.props.save)} />
 							</div>
 						</div>
-				</div>
-			</form>
+					</div>
+				</form>
+			</Block>
 		);
 	}
 }
