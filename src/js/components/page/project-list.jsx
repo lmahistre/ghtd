@@ -65,7 +65,7 @@ class ProjectList extends React.Component {
 								}
 							</div>
 							<div className="td" data-column="name">
-								<div className="label content">{elt.name}</div>
+								<div className="label">{elt.name}</div>
 							</div>
 							<div className="td" data-column="indicators">
 								<SmallButton fa={elt.provider} title={elt.repo} style={{backgroundColor : '#'+elt.color}} />

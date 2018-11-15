@@ -38,6 +38,13 @@ html {
 					margin: 8px;
 				}
 
+				h2 {
+					margin-bottom: 12px;
+				}
+				p {
+					margin-top: 12px;
+				}
+
 				a.common-button {
 					text-decoration: none;
 					color: #000;
@@ -101,6 +108,7 @@ html {
 					}
 				}
 				div.ui-block {
+					margin: 4px 4px;
 					border-radius: 4px;
 					padding:	4px;
 				}
@@ -121,6 +129,10 @@ html {
 							color: #888;
 							opacity: 0.8;
 							z-index: 0;
+
+							.project-label {
+								opacity: 0.8;
+							}
 						}
 
 						input {
@@ -236,6 +248,7 @@ div[data-table=settings-list] {
 	div.td[data-column=value] {
 		overflow: hidden;
 		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 }
 div[data-table=import-project-list] {

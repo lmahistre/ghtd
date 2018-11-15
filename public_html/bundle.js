@@ -9359,14 +9359,11 @@ exports.redirect = function (uri) {
 }
 
 
-// exports.setBackgroundColor = function(theme) {
-// 	// if ('dark' === theme) {
-// 	// 	document.body.style.backgroundColor = '#111';
-// 	// }
-// 	// else {
-// 	// 	document.body.style.backgroundColor = '#EEE';
-// 	// }
-// }
+exports.setBackgroundImage = function(url) {
+	document.getElementsByTagName('html')[0].style.backgroundImage = "url("+url+")";
+}
+
+
 
 
 /***/ }),
@@ -10378,6 +10375,9 @@ exports.settingsDecode = function(str) {
 	}
 	if (obj.fileName) {
 		ret.fileName = obj.fileName;
+	}
+	if (obj.backgroundImage) {
+		ret.backgroundImage = obj.backgroundImage;
 	}
 	return ret;
 }
@@ -20992,7 +20992,9 @@ var SettingsEdit = function (_React$Component) {
 			settings.token = document.getElementById('settings-token').value;
 			settings.gistId = document.getElementById('settings-gistId').value;
 			settings.fileName = document.getElementById('settings-fileName').value;
+			settings.backgroundImage = document.getElementById('settings-backgroundImage').value;
 			store.dispatch(reduxActions.updateSettings(settings));
+			browserService.setBackgroundImage(settings.backgroundImage);
 			browserService.redirect('settings');
 		}
 	}, {
@@ -21130,6 +21132,20 @@ var SettingsEdit = function (_React$Component) {
 								"div",
 								{ "data-column": "value" },
 								React.createElement("input", { name: "token", id: "settings-fileName", type: "text", defaultValue: settings.fileName, onKeyDown: this.handleInputKeyDown.bind(this) })
+							)
+						),
+						React.createElement(
+							"div",
+							{ className: "view-row" },
+							React.createElement(
+								"div",
+								{ "data-column": "label" },
+								L("Background image")
+							),
+							React.createElement(
+								"div",
+								{ "data-column": "value" },
+								React.createElement("input", { name: "token", id: "settings-backgroundImage", type: "text", defaultValue: settings.backgroundImage, onKeyDown: this.handleInputKeyDown.bind(this) })
 							)
 						)
 					)
@@ -21457,12 +21473,12 @@ var SettingsView = function (_React$Component) {
 							{ className: "view-row" },
 							React.createElement(
 								"div",
-								{ "data-column": "label" },
+								{ className: "td", "data-column": "label" },
 								L("Theme")
 							),
 							React.createElement(
 								"div",
-								{ "data-column": "value" },
+								{ className: "td", "data-column": "value" },
 								L(themeLabel)
 							)
 						),
@@ -21471,12 +21487,12 @@ var SettingsView = function (_React$Component) {
 							{ className: "view-row" },
 							React.createElement(
 								"div",
-								{ "data-column": "label" },
+								{ className: "td", "data-column": "label" },
 								L("Language")
 							),
 							React.createElement(
 								"div",
-								{ "data-column": "value" },
+								{ className: "td", "data-column": "value" },
 								L(languageLabel)
 							)
 						),
@@ -21485,12 +21501,12 @@ var SettingsView = function (_React$Component) {
 							{ className: "view-row" },
 							React.createElement(
 								"div",
-								{ "data-column": "label" },
+								{ className: "td", "data-column": "label" },
 								L("User")
 							),
 							React.createElement(
 								"div",
-								{ "data-column": "value" },
+								{ className: "td", "data-column": "value" },
 								settings.user
 							)
 						),
@@ -21499,12 +21515,12 @@ var SettingsView = function (_React$Component) {
 							{ className: "view-row" },
 							React.createElement(
 								"div",
-								{ "data-column": "label" },
+								{ className: "td", "data-column": "label" },
 								L("Gist ID")
 							),
 							React.createElement(
 								"div",
-								{ "data-column": "value" },
+								{ className: "td", "data-column": "value" },
 								settings.gistId
 							)
 						),
@@ -21513,12 +21529,12 @@ var SettingsView = function (_React$Component) {
 							{ className: "view-row" },
 							React.createElement(
 								"div",
-								{ "data-column": "label" },
+								{ className: "td", "data-column": "label" },
 								L("Token")
 							),
 							React.createElement(
 								"div",
-								{ "data-column": "value" },
+								{ className: "td", "data-column": "value" },
 								settings.token
 							)
 						),
@@ -21527,13 +21543,27 @@ var SettingsView = function (_React$Component) {
 							{ className: "view-row" },
 							React.createElement(
 								"div",
-								{ "data-column": "label" },
+								{ className: "td", "data-column": "label" },
 								L("File name")
 							),
 							React.createElement(
 								"div",
-								{ "data-column": "value" },
+								{ className: "td", "data-column": "value" },
 								settings.fileName
+							)
+						),
+						React.createElement(
+							"div",
+							{ className: "view-row" },
+							React.createElement(
+								"div",
+								{ className: "td", "data-column": "label" },
+								L("Background image")
+							),
+							React.createElement(
+								"div",
+								{ className: "td", "data-column": "value" },
+								settings.backgroundImage
 							)
 						)
 					)
@@ -21903,7 +21933,7 @@ var ProjectList = function (_React$Component) {
 								{ className: 'td', 'data-column': 'name' },
 								React.createElement(
 									'div',
-									{ className: 'label content' },
+									{ className: 'label' },
 									elt.name
 								)
 							),
@@ -22989,7 +23019,9 @@ var Task = function (_React$Component) {
 					var projects = self.props.projects;
 					for (var i in projects) {
 						var project = projects[i];
-						projectList.push(project);
+						if (project.status == 'active') {
+							projectList.push(project);
+						}
 					}
 					return React.createElement(
 						Row,
@@ -23049,7 +23081,7 @@ var Task = function (_React$Component) {
 							{ className: "td", "data-column": "name" },
 							React.createElement(
 								"div",
-								{ className: "label content" },
+								{ className: "label" },
 								elt.name
 							)
 						)
@@ -23381,6 +23413,7 @@ module.exports = {
 	"About" : "Aide",
 	"Are you sure you want to delete the project " : "Souhaitez-vous supprimer le projet ",
 	"Add task" : "Ajouter la tâche",
+	"Background image" : "Image de fond",
 	"Cancel" : "Annuler",
 	"Clean resolved" : "Supprimer résolues",
 	"Creation time" : "Date de création",
@@ -31615,7 +31648,7 @@ utils.intFromLE = intFromLE;
 /* 196 */
 /***/ (function(module) {
 
-module.exports = {"_args":[["elliptic@6.4.0","/home/lionel/Documents/pp/github-todo"]],"_development":true,"_from":"elliptic@6.4.0","_id":"elliptic@6.4.0","_inBundle":false,"_integrity":"sha1-ysmvh2LIWDYYcAPI3+GT5eLq5d8=","_location":"/elliptic","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"elliptic@6.4.0","name":"elliptic","escapedName":"elliptic","rawSpec":"6.4.0","saveSpec":null,"fetchSpec":"6.4.0"},"_requiredBy":["/browserify-sign","/create-ecdh"],"_resolved":"https://registry.npmjs.org/elliptic/-/elliptic-6.4.0.tgz","_spec":"6.4.0","_where":"/home/lionel/Documents/pp/github-todo","author":{"name":"Fedor Indutny","email":"fedor@indutny.com"},"bugs":{"url":"https://github.com/indutny/elliptic/issues"},"dependencies":{"bn.js":"^4.4.0","brorand":"^1.0.1","hash.js":"^1.0.0","hmac-drbg":"^1.0.0","inherits":"^2.0.1","minimalistic-assert":"^1.0.0","minimalistic-crypto-utils":"^1.0.0"},"description":"EC cryptography","devDependencies":{"brfs":"^1.4.3","coveralls":"^2.11.3","grunt":"^0.4.5","grunt-browserify":"^5.0.0","grunt-cli":"^1.2.0","grunt-contrib-connect":"^1.0.0","grunt-contrib-copy":"^1.0.0","grunt-contrib-uglify":"^1.0.1","grunt-mocha-istanbul":"^3.0.1","grunt-saucelabs":"^8.6.2","istanbul":"^0.4.2","jscs":"^2.9.0","jshint":"^2.6.0","mocha":"^2.1.0"},"files":["lib"],"homepage":"https://github.com/indutny/elliptic","keywords":["EC","Elliptic","curve","Cryptography"],"license":"MIT","main":"lib/elliptic.js","name":"elliptic","repository":{"type":"git","url":"git+ssh://git@github.com/indutny/elliptic.git"},"scripts":{"jscs":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","jshint":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","lint":"npm run jscs && npm run jshint","test":"npm run lint && npm run unit","unit":"istanbul test _mocha --reporter=spec test/index.js","version":"grunt dist && git add dist/"},"version":"6.4.0"};
+module.exports = {"_args":[["elliptic@6.4.0","/home/lionel/projects/ghtd"]],"_development":true,"_from":"elliptic@6.4.0","_id":"elliptic@6.4.0","_inBundle":false,"_integrity":"sha1-ysmvh2LIWDYYcAPI3+GT5eLq5d8=","_location":"/elliptic","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"elliptic@6.4.0","name":"elliptic","escapedName":"elliptic","rawSpec":"6.4.0","saveSpec":null,"fetchSpec":"6.4.0"},"_requiredBy":["/browserify-sign","/create-ecdh"],"_resolved":"https://registry.npmjs.org/elliptic/-/elliptic-6.4.0.tgz","_spec":"6.4.0","_where":"/home/lionel/projects/ghtd","author":{"name":"Fedor Indutny","email":"fedor@indutny.com"},"bugs":{"url":"https://github.com/indutny/elliptic/issues"},"dependencies":{"bn.js":"^4.4.0","brorand":"^1.0.1","hash.js":"^1.0.0","hmac-drbg":"^1.0.0","inherits":"^2.0.1","minimalistic-assert":"^1.0.0","minimalistic-crypto-utils":"^1.0.0"},"description":"EC cryptography","devDependencies":{"brfs":"^1.4.3","coveralls":"^2.11.3","grunt":"^0.4.5","grunt-browserify":"^5.0.0","grunt-cli":"^1.2.0","grunt-contrib-connect":"^1.0.0","grunt-contrib-copy":"^1.0.0","grunt-contrib-uglify":"^1.0.1","grunt-mocha-istanbul":"^3.0.1","grunt-saucelabs":"^8.6.2","istanbul":"^0.4.2","jscs":"^2.9.0","jshint":"^2.6.0","mocha":"^2.1.0"},"files":["lib"],"homepage":"https://github.com/indutny/elliptic","keywords":["EC","Elliptic","curve","Cryptography"],"license":"MIT","main":"lib/elliptic.js","name":"elliptic","repository":{"type":"git","url":"git+ssh://git@github.com/indutny/elliptic.git"},"scripts":{"jscs":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","jshint":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","lint":"npm run jscs && npm run jshint","test":"npm run lint && npm run unit","unit":"istanbul test _mocha --reporter=spec test/index.js","version":"grunt dist && git add dist/"},"version":"6.4.0"};
 
 /***/ }),
 /* 197 */
@@ -34928,6 +34961,7 @@ exports.SET_SETTINGS = function(state, action) {
 			|| newState.settings.gistId != action.settings.gistId
 			|| newState.settings.token != action.settings.token
 			|| newState.settings.fileName != action.settings.fileName
+			|| newState.settings.backgroundImage != action.settings.backgroundImage
 		)
 	) {
 		newState.settings.isSyncDirty = true;
@@ -34939,6 +34973,9 @@ exports.SET_SETTINGS = function(state, action) {
 	newState.settings.theme = action.settings.theme;
 	if (action.settings.fileName) {
 		newState.settings.fileName = action.settings.fileName;
+	}
+	if (action.settings.backgroundImage) {
+		newState.settings.backgroundImage = action.settings.backgroundImage;
 	}
 	return newState;
 }
@@ -35148,7 +35185,10 @@ var Main = function (_React$Component) {
 	_createClass(Main, [{
 		key: 'render',
 		value: function render() {
-			// browserService.setBackgroundColor(store.getState().settings.theme);
+			var state = store.getState();
+			if (state.settings && state.settings.backgroundImage && state.settings.backgroundImage.length > 0) {
+				browserService.setBackgroundImage(state.settings.backgroundImage);
+			}
 			return React.createElement(
 				ReactRedux.Provider,
 				{ store: store },

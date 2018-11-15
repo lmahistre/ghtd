@@ -5,7 +5,7 @@ const ReactRouterDom = require('react-router-dom');
 const Redirect = ReactRouterDom.Redirect;
 
 const AppPage = require("../app-page.jsx");
-const VisibleMarker = require("../visible-marker.jsx");
+const VisibleMarker = require("../ui/visible-marker.jsx");
 const CommonButton = require("../ui/common-button.jsx");
 const DateViewer = require('../ui/date-viewer.jsx');
 const Block = require("../ui/block.jsx");

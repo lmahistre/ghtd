@@ -87,7 +87,9 @@ class Task extends React.Component {
 				const projects = self.props.projects;
 				for (let i in projects) {
 					let project = projects[i];
-					projectList.push(project);
+					if (project.status == 'active') {
+						projectList.push(project);
+					}
 				}
 				return (
 					<Row className={"task status-"+elt.status}>
@@ -133,7 +135,7 @@ class Task extends React.Component {
 							<div className="project-label" style={style} title={elt.projectName} data-tip={elt.projectName}>{elt.projectName}</div>
 						</div>
 						<div className="td" data-column="name">
-							<div className="label content">{elt.name}</div>
+							<div className="label">{elt.name}</div>
 						</div>
 					</Row>
 				);

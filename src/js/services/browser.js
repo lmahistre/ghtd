@@ -51,11 +51,8 @@ exports.redirect = function (uri) {
 }
 
 
-// exports.setBackgroundColor = function(theme) {
-// 	// if ('dark' === theme) {
-// 	// 	document.body.style.backgroundColor = '#111';
-// 	// }
-// 	// else {
-// 	// 	document.body.style.backgroundColor = '#EEE';
-// 	// }
-// }
+exports.setBackgroundImage = function(url) {
+	document.getElementsByTagName('html')[0].style.backgroundImage = "url("+url+")";
+}
+
+

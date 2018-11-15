@@ -162,6 +162,7 @@ exports.SET_SETTINGS = function(state, action) {
 			|| newState.settings.gistId != action.settings.gistId
 			|| newState.settings.token != action.settings.token
 			|| newState.settings.fileName != action.settings.fileName
+			|| newState.settings.backgroundImage != action.settings.backgroundImage
 		)
 	) {
 		newState.settings.isSyncDirty = true;
@@ -173,6 +174,9 @@ exports.SET_SETTINGS = function(state, action) {
 	newState.settings.theme = action.settings.theme;
 	if (action.settings.fileName) {
 		newState.settings.fileName = action.settings.fileName;
+	}
+	if (action.settings.backgroundImage) {
+		newState.settings.backgroundImage = action.settings.backgroundImage;
 	}
 	return newState;
 }

@@ -4,6 +4,7 @@ module.exports = {
 	"About" : "Aide",
 	"Are you sure you want to delete the project " : "Souhaitez-vous supprimer le projet ",
 	"Add task" : "Ajouter la tâche",
+	"Background image" : "Image de fond",
 	"Cancel" : "Annuler",
 	"Clean resolved" : "Supprimer résolues",
 	"Creation time" : "Date de création",

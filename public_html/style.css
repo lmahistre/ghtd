@@ -24,6 +24,12 @@ html body #react-root .app-container {
 html body #react-root .app-container .text-page {
   margin: 8px;
 }
+html body #react-root .app-container h2 {
+  margin-bottom: 12px;
+}
+html body #react-root .app-container p {
+  margin-top: 12px;
+}
 html body #react-root .app-container a.common-button {
   text-decoration: none;
   color: #000;
@@ -230,6 +236,7 @@ html body #react-root .app-container div.ui-tr > div.td {
   vertical-align: middle;
 }
 html body #react-root .app-container div.ui-block {
+  margin: 4px 4px;
   border-radius: 4px;
   padding: 4px;
 }
@@ -249,6 +256,9 @@ html body #react-root .app-container .list-table .ui-tr.status-done {
   color: #888;
   opacity: 0.8;
   z-index: 0;
+}
+html body #react-root .app-container .list-table .ui-tr.status-done .project-label {
+  opacity: 0.8;
 }
 html body #react-root .app-container .list-table .ui-tr input {
   width: 100%;
@@ -343,6 +353,7 @@ div[data-table=settings-list] div.td[data-column=label] {
 div[data-table=settings-list] div.td[data-column=value] {
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 div[data-table=import-project-list] div.td[data-column=name] {
   width: calc(100% - 28px);
@@ -2615,21 +2626,21 @@ html body #react-root .app-container[data-theme=light] {
   color: #111;
 }
 html body #react-root .app-container[data-theme=light] .content {
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.5);
 }
 html body #react-root .app-container[data-theme=light] select {
   color: #111;
-  background-color: #DDD;
+  background-color: rgba(224, 224, 224, 0.5);
   border-color: #BBB;
 }
 html body #react-root .app-container[data-theme=light] select option {
   color: #111;
-  background-color: #DDD;
+  background-color: rgba(224, 224, 224, 0.5);
 }
 html body #react-root .app-container[data-theme=light] input[type=text] {
   border-color: #BBB;
   color: #111;
-  background-color: #DDD;
+  background-color: rgba(224, 224, 224, 0.5);
 }
 html body #react-root .app-container[data-theme=light] .radio-selector .radio-selector-elt {
   color: #111;
@@ -2638,21 +2649,21 @@ html body #react-root .app-container[data-theme=dark] {
   color: #EEE;
 }
 html body #react-root .app-container[data-theme=dark] .content {
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 html body #react-root .app-container[data-theme=dark] select {
   color: #EEE;
-  background-color: #222;
+  background-color: rgba(32, 32, 32, 0.5);
   border-color: #444;
 }
 html body #react-root .app-container[data-theme=dark] select option {
   color: #EEE;
-  background-color: #222;
+  background-color: rgba(32, 32, 32, 0.5);
 }
 html body #react-root .app-container[data-theme=dark] input[type=text] {
   border-color: #444;
   color: #EEE;
-  background-color: #222;
+  background-color: rgba(32, 32, 32, 0.5);
 }
 html body #react-root .app-container[data-theme=dark] .radio-selector .radio-selector-elt {
   color: #EEE;

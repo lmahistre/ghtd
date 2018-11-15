@@ -1,7 +1,7 @@
 const React = require("react");
 
 const ShallowRenderer = require('react-test-renderer/shallow'); 
-const VisibleMarker = require('../js/components/visible-marker.jsx');
+const VisibleMarker = require('../js/components/ui/visible-marker.jsx');
 
 describe ('visible-marker', function() {
 	const renderer = new ShallowRenderer();

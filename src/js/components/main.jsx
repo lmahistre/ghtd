@@ -10,8 +10,15 @@ const AppRouter = require('./app-router.jsx');
 store.dispatch(reduxActions.init());
 
 class Main extends React.Component {
+
 	render() {
-		// browserService.setBackgroundColor(store.getState().settings.theme);
+		const state = store.getState();
+		if (state.settings 
+			&& state.settings.backgroundImage 
+			&& state.settings.backgroundImage.length > 0
+		) {
+			browserService.setBackgroundImage(state.settings.backgroundImage);
+		}
 		return (
 			<ReactRedux.Provider store={store}>
 				<AppRouter />
