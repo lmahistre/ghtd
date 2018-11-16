@@ -5623,8 +5623,9 @@ exports.updateProject = function(elt) {
 
 exports.changeProjectVisibility = function(id) {
 	return {
-		type : 'SET_PROJECT_VISIBLE',
+		type : 'CHANGE_PROJECT_VISIBILITY',
 		id : id,
+		currentTimestamp : parseInt(Date.now()/1000),
 	}
 }
 
@@ -21181,11 +21182,11 @@ module.exports = store.connect(function (props) {
 			AppPage,
 			{ selectedMenu: "settings" },
 			React.createElement(
-				"div",
-				{ className: "text-page" },
+				Block,
+				null,
 				React.createElement(
-					Block,
-					null,
+					"div",
+					{ className: "text-page" },
 					React.createElement(
 						"p",
 						null,
@@ -21240,11 +21241,11 @@ module.exports = store.connect(function (props) {
 			AppPage,
 			{ selectedMenu: "settings" },
 			React.createElement(
-				"div",
-				{ className: "text-page" },
+				Block,
+				null,
 				React.createElement(
-					Block,
-					null,
+					"div",
+					{ className: "text-page" },
 					React.createElement(
 						"p",
 						null,
@@ -22393,6 +22394,7 @@ var ProjectDelete = function (_React$Component) {
 		key: 'delete',
 		value: function _delete() {
 			store.dispatch(reduxActions.removeProject(this.props.match.params.id));
+			browserService.redirect('projects');
 		}
 	}, {
 		key: 'render',
@@ -22756,7 +22758,9 @@ var TaskEdit = function (_React$Component) {
 				name: ''
 			}];
 			for (var i in this.props.projects) {
-				projectList.push(this.props.projects[i]);
+				if (this.props.projects[i].status == 'active') {
+					projectList.push(this.props.projects[i]);
+				}
 			}
 			return React.createElement(
 				AppPage,
@@ -25040,11 +25044,11 @@ var Home = function (_React$Component) {
 						AppPage,
 						null,
 						React.createElement(
-							"div",
-							{ className: "text-page" },
+							Block,
+							null,
 							React.createElement(
-								Block,
-								null,
+								"div",
+								{ className: "text-page" },
 								React.createElement(
 									"h2",
 									null,
@@ -25101,11 +25105,11 @@ var Home = function (_React$Component) {
 						AppPage,
 						null,
 						React.createElement(
-							"div",
-							{ className: "text-page" },
+							Block,
+							null,
 							React.createElement(
-								Block,
-								null,
+								"div",
+								{ className: "text-page" },
 								React.createElement(
 									"h2",
 									null,
@@ -31648,7 +31652,7 @@ utils.intFromLE = intFromLE;
 /* 196 */
 /***/ (function(module) {
 
-module.exports = {"_args":[["elliptic@6.4.0","/home/lionel/projects/ghtd"]],"_development":true,"_from":"elliptic@6.4.0","_id":"elliptic@6.4.0","_inBundle":false,"_integrity":"sha1-ysmvh2LIWDYYcAPI3+GT5eLq5d8=","_location":"/elliptic","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"elliptic@6.4.0","name":"elliptic","escapedName":"elliptic","rawSpec":"6.4.0","saveSpec":null,"fetchSpec":"6.4.0"},"_requiredBy":["/browserify-sign","/create-ecdh"],"_resolved":"https://registry.npmjs.org/elliptic/-/elliptic-6.4.0.tgz","_spec":"6.4.0","_where":"/home/lionel/projects/ghtd","author":{"name":"Fedor Indutny","email":"fedor@indutny.com"},"bugs":{"url":"https://github.com/indutny/elliptic/issues"},"dependencies":{"bn.js":"^4.4.0","brorand":"^1.0.1","hash.js":"^1.0.0","hmac-drbg":"^1.0.0","inherits":"^2.0.1","minimalistic-assert":"^1.0.0","minimalistic-crypto-utils":"^1.0.0"},"description":"EC cryptography","devDependencies":{"brfs":"^1.4.3","coveralls":"^2.11.3","grunt":"^0.4.5","grunt-browserify":"^5.0.0","grunt-cli":"^1.2.0","grunt-contrib-connect":"^1.0.0","grunt-contrib-copy":"^1.0.0","grunt-contrib-uglify":"^1.0.1","grunt-mocha-istanbul":"^3.0.1","grunt-saucelabs":"^8.6.2","istanbul":"^0.4.2","jscs":"^2.9.0","jshint":"^2.6.0","mocha":"^2.1.0"},"files":["lib"],"homepage":"https://github.com/indutny/elliptic","keywords":["EC","Elliptic","curve","Cryptography"],"license":"MIT","main":"lib/elliptic.js","name":"elliptic","repository":{"type":"git","url":"git+ssh://git@github.com/indutny/elliptic.git"},"scripts":{"jscs":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","jshint":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","lint":"npm run jscs && npm run jshint","test":"npm run lint && npm run unit","unit":"istanbul test _mocha --reporter=spec test/index.js","version":"grunt dist && git add dist/"},"version":"6.4.0"};
+module.exports = {"_args":[["elliptic@6.4.0","/home/lionel/Documents/pp/github-todo"]],"_development":true,"_from":"elliptic@6.4.0","_id":"elliptic@6.4.0","_inBundle":false,"_integrity":"sha1-ysmvh2LIWDYYcAPI3+GT5eLq5d8=","_location":"/elliptic","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"elliptic@6.4.0","name":"elliptic","escapedName":"elliptic","rawSpec":"6.4.0","saveSpec":null,"fetchSpec":"6.4.0"},"_requiredBy":["/browserify-sign","/create-ecdh"],"_resolved":"https://registry.npmjs.org/elliptic/-/elliptic-6.4.0.tgz","_spec":"6.4.0","_where":"/home/lionel/Documents/pp/github-todo","author":{"name":"Fedor Indutny","email":"fedor@indutny.com"},"bugs":{"url":"https://github.com/indutny/elliptic/issues"},"dependencies":{"bn.js":"^4.4.0","brorand":"^1.0.1","hash.js":"^1.0.0","hmac-drbg":"^1.0.0","inherits":"^2.0.1","minimalistic-assert":"^1.0.0","minimalistic-crypto-utils":"^1.0.0"},"description":"EC cryptography","devDependencies":{"brfs":"^1.4.3","coveralls":"^2.11.3","grunt":"^0.4.5","grunt-browserify":"^5.0.0","grunt-cli":"^1.2.0","grunt-contrib-connect":"^1.0.0","grunt-contrib-copy":"^1.0.0","grunt-contrib-uglify":"^1.0.1","grunt-mocha-istanbul":"^3.0.1","grunt-saucelabs":"^8.6.2","istanbul":"^0.4.2","jscs":"^2.9.0","jshint":"^2.6.0","mocha":"^2.1.0"},"files":["lib"],"homepage":"https://github.com/indutny/elliptic","keywords":["EC","Elliptic","curve","Cryptography"],"license":"MIT","main":"lib/elliptic.js","name":"elliptic","repository":{"type":"git","url":"git+ssh://git@github.com/indutny/elliptic.git"},"scripts":{"jscs":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","jshint":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","lint":"npm run jscs && npm run jshint","test":"npm run lint && npm run unit","unit":"istanbul test _mocha --reporter=spec test/index.js","version":"grunt dist && git add dist/"},"version":"6.4.0"};
 
 /***/ }),
 /* 197 */
@@ -34884,9 +34888,10 @@ exports.SET_PROJECT = function(state, action) {
 }
 
 
-exports.SET_PROJECT_VISIBLE = function(state, action) {
+exports.CHANGE_PROJECT_VISIBILITY = function(state, action) {
 	const newState = clone(state);
 	newState.projects[action.id].visible = !state.projects[action.id].visible;
+	newState.projects[action.id].timestampModified = action.currentTimestamp;
 	if (newState.settings) {
 		newState.settings.isSyncDirty = true;
 	}
@@ -34899,18 +34904,6 @@ exports.SET_BUSY = function(state, action) {
 	newState.busy = action.busy;
 	return newState;
 }
-
-
-// exports.DELETE_PROJECT = function(state, action) {
-// 	const newState = clone(state);
-// 	if (newState.projects && action.id && newState.projects[action.id]) {
-// 		delete newState.projects[action.id];
-// 	}
-// 	if (newState.settings) {
-// 		newState.settings.isSyncDirty = true;
-// 	}
-// 	return newState;
-// }
 
 
 exports.REMOVE_PROJECT = function(state, action) {

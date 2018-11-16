@@ -17,6 +17,7 @@ class ProjectDelete extends React.Component {
 
 	delete() {
 		store.dispatch(reduxActions.removeProject(this.props.match.params.id));
+		browserService.redirect('projects');
 	}
 
 

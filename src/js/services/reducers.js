@@ -85,9 +85,10 @@ exports.SET_PROJECT = function(state, action) {
 }
 
 
-exports.SET_PROJECT_VISIBLE = function(state, action) {
+exports.CHANGE_PROJECT_VISIBILITY = function(state, action) {
 	const newState = clone(state);
 	newState.projects[action.id].visible = !state.projects[action.id].visible;
+	newState.projects[action.id].timestampModified = action.currentTimestamp;
 	if (newState.settings) {
 		newState.settings.isSyncDirty = true;
 	}
@@ -100,18 +101,6 @@ exports.SET_BUSY = function(state, action) {
 	newState.busy = action.busy;
 	return newState;
 }
-
-
-// exports.DELETE_PROJECT = function(state, action) {
-// 	const newState = clone(state);
-// 	if (newState.projects && action.id && newState.projects[action.id]) {
-// 		delete newState.projects[action.id];
-// 	}
-// 	if (newState.settings) {
-// 		newState.settings.isSyncDirty = true;
-// 	}
-// 	return newState;
-// }
 
 
 exports.REMOVE_PROJECT = function(state, action) {

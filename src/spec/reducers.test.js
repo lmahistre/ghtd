@@ -390,7 +390,7 @@ describe ('reducers', function() {
 	});
 
 
-	it ('SET_PROJECT_VISIBLE', function() {
+	it ('CHANGE_PROJECT_VISIBILITY', function() {
 		expect(reducers.SET_PROJECT_VISIBLE({
 			projects : {
 				'1' : {
@@ -409,13 +409,14 @@ describe ('reducers', function() {
 		}, {
 			id : '1',
 			visible : true,
+			currentTimestamp : 1531075242,
 		})).toEqual({
 			projects : {
 				'1' : {
 					id : '1',
 					visible : true,
 					name : 'project',
-					timestampModified : 1531075147,
+					timestampModified : 1531075242,
 				},
 				'2' : {
 					id : '2',
@@ -441,44 +442,6 @@ describe ('reducers', function() {
 			busy : false,
 		}).busy).toBe(false);
 	});
-
-
-	// it ('DELETE_PROJECT', function() {
-	// 	expect(reducers.DELETE_PROJECT({
-	// 		projects : {
-	// 			'1' : {
-	// 				id : '1',
-	// 				name : 'project',
-	// 				timestampModified : 1531075147,
-	// 			},
-	// 			'2' : {
-	// 				id : '2',
-	// 				name : 'project 2',
-	// 				timestampModified : 1531075233,
-	// 			},
-	// 			'3' : {
-	// 				id : '3',
-	// 				name : 'project 3',
-	// 				timestampModified : 1531075347,
-	// 			},
-	// 		}, 
-	// 	}, {
-	// 		id : '2',
-	// 	})).toEqual({
-	// 		projects : {
-	// 			'1' : {
-	// 				id : '1',
-	// 				name : 'project',
-	// 				timestampModified : 1531075147,
-	// 			},
-	// 			'3' : {
-	// 				id : '3',
-	// 				name : 'project 3',
-	// 				timestampModified : 1531075347,
-	// 			},
-	// 		}, 
-	// 	});
-	// });
 
 
 	it ('REMOVE_PROJECT', function() {

@@ -17,8 +17,8 @@ class Home extends React.Component {
 			if (this.props.settings.language == 'fr') {
 				return (
 					<AppPage>
+						<Block>
 						<div className="text-page">
-							<Block>
 								<h2>{"GHTD"}</h2>
 								<p>{"Version "+consts.version}</p>
 								<p>{"Cette application sert à gérer facilement des tâches par projet."}</p>
@@ -36,16 +36,16 @@ class Home extends React.Component {
 									<Link to="/settings-about">{"Paramètres > Aide"}</Link>
 									{"."}
 								</p>
-							</Block>
-						</div>
+							</div>
+						</Block>
 					</AppPage>
 				);
 			}
 			else {
 				return (
 					<AppPage>
-						<div className="text-page">
-							<Block>
+						<Block>
+							<div className="text-page">
 								<h2>{"GHTD"}</h2>
 								<p>{"Version "+consts.version}</p>
 								<p>{"This application allows to manage easily tasks and projects."}</p>
@@ -60,8 +60,8 @@ class Home extends React.Component {
 									<Link to="/settings-about">{"Settings > About"}</Link>
 									{" page."}
 								</p>
-							</Block>
-						</div>
+							</div>
+						</Block>
 					</AppPage>
 				);
 			}

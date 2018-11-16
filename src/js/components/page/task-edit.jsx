@@ -40,7 +40,9 @@ class TaskEdit extends React.Component {
 			},
 		];
 		for (let i in this.props.projects) {
-			projectList.push(this.props.projects[i]);
+			if (this.props.projects[i].status == 'active') {
+				projectList.push(this.props.projects[i]);
+			}
 		}
 		return (
 			<AppPage selectedMenu="tasks">

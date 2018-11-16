@@ -1,5 +1,6 @@
 html {
   background-color: #889;
+  background-attachment: fixed;
 }
 html body {
   font-family: Arial, sans-serif;
@@ -14,6 +15,8 @@ html body {
   margin-right: 0px;
   height: 100%;
   max-width: 416px;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 html body #react-root .app-container {
   color: #111;
@@ -210,6 +213,27 @@ html body #react-root .app-container input[type=text] {
   border-color: #CCC;
   color: #111;
   font-size: 15px;
+  font-family: Arial, sans-serif;
+  outline: none;
+}
+html body #react-root .app-container select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-position-x: right;
+  background-position-y: center;
+  height: 24px;
+  background-color: #222;
+  border-width: 1px;
+  border-type: solid;
+  border-radius: 4px;
+  padding: 1px 2px;
+  margin: 1px 2px;
+}
+html body #react-root .app-container select option {
+  height: 24px;
 }
 html body #react-root .app-container .project-label {
   line-height: 18px;
@@ -282,24 +306,9 @@ html body #react-root .app-container .view-table .view-row div[data-column=value
 }
 html body #react-root .app-container .label {
   border-radius: 4px;
-  padding: 2px 4px;
-  line-height: 20px;
+  padding: 0px 4px;
+  line-height: 18px;
   min-height: 20px;
-}
-html body #react-root .app-container form select {
-  height: 24px;
-  background-color: #222;
-  color: #111;
-  border-width: 1px;
-  border-type: solid;
-  border-radius: 4px;
-  padding: 1px 2px;
-  margin: 1px 2px;
-}
-html body #react-root .app-container form select option {
-  color: #111;
-  height: 24px;
-  background-color: #FFF;
 }
 html body #react-root .app-container div.form-table {
   width: 100%;
@@ -315,9 +324,13 @@ html body #react-root .app-container div.form-table div.view-row div[data-column
 html body #react-root .app-container div.form-table div.view-row div[data-column=value] {
   display: inline-block;
   width: 70%;
+  box-sizing: border-box;
+  padding: 0px 4px;
 }
 html body #react-root .app-container div.form-table div.view-row div[data-column=value] select {
   width: 100%;
+  height: 28px;
+  margin: 1px 0px;
 }
 html body #react-root .app-container div.form-table div.view-row div[data-column=value] input[type=text] {
   width: 100%;
@@ -2631,6 +2644,7 @@ html body #react-root .app-container[data-theme=light] .content {
 html body #react-root .app-container[data-theme=light] select {
   color: #111;
   background-color: rgba(224, 224, 224, 0.5);
+  background-image: url("arrow-black.png");
   border-color: #BBB;
 }
 html body #react-root .app-container[data-theme=light] select option {
@@ -2654,6 +2668,7 @@ html body #react-root .app-container[data-theme=dark] .content {
 html body #react-root .app-container[data-theme=dark] select {
   color: #EEE;
   background-color: rgba(32, 32, 32, 0.5);
+  background-image: url("arrow-white.png");
   border-color: #444;
 }
 html body #react-root .app-container[data-theme=dark] select option {

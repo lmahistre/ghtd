@@ -70,8 +70,9 @@ exports.updateProject = function(elt) {
 
 exports.changeProjectVisibility = function(id) {
 	return {
-		type : 'SET_PROJECT_VISIBLE',
+		type : 'CHANGE_PROJECT_VISIBILITY',
 		id : id,
+		currentTimestamp : parseInt(Date.now()/1000),
 	}
 }
 

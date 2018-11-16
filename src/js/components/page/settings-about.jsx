@@ -11,8 +11,8 @@ module.exports = store.connect(function(props) {
 	if (props.settings.language == 'fr') {
 		return (
 			<AppPage selectedMenu="settings">
-				<div className="text-page">
-					<Block>
+				<Block>
+					<div className="text-page">
 						<p>{consts.appName+" version "+consts.version}</p>
 						<h2>{"Stockage desdonnées"}</h2>
 						<p>
@@ -26,16 +26,16 @@ module.exports = store.connect(function(props) {
 							<li>{"Un jeton qui permet à l'application d'accéder aux Gists."}</li>
 						</ul>
 						<p></p>
-					</Block>
-				</div>
+					</div>
+				</Block>
 			</AppPage>
 		);
 	}
 	else {
 		return (
 			<AppPage selectedMenu="settings">
-				<div className="text-page">
-					<Block>
+				<Block>
+					<div className="text-page">
 						<p>{consts.appName+" version "+consts.version}</p>
 						<h2>{"Data storage"}</h2>
 						<p>{"Data managed by the application is stored in local storage. It does not use cookies to store data. It is possible to use a GitHub account to store and synchronize data."}</p>
@@ -46,8 +46,8 @@ module.exports = store.connect(function(props) {
 							<li>{"A token to access Gist data."}</li>
 						</ul>
 						<p></p>
-					</Block>
-				</div>
+					</div>
+				</Block>
 			</AppPage>
 		);
 	}
