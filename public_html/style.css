@@ -2644,7 +2644,7 @@ html body #react-root .app-container[data-theme=light] .content {
 html body #react-root .app-container[data-theme=light] select {
   color: #111;
   background-color: rgba(224, 224, 224, 0.5);
-  background-image: url("arrow-black.png");
+  background-image: url("img/arrow-black.png");
   border-color: #BBB;
 }
 html body #react-root .app-container[data-theme=light] select option {
@@ -2668,7 +2668,7 @@ html body #react-root .app-container[data-theme=dark] .content {
 html body #react-root .app-container[data-theme=dark] select {
   color: #EEE;
   background-color: rgba(32, 32, 32, 0.5);
-  background-image: url("arrow-white.png");
+  background-image: url("img/arrow-white.png");
   border-color: #444;
 }
 html body #react-root .app-container[data-theme=dark] select option {

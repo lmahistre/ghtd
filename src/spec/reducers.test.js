@@ -391,7 +391,7 @@ describe ('reducers', function() {
 
 
 	it ('CHANGE_PROJECT_VISIBILITY', function() {
-		expect(reducers.SET_PROJECT_VISIBLE({
+		expect(reducers.CHANGE_PROJECT_VISIBILITY({
 			projects : {
 				'1' : {
 					id : '1',
