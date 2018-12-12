@@ -22,6 +22,7 @@ const call = function(uri, post, callback) {
 	const settings = state.settings;
 	const params = {
 		credentials : 'omit',
+		cache : 'no-store',
 	};
 
 	if (post) {

@@ -58,7 +58,6 @@ exports.setBackgroundImage = function(url) {
 
 exports.addServiceWorker = function () {
 	if ('serviceWorker' in navigator) {
-		console.log('Service Worker registration in progress.');
 		navigator.serviceWorker
 		.register('sw.js')
 		.then(function(registration) {
@@ -67,8 +66,5 @@ exports.addServiceWorker = function () {
 		.catch(function(error) {
 			console.log('Service Worker registration failure.', error);
 		});
-	}
-	else {
-		console.log('Service Worker is not supported.');
 	}
 }
