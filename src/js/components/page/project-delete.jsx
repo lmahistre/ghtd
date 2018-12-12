@@ -5,6 +5,7 @@ const ReactRouterDom = require('react-router-dom');
 const Redirect = ReactRouterDom.Redirect;
 
 const AppPage = require("../app-page.jsx");
+const Block = require("../ui/block.jsx");
 const CommonButton = require("../ui/common-button.jsx");
 
 const browserService = require('../../services/browser.js');
@@ -36,15 +37,17 @@ class ProjectDelete extends React.Component {
 			const projectIsUsed = utils.projectIsUsedByVisibleTasks(project.id, tasks);
 			return (
 				<AppPage selectedMenu="projects">
-					<div className="text-page">
-						<p>
-							{ projectIsUsed ?
-								L("The project ")+project.name+L(" cannot be deleted because there are still tasks attached to it.")
-							:
-								L("Are you sure you want to delete the project ")+project.name+L("?")
-							}
-						</p>
-					</div>
+					<Block>
+						<div className="text-page">
+							<p>
+								{ projectIsUsed ?
+									L("The project ")+project.name+L(" cannot be deleted because there are still tasks attached to it.")
+								:
+									L("Are you sure you want to delete the project ")+project.name+L("?")
+								}
+							</p>
+						</div>
+					</Block>
 					{ projectIsUsed ? null : 
 						<CommonButton onClick={self.delete.bind(self)}>{L("Delete")}</CommonButton>
 					}
