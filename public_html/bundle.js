@@ -9759,7 +9759,7 @@ module.exports.colors = [
 	},
 ];
 
-exports.version = '0.2.0';
+exports.version = '0.2.1';
 exports.appName = 'GHTD';
 exports.fileName = 'ghtd.json';
 
