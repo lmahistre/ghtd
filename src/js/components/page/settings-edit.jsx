@@ -24,9 +24,7 @@ class SettingsEdit extends React.Component {
 		settings.token = document.getElementById('settings-token').value;
 		settings.gistId = document.getElementById('settings-gistId').value;
 		settings.fileName = document.getElementById('settings-fileName').value;
-		settings.backgroundImage = document.getElementById('settings-backgroundImage').value;
 		store.dispatch(reduxActions.updateSettings(settings));
-		browserService.setBackgroundImage(settings.backgroundImage);
 		browserService.redirect('settings');
 	}
 
@@ -87,12 +85,6 @@ class SettingsEdit extends React.Component {
 							<div data-column="label">{L("File name")}</div>
 							<div data-column="value">
 								<input name="token" id="settings-fileName" type="text" defaultValue={settings.fileName} onKeyDown={this.handleInputKeyDown.bind(this)} />
-							</div>
-						</div>
-						<div className="view-row">
-							<div data-column="label">{L("Background image")}</div>
-							<div data-column="value">
-								<input name="token" id="settings-backgroundImage" type="text" defaultValue={settings.backgroundImage} onKeyDown={this.handleInputKeyDown.bind(this)} />
 							</div>
 						</div>
 					</div>

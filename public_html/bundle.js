@@ -5662,7 +5662,6 @@ exports.addTask = function(elt) {
 
 
 exports.updateTask = function(elt) {
-	// elt.timestampModified = parseInt(Date.now()/1000);
 	return {
 		type : 'SET_TASK',
 		task : elt,
@@ -9313,7 +9312,6 @@ const React = __webpack_require__(1);
 const ReactDOM = __webpack_require__(66);
 const Main = __webpack_require__(122);
 
-// const stateContainerService = require('./state-container.js');
 const constsService = __webpack_require__(21);
 
 /**
@@ -9359,11 +9357,6 @@ exports.render = function () {
 
 exports.redirect = function (uri) {
 	window.location.href = '#/'+uri;
-}
-
-
-exports.setBackgroundImage = function(url) {
-	document.getElementsByTagName('html')[0].style.backgroundImage = "url("+url+")";
 }
 
 
@@ -12174,41 +12167,15 @@ function decrypt (data, password) {
 "use strict";
 
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 var React = __webpack_require__(1);
 
-var Row = function (_React$Component) {
-	_inherits(Row, _React$Component);
-
-	function Row() {
-		_classCallCheck(this, Row);
-
-		return _possibleConstructorReturn(this, (Row.__proto__ || Object.getPrototypeOf(Row)).apply(this, arguments));
-	}
-
-	_createClass(Row, [{
-		key: "render",
-		value: function render() {
-			// <div className="clearfix" />
-			return React.createElement(
-				"div",
-				{ className: "ui-tr content " + this.props.className },
-				this.props.children
-			);
-		}
-	}]);
-
-	return Row;
-}(React.Component);
-
-module.exports = Row;
+module.exports = function (props) {
+	return React.createElement(
+		"div",
+		{ className: "ui-tr content " + props.className },
+		props.children
+	);
+};
 
 /***/ }),
 /* 46 */
@@ -21185,7 +21152,7 @@ const browserService = __webpack_require__(18);
 window.onload = function () {
 	browserService.setTitle();
 	browserService.render();
-	browserService.addServiceWorker();
+	// browserService.addServiceWorker();
 }
 
 
@@ -21553,10 +21520,6 @@ var Main = function (_React$Component) {
 	_createClass(Main, [{
 		key: 'render',
 		value: function render() {
-			var state = store.getState();
-			if (state.settings && state.settings.backgroundImage && state.settings.backgroundImage.length > 0) {
-				browserService.setBackgroundImage(state.settings.backgroundImage);
-			}
 			return React.createElement(
 				ReactRedux.Provider,
 				{ store: store },
@@ -35838,7 +35801,6 @@ var TaskEdit = function (_React$Component) {
 		key: 'render',
 		value: function render() {
 			var task = this.props.tasks[this.props.match.params.id];
-			// let project = task.projectId ? this.props.projects[task.projectId] : null;
 			var projectList = [{
 				id: 0,
 				name: ''
@@ -37174,20 +37136,6 @@ var SettingsView = function (_React$Component) {
 								{ className: "td", "data-column": "value" },
 								settings.fileName
 							)
-						),
-						React.createElement(
-							"div",
-							{ className: "view-row" },
-							React.createElement(
-								"div",
-								{ className: "td", "data-column": "label" },
-								L("Background image")
-							),
-							React.createElement(
-								"div",
-								{ className: "td", "data-column": "value" },
-								settings.backgroundImage
-							)
 						)
 					)
 				)
@@ -37465,9 +37413,7 @@ var SettingsEdit = function (_React$Component) {
 			settings.token = document.getElementById('settings-token').value;
 			settings.gistId = document.getElementById('settings-gistId').value;
 			settings.fileName = document.getElementById('settings-fileName').value;
-			settings.backgroundImage = document.getElementById('settings-backgroundImage').value;
 			store.dispatch(reduxActions.updateSettings(settings));
-			browserService.setBackgroundImage(settings.backgroundImage);
 			browserService.redirect('settings');
 		}
 	}, {
@@ -37605,20 +37551,6 @@ var SettingsEdit = function (_React$Component) {
 								"div",
 								{ "data-column": "value" },
 								React.createElement("input", { name: "token", id: "settings-fileName", type: "text", defaultValue: settings.fileName, onKeyDown: this.handleInputKeyDown.bind(this) })
-							)
-						),
-						React.createElement(
-							"div",
-							{ className: "view-row" },
-							React.createElement(
-								"div",
-								{ "data-column": "label" },
-								L("Background image")
-							),
-							React.createElement(
-								"div",
-								{ "data-column": "value" },
-								React.createElement("input", { name: "token", id: "settings-backgroundImage", type: "text", defaultValue: settings.backgroundImage, onKeyDown: this.handleInputKeyDown.bind(this) })
 							)
 						)
 					)

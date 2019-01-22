@@ -32,7 +32,6 @@ class TaskEdit extends React.Component {
 
 	render() {
 		let task = this.props.tasks[this.props.match.params.id];
-		// let project = task.projectId ? this.props.projects[task.projectId] : null;
 		const projectList = [
 			{
 				id : 0,

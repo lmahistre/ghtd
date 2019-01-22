@@ -89,10 +89,6 @@ class SettingsView extends React.Component {
 							<div className="td"  data-column="label">{L("File name")}</div>
 							<div className="td"  data-column="value">{settings.fileName}</div>
 						</div>
-						<div className="view-row">
-							<div className="td"  data-column="label">{L("Background image")}</div>
-							<div className="td"  data-column="value">{settings.backgroundImage}</div>
-						</div>
 					</div>
 				</Block>
 			</AppPage>

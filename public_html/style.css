@@ -2636,6 +2636,7 @@ div[data-table=import-project-list] div.td[data-column=actions] {
   clip: auto;
 }
 html body #react-root .app-container[data-theme=light] {
+  background-color: #889;
   color: #111;
 }
 html body #react-root .app-container[data-theme=light] .content {
@@ -2660,6 +2661,7 @@ html body #react-root .app-container[data-theme=light] .radio-selector .radio-se
   color: #111;
 }
 html body #react-root .app-container[data-theme=dark] {
+  background-color: #222;
   color: #EEE;
 }
 html body #react-root .app-container[data-theme=dark] .content {

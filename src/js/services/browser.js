@@ -2,7 +2,6 @@ const React = require("react");
 const ReactDOM = require("react-dom");
 const Main = require("../components/main.jsx");
 
-// const stateContainerService = require('./state-container.js');
 const constsService = require('./consts.js');
 
 /**
@@ -48,11 +47,6 @@ exports.render = function () {
 
 exports.redirect = function (uri) {
 	window.location.href = '#/'+uri;
-}
-
-
-exports.setBackgroundImage = function(url) {
-	document.getElementsByTagName('html')[0].style.backgroundImage = "url("+url+")";
 }
 
 

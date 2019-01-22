@@ -25,7 +25,6 @@ exports.addTask = function(elt) {
 
 
 exports.updateTask = function(elt) {
-	// elt.timestampModified = parseInt(Date.now()/1000);
 	return {
 		type : 'SET_TASK',
 		task : elt,
