@@ -553,7 +553,6 @@ describe ('reducers', function() {
 				gistId : '222',
 				token : '333',
 				language : 'english',
-				theme : 'dark',
 			},
 		})).toEqual({
 			settings : {
@@ -561,7 +560,6 @@ describe ('reducers', function() {
 				gistId : '222',
 				token : '333',
 				language : 'english',
-				theme : 'dark',
 				isSyncDirty : true,
 			}
 		});
@@ -570,7 +568,6 @@ describe ('reducers', function() {
 			settings : {
 				projectId : '2',
 				user : 'dd',
-				theme : 'light',
 			},
 		}, {
 			settings : {
@@ -578,7 +575,6 @@ describe ('reducers', function() {
 				gistId : '222',
 				token : '333',
 				language : 'english',
-				theme : 'dark',
 			},
 		})).toEqual({
 			settings : {
@@ -587,7 +583,6 @@ describe ('reducers', function() {
 				gistId : '222',
 				token : '333',
 				language : 'english',
-				theme : 'dark',
 				isSyncDirty : true,
 			},
 		});

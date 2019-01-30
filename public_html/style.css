@@ -24,11 +24,22 @@ html body #react-root .app-container {
 html body #react-root .app-container .text-page {
   margin: 8px;
 }
-html body #react-root .app-container h2 {
+html body #react-root .app-container .text-page h2 {
   margin-bottom: 12px;
 }
-html body #react-root .app-container p {
+html body #react-root .app-container .text-page p {
   margin-top: 12px;
+  margin-bottom: 0px;
+  line-height: 24px;
+}
+html body #react-root .app-container .text-page ul {
+  margin: 0px;
+}
+html body #react-root .app-container .text-page ul li {
+  line-height: 24px;
+}
+html body #react-root .app-container a {
+  color: #8BF;
 }
 html body #react-root .app-container a.common-button {
   text-decoration: none;
@@ -109,7 +120,7 @@ html body #react-root .app-container div.menu {
 html body #react-root .app-container div.menu .menu-entry {
   background-color: rgba(204, 204, 204, 0.8);
   display: inline-block;
-  width: 76px;
+  width: 80px;
   text-decoration: none;
   color: #000;
   padding: 8px 8px;
@@ -303,7 +314,7 @@ html body #react-root .app-container .view-table input[type=text] {
   width: 100%;
 }
 html body #react-root .app-container .view-table .view-row {
-  padding: 2px 4px;
+  padding: 4px 4px;
 }
 html body #react-root .app-container .view-table .view-row div[data-column=label] {
   display: inline-block;
@@ -349,6 +360,9 @@ html body #react-root .app-container .page-content {
   padding-right: 4px;
   padding-top: 4px;
   padding-bottom: 4px;
+}
+html body #react-root .app-container .__react_component_tooltip {
+  font-size: 16px;
 }
 div[data-table=task-list] div.td[data-column=actions] {
   width: 84px;

@@ -37,13 +37,24 @@ html {
 
 				.text-page {
 					margin: 8px;
+					h2 {
+						margin-bottom: 12px;
+					}
+					p {
+						margin-top: 12px;
+						margin-bottom: 0px;
+						line-height: 24px;
+					}
+					ul {
+						margin: 0px;
+						li {
+							line-height: 24px;
+						}
+					}
 				}
 
-				h2 {
-					margin-bottom: 12px;
-				}
-				p {
-					margin-top: 12px;
+				a {
+					color: @button-color;
 				}
 
 				a.common-button {
@@ -180,7 +191,7 @@ html {
 						width: 100%;
 					}
 					.view-row {
-						padding: 2px 4px;
+						padding: 4px 4px;
 						div[data-column=label] {
 							display: inline-block;
 							width: 30%;
@@ -232,6 +243,10 @@ html {
 					padding-right: 4px;
 					padding-top: 4px;
 					padding-bottom: 4px;
+				}
+
+				.__react_component_tooltip {
+					font-size: @font-size-default;
 				}
 			}
 		}

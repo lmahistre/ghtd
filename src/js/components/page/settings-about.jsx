@@ -14,7 +14,7 @@ module.exports = store.connect(function(props) {
 				<Block>
 					<div className="text-page">
 						<p>{consts.appName+" version "+consts.version}</p>
-						<h2>{"Stockage desdonnées"}</h2>
+						<h2>{"Stockage des données"}</h2>
 						<p>
 							{"Les données manipulées par l'application sont stockées dans le "}
 							<i>{"local storage"}</i>
@@ -25,7 +25,15 @@ module.exports = store.connect(function(props) {
 							<li>{"Un Gist pour stocker ces données."}</li>
 							<li>{"Un jeton qui permet à l'application d'accéder aux Gists."}</li>
 						</ul>
-						<p></p>
+						<h2>{"Paramètres"}</h2>
+						<p>{"Paramètres disponibles :"}</p>
+						<ul>
+							<li>{"Langue : langue de l'interface (français ou anglais)"}</li>
+							<li>{"Utilisateur : nom d'utilisateur du compte GitHub"}</li>
+							<li>{"ID du Gist : identifiant du Gist utilisé pour stocker les données"}</li>
+							<li>{"Jeton : jeton utilisé pour accéder aux Gists. Le jeton nécessite seulement l'accès aux Gists"}</li>
+							<li>{"Nom de fichier : fichier du Gist pour stocker les données, 'ghtd.json' par défaut"}</li>
+						</ul>
 					</div>
 				</Block>
 			</AppPage>
@@ -45,15 +53,14 @@ module.exports = store.connect(function(props) {
 							<li>{"A Gist to store data."}</li>
 							<li>{"A token to access Gist data."}</li>
 						</ul>
-						<p></p>
 						<h2>{"Settings"}</h2>
 						<p>{"Available settings:"}</p>
 						<ul>
-							<li>{"Language : interface language"}</li>
-							<li>{"User : user name of GitHub account"}</li>
-							<li>{"Gist ID : identifier of the Gist used to store data"}</li>
-							<li>{"Token : token used to access Gist data. This token only requires access to Gists"}</li>
-							<li>{"File name : name of the file used to store data inside the Gist"}</li>
+							<li>{"Language: interface language (English or French)"}</li>
+							<li>{"User: user name of GitHub account"}</li>
+							<li>{"Gist ID: identifier of the Gist used to store data"}</li>
+							<li>{"Token: token used to access Gist data. This token only requires access to Gists"}</li>
+							<li>{"File name: name of the file used to store data inside the Gist, 'ghtd.json' by default"}</li>
 						</ul>
 					</div>
 				</Block>

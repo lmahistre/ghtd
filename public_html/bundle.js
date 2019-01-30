@@ -37249,7 +37249,7 @@ module.exports = store.connect(function (props) {
 					React.createElement(
 						"h2",
 						null,
-						"Stockage desdonnées"
+						"Stockage des données"
 					),
 					React.createElement(
 						"p",
@@ -37286,7 +37286,45 @@ module.exports = store.connect(function (props) {
 							"Un jeton qui permet à l'application d'accéder aux Gists."
 						)
 					),
-					React.createElement("p", null)
+					React.createElement(
+						"h2",
+						null,
+						"Paramètres"
+					),
+					React.createElement(
+						"p",
+						null,
+						"Paramètres disponibles :"
+					),
+					React.createElement(
+						"ul",
+						null,
+						React.createElement(
+							"li",
+							null,
+							"Langue : langue de l'interface (français ou anglais)"
+						),
+						React.createElement(
+							"li",
+							null,
+							"Utilisateur : nom d'utilisateur du compte GitHub"
+						),
+						React.createElement(
+							"li",
+							null,
+							"ID du Gist : identifiant du Gist utilisé pour stocker les données"
+						),
+						React.createElement(
+							"li",
+							null,
+							"Jeton : jeton utilisé pour accéder aux Gists. Le jeton nécessite seulement l'accès aux Gists"
+						),
+						React.createElement(
+							"li",
+							null,
+							"Nom de fichier : fichier du Gist pour stocker les données, 'ghtd.json' par défaut"
+						)
+					)
 				)
 			)
 		);
@@ -37339,7 +37377,6 @@ module.exports = store.connect(function (props) {
 							"A token to access Gist data."
 						)
 					),
-					React.createElement("p", null),
 					React.createElement(
 						"h2",
 						null,
@@ -37356,27 +37393,27 @@ module.exports = store.connect(function (props) {
 						React.createElement(
 							"li",
 							null,
-							"Language : interface language"
+							"Language: interface language (English or French)"
 						),
 						React.createElement(
 							"li",
 							null,
-							"User : user name of GitHub account"
+							"User: user name of GitHub account"
 						),
 						React.createElement(
 							"li",
 							null,
-							"Gist ID : identifier of the Gist used to store data"
+							"Gist ID: identifier of the Gist used to store data"
 						),
 						React.createElement(
 							"li",
 							null,
-							"Token : token used to access Gist data. This token only requires access to Gists"
+							"Token: token used to access Gist data. This token only requires access to Gists"
 						),
 						React.createElement(
 							"li",
 							null,
-							"File name : name of the file used to store data inside the Gist"
+							"File name: name of the file used to store data inside the Gist, 'ghtd.json' by default"
 						)
 					)
 				)
