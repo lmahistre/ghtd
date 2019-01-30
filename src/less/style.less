@@ -2,20 +2,17 @@
 @border-color: #0CF;
 @margin-elt : 4px;
 
-@font-size-default : 15px;
+@font-size-default : 16px;
 @font-family-default: Arial, sans-serif;
-@text-color : #111;
-@text-color-light : #111;
-@text-color-dark : #EEE;
+@text-color : #EEE;
 
 @button-color : #8BF;
 @button-hover-color : #8AE;
 
 html {
-	background-color: #889;
-	background-attachment: fixed;
 
 	body {
+		background-color: #333;
 		font-family: @font-family-default;
 		font-size: @font-size-default;
 		padding-top: 0px;
@@ -34,7 +31,7 @@ html {
 		#react-root {
 			.app-container {
 				color: @text-color;
-				padding-top: 30px;
+				padding-top: 34px;
 				margin-left: auto;
 				margin-right: auto;
 
@@ -62,6 +59,10 @@ html {
 					}
 				}
 
+				.content {
+					background-color: rgba(0, 0, 0, 0.5);
+				}
+
 				@import "components/small-button.less";
 				@import "components/menu.less";
 				@import "components/alerts.less";
@@ -76,13 +77,17 @@ html {
 					border-style: solid;
 					border-width: 1px;
 					border-radius: 4px;
+					background-color: #444;
+					border-color: transparent;
 					box-sizing: border-box;
 					padding: 4px 8px;
-					border-color:	#CCC;
 					color: @text-color;
 					font-size: @font-size-default;
 					font-family: @font-family-default;
 					outline: none;
+				}
+				input[type=text] {
+					color: @text-color;
 				}
 				select {
 					-webkit-appearance: none;
@@ -93,14 +98,16 @@ html {
 					background-position-x: right;
 					background-position-y: center;
 					height: 24px;
-					background-color: #222;
 					border-width: 1px;
 					border-type: solid;
 					border-radius: 4px;
 					padding: 1px 2px;
 					margin: 1px 2px;
+					color: @text-color;
+					background-image: url("img/arrow-white.png");
 					option {
 						height: 24px;
+						color: @text-color;
 					}
 				}
 
@@ -117,6 +124,8 @@ html {
 
 				select.project-label {
 					width: 100%;
+					height: 27px;
+					margin: 0px;
 				}
 
 				div.new-task-form {
@@ -127,7 +136,6 @@ html {
 					border-radius: 4px;
 					margin:	4px;
 					&>div.td {
-						// float: left;
 						display: inline-block;
 						vertical-align: middle;
 					}

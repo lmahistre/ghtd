@@ -66,28 +66,24 @@ class SettingsView extends React.Component {
 				<Block>
 					<div className="view-table" data-table="settings-list">
 						<div className="view-row">
-							<div className="td" data-column="label">{L("Theme")}</div>
-							<div className="td"  data-column="value">{L(themeLabel)}</div>
+							<div className="td" data-column="label">{L("Language")}</div>
+							<div className="td" data-column="value">{L(languageLabel)}</div>
 						</div>
 						<div className="view-row">
-							<div className="td"  data-column="label">{L("Language")}</div>
-							<div className="td"  data-column="value">{L(languageLabel)}</div>
+							<div className="td" data-column="label">{L("User")}</div>
+							<div className="td" data-column="value">{settings.user}</div>
 						</div>
 						<div className="view-row">
-							<div className="td"  data-column="label">{L("User")}</div>
-							<div className="td"  data-column="value">{settings.user}</div>
+							<div className="td" data-column="label">{L("Gist ID")}</div>
+							<div className="td" data-column="value">{settings.gistId}</div>
 						</div>
 						<div className="view-row">
-							<div className="td"  data-column="label">{L("Gist ID")}</div>
-							<div className="td"  data-column="value">{settings.gistId}</div>
+							<div className="td" data-column="label">{L("Token")}</div>
+							<div className="td" data-column="value">{settings.token}</div>
 						</div>
 						<div className="view-row">
-							<div className="td"  data-column="label">{L("Token")}</div>
-							<div className="td"  data-column="value">{settings.token}</div>
-						</div>
-						<div className="view-row">
-							<div className="td"  data-column="label">{L("File name")}</div>
-							<div className="td"  data-column="value">{settings.fileName}</div>
+							<div className="td" data-column="label">{L("File name")}</div>
+							<div className="td" data-column="value">{settings.fileName}</div>
 						</div>
 					</div>
 				</Block>

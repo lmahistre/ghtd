@@ -21851,12 +21851,8 @@ exports.SET_SETTINGS = function(state, action) {
 	newState.settings.gistId = action.settings.gistId;
 	newState.settings.token = action.settings.token;
 	newState.settings.language = action.settings.language;
-	newState.settings.theme = action.settings.theme;
 	if (action.settings.fileName) {
 		newState.settings.fileName = action.settings.fileName;
-	}
-	if (action.settings.backgroundImage) {
-		newState.settings.backgroundImage = action.settings.backgroundImage;
 	}
 	return newState;
 }
@@ -25051,7 +25047,7 @@ module.exports.makeKey = makeKey
 /* 174 */
 /***/ (function(module) {
 
-module.exports = {"_from":"elliptic@^6.0.0","_id":"elliptic@6.4.1","_inBundle":false,"_integrity":"sha512-BsXLz5sqX8OHcsh7CqBMztyXARmGQ3LWPtGjJi6DiJHq5C/qvi9P3OqgswKSDftbu8+IoI/QDTAm2fFnQ9SZSQ==","_location":"/elliptic","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"elliptic@^6.0.0","name":"elliptic","escapedName":"elliptic","rawSpec":"^6.0.0","saveSpec":null,"fetchSpec":"^6.0.0"},"_requiredBy":["/browserify-sign","/create-ecdh"],"_resolved":"https://registry.npmjs.org/elliptic/-/elliptic-6.4.1.tgz","_shasum":"c2d0b7776911b86722c632c3c06c60f2f819939a","_spec":"elliptic@^6.0.0","_where":"/home/lionel/projects/ghtd/node_modules/browserify-sign","author":{"name":"Fedor Indutny","email":"fedor@indutny.com"},"bugs":{"url":"https://github.com/indutny/elliptic/issues"},"bundleDependencies":false,"dependencies":{"bn.js":"^4.4.0","brorand":"^1.0.1","hash.js":"^1.0.0","hmac-drbg":"^1.0.0","inherits":"^2.0.1","minimalistic-assert":"^1.0.0","minimalistic-crypto-utils":"^1.0.0"},"deprecated":false,"description":"EC cryptography","devDependencies":{"brfs":"^1.4.3","coveralls":"^2.11.3","grunt":"^0.4.5","grunt-browserify":"^5.0.0","grunt-cli":"^1.2.0","grunt-contrib-connect":"^1.0.0","grunt-contrib-copy":"^1.0.0","grunt-contrib-uglify":"^1.0.1","grunt-mocha-istanbul":"^3.0.1","grunt-saucelabs":"^8.6.2","istanbul":"^0.4.2","jscs":"^2.9.0","jshint":"^2.6.0","mocha":"^2.1.0"},"files":["lib"],"homepage":"https://github.com/indutny/elliptic","keywords":["EC","Elliptic","curve","Cryptography"],"license":"MIT","main":"lib/elliptic.js","name":"elliptic","repository":{"type":"git","url":"git+ssh://git@github.com/indutny/elliptic.git"},"scripts":{"jscs":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","jshint":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","lint":"npm run jscs && npm run jshint","test":"npm run lint && npm run unit","unit":"istanbul test _mocha --reporter=spec test/index.js","version":"grunt dist && git add dist/"},"version":"6.4.1"};
+module.exports = {"_args":[["elliptic@6.4.1","/home/lionel/projects/ghtd"]],"_development":true,"_from":"elliptic@6.4.1","_id":"elliptic@6.4.1","_inBundle":false,"_integrity":"sha512-BsXLz5sqX8OHcsh7CqBMztyXARmGQ3LWPtGjJi6DiJHq5C/qvi9P3OqgswKSDftbu8+IoI/QDTAm2fFnQ9SZSQ==","_location":"/elliptic","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"elliptic@6.4.1","name":"elliptic","escapedName":"elliptic","rawSpec":"6.4.1","saveSpec":null,"fetchSpec":"6.4.1"},"_requiredBy":["/browserify-sign","/create-ecdh"],"_resolved":"https://registry.npmjs.org/elliptic/-/elliptic-6.4.1.tgz","_spec":"6.4.1","_where":"/home/lionel/projects/ghtd","author":{"name":"Fedor Indutny","email":"fedor@indutny.com"},"bugs":{"url":"https://github.com/indutny/elliptic/issues"},"dependencies":{"bn.js":"^4.4.0","brorand":"^1.0.1","hash.js":"^1.0.0","hmac-drbg":"^1.0.0","inherits":"^2.0.1","minimalistic-assert":"^1.0.0","minimalistic-crypto-utils":"^1.0.0"},"description":"EC cryptography","devDependencies":{"brfs":"^1.4.3","coveralls":"^2.11.3","grunt":"^0.4.5","grunt-browserify":"^5.0.0","grunt-cli":"^1.2.0","grunt-contrib-connect":"^1.0.0","grunt-contrib-copy":"^1.0.0","grunt-contrib-uglify":"^1.0.1","grunt-mocha-istanbul":"^3.0.1","grunt-saucelabs":"^8.6.2","istanbul":"^0.4.2","jscs":"^2.9.0","jshint":"^2.6.0","mocha":"^2.1.0"},"files":["lib"],"homepage":"https://github.com/indutny/elliptic","keywords":["EC","Elliptic","curve","Cryptography"],"license":"MIT","main":"lib/elliptic.js","name":"elliptic","repository":{"type":"git","url":"git+ssh://git@github.com/indutny/elliptic.git"},"scripts":{"jscs":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","jshint":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","lint":"npm run jscs && npm run jshint","test":"npm run lint && npm run unit","unit":"istanbul test _mocha --reporter=spec test/index.js","version":"grunt dist && git add dist/"},"version":"6.4.1"};
 
 /***/ }),
 /* 175 */
@@ -35224,8 +35220,8 @@ exports.task = function (obj) {
 		name : obj.name,
 		projectId : obj.projectId,
 		status : obj.status,
-		timestampCreated : isNaN(obj.timestampCreated) ? 0 : obj.timestampCreated,
-		timestampModified : isNaN(obj.timestampModified) ? 0 : obj.timestampModified,
+		timestampCreated : isNaN(obj.timestampCreated) ? parseInt(Date.now()/1000) : obj.timestampCreated,
+		timestampModified : isNaN(obj.timestampModified) ? parseInt(Date.now()/1000) : obj.timestampModified,
 	}
 }
 
@@ -35239,8 +35235,8 @@ exports.project = function (obj) {
 		provider : obj.provider,
 		repo : obj.repo,
 		status : obj.status && ['active', 'removed'].indexOf(obj.status) ? obj.status : 'active',
-		timestampCreated : isNaN(obj.timestampCreated) ? 0 : obj.timestampCreated,
-		timestampModified : isNaN(obj.timestampModified) ? 0 : obj.timestampModified,
+		timestampCreated : isNaN(obj.timestampCreated) ? parseInt(Date.now()/1000) : obj.timestampCreated,
+		timestampModified : isNaN(obj.timestampModified) ? parseInt(Date.now()/1000) : obj.timestampModified,
 	}
 }
 
@@ -37059,20 +37055,6 @@ var SettingsView = function (_React$Component) {
 							React.createElement(
 								"div",
 								{ className: "td", "data-column": "label" },
-								L("Theme")
-							),
-							React.createElement(
-								"div",
-								{ className: "td", "data-column": "value" },
-								L(themeLabel)
-							)
-						),
-						React.createElement(
-							"div",
-							{ className: "view-row" },
-							React.createElement(
-								"div",
-								{ className: "td", "data-column": "label" },
 								L("Language")
 							),
 							React.createElement(
@@ -37357,7 +37339,46 @@ module.exports = store.connect(function (props) {
 							"A token to access Gist data."
 						)
 					),
-					React.createElement("p", null)
+					React.createElement("p", null),
+					React.createElement(
+						"h2",
+						null,
+						"Settings"
+					),
+					React.createElement(
+						"p",
+						null,
+						"Available settings:"
+					),
+					React.createElement(
+						"ul",
+						null,
+						React.createElement(
+							"li",
+							null,
+							"Language : interface language"
+						),
+						React.createElement(
+							"li",
+							null,
+							"User : user name of GitHub account"
+						),
+						React.createElement(
+							"li",
+							null,
+							"Gist ID : identifier of the Gist used to store data"
+						),
+						React.createElement(
+							"li",
+							null,
+							"Token : token used to access Gist data. This token only requires access to Gists"
+						),
+						React.createElement(
+							"li",
+							null,
+							"File name : name of the file used to store data inside the Gist"
+						)
+					)
 				)
 			)
 		);
@@ -37407,7 +37428,6 @@ var SettingsEdit = function (_React$Component) {
 		key: "save",
 		value: function save() {
 			var settings = {};
-			settings.theme = document.getElementById('settings-theme').value;
 			settings.language = document.getElementById('language').value;
 			settings.user = document.getElementById('settings-user').value;
 			settings.token = document.getElementById('settings-token').value;
@@ -37446,33 +37466,6 @@ var SettingsEdit = function (_React$Component) {
 					React.createElement(
 						"div",
 						{ className: "form-table", "data-table": "settings-list" },
-						React.createElement(
-							"div",
-							{ className: "view-row" },
-							React.createElement(
-								"div",
-								{ "data-column": "label" },
-								L("Theme")
-							),
-							React.createElement(
-								"div",
-								{ "data-column": "value" },
-								React.createElement(
-									RadioSelector,
-									{ id: "settings-theme", value: settings.theme },
-									React.createElement(
-										"option",
-										{ value: "light" },
-										L("Light")
-									),
-									React.createElement(
-										"option",
-										{ value: "dark" },
-										L("Dark")
-									)
-								)
-							)
-						),
 						React.createElement(
 							"div",
 							{ className: "view-row" },

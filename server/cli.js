@@ -4,7 +4,11 @@ const chalk = require('chalk');
 
 
 exports.css = function (args) {
-	tasks.css();
+	tasks.css().then(function() {
+		console.log(chalk.green('CSS successfully compiled'));
+	}).catch(function(error) {
+		console.log(chalk.red(error));
+	});
 }
 
 

@@ -18,7 +18,6 @@ class SettingsEdit extends React.Component {
 
 	save() {
 		const settings = {};
-		settings.theme = document.getElementById('settings-theme').value;
 		settings.language = document.getElementById('language').value;
 		settings.user = document.getElementById('settings-user').value;
 		settings.token = document.getElementById('settings-token').value;
@@ -44,15 +43,6 @@ class SettingsEdit extends React.Component {
 				<CommonButton to="/settings">{L("Cancel")}</CommonButton>
 				<Block>
 					<div className="form-table" data-table="settings-list">
-						<div className="view-row">
-							<div data-column="label">{L("Theme")}</div>
-							<div data-column="value">
-								<RadioSelector id="settings-theme" value={settings.theme}>
-									<option value="light">{L("Light")}</option>
-									<option value="dark">{L("Dark")}</option>
-								</RadioSelector>
-							</div>
-						</div>
 						<div className="view-row">
 							<div data-column="label">{L("Language")}</div>
 							<div data-column="value">

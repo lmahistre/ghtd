@@ -46,6 +46,15 @@ module.exports = store.connect(function(props) {
 							<li>{"A token to access Gist data."}</li>
 						</ul>
 						<p></p>
+						<h2>{"Settings"}</h2>
+						<p>{"Available settings:"}</p>
+						<ul>
+							<li>{"Language : interface language"}</li>
+							<li>{"User : user name of GitHub account"}</li>
+							<li>{"Gist ID : identifier of the Gist used to store data"}</li>
+							<li>{"Token : token used to access Gist data. This token only requires access to Gists"}</li>
+							<li>{"File name : name of the file used to store data inside the Gist"}</li>
+						</ul>
 					</div>
 				</Block>
 			</AppPage>

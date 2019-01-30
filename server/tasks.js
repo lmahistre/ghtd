@@ -21,14 +21,16 @@ exports.css = function() {
 				},
 				function (e, output) {
 					if (e) {
-						resolve();
+						reject(e);
 					}
 					else {
 						fs.writeFile(config.css.outputFolder+'/'+config.css.outputFilename, output.css, {
 							flag:'w+', 
 							encoding:'utf8'
 						},
-						function(err) {
+						function(err, stg) {
+							console.log(err);
+							console.log(stg);
 							if (err) {
 								reject(err);
 							}

@@ -5,8 +5,8 @@ exports.task = function (obj) {
 		name : obj.name,
 		projectId : obj.projectId,
 		status : obj.status,
-		timestampCreated : isNaN(obj.timestampCreated) ? 0 : obj.timestampCreated,
-		timestampModified : isNaN(obj.timestampModified) ? 0 : obj.timestampModified,
+		timestampCreated : isNaN(obj.timestampCreated) ? parseInt(Date.now()/1000) : obj.timestampCreated,
+		timestampModified : isNaN(obj.timestampModified) ? parseInt(Date.now()/1000) : obj.timestampModified,
 	}
 }
 
@@ -20,7 +20,7 @@ exports.project = function (obj) {
 		provider : obj.provider,
 		repo : obj.repo,
 		status : obj.status && ['active', 'removed'].indexOf(obj.status) ? obj.status : 'active',
-		timestampCreated : isNaN(obj.timestampCreated) ? 0 : obj.timestampCreated,
-		timestampModified : isNaN(obj.timestampModified) ? 0 : obj.timestampModified,
+		timestampCreated : isNaN(obj.timestampCreated) ? parseInt(Date.now()/1000) : obj.timestampCreated,
+		timestampModified : isNaN(obj.timestampModified) ? parseInt(Date.now()/1000) : obj.timestampModified,
 	}
 }
