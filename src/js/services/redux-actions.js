@@ -154,3 +154,11 @@ exports.endSync = function(data) {
 		type : 'END_SYNC',
 	}
 }
+
+
+exports.changeLanguage = function (language) {
+	return {
+		type : 'CHANGE_LANGUAGE',
+		language : language,
+	}
+}

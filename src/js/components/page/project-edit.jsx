@@ -15,7 +15,7 @@ const L = require('../../services/i18n.js');
 class ProjectEdit extends React.Component {
 
 	create() {
-		const project = {			// id : id,
+		const project = {
 			name : document.forms['project-edit'].name.value,
 			visible : document.forms['project-edit'].visible.checked,
 			color : document.forms['project-edit'].color.value,

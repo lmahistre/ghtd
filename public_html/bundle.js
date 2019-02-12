@@ -215,6 +215,44 @@ SafeBuffer.allocUnsafeSlow = function (size) {
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
+
+const Redux = __webpack_require__(63);
+const ReactRedux = __webpack_require__(14);
+const ReduxReducers = __webpack_require__(127);
+const storage = __webpack_require__(47);
+
+const ConfigureStore = function(preloadedState) {
+	return Redux.createStore(ReduxReducers, preloadedState);
+}
+
+const configuredStore = ConfigureStore();
+
+const next = configuredStore.dispatch;
+
+configuredStore.dispatch = function(action) {
+	let result = next(action)
+	storage.save(configuredStore.getState());
+	return result;
+}
+
+configuredStore.connect = ReactRedux.connect(function(state, ownProps) {
+	return {
+		tasks : state && state.tasks ? state.tasks : {},
+		projects : state && state.projects ? state.projects : {},
+		settings : state && state.settings ? state.settings : {},
+		importProjects : state && state.importProjects ? state.importProjects : [],
+		busy : state.busy ? true : false,
+		alerts : state.alerts ? state.alerts : [],
+	}
+});
+
+module.exports = configuredStore;
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -261,44 +299,6 @@ var invariant = function(condition, format, a, b, c, d, e, f) {
 };
 
 module.exports = invariant;
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-const Redux = __webpack_require__(63);
-const ReactRedux = __webpack_require__(14);
-const ReduxReducers = __webpack_require__(127);
-const storage = __webpack_require__(47);
-
-const ConfigureStore = function(preloadedState) {
-	return Redux.createStore(ReduxReducers, preloadedState);
-}
-
-const configuredStore = ConfigureStore();
-
-const next = configuredStore.dispatch;
-
-configuredStore.dispatch = function(action) {
-	let result = next(action)
-	storage.save(configuredStore.getState());
-	return result;
-}
-
-configuredStore.connect = ReactRedux.connect(function(state, ownProps) {
-	return {
-		tasks : state && state.tasks ? state.tasks : {},
-		projects : state && state.projects ? state.projects : {},
-		settings : state && state.settings ? state.settings : {},
-		importProjects : state && state.importProjects ? state.importProjects : [],
-		busy : state.busy ? true : false,
-		alerts : state.alerts ? state.alerts : [],
-	}
-});
-
-module.exports = configuredStore;
 
 
 /***/ }),
@@ -5792,12 +5792,20 @@ exports.endSync = function(data) {
 	}
 }
 
+
+exports.changeLanguage = function (language) {
+	return {
+		type : 'CHANGE_LANGUAGE',
+		language : language,
+	}
+}
+
 /***/ }),
 /* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-const store = __webpack_require__(5);
+const store = __webpack_require__(4);
 
 const langs = {
 	en : __webpack_require__(256),
@@ -5857,7 +5865,7 @@ var ReactTooltip = __webpack_require__(219);
 var Menu = __webpack_require__(255);
 var Alerts = __webpack_require__(260);
 
-var store = __webpack_require__(5);
+var store = __webpack_require__(4);
 
 var AppPage = function (_React$Component) {
 	_inherits(AppPage, _React$Component);
@@ -6065,7 +6073,7 @@ var hoist_non_react_statics_cjs = __webpack_require__(113);
 var hoist_non_react_statics_cjs_default = /*#__PURE__*/__webpack_require__.n(hoist_non_react_statics_cjs);
 
 // EXTERNAL MODULE: ./node_modules/invariant/browser.js
-var browser = __webpack_require__(4);
+var browser = __webpack_require__(5);
 var browser_default = /*#__PURE__*/__webpack_require__.n(browser);
 
 // EXTERNAL MODULE: ./node_modules/react-is/index.js
@@ -6829,66 +6837,6 @@ function createConnect(_temp) {
 
 /***/ }),
 /* 15 */
-/***/ (function(module, exports) {
-
-module.exports = assert;
-
-function assert(val, msg) {
-  if (!val)
-    throw new Error(msg || 'Assertion failed');
-}
-
-assert.equal = function assertEqual(l, r, msg) {
-  if (l != r)
-    throw new Error(msg || ('Assertion failed: ' + l + ' != ' + r));
-};
-
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var React = __webpack_require__(1);
-
-var ReactRouterDom = __webpack_require__(17);
-var Link = ReactRouterDom.Link;
-
-var colors = ['blue', 'green', 'yellow', 'orange', 'red', 'purple'];
-
-module.exports = function (props) {
-	var linkClassName = 'common-button';
-	if (props.color && colors.indexOf(props.color) > -1) {
-		linkClassName += ' small-button-' + props.color;
-	}
-	if (props.to) {
-		return React.createElement(
-			Link,
-			{ className: linkClassName, to: props.to, 'data-tip': props.title },
-			props.children
-		);
-	} else if (props.onClick) {
-		return React.createElement(
-			'a',
-			{ className: linkClassName,
-				onClick: props.onClick,
-				href: 'javascript:void(0);',
-				'data-tip': props.title },
-			props.children
-		);
-	} else {
-		return React.createElement(
-			'a',
-			{ className: linkClassName, href: props.href, download: props.download, 'data-tip': props.title },
-			props.children
-		);
-	}
-};
-
-/***/ }),
-/* 17 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6911,7 +6859,7 @@ var browser = __webpack_require__(9);
 var browser_default = /*#__PURE__*/__webpack_require__.n(browser);
 
 // EXTERNAL MODULE: ./node_modules/invariant/browser.js
-var invariant_browser = __webpack_require__(4);
+var invariant_browser = __webpack_require__(5);
 var invariant_browser_default = /*#__PURE__*/__webpack_require__.n(invariant_browser);
 
 // CONCATENATED MODULE: ./node_modules/resolve-pathname/index.js
@@ -9305,6 +9253,66 @@ var withRouter_withRouter = function withRouter(Component) {
 
 
 /***/ }),
+/* 16 */
+/***/ (function(module, exports) {
+
+module.exports = assert;
+
+function assert(val, msg) {
+  if (!val)
+    throw new Error(msg || 'Assertion failed');
+}
+
+assert.equal = function assertEqual(l, r, msg) {
+  if (l != r)
+    throw new Error(msg || ('Assertion failed: ' + l + ' != ' + r));
+};
+
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var React = __webpack_require__(1);
+
+var ReactRouterDom = __webpack_require__(15);
+var Link = ReactRouterDom.Link;
+
+var colors = ['blue', 'green', 'yellow', 'orange', 'red', 'purple'];
+
+module.exports = function (props) {
+	var linkClassName = 'common-button';
+	if (props.color && colors.indexOf(props.color) > -1) {
+		linkClassName += ' small-button-' + props.color;
+	}
+	if (props.to) {
+		return React.createElement(
+			Link,
+			{ className: linkClassName, to: props.to, 'data-tip': props.title },
+			props.children
+		);
+	} else if (props.onClick) {
+		return React.createElement(
+			'a',
+			{ className: linkClassName,
+				onClick: props.onClick,
+				href: 'javascript:void(0);',
+				'data-tip': props.title },
+			props.children
+		);
+	} else {
+		return React.createElement(
+			'a',
+			{ className: linkClassName, href: props.href, download: props.download, 'data-tip': props.title },
+			props.children
+		);
+	}
+};
+
+/***/ }),
 /* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9407,7 +9415,7 @@ module.exports = g;
 "use strict";
 
 
-var assert = __webpack_require__(15);
+var assert = __webpack_require__(16);
 var inherits = __webpack_require__(2);
 
 exports.inherits = inherits;
@@ -9824,7 +9832,7 @@ module.exports = Block;
 
 
 let constsService = __webpack_require__(21);
-const store = __webpack_require__(5);
+const store = __webpack_require__(4);
 const clone = __webpack_require__(67);
 
 exports.setDependencies = function (deps) {
@@ -10649,7 +10657,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var React = __webpack_require__(1);
 
-var ReactRouterDom = __webpack_require__(17);
+var ReactRouterDom = __webpack_require__(15);
 var Link = ReactRouterDom.Link;
 
 var SmallButton = function (_React$Component) {
@@ -10872,7 +10880,7 @@ function objectToString(o) {
 
 
 var utils = __webpack_require__(20);
-var assert = __webpack_require__(15);
+var assert = __webpack_require__(16);
 
 function BlockHash() {
   this.pending = null;
@@ -18011,7 +18019,7 @@ exports.g1_256 = g1_256;
 var utils = __webpack_require__(20);
 var common = __webpack_require__(33);
 var shaCommon = __webpack_require__(93);
-var assert = __webpack_require__(15);
+var assert = __webpack_require__(16);
 
 var sum32 = utils.sum32;
 var sum32_4 = utils.sum32_4;
@@ -18122,7 +18130,7 @@ SHA256.prototype._digest = function digest(enc) {
 
 var utils = __webpack_require__(20);
 var common = __webpack_require__(33);
-var assert = __webpack_require__(15);
+var assert = __webpack_require__(16);
 
 var rotr64_hi = utils.rotr64_hi;
 var rotr64_lo = utils.rotr64_lo;
@@ -20719,7 +20727,7 @@ const storageService = __webpack_require__(47);
 const githubService = __webpack_require__(112);
 const validateService = __webpack_require__(259);
 const reduxActions = __webpack_require__(10);
-const store = __webpack_require__(5);
+const store = __webpack_require__(4);
 const utils = __webpack_require__(23);
 
 
@@ -20801,7 +20809,7 @@ exports.syncWithGitHub = function (callback) {
 
 
 const reduxActions = __webpack_require__(10);
-const store = __webpack_require__(5);
+const store = __webpack_require__(4);
 
 const config = {
 	site : 'https://api.github.com',
@@ -21152,7 +21160,7 @@ const browserService = __webpack_require__(18);
 window.onload = function () {
 	browserService.setTitle();
 	browserService.render();
-	// browserService.addServiceWorker();
+	browserService.addServiceWorker();
 }
 
 
@@ -21501,7 +21509,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var React = __webpack_require__(1);
 var ReactRedux = __webpack_require__(14);
 var reduxActions = __webpack_require__(10);
-var store = __webpack_require__(5);
+var store = __webpack_require__(4);
 var browserService = __webpack_require__(18);
 
 var AppRouter = __webpack_require__(215);
@@ -21891,6 +21899,13 @@ exports.END_SYNC = function(state, action) {
 	if (newState.settings) {
 		newState.settings.isSyncDirty = false;
 	}
+	return newState;
+}
+
+
+exports.CHANGE_LANGUAGE = function (state, action) {
+	const newState = clone(state);
+	newState.settings.language = action.language;
 	return newState;
 }
 
@@ -23550,7 +23565,7 @@ exports.padSplit = function padSplit(num, size, group) {
 "use strict";
 
 
-var assert = __webpack_require__(15);
+var assert = __webpack_require__(16);
 
 function Cipher(options) {
   this.options = options;
@@ -23698,7 +23713,7 @@ Cipher.prototype._finalDecrypt = function _finalDecrypt() {
 "use strict";
 
 
-var assert = __webpack_require__(15);
+var assert = __webpack_require__(16);
 var inherits = __webpack_require__(2);
 
 var des = __webpack_require__(54);
@@ -23848,7 +23863,7 @@ DES.prototype._decrypt = function _decrypt(state, lStart, rStart, out, off) {
 "use strict";
 
 
-var assert = __webpack_require__(15);
+var assert = __webpack_require__(16);
 var inherits = __webpack_require__(2);
 
 var proto = {};
@@ -23920,7 +23935,7 @@ proto._update = function _update(inp, inOff, out, outOff) {
 "use strict";
 
 
-var assert = __webpack_require__(15);
+var assert = __webpack_require__(16);
 var inherits = __webpack_require__(2);
 
 var des = __webpack_require__(54);
@@ -25058,7 +25073,7 @@ module.exports = {"_args":[["elliptic@6.4.1","/home/lionel/projects/ghtd"]],"_de
 
 var utils = exports;
 var BN = __webpack_require__(8);
-var minAssert = __webpack_require__(15);
+var minAssert = __webpack_require__(16);
 var minUtils = __webpack_require__(92);
 
 utils.assert = minAssert;
@@ -27676,7 +27691,7 @@ var sh = [
 
 
 var utils = __webpack_require__(20);
-var assert = __webpack_require__(15);
+var assert = __webpack_require__(16);
 
 function Hmac(hash, key, enc) {
   if (!(this instanceof Hmac))
@@ -28764,7 +28779,7 @@ EC.prototype.getKeyRecoveryParam = function(e, signature, Q, enc) {
 
 var hash = __webpack_require__(58);
 var utils = __webpack_require__(92);
-var assert = __webpack_require__(15);
+var assert = __webpack_require__(16);
 
 function HmacDRBG(options) {
   if (!(this instanceof HmacDRBG))
@@ -29933,7 +29948,7 @@ ReporterError.prototype.rethrow = function rethrow(msg) {
 var Reporter = __webpack_require__(35).Reporter;
 var EncoderBuffer = __webpack_require__(35).EncoderBuffer;
 var DecoderBuffer = __webpack_require__(35).DecoderBuffer;
-var assert = __webpack_require__(15);
+var assert = __webpack_require__(16);
 
 // Supported tags
 var tags = [
@@ -31430,7 +31445,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var React = __webpack_require__(1);
 var ReactRedux = __webpack_require__(14);
 
-var ReactRouterDom = __webpack_require__(17);
+var ReactRouterDom = __webpack_require__(15);
 var HashRouter = ReactRouterDom.HashRouter;
 var Route = ReactRouterDom.Route;
 var Switch = ReactRouterDom.Switch;
@@ -31447,7 +31462,8 @@ var _require = __webpack_require__(217),
     ProjectView = _require.ProjectView,
     SettingsView = _require.SettingsView,
     SettingsAbout = _require.SettingsAbout,
-    SettingsEdit = _require.SettingsEdit;
+    SettingsEdit = _require.SettingsEdit,
+    SettingsLang = _require.SettingsLang;
 
 var AppRouter = function (_React$Component) {
 	_inherits(AppRouter, _React$Component);
@@ -31473,6 +31489,7 @@ var AppRouter = function (_React$Component) {
 			React.createElement(Route, { exact: true, path: '/settings', component: SettingsView }),
 			React.createElement(Route, { exact: true, path: '/settings-about', component: SettingsAbout }),
 			React.createElement(Route, { exact: true, path: '/settings-edit', component: SettingsEdit }),
+			React.createElement(Route, { exact: true, path: '/settings-lang/:lang', component: SettingsLang }),
 			React.createElement(Route, { exact: true, path: '*', component: Home })
 		);
 		return _this;
@@ -31519,6 +31536,7 @@ exports.ProjectView = __webpack_require__(272);
 exports.SettingsView = __webpack_require__(274);
 exports.SettingsAbout = __webpack_require__(276);
 exports.SettingsEdit = __webpack_require__(277);
+exports.SettingsLang = __webpack_require__(279);
 
 /***/ }),
 /* 218 */
@@ -31537,7 +31555,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var React = __webpack_require__(1);
 
-var _require = __webpack_require__(17),
+var _require = __webpack_require__(15),
     Link = _require.Link,
     Redirect = _require.Redirect;
 
@@ -31545,7 +31563,7 @@ var AppPage = __webpack_require__(13);
 var Block = __webpack_require__(22);
 
 var consts = __webpack_require__(21);
-var store = __webpack_require__(5);
+var store = __webpack_require__(4);
 
 var Home = function (_React$Component) {
 	_inherits(Home, _React$Component);
@@ -35004,7 +35022,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var React = __webpack_require__(1);
-var ReactRouterDom = __webpack_require__(17);
+var ReactRouterDom = __webpack_require__(15);
 
 var Link = ReactRouterDom.Link;
 
@@ -35139,13 +35157,13 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var React = __webpack_require__(1);
-var ReactRouterDom = __webpack_require__(17);
+var ReactRouterDom = __webpack_require__(15);
 
 var Link = ReactRouterDom.Link;
 
 var L = __webpack_require__(11);
 var reduxActions = __webpack_require__(10);
-var store = __webpack_require__(5);
+var store = __webpack_require__(4);
 var githubSync = __webpack_require__(111);
 
 module.exports = function (_React$Component) {
@@ -35260,7 +35278,7 @@ var React = __webpack_require__(1);
 // const stateContainerService = require('../services/state-container.js');
 // const browserService = require('../services/browser.js');
 var reduxActions = __webpack_require__(10);
-var store = __webpack_require__(5);
+var store = __webpack_require__(4);
 
 var Alerts = function (_React$Component) {
 	_inherits(Alerts, _React$Component);
@@ -35326,14 +35344,14 @@ var React = __webpack_require__(1);
 var AppPage = __webpack_require__(13);
 var Task = __webpack_require__(262);
 var SmallButton = __webpack_require__(29);
-var CommonButton = __webpack_require__(16);
+var CommonButton = __webpack_require__(17);
 var NewTaskForm = __webpack_require__(263);
 
 var browserService = __webpack_require__(18);
 var githubService = __webpack_require__(112);
 var L = __webpack_require__(11);
 var reduxActions = __webpack_require__(10);
-var store = __webpack_require__(5);
+var store = __webpack_require__(4);
 
 var TaskList = function (_React$Component) {
 	_inherits(TaskList, _React$Component);
@@ -35445,7 +35463,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var React = __webpack_require__(1);
 
-var ReactRouterDom = __webpack_require__(17);
+var ReactRouterDom = __webpack_require__(15);
 var Link = ReactRouterDom.Link;
 
 var SmallButton = __webpack_require__(29);
@@ -35453,7 +35471,7 @@ var Row = __webpack_require__(45);
 
 var L = __webpack_require__(11);
 var reduxActions = __webpack_require__(10);
-var store = __webpack_require__(5);
+var store = __webpack_require__(4);
 
 var Task = function (_React$Component) {
 	_inherits(Task, _React$Component);
@@ -35642,7 +35660,7 @@ var browserService = __webpack_require__(18);
 var utilsService = __webpack_require__(23);
 var L = __webpack_require__(11);
 var reduxActions = __webpack_require__(10);
-var store = __webpack_require__(5);
+var store = __webpack_require__(4);
 
 var NewTaskForm = function (_React$Component) {
 	_inherits(NewTaskForm, _React$Component);
@@ -35758,18 +35776,18 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var React = __webpack_require__(1);
 var ReactRedux = __webpack_require__(14);
-var ReactRouterDom = __webpack_require__(17);
+var ReactRouterDom = __webpack_require__(15);
 
 var Link = ReactRouterDom.Link;
 
 var AppPage = __webpack_require__(13);
-var CommonButton = __webpack_require__(16);
+var CommonButton = __webpack_require__(17);
 var DateViewer = __webpack_require__(61);
 var TaskEditForm = __webpack_require__(265);
 
 var L = __webpack_require__(11);
 var reduxActions = __webpack_require__(10);
-var store = __webpack_require__(5);
+var store = __webpack_require__(4);
 var browserService = __webpack_require__(18);
 
 var TaskEdit = function (_React$Component) {
@@ -35851,7 +35869,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var React = __webpack_require__(1);
 
 var AppPage = __webpack_require__(13);
-var CommonButton = __webpack_require__(16);
+var CommonButton = __webpack_require__(17);
 var Block = __webpack_require__(22);
 
 var constsService = __webpack_require__(21);
@@ -35959,16 +35977,16 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var React = __webpack_require__(1);
 var ReactRedux = __webpack_require__(14);
-var ReactRouterDom = __webpack_require__(17);
+var ReactRouterDom = __webpack_require__(15);
 
 var Link = ReactRouterDom.Link;
 
 var AppPage = __webpack_require__(13);
-var CommonButton = __webpack_require__(16);
+var CommonButton = __webpack_require__(17);
 var DateViewer = __webpack_require__(61);
 var Block = __webpack_require__(22);
 
-var store = __webpack_require__(5);
+var store = __webpack_require__(4);
 var L = __webpack_require__(11);
 
 var TaskView = function (_React$Component) {
@@ -36103,18 +36121,18 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var React = __webpack_require__(1);
 var ReactRedux = __webpack_require__(14);
-var ReactRouterDom = __webpack_require__(17);
+var ReactRouterDom = __webpack_require__(15);
 
 var Redirect = ReactRouterDom.Redirect;
 
 var AppPage = __webpack_require__(13);
 var Block = __webpack_require__(22);
-var CommonButton = __webpack_require__(16);
+var CommonButton = __webpack_require__(17);
 
 var browserService = __webpack_require__(18);
 var L = __webpack_require__(11);
 var reduxActions = __webpack_require__(10);
-var store = __webpack_require__(5);
+var store = __webpack_require__(4);
 var utils = __webpack_require__(23);
 
 var ProjectDelete = function (_React$Component) {
@@ -36202,13 +36220,13 @@ var React = __webpack_require__(1);
 var ReactRedux = __webpack_require__(14);
 
 var AppPage = __webpack_require__(13);
-var CommonButton = __webpack_require__(16);
+var CommonButton = __webpack_require__(17);
 var ProjectEditForm = __webpack_require__(269);
 
 var browserService = __webpack_require__(18);
 var utilsService = __webpack_require__(23);
 var reduxActions = __webpack_require__(10);
-var store = __webpack_require__(5);
+var store = __webpack_require__(4);
 
 var L = __webpack_require__(11);
 
@@ -36224,7 +36242,7 @@ var ProjectEdit = function (_React$Component) {
 	_createClass(ProjectEdit, [{
 		key: "create",
 		value: function create() {
-			var project = { // id : id,
+			var project = {
 				name: document.forms['project-edit'].name.value,
 				visible: document.forms['project-edit'].visible.checked,
 				color: document.forms['project-edit'].color.value,
@@ -36318,7 +36336,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var React = __webpack_require__(1);
 
 var AppPage = __webpack_require__(13);
-var CommonButton = __webpack_require__(16);
+var CommonButton = __webpack_require__(17);
 var Block = __webpack_require__(22);
 
 var constsService = __webpack_require__(21);
@@ -36504,7 +36522,7 @@ var Row = __webpack_require__(45);
 var utilsService = __webpack_require__(23);
 var browserService = __webpack_require__(18);
 var reduxActions = __webpack_require__(10);
-var store = __webpack_require__(5);
+var store = __webpack_require__(4);
 
 var ProjectImport = function (_React$Component) {
 	_inherits(ProjectImport, _React$Component);
@@ -36596,19 +36614,19 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var React = __webpack_require__(1);
 var ReactRedux = __webpack_require__(14);
-var ReactRouterDom = __webpack_require__(17);
+var ReactRouterDom = __webpack_require__(15);
 
 var Link = ReactRouterDom.Link;
 
 var AppPage = __webpack_require__(13);
-var CommonButton = __webpack_require__(16);
+var CommonButton = __webpack_require__(17);
 var SmallButton = __webpack_require__(29);
 var Row = __webpack_require__(45);
 
 var browserService = __webpack_require__(18);
 var L = __webpack_require__(11);
 var reduxActions = __webpack_require__(10);
-var store = __webpack_require__(5);
+var store = __webpack_require__(4);
 var githubSync = __webpack_require__(111);
 
 var ProjectList = function (_React$Component) {
@@ -36721,17 +36739,17 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var React = __webpack_require__(1);
 var ReactRedux = __webpack_require__(14);
-var ReactRouterDom = __webpack_require__(17);
+var ReactRouterDom = __webpack_require__(15);
 
 var Redirect = ReactRouterDom.Redirect;
 
 var AppPage = __webpack_require__(13);
 var VisibleMarker = __webpack_require__(273);
-var CommonButton = __webpack_require__(16);
+var CommonButton = __webpack_require__(17);
 var DateViewer = __webpack_require__(61);
 var Block = __webpack_require__(22);
 
-var store = __webpack_require__(5);
+var store = __webpack_require__(4);
 var reduxActions = __webpack_require__(10);
 var L = __webpack_require__(11);
 
@@ -36967,7 +36985,7 @@ var React = __webpack_require__(1);
 var ReactRedux = __webpack_require__(14);
 
 var AppPage = __webpack_require__(13);
-var CommonButton = __webpack_require__(16);
+var CommonButton = __webpack_require__(17);
 var Upload = __webpack_require__(275);
 var Block = __webpack_require__(22);
 
@@ -36975,7 +36993,7 @@ var constsService = __webpack_require__(21);
 var browserService = __webpack_require__(18);
 var L = __webpack_require__(11);
 var reduxActions = __webpack_require__(10);
-var store = __webpack_require__(5);
+var store = __webpack_require__(4);
 var utils = __webpack_require__(23);
 
 var SettingsView = function (_React$Component) {
@@ -37155,7 +37173,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var React = __webpack_require__(1);
 
-var CommonButton = __webpack_require__(16);
+var CommonButton = __webpack_require__(17);
 
 var Upload = function (_React$Component) {
 	_inherits(Upload, _React$Component);
@@ -37228,7 +37246,7 @@ var AppPage = __webpack_require__(13);
 var Block = __webpack_require__(22);
 
 var consts = __webpack_require__(21);
-var store = __webpack_require__(5);
+var store = __webpack_require__(4);
 
 module.exports = store.connect(function (props) {
 	if (props.settings.language == 'fr') {
@@ -37442,14 +37460,14 @@ var ReactRedux = __webpack_require__(14);
 
 var AppPage = __webpack_require__(13);
 var SmallButton = __webpack_require__(29);
-var CommonButton = __webpack_require__(16);
+var CommonButton = __webpack_require__(17);
 var RadioSelector = __webpack_require__(278);
 var Block = __webpack_require__(22);
 
 var browserService = __webpack_require__(18);
 var constsService = __webpack_require__(21);
 var L = __webpack_require__(11);
-var store = __webpack_require__(5);
+var store = __webpack_require__(4);
 var reduxActions = __webpack_require__(10);
 
 var SettingsEdit = function (_React$Component) {
@@ -37719,6 +37737,61 @@ RadioSelector.propTypes = {
 };
 
 module.exports = RadioSelector;
+
+/***/ }),
+/* 279 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var React = __webpack_require__(1);
+var ReactRedux = __webpack_require__(14);
+var ReactRouterDom = __webpack_require__(15);
+
+var Redirect = ReactRouterDom.Redirect;
+var reduxActions = __webpack_require__(10);
+
+var store = __webpack_require__(4);
+
+var SettingsLang = function (_React$Component) {
+	_inherits(SettingsLang, _React$Component);
+
+	function SettingsLang() {
+		_classCallCheck(this, SettingsLang);
+
+		return _possibleConstructorReturn(this, (SettingsLang.__proto__ || Object.getPrototypeOf(SettingsLang)).apply(this, arguments));
+	}
+
+	_createClass(SettingsLang, [{
+		key: 'render',
+		value: function render() {
+			var language = this.props.match.params.lang;
+			store.dispatch(reduxActions.changeLanguage(language));
+			return React.createElement(Redirect, { to: '/tasks' });
+		}
+	}]);
+
+	return SettingsLang;
+}(React.Component);
+
+function mapStateToProps(state, ownProps) {
+	return {
+		tasks: state && state.tasks ? state.tasks : {},
+		projects: state && state.projects ? state.projects : {},
+		settings: state && state.settings ? state.settings : {}
+	};
+}
+
+module.exports = ReactRedux.connect(mapStateToProps)(SettingsLang);
 
 /***/ })
 /******/ ]);

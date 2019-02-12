@@ -10,3 +10,4 @@ exports.ProjectView = require("./project-view.jsx");
 exports.SettingsView = require("./settings-view.jsx");
 exports.SettingsAbout = require("./settings-about.jsx");
 exports.SettingsEdit = require("./settings-edit.jsx");
+exports.SettingsLang = require("./settings-lang.jsx");

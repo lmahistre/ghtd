@@ -202,3 +202,10 @@ exports.END_SYNC = function(state, action) {
 	}
 	return newState;
 }
+
+
+exports.CHANGE_LANGUAGE = function (state, action) {
+	const newState = clone(state);
+	newState.settings.language = action.language;
+	return newState;
+}

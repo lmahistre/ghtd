@@ -7,8 +7,9 @@ const HashRouter = ReactRouterDom.HashRouter;
 const Route = ReactRouterDom.Route;
 const Switch = ReactRouterDom.Switch;
 
-const { Home, TaskList, TaskEdit, TaskView, ProjectDelete, ProjectEdit, ProjectImport,
-	ProjectList, ProjectView, SettingsView, SettingsAbout, SettingsEdit, 
+const { Home, TaskList, TaskEdit, TaskView, ProjectDelete, ProjectEdit,
+	ProjectImport, ProjectList, ProjectView, SettingsView, SettingsAbout,
+	SettingsEdit, SettingsLang,
 } = require('./page/index.js');
 
 class AppRouter extends React.Component {
@@ -30,6 +31,7 @@ class AppRouter extends React.Component {
 				<Route exact path="/settings" component={SettingsView} />
 				<Route exact path="/settings-about" component={SettingsAbout} />
 				<Route exact path="/settings-edit" component={SettingsEdit} />
+				<Route exact path="/settings-lang/:lang" component={SettingsLang} />
 				<Route exact path="*" component={Home} />
 			</Switch>
 		);

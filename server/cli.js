@@ -13,7 +13,11 @@ exports.css = function (args) {
 
 
 exports.js = function (args) {
-	tasks.js();
+	tasks.js().then(function() {
+		console.log(chalk.green('JS successfully compiled'));
+	}).catch(function(error) {
+		console.log(chalk.red(error));
+	});
 }
 
 
