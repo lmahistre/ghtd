@@ -9,6 +9,7 @@ module.exports = {
 	"Clean resolved" : "Supprimer résolues",
 	"Creation time" : "Date de création",
 	"Dark" : "Sombre",
+	"Data is not synchronized" : "Les données ne sont pas synchronisées",
 	"Delete" : "Supprimer",
 	"Edit" : "Editer",
 	"Empty file error" : "Fichier vide",

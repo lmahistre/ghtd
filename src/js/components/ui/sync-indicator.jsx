@@ -30,7 +30,7 @@ module.exports = class SyncIndicator extends React.Component {
 				);
 			}
 			else {
-				if (this.props.settings.isSyncDirty) {
+				if (settings.isSyncDirty) {
 					return (
 						<span className="sync-indicator sync-dirty" 
 								data-tip={L("Sync with GitHub")} 

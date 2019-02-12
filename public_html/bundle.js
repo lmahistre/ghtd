@@ -5605,36 +5605,6 @@ function isnan (val) {
 /* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-/**
- * Copyright 2014-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
-
-
-
-/**
- * Similar to invariant but only logs a warning if the condition is not met.
- * This can be used to log issues in development environments in critical
- * paths. Removing the logging code for production environments will keep the
- * same logic and follow the same code paths.
- */
-
-var warning = function() {};
-
-if (false) {}
-
-module.exports = warning;
-
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
 
 const storageService = __webpack_require__(47);
 const utilsService = __webpack_require__(23);
@@ -5801,6 +5771,36 @@ exports.changeLanguage = function (language) {
 }
 
 /***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Copyright 2014-2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ */
+
+
+
+/**
+ * Similar to invariant but only logs a warning if the condition is not met.
+ * This can be used to log issues in development environments in critical
+ * paths. Removing the logging code for production environments will keep the
+ * same logic and follow the same code paths.
+ */
+
+var warning = function() {};
+
+if (false) {}
+
+module.exports = warning;
+
+
+/***/ }),
 /* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5866,6 +5866,8 @@ var Menu = __webpack_require__(255);
 var Alerts = __webpack_require__(260);
 
 var store = __webpack_require__(4);
+var reduxActions = __webpack_require__(9);
+var L = __webpack_require__(11);
 
 var AppPage = function (_React$Component) {
 	_inherits(AppPage, _React$Component);
@@ -5879,10 +5881,20 @@ var AppPage = function (_React$Component) {
 	_createClass(AppPage, [{
 		key: "render",
 		value: function render() {
-			var theme = this.props.settings && this.props.settings.theme && this.props.settings.theme === 'dark' ? 'dark' : 'light';
+			if (this.props.settings && (this.props.settings.isSyncDirty || this.props.busy)) {
+				window.onbeforeunload = function (e) {
+					e.preventDefault();
+					store.dispatch(reduxActions.addAlert('warning', L('Data is not synchronized')));
+					return true;
+				};
+			} else {
+				window.onbeforeunload = function (e) {
+					return null;
+				};
+			}
 			return React.createElement(
 				"div",
-				{ className: "app-container", "data-theme": theme },
+				{ className: "app-container" },
 				React.createElement(Menu, { selectedMenu: this.props.selectedMenu,
 					busy: this.props.busy,
 					settings: this.props.settings }),
@@ -5899,9 +5911,6 @@ var AppPage = function (_React$Component) {
 
 	return AppPage;
 }(React.Component);
-
-// module.exports = AppPage;
-
 
 module.exports = store.connect(AppPage);
 
@@ -6855,7 +6864,7 @@ var prop_types = __webpack_require__(0);
 var prop_types_default = /*#__PURE__*/__webpack_require__.n(prop_types);
 
 // EXTERNAL MODULE: ./node_modules/history/node_modules/warning/browser.js
-var browser = __webpack_require__(9);
+var browser = __webpack_require__(10);
 var browser_default = /*#__PURE__*/__webpack_require__.n(browser);
 
 // EXTERNAL MODULE: ./node_modules/invariant/browser.js
@@ -20726,7 +20735,7 @@ exports.default = {
 const storageService = __webpack_require__(47);
 const githubService = __webpack_require__(112);
 const validateService = __webpack_require__(259);
-const reduxActions = __webpack_require__(10);
+const reduxActions = __webpack_require__(9);
 const store = __webpack_require__(4);
 const utils = __webpack_require__(23);
 
@@ -20808,7 +20817,7 @@ exports.syncWithGitHub = function (callback) {
 /***/ (function(module, exports, __webpack_require__) {
 
 
-const reduxActions = __webpack_require__(10);
+const reduxActions = __webpack_require__(9);
 const store = __webpack_require__(4);
 
 const config = {
@@ -21160,7 +21169,7 @@ const browserService = __webpack_require__(18);
 window.onload = function () {
 	browserService.setTitle();
 	browserService.render();
-	browserService.addServiceWorker();
+	// browserService.addServiceWorker();
 }
 
 
@@ -21508,7 +21517,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var React = __webpack_require__(1);
 var ReactRedux = __webpack_require__(14);
-var reduxActions = __webpack_require__(10);
+var reduxActions = __webpack_require__(9);
 var store = __webpack_require__(4);
 var browserService = __webpack_require__(18);
 
@@ -35100,6 +35109,7 @@ module.exports = {
 	"Clean resolved" : "Supprimer résolues",
 	"Creation time" : "Date de création",
 	"Dark" : "Sombre",
+	"Data is not synchronized" : "Les données ne sont pas synchronisées",
 	"Delete" : "Supprimer",
 	"Edit" : "Editer",
 	"Empty file error" : "Fichier vide",
@@ -35162,7 +35172,7 @@ var ReactRouterDom = __webpack_require__(15);
 var Link = ReactRouterDom.Link;
 
 var L = __webpack_require__(11);
-var reduxActions = __webpack_require__(10);
+var reduxActions = __webpack_require__(9);
 var store = __webpack_require__(4);
 var githubSync = __webpack_require__(111);
 
@@ -35196,7 +35206,7 @@ module.exports = function (_React$Component) {
 						React.createElement('span', { className: 'fa fa-refresh fa-spin', 'aria-hidden': 'true' })
 					);
 				} else {
-					if (this.props.settings.isSyncDirty) {
+					if (settings.isSyncDirty) {
 						return React.createElement(
 							'span',
 							{ className: 'sync-indicator sync-dirty',
@@ -35275,9 +35285,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var React = __webpack_require__(1);
 
-// const stateContainerService = require('../services/state-container.js');
-// const browserService = require('../services/browser.js');
-var reduxActions = __webpack_require__(10);
+var reduxActions = __webpack_require__(9);
 var store = __webpack_require__(4);
 
 var Alerts = function (_React$Component) {
@@ -35293,8 +35301,6 @@ var Alerts = function (_React$Component) {
 		key: 'hide',
 		value: function hide(index) {
 			store.dispatch(reduxActions.clearAlert(index));
-			// stateContainerService.clearAlert(index);
-			// browserService.render();
 		}
 	}, {
 		key: 'render',
@@ -35350,7 +35356,7 @@ var NewTaskForm = __webpack_require__(263);
 var browserService = __webpack_require__(18);
 var githubService = __webpack_require__(112);
 var L = __webpack_require__(11);
-var reduxActions = __webpack_require__(10);
+var reduxActions = __webpack_require__(9);
 var store = __webpack_require__(4);
 
 var TaskList = function (_React$Component) {
@@ -35470,7 +35476,7 @@ var SmallButton = __webpack_require__(29);
 var Row = __webpack_require__(45);
 
 var L = __webpack_require__(11);
-var reduxActions = __webpack_require__(10);
+var reduxActions = __webpack_require__(9);
 var store = __webpack_require__(4);
 
 var Task = function (_React$Component) {
@@ -35659,7 +35665,7 @@ var Row = __webpack_require__(45);
 var browserService = __webpack_require__(18);
 var utilsService = __webpack_require__(23);
 var L = __webpack_require__(11);
-var reduxActions = __webpack_require__(10);
+var reduxActions = __webpack_require__(9);
 var store = __webpack_require__(4);
 
 var NewTaskForm = function (_React$Component) {
@@ -35786,7 +35792,7 @@ var DateViewer = __webpack_require__(61);
 var TaskEditForm = __webpack_require__(265);
 
 var L = __webpack_require__(11);
-var reduxActions = __webpack_require__(10);
+var reduxActions = __webpack_require__(9);
 var store = __webpack_require__(4);
 var browserService = __webpack_require__(18);
 
@@ -36131,7 +36137,7 @@ var CommonButton = __webpack_require__(17);
 
 var browserService = __webpack_require__(18);
 var L = __webpack_require__(11);
-var reduxActions = __webpack_require__(10);
+var reduxActions = __webpack_require__(9);
 var store = __webpack_require__(4);
 var utils = __webpack_require__(23);
 
@@ -36225,7 +36231,7 @@ var ProjectEditForm = __webpack_require__(269);
 
 var browserService = __webpack_require__(18);
 var utilsService = __webpack_require__(23);
-var reduxActions = __webpack_require__(10);
+var reduxActions = __webpack_require__(9);
 var store = __webpack_require__(4);
 
 var L = __webpack_require__(11);
@@ -36521,7 +36527,7 @@ var Row = __webpack_require__(45);
 
 var utilsService = __webpack_require__(23);
 var browserService = __webpack_require__(18);
-var reduxActions = __webpack_require__(10);
+var reduxActions = __webpack_require__(9);
 var store = __webpack_require__(4);
 
 var ProjectImport = function (_React$Component) {
@@ -36625,7 +36631,7 @@ var Row = __webpack_require__(45);
 
 var browserService = __webpack_require__(18);
 var L = __webpack_require__(11);
-var reduxActions = __webpack_require__(10);
+var reduxActions = __webpack_require__(9);
 var store = __webpack_require__(4);
 var githubSync = __webpack_require__(111);
 
@@ -36750,7 +36756,7 @@ var DateViewer = __webpack_require__(61);
 var Block = __webpack_require__(22);
 
 var store = __webpack_require__(4);
-var reduxActions = __webpack_require__(10);
+var reduxActions = __webpack_require__(9);
 var L = __webpack_require__(11);
 
 var ProjectView = function (_React$Component) {
@@ -36992,7 +36998,7 @@ var Block = __webpack_require__(22);
 var constsService = __webpack_require__(21);
 var browserService = __webpack_require__(18);
 var L = __webpack_require__(11);
-var reduxActions = __webpack_require__(10);
+var reduxActions = __webpack_require__(9);
 var store = __webpack_require__(4);
 var utils = __webpack_require__(23);
 
@@ -37468,7 +37474,7 @@ var browserService = __webpack_require__(18);
 var constsService = __webpack_require__(21);
 var L = __webpack_require__(11);
 var store = __webpack_require__(4);
-var reduxActions = __webpack_require__(10);
+var reduxActions = __webpack_require__(9);
 
 var SettingsEdit = function (_React$Component) {
 	_inherits(SettingsEdit, _React$Component);
@@ -37758,7 +37764,7 @@ var ReactRedux = __webpack_require__(14);
 var ReactRouterDom = __webpack_require__(15);
 
 var Redirect = ReactRouterDom.Redirect;
-var reduxActions = __webpack_require__(10);
+var reduxActions = __webpack_require__(9);
 
 var store = __webpack_require__(4);
 

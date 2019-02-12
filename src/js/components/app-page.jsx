@@ -6,15 +6,26 @@ const Menu = require('./menu.jsx');
 const Alerts = require('./alerts.jsx');
 
 const store = require('../services/store.js');
+const reduxActions = require('../services/redux-actions.js');
+const L = require('../services/i18n.js');
 
 class AppPage extends React.Component {
 
 	render() {
-		const theme = (this.props.settings 
-			&& this.props.settings.theme 
-			&& this.props.settings.theme === 'dark') ? 'dark' : 'light';
+		if (this.props.settings 
+			&& (this.props.settings.isSyncDirty || this.props.busy)
+		) {
+			window.onbeforeunload = function(e) {
+				e.preventDefault()
+				store.dispatch(reduxActions.addAlert('warning', L('Data is not synchronized')));
+				return true;
+			};
+		}
+		else {
+			window.onbeforeunload = e => null;
+		}
 		return (
-			<div className="app-container" data-theme={theme}>
+			<div className="app-container">
 				<Menu selectedMenu={this.props.selectedMenu} 
 					busy={this.props.busy} 
 					settings={this.props.settings} />
@@ -28,5 +39,4 @@ class AppPage extends React.Component {
 	}
 }
 
-// module.exports = AppPage;
 module.exports = store.connect(AppPage);

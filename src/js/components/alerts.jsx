@@ -1,7 +1,5 @@
 const React = require("react");
 
-// const stateContainerService = require('../services/state-container.js');
-// const browserService = require('../services/browser.js');
 const reduxActions = require('../services/redux-actions.js');
 const store = require('../services/store.js');
 
@@ -9,8 +7,6 @@ class Alerts extends React.Component {
 
 	hide(index) {
 		store.dispatch(reduxActions.clearAlert(index));
-		// stateContainerService.clearAlert(index);
-		// browserService.render();
 	}
 
 	render() {
