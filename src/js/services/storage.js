@@ -111,8 +111,8 @@ exports.getSettings = function () {
 	if (!settings.language) {
 		settings.language = 'en';
 	}
-	if (!settings.theme) {
-		settings.theme = 'light';
+	if (!settings.warnIfDirty) {
+		settings.warnIfDirty = false;
 	}
 	return settings;
 }

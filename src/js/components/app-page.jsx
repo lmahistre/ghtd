@@ -14,6 +14,7 @@ class AppPage extends React.Component {
 	render() {
 		if (this.props.settings 
 			&& (this.props.settings.isSyncDirty || this.props.busy)
+			&& this.props.settings.warnIfDirty
 		) {
 			window.onbeforeunload = function(e) {
 				e.preventDefault()

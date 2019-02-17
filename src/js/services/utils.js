@@ -224,8 +224,8 @@ exports.settingsDecode = function(str) {
 	if (obj.fileName) {
 		ret.fileName = obj.fileName;
 	}
-	if (obj.backgroundImage) {
-		ret.backgroundImage = obj.backgroundImage;
+	if (typeof obj.warnIfDirty === 'boolean') {
+		ret.warnIfDirty = obj.warnIfDirty;
 	}
 	return ret;
 }

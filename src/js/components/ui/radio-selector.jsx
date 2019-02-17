@@ -101,7 +101,6 @@ RadioSelector.propTypes = {
 	id : PropTypes.string,
 	name : PropTypes.string,
 	className : PropTypes.string,
-	options : PropTypes.array,
 }
 
 module.exports = RadioSelector;

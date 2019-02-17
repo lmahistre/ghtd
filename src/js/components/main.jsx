@@ -1,4 +1,3 @@
-
 const React = require("react");
 const ReactRedux = require('react-redux');
 const reduxActions = require('../services/redux-actions.js');
@@ -7,9 +6,13 @@ const browserService = require('../services/browser.js');
 
 const AppRouter = require('./app-router.jsx');
 
-store.dispatch(reduxActions.init());
 
 class Main extends React.Component {
+
+	constructor () {
+		super();
+		store.dispatch(reduxActions.init());
+	}
 
 	render() {
 		return (

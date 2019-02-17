@@ -29,7 +29,10 @@ module.exports = {
 	"Language" : "Langue",
 	"Light" : "Clair",
 	"Modification time" : "Date de modification",
+	"Modification warning" : "Alerte de modification",
+	"Modification warning text" : "Si des modifications ne sont pas<br/>synchronisées, affiche une alerte<br/>lors de la fermeture de la fenêtre",
 	"New project" : "Nouveau projet",
+	"No" : "Non",
 	"No file selected" : "Aucun fichier sélectionné",
 	"Not connected" : "Non connecté",
 	"Not visible" : "Non visible",
@@ -49,4 +52,5 @@ module.exports = {
 	"Token" : "Jeton",
 	"User" : "Utilisateur",
 	"View detail" : "Voir le détail",
+	"Yes" : "Oui",
 }

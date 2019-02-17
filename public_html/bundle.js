@@ -5881,7 +5881,7 @@ var AppPage = function (_React$Component) {
 	_createClass(AppPage, [{
 		key: "render",
 		value: function render() {
-			if (this.props.settings && (this.props.settings.isSyncDirty || this.props.busy)) {
+			if (this.props.settings && (this.props.settings.isSyncDirty || this.props.busy) && this.props.settings.warnIfDirty) {
 				window.onbeforeunload = function (e) {
 					e.preventDefault();
 					store.dispatch(reduxActions.addAlert('warning', L('Data is not synchronized')));
@@ -10065,8 +10065,8 @@ exports.settingsDecode = function(str) {
 	if (obj.fileName) {
 		ret.fileName = obj.fileName;
 	}
-	if (obj.backgroundImage) {
-		ret.backgroundImage = obj.backgroundImage;
+	if (typeof obj.warnIfDirty === 'boolean') {
+		ret.warnIfDirty = obj.warnIfDirty;
 	}
 	return ret;
 }
@@ -12743,8 +12743,8 @@ exports.getSettings = function () {
 	if (!settings.language) {
 		settings.language = 'en';
 	}
-	if (!settings.theme) {
-		settings.theme = 'light';
+	if (!settings.warnIfDirty) {
+		settings.warnIfDirty = false;
 	}
 	return settings;
 }
@@ -21523,15 +21523,16 @@ var browserService = __webpack_require__(18);
 
 var AppRouter = __webpack_require__(215);
 
-store.dispatch(reduxActions.init());
-
 var Main = function (_React$Component) {
 	_inherits(Main, _React$Component);
 
 	function Main() {
 		_classCallCheck(this, Main);
 
-		return _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).apply(this, arguments));
+		var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this));
+
+		store.dispatch(reduxActions.init());
+		return _this;
 	}
 
 	_createClass(Main, [{
@@ -21860,6 +21861,7 @@ exports.SET_SETTINGS = function(state, action) {
 			|| newState.settings.token != action.settings.token
 			|| newState.settings.fileName != action.settings.fileName
 			|| newState.settings.backgroundImage != action.settings.backgroundImage
+			|| newState.settings.warnIfDirty != action.settings.warnIfDirty
 		)
 	) {
 		newState.settings.isSyncDirty = true;
@@ -21871,6 +21873,7 @@ exports.SET_SETTINGS = function(state, action) {
 	if (action.settings.fileName) {
 		newState.settings.fileName = action.settings.fileName;
 	}
+	newState.settings.warnIfDirty = action.settings.warnIfDirty;
 	return newState;
 }
 
@@ -35087,6 +35090,7 @@ module.exports = {
 	"About" : "About",
 	"Cancel" : "Cancel",
 	"Edit" : "Edit",
+	"Modification warning text" : "If there are unchanged modification,<br/>a warning will be displayed when<br/>closing the window",
 	"Projects" : "Projects",
 	"Save" : "Save",
 	"Settings" : "Settings",
@@ -35129,7 +35133,10 @@ module.exports = {
 	"Language" : "Langue",
 	"Light" : "Clair",
 	"Modification time" : "Date de modification",
+	"Modification warning" : "Alerte de modification",
+	"Modification warning text" : "Si des modifications ne sont pas<br/>synchronisées, affiche une alerte<br/>lors de la fermeture de la fenêtre",
 	"New project" : "Nouveau projet",
+	"No" : "Non",
 	"No file selected" : "Aucun fichier sélectionné",
 	"Not connected" : "Non connecté",
 	"Not visible" : "Non visible",
@@ -35149,6 +35156,7 @@ module.exports = {
 	"Token" : "Jeton",
 	"User" : "Utilisateur",
 	"View detail" : "Voir le détail",
+	"Yes" : "Oui",
 }
 
 /***/ }),
@@ -36016,7 +36024,7 @@ var TaskView = function (_React$Component) {
 				React.createElement(
 					CommonButton,
 					{ to: "/task-edit/" + self.props.match.params.id },
-					"Edit"
+					L("Edit")
 				),
 				React.createElement(
 					Block,
@@ -37142,6 +37150,24 @@ var SettingsView = function (_React$Component) {
 								{ className: "td", "data-column": "value" },
 								settings.fileName
 							)
+						),
+						React.createElement(
+							"div",
+							{ className: "view-row" },
+							React.createElement(
+								"div",
+								{ className: "td", "data-column": "label" },
+								L("Modification warning")
+							),
+							React.createElement(
+								"div",
+								{ className: "td", "data-column": "value" },
+								settings.warnIfDirty ? React.createElement("span", { className: "fa fa-check color-yes",
+									"aria-hidden": "true",
+									"data-multiline": "true",
+									"data-tip": L("Modification warning text")
+								}) : React.createElement("span", { className: "fa fa-remove color-no", "aria-hidden": "true" })
+							)
 						)
 					)
 				)
@@ -37494,6 +37520,7 @@ var SettingsEdit = function (_React$Component) {
 			settings.token = document.getElementById('settings-token').value;
 			settings.gistId = document.getElementById('settings-gistId').value;
 			settings.fileName = document.getElementById('settings-fileName').value;
+			settings.warnIfDirty = document.getElementById('warn-if-dirty').value === '1';
 			store.dispatch(reduxActions.updateSettings(settings));
 			browserService.redirect('settings');
 		}
@@ -37605,6 +37632,33 @@ var SettingsEdit = function (_React$Component) {
 								"div",
 								{ "data-column": "value" },
 								React.createElement("input", { name: "token", id: "settings-fileName", type: "text", defaultValue: settings.fileName, onKeyDown: this.handleInputKeyDown.bind(this) })
+							)
+						),
+						React.createElement(
+							"div",
+							{ className: "view-row" },
+							React.createElement(
+								"div",
+								{ "data-column": "label", "data-tip": L("Modification warning text") },
+								L("Modification warning")
+							),
+							React.createElement(
+								"div",
+								{ "data-column": "value" },
+								React.createElement(
+									RadioSelector,
+									{ id: "warn-if-dirty", name: "warn-if-dirty", value: settings.warnIfDirty ? '1' : '0' },
+									React.createElement(
+										"option",
+										{ value: "0" },
+										L("No")
+									),
+									React.createElement(
+										"option",
+										{ value: "1" },
+										L("Yes")
+									)
+								)
 							)
 						)
 					)
@@ -37738,8 +37792,7 @@ var RadioSelector = function (_React$Component) {
 RadioSelector.propTypes = {
 	id: PropTypes.string,
 	name: PropTypes.string,
-	className: PropTypes.string,
-	options: PropTypes.array
+	className: PropTypes.string
 };
 
 module.exports = RadioSelector;

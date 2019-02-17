@@ -22,6 +22,7 @@ class SettingsEdit extends React.Component {
 		settings.token = document.getElementById('settings-token').value;
 		settings.gistId = document.getElementById('settings-gistId').value;
 		settings.fileName = document.getElementById('settings-fileName').value;
+		settings.warnIfDirty = document.getElementById('warn-if-dirty').value === '1';
 		store.dispatch(reduxActions.updateSettings(settings));
 		browserService.redirect('settings');
 	}
@@ -74,6 +75,15 @@ class SettingsEdit extends React.Component {
 							<div data-column="label">{L("File name")}</div>
 							<div data-column="value">
 								<input name="token" id="settings-fileName" type="text" defaultValue={settings.fileName} onKeyDown={this.handleInputKeyDown.bind(this)} />
+							</div>
+						</div>
+						<div className="view-row">
+							<div data-column="label" data-tip={L("Modification warning text")}>{L("Modification warning")}</div>
+							<div data-column="value">
+								<RadioSelector id="warn-if-dirty" name="warn-if-dirty" value={settings.warnIfDirty ? '1' : '0'}>
+									<option value="0">{L("No")}</option>
+									<option value="1">{L("Yes")}</option>
+								</RadioSelector>
 							</div>
 						</div>
 					</div>

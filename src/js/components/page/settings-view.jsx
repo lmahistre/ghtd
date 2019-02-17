@@ -85,6 +85,20 @@ class SettingsView extends React.Component {
 							<div className="td" data-column="label">{L("File name")}</div>
 							<div className="td" data-column="value">{settings.fileName}</div>
 						</div>
+						<div className="view-row">
+							<div className="td" data-column="label">{L("Modification warning")}</div>
+							<div className="td" data-column="value">
+								{settings.warnIfDirty ?
+									<span className={"fa fa-check color-yes"}
+										aria-hidden="true"
+										data-multiline="true"
+										data-tip={L("Modification warning text")}
+									/>
+								:
+									<span className={"fa fa-remove color-no"} aria-hidden="true" />
+								}
+							</div>
+						</div>
 					</div>
 				</Block>
 			</AppPage>

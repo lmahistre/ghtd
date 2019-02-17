@@ -152,6 +152,7 @@ exports.SET_SETTINGS = function(state, action) {
 			|| newState.settings.token != action.settings.token
 			|| newState.settings.fileName != action.settings.fileName
 			|| newState.settings.backgroundImage != action.settings.backgroundImage
+			|| newState.settings.warnIfDirty != action.settings.warnIfDirty
 		)
 	) {
 		newState.settings.isSyncDirty = true;
@@ -163,6 +164,7 @@ exports.SET_SETTINGS = function(state, action) {
 	if (action.settings.fileName) {
 		newState.settings.fileName = action.settings.fileName;
 	}
+	newState.settings.warnIfDirty = action.settings.warnIfDirty;
 	return newState;
 }
 

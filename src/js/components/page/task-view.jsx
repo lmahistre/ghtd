@@ -21,7 +21,7 @@ class TaskView extends React.Component {
 		const project = task.projectId ? self.props.projects[task.projectId] : null;
 		return (
 			<AppPage selectedMenu="tasks">
-				<CommonButton to={"/task-edit/"+self.props.match.params.id}>{"Edit"}</CommonButton>
+				<CommonButton to={"/task-edit/"+self.props.match.params.id}>{L("Edit")}</CommonButton>
 				<Block>
 					<div className="view-table">
 						<div className="view-row">
