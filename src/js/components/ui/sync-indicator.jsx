@@ -21,40 +21,49 @@ module.exports = class SyncIndicator extends React.Component {
 	render () {
 		const settings = this.props.settings;
 		const isConnected = settings.user && settings.gistId && settings.token;
-		if (isConnected) {
-			if (this.props.busy) {
-				return (
-					<span className="sync-indicator busy" data-tip={L("Synchronizing")}>
-						<span className="fa fa-refresh fa-spin" aria-hidden="true" />
-					</span>
-				);
-			}
-			else {
-				if (settings.isSyncDirty) {
+		if (navigator.onLine) {
+			if (isConnected) {
+				if (this.props.busy) {
 					return (
-						<span className="sync-indicator sync-dirty" 
-								data-tip={L("Sync with GitHub")} 
-								onClick={this.syncWithGitHub}>
-							<span className="fa fa-refresh" aria-hidden="true" />
+						<span className="sync-indicator busy" data-tip={L("Synchronizing")}>
+							<span className="fa fa-refresh fa-spin" aria-hidden="true" />
 						</span>
 					);
 				}
 				else {
-					return (
-						<span className="sync-indicator connected" 
-								data-tip={L("Sync with GitHub")} 
-								onClick={this.syncWithGitHub}>
-							<span className="fa fa-refresh" aria-hidden="true" />
-						</span>
-					);
+					if (settings.isSyncDirty) {
+						return (
+							<span className="sync-indicator sync-dirty" 
+									data-tip={L("Sync with GitHub")} 
+									onClick={this.syncWithGitHub}>
+								<span className="fa fa-refresh" aria-hidden="true" />
+							</span>
+						);
+					}
+					else {
+						return (
+							<span className="sync-indicator connected" 
+									data-tip={L("Sync with GitHub")} 
+									onClick={this.syncWithGitHub}>
+								<span className="fa fa-refresh" aria-hidden="true" />
+							</span>
+						);
+					}
 				}
+			}
+			else {
+				return (
+					<Link className="sync-indicator" to="/settings" data-tip={L("Not connected")}>
+						<span className="fa fa-user-times" aria-hidden="true" />
+					</Link>
+				);
 			}
 		}
 		else {
 			return (
-				<Link className="sync-indicator" to="/settings" data-tip={L("Not connected")}>
-					<span className="fa fa-user-times" aria-hidden="true" />
-				</Link>
+				<span className="sync-indicator offline" data-tip={L("Offline")}>
+					<span className="fa fa-refresh fa-plug" aria-hidden="true" />
+				</span>
 			);
 		}
 	}

@@ -3,6 +3,13 @@ const storageService = require('./storage.js');
 const utilsService = require('./utils.js');
 
 
+exports.render = function () {
+	return {
+		type : 'DO_NOTHING',
+	}
+}
+
+
 exports.init = function() {
 	return {
 		type : 'INIT',

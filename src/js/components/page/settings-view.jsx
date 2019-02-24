@@ -50,10 +50,6 @@ class SettingsView extends React.Component {
 				languageLabel = constsService.languages[i].label;
 			}
 		}
-		let themeLabel = '';
-		if (settings.theme && constsService.themes[settings.theme]) {
-			themeLabel = constsService.themes[settings.theme];
-		}
 		return (
 			<AppPage selectedMenu="settings">
 				<CommonButton to="settings-edit">{L("Edit")}</CommonButton>

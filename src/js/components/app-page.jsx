@@ -11,6 +11,10 @@ const L = require('../services/i18n.js');
 
 class AppPage extends React.Component {
 
+	updateOnlineStatus () {
+		store.dispatch(reduxActions.render());
+	}
+
 	render() {
 		if (this.props.settings 
 			&& (this.props.settings.isSyncDirty || this.props.busy)
@@ -25,6 +29,10 @@ class AppPage extends React.Component {
 		else {
 			window.onbeforeunload = e => null;
 		}
+
+		window.addEventListener('offline', this.updateOnlineStatus);
+		window.addEventListener('online', this.updateOnlineStatus);
+
 		return (
 			<div className="app-container">
 				<Menu selectedMenu={this.props.selectedMenu} 

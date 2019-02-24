@@ -5610,6 +5610,13 @@ const storageService = __webpack_require__(47);
 const utilsService = __webpack_require__(23);
 
 
+exports.render = function () {
+	return {
+		type : 'DO_NOTHING',
+	}
+}
+
+
 exports.init = function() {
 	return {
 		type : 'INIT',
@@ -5879,6 +5886,11 @@ var AppPage = function (_React$Component) {
 	}
 
 	_createClass(AppPage, [{
+		key: "updateOnlineStatus",
+		value: function updateOnlineStatus() {
+			store.dispatch(reduxActions.render());
+		}
+	}, {
 		key: "render",
 		value: function render() {
 			if (this.props.settings && (this.props.settings.isSyncDirty || this.props.busy) && this.props.settings.warnIfDirty) {
@@ -5892,6 +5904,10 @@ var AppPage = function (_React$Component) {
 					return null;
 				};
 			}
+
+			window.addEventListener('offline', this.updateOnlineStatus);
+			window.addEventListener('online', this.updateOnlineStatus);
+
 			return React.createElement(
 				"div",
 				{ className: "app-container" },
@@ -21169,7 +21185,7 @@ const browserService = __webpack_require__(18);
 window.onload = function () {
 	browserService.setTitle();
 	browserService.render();
-	// browserService.addServiceWorker();
+	browserService.addServiceWorker();
 }
 
 
@@ -21709,6 +21725,11 @@ module.exports = function (state, action) {
 
 const clone = __webpack_require__(67);
 const utils = __webpack_require__(23);
+
+
+exports.DO_NOTHING = function (state, action) {
+	return clone(state);
+}
 
 
 exports.DELETE_REMOVED_TASKS = function(state, action) {
@@ -35206,37 +35227,45 @@ module.exports = function (_React$Component) {
 		value: function render() {
 			var settings = this.props.settings;
 			var isConnected = settings.user && settings.gistId && settings.token;
-			if (isConnected) {
-				if (this.props.busy) {
-					return React.createElement(
-						'span',
-						{ className: 'sync-indicator busy', 'data-tip': L("Synchronizing") },
-						React.createElement('span', { className: 'fa fa-refresh fa-spin', 'aria-hidden': 'true' })
-					);
-				} else {
-					if (settings.isSyncDirty) {
+			if (navigator.onLine) {
+				if (isConnected) {
+					if (this.props.busy) {
 						return React.createElement(
 							'span',
-							{ className: 'sync-indicator sync-dirty',
-								'data-tip': L("Sync with GitHub"),
-								onClick: this.syncWithGitHub },
-							React.createElement('span', { className: 'fa fa-refresh', 'aria-hidden': 'true' })
+							{ className: 'sync-indicator busy', 'data-tip': L("Synchronizing") },
+							React.createElement('span', { className: 'fa fa-refresh fa-spin', 'aria-hidden': 'true' })
 						);
 					} else {
-						return React.createElement(
-							'span',
-							{ className: 'sync-indicator connected',
-								'data-tip': L("Sync with GitHub"),
-								onClick: this.syncWithGitHub },
-							React.createElement('span', { className: 'fa fa-refresh', 'aria-hidden': 'true' })
-						);
+						if (settings.isSyncDirty) {
+							return React.createElement(
+								'span',
+								{ className: 'sync-indicator sync-dirty',
+									'data-tip': L("Sync with GitHub"),
+									onClick: this.syncWithGitHub },
+								React.createElement('span', { className: 'fa fa-refresh', 'aria-hidden': 'true' })
+							);
+						} else {
+							return React.createElement(
+								'span',
+								{ className: 'sync-indicator connected',
+									'data-tip': L("Sync with GitHub"),
+									onClick: this.syncWithGitHub },
+								React.createElement('span', { className: 'fa fa-refresh', 'aria-hidden': 'true' })
+							);
+						}
 					}
+				} else {
+					return React.createElement(
+						Link,
+						{ className: 'sync-indicator', to: '/settings', 'data-tip': L("Not connected") },
+						React.createElement('span', { className: 'fa fa-user-times', 'aria-hidden': 'true' })
+					);
 				}
 			} else {
 				return React.createElement(
-					Link,
-					{ className: 'sync-indicator', to: '/settings', 'data-tip': L("Not connected") },
-					React.createElement('span', { className: 'fa fa-user-times', 'aria-hidden': 'true' })
+					'span',
+					{ className: 'sync-indicator offline', 'data-tip': L("Offline") },
+					React.createElement('span', { className: 'fa fa-refresh fa-plug', 'aria-hidden': 'true' })
 				);
 			}
 		}
@@ -37048,10 +37077,6 @@ var SettingsView = function (_React$Component) {
 				if (constsService.languages[i].key === settings.language) {
 					languageLabel = constsService.languages[i].label;
 				}
-			}
-			var themeLabel = '';
-			if (settings.theme && constsService.themes[settings.theme]) {
-				themeLabel = constsService.themes[settings.theme];
 			}
 			return React.createElement(
 				AppPage,

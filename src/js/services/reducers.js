@@ -2,6 +2,11 @@ const clone = require('clone');
 const utils = require('./utils.js');
 
 
+exports.DO_NOTHING = function (state, action) {
+	return clone(state);
+}
+
+
 exports.DELETE_REMOVED_TASKS = function(state, action) {
 	const newState = clone(state);
 	for (let i in newState.tasks) {

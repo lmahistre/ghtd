@@ -159,6 +159,9 @@ html body #react-root .app-container div.menu .sync-indicator.sync-dirty {
 html body #react-root .app-container div.menu .sync-indicator.busy {
   background-color: #F00;
 }
+html body #react-root .app-container div.alerts {
+  padding-top: 4px;
+}
 html body #react-root .app-container div.alerts .alert {
   margin: 4px 8px 0px 8px;
   padding: 4px 8px;
