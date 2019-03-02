@@ -1,7 +1,10 @@
 const CACHE_NAME = 'ghtd';
 
 const STATICS_TO_PRELOAD = [
-	'img/favicon.png',
+	'img/logo-32.png',
+	'img/logo-192.png',
+	'img/logo-256.png',
+	'img/logo-512.png',
 	'img/arrow-black.png',
 	'img/arrow-white.png',
 	'style.css',
