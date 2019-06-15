@@ -16,10 +16,7 @@ class NewTaskForm extends React.Component {
 		if (event.which == 13) {
 			this.addTask();
 		}
-		else {
-		}
 	}
-
 
 	addTask() {
 		const name = document.getElementById('new-task-name').value;
@@ -36,7 +33,6 @@ class NewTaskForm extends React.Component {
 			store.dispatch(reduxActions.addTask(task));
 		}
 	}
-
 
 	onChangeName(event) {
 		this.setState({

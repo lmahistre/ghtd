@@ -27,9 +27,9 @@ class ProjectDelete extends React.Component {
 		const projects = self.props.projects;
 		const tasks = self.props.tasks;
 		if (self.props.match 
-				&& self.props.match.params 
-				&& self.props.match.params.id
-				&& projects[self.props.match.params.id]
+			&& self.props.match.params 
+			&& self.props.match.params.id
+			&& projects[self.props.match.params.id]
 		) {
 			const project = projects[self.props.match.params.id];
 

@@ -17,16 +17,16 @@ class SettingsEdit extends React.Component {
 
 	save() {
 		const settings = {};
-		settings.language = document.getElementById('language').value;
-		settings.user = document.getElementById('settings-user').value;
-		settings.token = document.getElementById('settings-token').value;
-		settings.gistId = document.getElementById('settings-gistId').value;
-		settings.fileName = document.getElementById('settings-fileName').value;
-		settings.warnIfDirty = document.getElementById('warn-if-dirty').value === '1';
+		const form = document.forms['settings-edit'];
+		settings.language = form.language.value;
+		settings.user = form.user.value;
+		settings.token = form.token.value;
+		settings.gistId = form.gistId.value;
+		settings.fileName = form.fileName.value;
+		settings.warnIfDirty = form.warnIfDirty.value === '1';
 		store.dispatch(reduxActions.updateSettings(settings));
 		browserService.redirect('settings');
 	}
-
 
 	handleInputKeyDown(event) {
 		if (event.which == 13) {
@@ -34,19 +34,18 @@ class SettingsEdit extends React.Component {
 		}
 	}
 
-
 	render() {
 		const settings = this.props.settings;
 		return (
 			<AppPage selectedMenu="settings">
-				<CommonButton onClick={this.save}>{L("Save")}</CommonButton>
+				<CommonButton onClick={this.save.bind(this)}>{L("Save")}</CommonButton>
 				<CommonButton to="/settings">{L("Cancel")}</CommonButton>
 				<Block>
-					<div className="form-table" data-table="settings-list">
+					<form className="form-table" data-table="settings-list" name="settings-edit">
 						<div className="view-row">
 							<div data-column="label">{L("Language")}</div>
 							<div data-column="value">
-								<RadioSelector id="language" name="language" value={settings.language}>
+								<RadioSelector name="language" value={settings.language} ref={this.languageRef}>
 									{constsService.languages.map(elt => (
 										<option key={elt.key} value={elt.key}>{L(elt.label)}</option>
 									))}
@@ -56,37 +55,37 @@ class SettingsEdit extends React.Component {
 						<div className="view-row">
 							<div data-column="label">{L("User")}</div>
 							<div data-column="value">
-								<input name="user" id="settings-user" type="text" defaultValue={settings.user} onKeyDown={this.handleInputKeyDown.bind(this)} />
+								<input name="user" type="text" defaultValue={settings.user} onKeyDown={this.handleInputKeyDown.bind(this)} />
 							</div>
 						</div>
 						<div className="view-row">
 							<div data-column="label">{L("Gist ID")}</div>
 							<div data-column="value">
-								<input name="gistId" id="settings-gistId" type="text" defaultValue={settings.gistId} onKeyDown={this.handleInputKeyDown.bind(this)} />
+								<input name="gistId" type="text" defaultValue={settings.gistId} onKeyDown={this.handleInputKeyDown.bind(this)} />
 							</div>
 						</div>
 						<div className="view-row">
 							<div data-column="label">{L("Token")}</div>
 							<div data-column="value">
-								<input name="token" id="settings-token" type="text" defaultValue={settings.token} onKeyDown={this.handleInputKeyDown.bind(this)} />
+								<input name="token" type="text" defaultValue={settings.token} onKeyDown={this.handleInputKeyDown.bind(this)} />
 							</div>
 						</div>
 						<div className="view-row">
 							<div data-column="label">{L("File name")}</div>
 							<div data-column="value">
-								<input name="token" id="settings-fileName" type="text" defaultValue={settings.fileName} onKeyDown={this.handleInputKeyDown.bind(this)} />
+								<input name="token" type="text" defaultValue={settings.fileName} onKeyDown={this.handleInputKeyDown.bind(this)} />
 							</div>
 						</div>
 						<div className="view-row">
 							<div data-column="label" data-tip={L("Modification warning text")}>{L("Modification warning")}</div>
 							<div data-column="value">
-								<RadioSelector id="warn-if-dirty" name="warn-if-dirty" value={settings.warnIfDirty ? '1' : '0'}>
+								<RadioSelector name="warnIfDirty" value={settings.warnIfDirty ? '1' : '0'}>
 									<option value="0">{L("No")}</option>
 									<option value="1">{L("Yes")}</option>
 								</RadioSelector>
 							</div>
 						</div>
-					</div>
+					</form>
 				</Block>
 			</AppPage>
 		);
