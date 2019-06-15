@@ -21185,7 +21185,7 @@ const browserService = __webpack_require__(18);
 window.onload = function () {
 	browserService.setTitle();
 	browserService.render();
-	// browserService.addServiceWorker();
+	browserService.addServiceWorker();
 }
 
 
@@ -36703,6 +36703,9 @@ var ProjectList = function (_React$Component) {
 			var projects = self.props.projects;
 			if (projects) {
 				for (var i in projects) {
+					if (!projects[i].status) {
+						projects[i].status = 'active';
+					}
 					if (projects[i].status === 'active') {
 						projectList.push(projects[i]);
 					}

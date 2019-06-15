@@ -37,6 +37,9 @@ class ProjectList extends React.Component {
 		const projects = self.props.projects;
 		if (projects) {
 			for (let i in projects) {
+				if (!projects[i].status) {
+					projects[i].status = 'active';
+				}
 				if (projects[i].status === 'active') {
 					projectList.push(projects[i]);
 				}
