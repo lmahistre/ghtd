@@ -37660,7 +37660,7 @@ var SettingsEdit = function (_React$Component) {
 							React.createElement(
 								"div",
 								{ "data-column": "value" },
-								React.createElement("input", { name: "token", type: "text", defaultValue: settings.fileName, onKeyDown: this.handleInputKeyDown.bind(this) })
+								React.createElement("input", { name: "fileName", type: "text", defaultValue: settings.fileName, onKeyDown: this.handleInputKeyDown.bind(this) })
 							)
 						),
 						React.createElement(

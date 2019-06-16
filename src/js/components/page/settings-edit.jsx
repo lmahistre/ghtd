@@ -73,7 +73,7 @@ class SettingsEdit extends React.Component {
 						<div className="view-row">
 							<div data-column="label">{L("File name")}</div>
 							<div data-column="value">
-								<input name="token" type="text" defaultValue={settings.fileName} onKeyDown={this.handleInputKeyDown.bind(this)} />
+								<input name="fileName" type="text" defaultValue={settings.fileName} onKeyDown={this.handleInputKeyDown.bind(this)} />
 							</div>
 						</div>
 						<div className="view-row">
