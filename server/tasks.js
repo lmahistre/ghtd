@@ -118,6 +118,8 @@ exports.start = function (portOption) {
 				});
 			});
 
+			app.use('/api', require('./api-router'));
+
 			app.listen(port);
 			resolve(port);
 		}
@@ -125,4 +127,15 @@ exports.start = function (portOption) {
 			reject(error);
 		}
 	});
+}
+
+exports.createDb = function() {
+	const Sequelize = require('sequelize');
+	const sequelize = new Sequelize(config.db.sequelize);
+	const defs = require('../services/db-defs');
+	const mods = {};
+	for (let k in defs) {
+		mods[k] = sequelize.define(k, defs[k], config.db.table);
+	}
+	return sequelize.sync();
 }
