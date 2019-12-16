@@ -6,7 +6,6 @@ const reduxActions = require('./redux-actions.js');
 const store = require('./store.js');
 const utils = require('./utils.js');
 
-
 exports.importProjects = function (callback) {
 	githubService.getProjects(function(error, data) {
 		if (callback && typeof callback === 'function') {
@@ -14,7 +13,6 @@ exports.importProjects = function (callback) {
 		}
 	});
 }
-
 
 const pullFromGitHub = function (callback) {
 	githubService.getGistData(function(error, ghData) {
@@ -25,6 +23,14 @@ const pullFromGitHub = function (callback) {
 		else {
 			const localData = storageService.retrieve();
 			const mergedData = utils.mergeData(localData, ghData);
+
+			const debugData = {
+				local : localData,
+				github : ghData,
+				merged : mergedData,
+			};
+			console.log(debugData);
+
 			store.dispatch(reduxActions.setData(mergedData));
 
 			if (callback && typeof callback === 'function') {
@@ -33,7 +39,6 @@ const pullFromGitHub = function (callback) {
 		}
 	});
 }
-
 
 const saveToGitHub = function (callback) {
 	const data = storageService.retrieve();
@@ -62,7 +67,6 @@ const saveToGitHub = function (callback) {
 		}
 	}
 }
-
 
 exports.syncWithGitHub = function (callback) {
 	pullFromGitHub(function (ghData) {

@@ -1,4 +1,4 @@
-module.exports.colors = [
+exports.colors = [
 	{
 		"id":"1",
 		"name":"Black",
@@ -86,7 +86,7 @@ module.exports.colors = [
 	},
 ];
 
-exports.version = '0.2.6';
+exports.version = '0.2.7';
 exports.appName = 'GHTD';
 exports.fileName = 'ghtd.json';
 

@@ -2,7 +2,6 @@ const webpack = require('webpack');
 const fs = require('fs');
 const config = require('./compiler-config.js');
 
-
 exports.css = function() {
 	const less = require('less');
 	return new Promise(function(resolve, reject) {
@@ -48,7 +47,6 @@ exports.css = function() {
 	});
 }
 
-
 exports.js = function() {
 	return new Promise(function(resolve, reject) {
 		const webpackCompiler = webpack(config.js);
@@ -76,12 +74,28 @@ exports.js = function() {
 	});
 }
 
-
 exports.test = function () {
 	const jest = require('jest');
 	return jest.runCLI(config.test, [config.test.rootDir]);
 }
 
+const reqToPost = function(req, res, callback) {
+	let content ='';
+	req.on('data', function(data) {
+		content+=data;
+	});
+	req.on('end', function() {
+		try {
+			const post = JSON.parse(content);
+			if (callback && typeof callback == 'function') {
+				callback(post);
+			}
+		}
+		catch (err) {
+			callback({});
+		}
+	});
+}
 
 exports.start = function () {
 	return new Promise(function(resolve, reject) {
@@ -98,6 +112,12 @@ exports.start = function () {
 
 			// Static files
 			app.use('/', express.static(path.resolve(__dirname+'/../public_html')));
+			app.post('/debug', function(req, res) {
+				reqToPost(req, res, function(post) {
+					console.log(post);
+					res.end();
+				});
+			});
 
 			app.listen(port);
 			resolve(port);

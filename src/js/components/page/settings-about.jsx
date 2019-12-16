@@ -18,7 +18,7 @@ module.exports = store.connect(function(props) {
 						<p>
 							{"Les données manipulées par l'application sont stockées dans le "}
 							<i>{"local storage"}</i>
-							{". Aucun cookie n'est utilisé. Il est possible d'utilisé un compte GitHub pour stocker les données dans un Gist."}</p>
+							{". Aucun cookie n'est utilisé. Il est possible d'utiliser un compte GitHub pour stocker les données dans un Gist."}</p>
 						<h2>{"Utilisation d'un compte GitHub"}</h2>
 						<p>{"Vous devez posséder un compte GitHub. Ce compte doit comporter :"}</p>
 						<ul>
