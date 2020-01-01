@@ -86,6 +86,8 @@ exports.colors = [
 	},
 ];
 
+exports.dataTimeout = 31536000; // 1 year
+
 exports.version = '0.2.7';
 exports.appName = 'GHTD';
 exports.fileName = 'ghtd.json';
