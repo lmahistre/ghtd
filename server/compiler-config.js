@@ -22,7 +22,7 @@ module.exports = {
 			appDirName+"/src/js/entry.js",
 		],
 		output : {
-			path : appDirName +'/public_html',
+			path : appDirName +'/public',
 			filename : 'bundle.js',
 		},
 		optimization : {
@@ -45,7 +45,7 @@ module.exports = {
 	css : {
 		inputFolder : appDirName+'/src/less',
 		inputFilename : 'index.less',
-		outputFolder : appDirName+'/public_html',
+		outputFolder : appDirName+'/public',
 		outputFilename : 'style.css',
 	},
 };

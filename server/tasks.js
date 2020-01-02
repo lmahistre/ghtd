@@ -107,11 +107,11 @@ exports.start = function () {
 			const port = config.app.port || 3002;
 
 			app.get('/', function (req, res) {
-				res.sendFile(path.resolve(__dirname+'/../public_html/index.html'));
+				res.sendFile(path.resolve(__dirname+'/../public/index.html'));
 			});
 
 			// Static files
-			app.use('/', express.static(path.resolve(__dirname+'/../public_html')));
+			app.use('/', express.static(path.resolve(__dirname+'/../public')));
 			app.post('/debug', function(req, res) {
 				reqToPost(req, res, function(post) {
 					console.log(post);

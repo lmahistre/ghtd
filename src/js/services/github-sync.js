@@ -29,7 +29,6 @@ const pullFromGitHub = function (callback) {
 				github : ghData,
 				merged : mergedData,
 			};
-			console.log(debugData);
 
 			store.dispatch(reduxActions.setData(mergedData));
 
