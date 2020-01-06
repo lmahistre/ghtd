@@ -11,9 +11,6 @@ module.exports = {
 					exclude: /node_modules/,
 					use: {
 						loader: "babel-loader",
-						options: {
-							presets: ["env", "react"]
-						},
 					},
 				},
 			],
@@ -24,6 +21,9 @@ module.exports = {
 		output : {
 			path : appDirName +'/public',
 			filename : 'bundle.js',
+		},
+		resolve : {
+			extensions : ['.js', '.jsx',],
 		},
 		optimization : {
 			minimize : false,
