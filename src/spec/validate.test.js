@@ -27,7 +27,6 @@ describe ('validate', function() {
 			visible : true,
 			color : 'DDD',
 			provider : '',
-			// status : 'active',
 			timestampCreated : 135435,
 			timestampModified : 135899,
 			somethingElse : 'value',
@@ -37,7 +36,7 @@ describe ('validate', function() {
 			visible : true,
 			color : 'DDD',
 			provider : '',
-			status : 'active',
+			status : 'removed',
 			timestampCreated : 135435,
 			timestampModified : 135899,
 		});

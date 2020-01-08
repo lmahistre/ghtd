@@ -282,7 +282,52 @@ describe ('merge tasks', function() {
 		});
 	});
 
-	it ('with removed local task', function() {
+	it ('with old removed local task', function() {
+		expect(utils.mergeData({
+			timestampSynchronized : 1540001000,
+			tasks : {
+				't1' : {
+					id : 't1',
+					timestampModified : 1508464000,
+					name : 'task 1',
+					status : 'removed',
+					projectId : 'p1',
+				},
+				't2' : {
+					id : 't2',
+					timestampModified : 1540000500,
+					name : 'task 2',
+					status : 'active',
+					projectId : 'p1',
+				},
+			},
+		}, {
+			timestampSynchronized : 1540000500,
+			tasks : {
+				't2' : {
+					id : 't2',
+					timestampModified : 1540000500,
+					name : 'task 2',
+					status : 'active',
+					projectId : 'p1',
+				},
+			},
+		}, 1540002000)).toEqual({
+			timestampSynchronized : 1540002000,
+			tasks : {
+				't2' : {
+					id : 't2',
+					timestampModified : 1540000500,
+					name : 'task 2',
+					status : 'active',
+					projectId : 'p1',
+				},
+			},
+			projects : {},
+		});
+	});
+
+	it ('with recently removed local task', function() {
 		expect(utils.mergeData({
 			timestampSynchronized : 1540001000,
 			tasks : {
@@ -315,6 +360,13 @@ describe ('merge tasks', function() {
 		}, 1540002000)).toEqual({
 			timestampSynchronized : 1540002000,
 			tasks : {
+				't1' : {
+					id : 't1',
+					timestampModified : 1540001000,
+					name : 'task 1',
+					status : 'removed',
+					projectId : 'p1',
+				},
 				't2' : {
 					id : 't2',
 					timestampModified : 1540000500,
@@ -660,7 +712,35 @@ describe ('merge projects', function() {
 		});
 	});
 
-	it ('2 removed projects without task', function() {
+	it ('2 old removed projects without task', function() {
+		expect(utils.mergeData({
+			timestampSynchronized : 1540001000,
+			projects : {
+				'p1' : {
+					id : 'p1',
+					timestampModified : 1508464000,
+					name : 'project 1 modified',
+					status : 'removed',
+				},
+			},
+		}, {
+			timestampSynchronized : 1540000500,
+			projects : {
+				'p2' : {
+					id : 'p2',
+					timestampModified : 1508464000,
+					name : 'project 1',
+					status : 'removed',
+				},
+			},
+		}, 1540002000)).toEqual({
+			timestampSynchronized : 1540002000,
+			tasks : {},
+			projects : {},
+		});
+	});
+
+	it ('2 recently removed projects without task', function() {
 		expect(utils.mergeData({
 			timestampSynchronized : 1540001000,
 			projects : {
@@ -684,7 +764,14 @@ describe ('merge projects', function() {
 		}, 1540002000)).toEqual({
 			timestampSynchronized : 1540002000,
 			tasks : {},
-			projects : {},
+			projects : {
+				'p1' : {
+					id : 'p1',
+					timestampModified : 1540000800,
+					name : 'project 1 modified',
+					status : 'removed',
+				},
+			},
 		});
 	});
 
@@ -736,8 +823,30 @@ describe ('merge projects', function() {
 			},
 		}, 1540002000)).toEqual({
 			timestampSynchronized : 1540002000,
-			tasks : {},
-			projects : {},
+			tasks : {
+				't1' : {
+					id : 't1',
+					timestampModified : 1540001000,
+					name : 'task 1',
+					status : 'removed',
+					projectId : 'p1',
+				},
+				't2' : {
+					id : 't2',
+					timestampModified : 1540000500,
+					name : 'task 2',
+					status : 'removed',
+					projectId : 'p1',
+				},
+			},
+			projects : {
+				'p1' : {
+					id : 'p1',
+					timestampModified : 1540000800,
+					name : 'project 1 modified',
+					status : 'removed',
+				},
+			},
 		});
 	});
 

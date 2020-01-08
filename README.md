@@ -2,11 +2,15 @@
 
 # GitHub Todo
 
+GitHub Todo is a serverless todo-list application.
+
+Data is stored in local storage. It can also be stored in a Gist on a GitHub account.
+
 ## Installation
 
 ### Prerequisite
 
-A GitHub account must be used to store data.
+A GitHub account must be used for data persistence and synchronization. The application can be used without GitHub account, in this case data is stored locally and can be lost if local storage is cleared.
 
 ### Setup GitHub account
 

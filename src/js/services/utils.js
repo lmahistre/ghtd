@@ -144,7 +144,7 @@ exports.mergeData = function(localData, extData, timestampSynchronized) {
 			if (localData.tasks[k].status === 'active'
 				|| localData.tasks[k].status === 'done'
 				|| (localData.tasks[k].status === 'removed'
-					&& parseInt(Date.now()/1000) - localData.tasks[k].timestampModified < constsService.dataTimeout
+					&& timestampSynchronized - localData.tasks[k].timestampModified < constsService.dataTimeout
 				)
 			) {
 				newData.tasks[k] = localData.tasks[k];
@@ -178,7 +178,7 @@ exports.mergeData = function(localData, extData, timestampSynchronized) {
 			if (localData.projects[k].status === 'active'
 				|| exports.projectIsUsed(localData.projects[k].id, newData.tasks)
 				|| (localData.projects[k].status === 'removed'
-					&& parseInt(Date.now()/1000) - localData.projects[k].timestampModified < constsService.dataTimeout
+					&& timestampSynchronized- localData.projects[k].timestampModified < constsService.dataTimeout
 				)
 			) {
 				newData.projects[k] = localData.projects[k];

@@ -1,15 +1,13 @@
-
 exports.task = function (obj) {
 	return {
 		id : obj.id,
 		name : obj.name,
 		projectId : obj.projectId,
-		status : obj.status,
+		status : obj.status && ['active', 'done', 'removed'].indexOf(obj.status) > -1 ? obj.status : 'removed',
 		timestampCreated : isNaN(obj.timestampCreated) ? parseInt(Date.now()/1000) : obj.timestampCreated,
 		timestampModified : isNaN(obj.timestampModified) ? parseInt(Date.now()/1000) : obj.timestampModified,
 	}
 }
-
 
 exports.project = function (obj) {
 	return {
@@ -19,7 +17,7 @@ exports.project = function (obj) {
 		color : obj.color,
 		provider : obj.provider,
 		repo : obj.repo,
-		status : obj.status && ['active', 'removed'].indexOf(obj.status) ? obj.status : 'active',
+		status : obj.status && ['active', 'removed'].indexOf(obj.status) > -1 ? obj.status : 'removed',
 		timestampCreated : isNaN(obj.timestampCreated) ? parseInt(Date.now()/1000) : obj.timestampCreated,
 		timestampModified : isNaN(obj.timestampModified) ? parseInt(Date.now()/1000) : obj.timestampModified,
 	}

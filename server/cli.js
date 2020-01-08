@@ -20,37 +20,23 @@ exports.js = function (args) {
 	});
 }
 
-
 exports.dev = function(args) {
 	tasks.js().then(tasks.css);
 }
-
 
 exports.test = function (args) {
 	tasks.test();
 }
 
-
 exports.build = function(args) {
 	tasks.js().then(tasks.css).then(tasks.test);
 }
 
-
-exports.help = function(args) {
-	console.log('Usage: github-todo [OPTION]');
-	console.log('Options:');
-	for (let k in exports) {
-		console.log ('  '+k+ '');
-	}
-}
-
-
-exports.start = function(args) {
-	tasks.start().then(function(port) {
+exports.start = function(options) {
+	tasks.start(options['--port'] || options['-p']).then(function(port) {
 		console.log(chalk.green('Server is listening on port '+port));
 	});
 }
-
 
 exports.watch = function(args) {
 	const watch = require('node-watch');
@@ -77,6 +63,15 @@ exports.watch = function(args) {
 	});
 }
 
+exports.version = function() {
+	const consts = require('../src/js/services/consts');
+	console.log(chalk.green('Version ' + consts.version));
+}
 
-exports.default = exports.build;
-exports['--help'] = exports['-h'] = exports.help;
+exports.error = function(error) {
+	console.log(chalk.red(error));
+}
+
+exports.default = function() {
+	console.log(chalk.yellow('No action specified'));
+}
