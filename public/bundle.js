@@ -5878,7 +5878,9 @@ function (_React$Component) {
         settings: this.props.settings
       }), React.createElement(Alerts, {
         alerts: this.props.alerts
-      }), React.createElement(ReactTooltip, null), React.createElement("div", {
+      }), React.createElement(ReactTooltip, {
+        place: "bottom"
+      }), React.createElement("div", {
         className: "page-content"
       }, this.props.children));
     }
@@ -32824,7 +32826,6 @@ function (_React$Component) {
           }, React.createElement("div", {
             className: "project-label",
             style: style,
-            title: elt.projectName,
             "data-tip": elt.projectName
           }, elt.projectName)), React.createElement("div", {
             className: "td",

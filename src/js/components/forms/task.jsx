@@ -132,7 +132,7 @@ class Task extends React.Component {
 							<SmallButton fa="eye" to={"/task-view/"+elt.id} title={L("View detail")} color="blue" />
 						</div>
 						<div className="td project-label-container" data-column="project">
-							<div className="project-label" style={style} title={elt.projectName} data-tip={elt.projectName}>{elt.projectName}</div>
+							<div className="project-label" style={style} data-tip={elt.projectName}>{elt.projectName}</div>
 						</div>
 						<div className="td" data-column="name">
 							<div className="label">{elt.name}</div>

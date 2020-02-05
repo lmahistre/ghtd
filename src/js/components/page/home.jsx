@@ -12,8 +12,6 @@ class Home extends React.Component {
 		if ((!this.props.tasks || JSON.stringify(this.props.tasks) == '{}')
 			&& (!this.props.projects || JSON.stringify(this.props.projects) == '{}')
 		) {
-			console.log(this.props.tasks)
-			console.log(this.props.settings)
 			if (this.props.settings.language == 'fr') {
 				return (
 					<AppPage>

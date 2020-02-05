@@ -39,7 +39,7 @@ class AppPage extends React.Component {
 					busy={this.props.busy} 
 					settings={this.props.settings} />
 				<Alerts alerts={this.props.alerts} />
-				<ReactTooltip />
+				<ReactTooltip place="bottom" />
 				<div className="page-content">
 					{this.props.children}
 				</div>
